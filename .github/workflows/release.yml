@@ -1,13 +1,14 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag to release (or a branch/ref for dry run)'
+        description: 'Reviewed tag or immutable commit to build'
+        required: true
+        type: string
+      expected_sha:
+        description: 'Reviewed full 40-character fork commit; must match the selected ref'
         required: true
         type: string
       simple_release:
@@ -19,7 +20,7 @@ on:
         description: 'Build and verify all selected artifacts without publishing'
         required: false
         type: boolean
-        default: false
+        default: true
 
 concurrency:
   group: release-${{ github.repository }}
@@ -49,6 +50,16 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{ github.sha }}
+      - name: Require reviewed source and publication opt-in
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+          PUBLICATION_ENABLED: ${{ vars.FORK_RELEASE_PUBLICATION_ENABLED }}
+        run: |
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo 'A reviewed full commit is required'; exit 1; }
+          if [[ "$DRY_RUN" != true && "$PUBLICATION_ENABLED" != true ]]; then
+            echo 'Fork publication is disabled; configure the reviewed release environment first'
+            exit 1
+          fi
       - name: Preserve tooling for releases of older tags
         run: cp -R .github/release-tools "$RUNNER_TEMP/release-tools"
       - name: Checkout selected application source
@@ -56,6 +67,10 @@ jobs:
         with:
           ref: ${{ inputs.tag || github.ref }}
           fetch-depth: 0
+      - name: Verify selected immutable source
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
@@ -79,6 +94,65 @@ jobs:
           name: version-file
           path: backend/cmd/server/VERSION
           retention-days: 1
+
+  qualify:
+    needs: prepare
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: sub2api_fork_test
+        ports:
+          - 127.0.0.1:5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d sub2api_fork_test"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 127.0.0.1:6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      SUB2API_USAGE_HOURLY_TEST_OWNED: '1'
+      SUB2API_USAGE_HOURLY_TEST_DSN: postgres://postgres@127.0.0.1:5432/sub2api_fork_test?sslmode=disable
+      SUB2API_ADMIN_KEY_TEST_OWNED: '1'
+      SUB2API_ADMIN_KEY_TEST_DSN: postgres://postgres@127.0.0.1:5432/sub2api_fork_test?sslmode=disable
+      SUB2API_ADMIN_KEY_TEST_REDIS_ADDR: 127.0.0.1:6379
+      SCOPED_ADMIN_TEST_DSN: host=127.0.0.1 port=5432 user=postgres dbname=sub2api_fork_test sslmode=disable
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - name: Unit and real loopback integration regressions
+        working-directory: backend
+        shell: bash
+        run: |
+          set -euo pipefail
+          go test -json -tags=unit -count=1 -p 1 ./... | tee "$RUNNER_TEMP/fork-tests.jsonl"
+          python3 - "$RUNNER_TEMP/fork-tests.jsonl" <<'PY'
+          import json, sys
+          required = {
+              ('github.com/Wei-Shaw/sub2api/internal/server/routes', 'TestUsageHourlyPostgresHTTPIntegration'),
+              ('github.com/Wei-Shaw/sub2api/internal/server/routes', 'TestAdminCreateUserAPIKeyIntegration'),
+              ('github.com/Wei-Shaw/sub2api/internal/service', 'TestOpenAIHTTPObservationRealHTTPSuccessSmoke'),
+          }
+          with open(sys.argv[1], encoding='utf-8') as source:
+              events = [json.loads(line) for line in source if line.strip()]
+          passed = {(e.get('Package'), e.get('Test')) for e in events if e.get('Action') == 'pass'}
+          missing = required - passed
+          if missing:
+              raise SystemExit('Missing or skipped downstream acceptance: ' + repr(sorted(missing)))
+          print('All mandatory downstream real-transport integrations passed')
+          PY
+
 
   build-frontend:
     needs: prepare
@@ -191,8 +265,9 @@ jobs:
           key: ${{ steps.go-cache.outputs.cache-primary-key }}
 
   release:
-    needs: [prepare, build-binaries]
+    needs: [prepare, build-binaries, qualify]
     runs-on: ubuntu-latest
+    environment: ${{ needs.prepare.outputs.dry_run == 'true' && 'fork-dry-run' || 'fork-release' }}
     permissions:
       contents: write
       packages: write
@@ -288,6 +363,7 @@ jobs:
           path: |
             dist/checksums.txt
             dist/artifacts.json
+            release-input/manifest-*.json
             dist/metadata.json
           if-no-files-found: error
           retention-days: 3
@@ -375,34 +451,3 @@ jobs:
                 disable_web_page_preview: true
               }')"
 
-  sync-version-file:
-    needs: [prepare, release]
-    if: ${{ needs.release.result == 'success' && needs.prepare.outputs.dry_run != 'true' }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    env:
-      RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
-    steps:
-      - name: Checkout default branch
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.repository.default_branch }}
-
-      - name: Sync VERSION file to released tag
-        run: |
-          VERSION="$RELEASE_VERSION"
-
-          CURRENT_VERSION=$(tr -d '\r\n' < backend/cmd/server/VERSION || true)
-          if [ "$CURRENT_VERSION" = "$VERSION" ]; then
-            echo "VERSION file already matches $VERSION"
-            exit 0
-          fi
-
-          echo "$VERSION" > backend/cmd/server/VERSION
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add backend/cmd/server/VERSION
-          git commit -m "chore: sync VERSION to ${VERSION} [skip ci]"
-          git push origin HEAD:${{ github.event.repository.default_branch }}

@@ -1,0 +1,78 @@
+name: sub2api-fork-test
+
+services:
+  app:
+    image: ${SUB2API_TEST_IMAGE:?Set the verified local candidate image}
+    restart: unless-stopped
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 256
+    ports:
+      - "127.0.0.1:18085:8080"
+    environment:
+      AUTO_SETUP: "false"
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: "8080"
+      GATEWAY_OPENAI_HTTP_OBSERVATION_SUCCESS_SAMPLE_RATE: "0"
+      TZ: UTC
+    volumes:
+      - ./data:/app/data
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    networks: [isolated]
+    healthcheck:
+      test: [CMD-SHELL, "curl -fsS --max-time 5 http://127.0.0.1:8080/setup/status || curl -fsS --max-time 5 http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 6s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+  # These services are deliberately gated until the dedicated credential purpose
+  # has been provisioned. Do not replace missing credentials with trust auth.
+  postgres:
+    profiles: [initialized]
+    image: ${SUB2API_TEST_POSTGRES_IMAGE:?Set a pinned PostgreSQL 18 image}
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 256
+    environment:
+      POSTGRES_USER: sub2api_test
+      POSTGRES_DB: sub2api_fork_test
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      PGDATA: /var/lib/postgresql/18/docker
+    volumes:
+      - ./postgres:/var/lib/postgresql
+      - ./secrets/postgres_password:/run/secrets/postgres_password:ro
+    networks: [isolated]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U sub2api_test -d sub2api_fork_test"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  redis:
+    profiles: [initialized]
+    image: ${SUB2API_TEST_REDIS_IMAGE:?Set a pinned Redis image}
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 128
+    command: [redis-server, /run/config/redis.conf]
+    volumes:
+      - ./redis:/data
+      - ./secrets/redis.conf:/run/config/redis.conf:ro
+    networks: [isolated]
+
+networks:
+  isolated:
+    internal: true

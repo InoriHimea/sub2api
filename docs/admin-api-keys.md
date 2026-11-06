@@ -181,3 +181,15 @@ curl 'https://example.invalid/api/v1/admin/accounts/import/codex-session' \
 ```
 
 生命周期接口位于 `/api/v1/admin/settings/admin-api-keys`：`GET` 列表及目录、`POST` 创建、`PUT /<KEY_ID>` 更新、`POST /<KEY_ID>/rotate` 轮换、`DELETE /<KEY_ID>` 永久撤销、`DELETE /<KEY_ID>/record` 删除已撤销记录。更新请求包含完整配置与策略；不要将未提交字段当作保持原值的 PATCH 语义。
+
+## 管理员代用户创建业务 API key（ADMKEY-01）
+
+`POST /api/v1/admin/users/:id/api-keys`沿用管理员认证、审计和原生`APIKeyService.Create`。这是创建用户的业务key，不是创建新的管理身份；Backend-only模式保持启用，不借用用户会话。
+
+- 管理员JWT/既有全权兼容身份沿用当前上游语义；受限管理key必须显式具有全站`users.api_keys.create`。`users.read`、分组选择及统计权限不授予创建能力；创建权限也不授予读取其他key/用户明细或修改订阅的权限。该权限可为任意合规目标用户创建凭据，不是租户隔离。
+- owner只取URL中的正整数`:id`，body的`user_id`不参与。目标须存在且active；以目标用户而非管理员检查订阅、分组可绑定性、key数量及频率限制。原生IP、自定义key、非负有限额度、有效期和认证缓存失效逻辑全部保留，不自动分配订阅/分组。
+- body支持`name`（必填且非空白）、`group_id`、`custom_key`、`ip_whitelist`、`ip_blacklist`、`quota`、`expires_in_days`、`rate_limit_5h/1d/7d`。成功使用原DTO/envelope并返回新key，设置`Cache-Control: no-store`；调用方应直接交付受保护存储，不记录响应秘密。
+- 强制有效`Idempotency-Key`，协调器不可用时503且不退化为直接创建。scope沿用当前管理员身份和受限key策略摘要，指纹包含目标与请求；同身份/同请求重放，同key改目标或参数409。成功重放带`X-Idempotency-Replayed: true`。
+- 幂等边界：key插入与成功响应记录仍是上游的两个持久化操作，TTL/处理租约到期或成功记录失败存在未知结果窗口，**不保证exactly-once**。遇超时/未知结果先由有权维护者核对目标key及幂等记录，不能换新幂等键盲重试；持久化幂等响应含新凭据，须按现有数据库秘密保护要求管理。未引入跨接口事务或新的恢复协议。
+- 审计action为`admin.users.api_keys.create`，请求体整体省略；仅添加目标用户、key和分组的数字摘要，不保存name/custom_key或任意嵌套body。无UI或数据库迁移。
+- 本地验收：真实loopback HTTP→管理认证→原生创建服务→PostgreSQL/Redis，覆盖订阅拒绝、owner归属、受限权限、跨管理key重放隔离、并发重放、负缓存与peer失效、写失败、真实审计脱敏、缺幂等键和inactive目标；未创建真实业务凭据或部署。测试`TestAdminCreateUserAPIKeyIntegration`使用`-tags=unit`，须同时设置`SUB2API_ADMIN_KEY_TEST_OWNED=1`、loopback且库名以`_test`结尾的`SUB2API_ADMIN_KEY_TEST_DSN`和独占`SUB2API_ADMIN_KEY_TEST_REDIS_ADDR`；测试会应用迁移并写合成数据，禁止指向业务资源。无fixture的Skip不是验收通过。

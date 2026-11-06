@@ -18,7 +18,20 @@ import (
 )
 
 // Forward forwards request to OpenAI API
-func (s *OpenAIGatewayService) Forward(ctx context.Context, c *gin.Context, account *Account, body []byte) (*OpenAIForwardResult, error) {
+func (s *OpenAIGatewayService) Forward(ctx context.Context, c *gin.Context, account *Account, body []byte) (observedResult *OpenAIForwardResult, observedErr error) {
+	if account != nil && account.Platform == PlatformOpenAI {
+		var httpSequence *openAIHTTPSequence
+		var attemptsBefore int
+		ctx, httpSequence, attemptsBefore = withOpenAIHTTPObservation(ctx, c)
+		if httpSequence != nil {
+			rate := 0.0
+			if s.cfg != nil {
+				rate = s.cfg.Gateway.OpenAIHTTPObservationSuccessSampleRate
+			}
+			httpSequence.selectCompletionSample(rate)
+		}
+		defer func() { finishOpenAIHTTPObservation(ctx, c, httpSequence, attemptsBefore, account, observedErr) }()
+	}
 	beginUpstreamResponseModelObservation(c)
 	ClearActualOpenAIUpstreamEndpoint(c)
 	if shouldForwardOpenAIResponsesViaRawChatCompletions(account) {

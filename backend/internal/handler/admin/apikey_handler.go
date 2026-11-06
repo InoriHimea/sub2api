@@ -12,14 +12,13 @@ import (
 
 // AdminAPIKeyHandler handles admin API key management
 type AdminAPIKeyHandler struct {
-	adminService service.AdminService
+	adminService  service.AdminService
+	apiKeyCreator *service.APIKeyService
 }
 
 // NewAdminAPIKeyHandler creates a new admin API key handler
-func NewAdminAPIKeyHandler(adminService service.AdminService) *AdminAPIKeyHandler {
-	return &AdminAPIKeyHandler{
-		adminService: adminService,
-	}
+func NewAdminAPIKeyHandler(adminService service.AdminService, apiKeyService *service.APIKeyService) *AdminAPIKeyHandler {
+	return &AdminAPIKeyHandler{adminService: adminService, apiKeyCreator: apiKeyService}
 }
 
 // AdminUpdateAPIKeyGroupRequest represents the request to update an API key.

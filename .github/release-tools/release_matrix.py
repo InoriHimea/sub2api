@@ -18,6 +18,14 @@ FULL_CONFIG = Path('.goreleaser.yaml')
 SIMPLE_CONFIG = Path('.goreleaser.simple.yaml')
 VERSION_FILE = Path('backend/cmd/server/VERSION')
 VERSION_RE = re.compile(r'\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?')
+GO_MOD = Path('backend/go.mod')
+
+
+def required_compiler():
+    match = re.search(r'^go (\d+\.\d+\.\d+)\s*$', GO_MOD.read_text(), re.MULTILINE)
+    if not match:
+        raise ValueError('release requires an exact Go patch version in backend/go.mod')
+    return 'go' + match.group(1)
 
 
 def config(simple=False):
@@ -81,21 +89,24 @@ def generate_config(args):
     data['snapshot'] = {'version_template': '{{ .Env.RELEASE_VERSION }}'}
     data['dockers'] = []
     data['docker_manifests'] = []
+    # Dependency changes belong in the reviewed source, never a release build hook.
+    data['before'] = {'hooks': []}
     if args.mode == 'build':
         target = {'goos': args.goos, 'goarch': args.goarch}
         if target not in targets():
             raise ValueError('unsupported build target')
         for build in data['builds']:
             build['goos'], build['goarch'], build['ignore'] = [args.goos], [args.goarch], []
+            build['flags'] = [*build.get('flags', []), '-mod=readonly']
             build['ldflags'] = [re.sub(r'{{\s*\.Date\s*}}', '{{ .Env.RELEASE_DATE }}', flag)
                                 for flag in build.get('ldflags', [])]
     else:
         # Artifacts are supplied through the OSS extra_files mechanism. No build
         # is repeated on the publishing runner, and release templates stay intact.
-        data['before'] = {'hooks': []}
         data['builds'] = [{'id': 'sub2api', 'skip': True}]
         data['archives'] = []
-        extra = [{'glob': 'release-input/sub2api_*.tar.gz'}, {'glob': 'release-input/sub2api_*.zip'}]
+        extra = [{'glob': 'release-input/sub2api_*.tar.gz'}, {'glob': 'release-input/sub2api_*.zip'},
+                 {'glob': 'release-input/manifest-*.json'}]
         if args.simple:
             data['checksum'] = {'disable': True}
         else:
@@ -115,7 +126,11 @@ def collect(args):
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, output / name)
-    manifest = {'sha': args.sha, 'version': args.version, 'target': target, 'archive': name, 'sha256': digest}
+    compiler = subprocess.check_output(['go', '-C', str(GO_MOD.parent), 'env', 'GOVERSION'], text=True).strip()
+    if compiler != required_compiler():
+        raise ValueError('release compiler does not match backend/go.mod')
+    manifest = {'sha': args.sha, 'version': args.version, 'target': target, 'archive': name,
+                'sha256': digest, 'compiler': compiler}
     (output / f"manifest-{args.goos}-{args.goarch}.json").write_text(json.dumps(manifest) + '\n')
 
 
@@ -128,7 +143,8 @@ def verify(args):
         expected.update((name, manifest_name))
         manifest = json.loads((directory / manifest_name).read_text())
         if manifest != {'sha': args.sha, 'version': args.version, 'target': target,
-                        'archive': name, 'sha256': sha256(directory / name)}:
+                        'archive': name, 'sha256': sha256(directory / name),
+                        'compiler': required_compiler()}:
             raise ValueError(f'build provenance or checksum mismatch: {name}')
     if {p.name for p in directory.iterdir()} != expected:
         raise ValueError('missing or unexpected release artifacts')

@@ -50,6 +50,7 @@ var definitions = []permissionDefinition{
 	{Permission{"models.defaults.read", "读取默认白名单模型 ID（含默认映射）", "模型", "global"}, []string{"GET /accounts/antigravity/default-model-mapping", "GET /groups/:id/model-allowlist-candidates"}},
 	{Permission{"dashboard.read", "读取全站经营报表", "报表", "global"}, []string{"GET /dashboard/snapshot-v2", "GET /dashboard/stats", "GET /dashboard/realtime", "GET /dashboard/trend", "GET /dashboard/models", "GET /dashboard/groups", "GET /dashboard/api-keys-trend", "GET /dashboard/users-trend", "GET /dashboard/users-ranking", "POST /dashboard/users-usage", "POST /dashboard/api-keys-usage", "GET /dashboard/user-breakdown"}},
 	{Permission{"users.read", "读取全站用户资料（含联系方式）", "用户", "global"}, []string{"GET /users", "GET /users/:id", "GET /users/:id/rpm-status", "GET /users/:id/attributes"}},
+	{Permission{"users.api_keys.create", "为任意用户创建 API key（返回凭据）", "用户", "global"}, []string{"POST /users/:id/api-keys"}},
 	{Permission{"users.balance.read", "读取全站用户余额及流水", "财务", "global"}, []string{"GET /users/:id/balance-history"}},
 	{Permission{"users.balance.write", "增减任意用户余额", "财务", "global"}, []string{"POST /users/:id/balance"}},
 	{Permission{"users.quotas.read", "读取全站用户平台额度", "用户", "global"}, []string{"GET /users/:id/platform-quotas"}},

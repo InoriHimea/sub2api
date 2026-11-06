@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-07",
+  "upstream_base_commit": "c5ca149a3d856d92fa0b61bea276338be718c5db",
+  "source_kind": "local_worktree_not_release_artifact",
+  "go_version": "1.27.3",
+  "source_sha256": {
+    ".github/release-tools/release_matrix.py": "e40d530ca44bfb102f46053e14d1348caef3696b8fab5a62eb5d403f5c42750f",
+    ".github/release-tools/test_release_matrix.py": "7628757a834401106c317f0470283dee9f4ddc4e1817a8539d0407bedbfc727a",
+    ".github/workflows/release.yml": "5e704a79d9885f1c1de0edcf3af1acecd0f6c1b6d3f27055ff11bc9c119d4f3f",
+    "backend/cmd/server/wire_gen.go": "c94b8b9b25c883021d515184844b6ddbaa919a36f5bfa89c0ffa1aab78138a11",
+    "backend/internal/config/config.go": "778f7335a663612475887acb3b9d54132c2d7590b215071e22549262e488ffeb",
+    "backend/internal/config/openai_http_observation_test.go": "b167b6bf302684666b19179c9c4519fe69e2acc56af10fc8b61ee49ff38aaf28",
+    "backend/internal/handler/admin/apikey_handler.go": "30f04948027b4d020941385c8cb741759bdcd7cdd9e330063f84c9302d323273",
+    "backend/internal/handler/admin/apikey_handler_create.go": "56c85606959aa0a991e16f1f42508e8c24e78ca70b577029fd48cbd35d0b5c35",
+    "backend/internal/handler/admin/apikey_handler_test.go": "c1e5ec7ab464a5770cc91948b4e46de608ed17f31af570780f01eed8a974ceb3",
+    "backend/internal/pkg/adminaccess/catalog.go": "f9a633ed67d3a9c3832a519cb06bad249bb8351819cfcd65581ac9c49a388cef",
+    "backend/internal/server/middleware/audit_log.go": "1bbd9e4466bb36814701e75bf9cb283dc060d38eba3578c41f5930d4b2224a51",
+    "backend/internal/server/routes/admin.go": "5c3a8fc49b544db7d613ac909dcf54a7262d38b5f2aa8c676ed99bacddaa9a60",
+    "backend/internal/server/routes/admin_user_api_key_integration_test.go": "27d892b1b08a196495b78a1c3c837229414eacceb531fa83196d438fdad7f2cf",
+    "backend/internal/service/openai_gateway_forward.go": "0273b2c008ac7f49c51d3be964dcbdd8ded5f28f15609960b15c6047219f47db",
+    "backend/internal/service/openai_gateway_response_handling.go": "154e3bcdf10314587da56cb1f0605ac4d120502bd52858f62bcec28bfea021fa",
+    "backend/internal/service/openai_gateway_upstream_errors.go": "0268577604444c3e1e899c957900aa62b3ee32efc7814eab75a1e2540bf5444f",
+    "backend/internal/service/openai_plugin_transport.go": "0060a2adff37464f212ce72fac5a5d5e4fdec0accacb1f5470e6b0efe55306f6",
+    "backend/internal/service/openai_pre_parser_observation_test.go": "f9892ce2f9fa5a9c20a156c3694d0bce6267aff900b30b7d253a1d5282432338",
+    "backend/internal/service/openai_success_observation.go": "417c2d470bf80cd4916e996e5517939a5c470ad9aa704def163b06fc2348e4ae",
+    "backend/internal/service/openai_success_observation_smoke_test.go": "9e1b79726ec5f492116ad8ee04eec3026249c020053911efcf5db963745f4854",
+    "backend/internal/service/openai_success_observation_test.go": "9ab8bade2c20bdcc2c2492d7eb98d2806d714ef3548b70874351f00a92d31e25",
+    "backend/internal/service/openai_upstream_observation.go": "42b6a99e710a8621d321e42f66bf3d1ca53d109ff0f6d409cde8da64611a318f",
+    "backend/internal/service/openai_upstream_observation_test.go": "5aed2ab28c5d2242cfe9236a8fca697207f18ea60dfb69cbfa4dc6e4eddfe1d5",
+    "backend/internal/service/ops_service.go": "2dc5c1ca28d6c0debf4b7dc9719a5d6a1edf615bf19888cd6317c105e4fe13a5",
+    "backend/internal/service/ops_upstream_context.go": "0d349b2e9ae555ea963778546bf47f040bd54207f38455beb9e6c0a57b3f6854"
+  },
+  "focused_integrated": {
+    "exit": 0,
+    "pass_events": 377,
+    "skip_events": 4,
+    "failures": []
+  },
+  "previously_gated_scoped_admin_followup": {
+    "exit": 0,
+    "pass_events": 12,
+    "skip_events": 0,
+    "top_level_passed": [
+      "TestScopedAdminWriteModelMappingEnforcesScopeAndPreservesCredentials",
+      "TestScopedAdminWriteEnforcesScopeAndAtomicCreate",
+      "TestScopedAdminWriteHidesAccountsOutsideGrantedScope",
+      "TestScopedAdminCreateWithCredentialWriteDoesNotRequireRead"
+    ]
+  },
+  "mandatory_integrations": {
+    "TestAdminCreateUserAPIKeyIntegration": "pass",
+    "TestUsageHourlyPostgresHTTPIntegration": "pass",
+    "TestOpenAIHTTPObservationRealHTTPSuccessSmoke": "pass"
+  },
+  "observability_race": {
+    "pass_events": 31,
+    "skip_events": 0,
+    "failures": [],
+    "package_outcomes": [
+      [
+        "github.com/Wei-Shaw/sub2api/internal/config",
+        "pass"
+      ],
+      [
+        "github.com/Wei-Shaw/sub2api/internal/service",
+        "pass"
+      ]
+    ],
+    "race_warning": false,
+    "launcher_timeout": true,
+    "surviving_toolchain_waited_to_completion": true,
+    "process_exit_code_not_captured": true
+  },
+  "observation_hook_benchmark": {
+    "scope": "synthetic parser hooks only, not end-to-end throughput",
+    "unsampled_100_frames": {
+      "ns_per_op": 844.6,
+      "bytes_per_op": 0,
+      "allocs_per_op": 0
+    },
+    "unsampled_1000_frames": {
+      "ns_per_op": 9032,
+      "bytes_per_op": 0,
+      "allocs_per_op": 0
+    },
+    "sampled_100_frames": {
+      "ns_per_op": 6311,
+      "bytes_per_op": 576,
+      "allocs_per_op": 1
+    },
+    "sampled_1000_frames": {
+      "ns_per_op": 58211,
+      "bytes_per_op": 576,
+      "allocs_per_op": 1
+    }
+  },
+  "source_binary_smoke": {
+    "built": true,
+    "version_command_succeeded": true,
+    "version": "0.2.19",
+    "commit": "unknown",
+    "build_time": "unknown",
+    "release_artifact": false
+  },
+  "release_tools": {
+    "platform_independent_tests_passed": 7,
+    "actionlint_passed": true,
+    "collect_verify_cli_passed": true,
+    "wrong_compiler_rejected": true,
+    "qualification_parser_passed": true,
+    "missing_integration_rejected": true,
+    "readonly_build_configuration_cli_passed": true,
+    "full_suite_windows_failures": [
+      "POSIX executable mode assertion unsupported on Windows",
+      "default bash resolves to unavailable WSL"
+    ]
+  },
+  "fixtures": {
+    "postgres_version": "18.6",
+    "redis_version": "5.0.14.1 Windows port",
+    "postgres_stopped": true,
+    "redis_stopped": true
+  },
+  "business_credentials_read": 0,
+  "deployed": false,
+  "remote_actions_enabled": false,
+  "provider_requests": 0,
+  "limitations": [
+    "Focused regressions, not the full upstream suite",
+    "Windows loopback fixtures, not OS-level network namespaces",
+    "No image build, signed provenance or remote release matrix",
+    "No live hourly consumer permissions or production reconciliation",
+    "API key insertion and idempotency success recording are not one transaction; no exactly-once guarantee"
+  ]
+}

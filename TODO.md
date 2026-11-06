@@ -7,27 +7,26 @@
 - Implementation: direct repository/service/handler/route code; RFC3339 half-open ranges, maximum31days, explicit row overflow, independent costs, duration sum and non-NULL count including0ms. PostgreSQL microsecond-grid handling preserves fractional-bound comparisons.
 - Latest-intake adaptation: explicit usage.hourly.read global permission, independent of legacy usage.read/dashboard.read and not granting request/user details or writes.
 - Evidence: seven focused pass events; ordinary unit round intentionally skips the gated PG case; three selected existing permission regressions pass; related packages build; explicit real PostgreSQL HTTP integration passes1/skip0; independent TCP HTTP smoke passes. Public sanitized summary: maintenance/verification/hourly-latest.json.
-- Next: separate release/rollback review, narrowly authorized real consumer access and live hourly reconciliation. Local verification is not deployment acceptance.
+- 2026-11-07 review: docs/usage-hourly.md now records artifact identity, whole-intake migration compatibility, rollback/consumer pause, least-privilege checks and closed-hour reconciliation gates. Existing evidence explicitly excludes image/release and live acceptance; local Go1.27.3 is available.
+- Blocked release: no selected target/current deployment identity, approved release/rollback materials or hourly consumer credential scope has been supplied in this repository. Existing statistics credential policies do not authorize this new GET. No deployment, credential read or live reconciliation performed.
+- Next: obtain the narrowly scoped Test release and consumer acceptance inputs; HOUR-01 stays open. Ledger-order local work on2026-11-07 completed ADMKEY-01 and OBS-01 (TODO-m.md); SYNC-01 local gates are verified but remote acceptance remains open. No production changes were made.
 
-## [Owned / adaptation pending] ADMKEY-01 Administrator creation of a target user's API key (2026-11-06)
+## [In progress] TEST-01 Independent Test instance deployment (2026-11-07)
 
-- Goal: a formal admin operation can create an API key for a specified user while backend-only mode stays enabled, without borrowing a user session or disabling global protection.
-- Prior reference: implementation was qualified against older upstream0.2.16/01842576b3d5c1e2545b5a99ad555d36e28ed306; this does not qualify the current intake. Historical material is retained privately.
-- Acceptance: compare current native capabilities first, then retain the minimum necessary direct-source difference for POST /api/v1/admin/users/:id/api-keys; enforce target user/group/subscription constraints and current restricted-admin permissions; real synthetic PostgreSQL/Redis/HTTP and audit/cache regressions must pass.
-- Risk: key insertion and idempotency success recording were not one transaction. Review unknown-result recovery and do not claim exactly-once behavior or blindly repeat writes under a new idempotency key.
-- Current: technical task ownership migrated; the old implementation is not blindly applied to this intake. No real account or key provisioning is performed.
+- Goal: user explicitly requested an independent instance in the existing Test environment, following the isolated-test proposal; do not replace any existing business instance.
+- Scope: discover the documented Test host and deployment convention; build source-identifiable fork artifacts; create a separate application, PostgreSQL and Redis with isolated ports/network/data. Keep success sampling0, no production changes, existing business credential reads or real provider requests.
+- Acceptance: independently running service with full UI, migrations and health verified; synthetic hourly/admin-key/observation behavior exercised where safely available; restart and rollback/removal path documented without touching existing stacks. Real consumer reconciliation remains a separate HOUR-01 gate.
+- Host verified: root@192.168.58.34 using existing pinned torii-test-known_hosts; x86_64, Docker29.1.3/Compose5.0.0, about15GiB available memory and24GiB disk. /opt/sub2api-fork-test absent; existing Torii/Bifrost/AxonHub and databases remain untouched.
+- Credential gate: no approved sub2api-fork-test OpenBao reader/enrollment exists in loaded rules or local deployment helpers. Do not borrow production usages/migration identities, read existing service secrets, generate a replacement secret store or enable trust authentication to bypass this gate.
+- Reachable next: build the complete embedded-UI candidate and start a private loopback-only initialization instance with AUTO_SETUP disabled. Database/admin bootstrap, migrations and authenticated acceptance remain blocked pending controlled credential provisioning; this is not completion of TEST-01.
 
-## [Owned / semantic comparison pending] OBS-01 Long-lived HTTP failure and completion observations (2026-11-06)
-
-- Goal: redacted failure-stage and per-request sampled native-stream completion metadata. Successful sampling defaults to0; no success error rows or changes to protocol/retry/timeout/account/model/TTFT policy.
-- Prior reference: older0.2.17/060d0160417782cd962a0c7f460f6cd4565d4916 qualification is historical evidence, not current implementation acceptance.
-- Acceptance: compare current upstream observations and port only necessary permanent extensions directly into source. Separate temporary timestamp/sequence/protocol bug workarounds; remove those already fixed upstream rather than carrying them indefinitely.
-- Verification: synthetic loopback HTTP/TLS H1/H2 behavior and byte-preservation, redaction, sampling and performance checks. Real provider experiments, deployments or host/network changes require separate scope.
-- Current: task migrated; no old mixed observation patch is blindly applied to maintained source.
-
-## [Pending] SYNC-01 Upstream synchronization and release provenance gates (2026-11-06)
+## [Local gates verified / remote acceptance pending] SYNC-01 Upstream synchronization and release provenance gates (2026-11-07)
 
 - Goal: track official upstream and reproducibly identify maintained downstream source, rather than rebuilding a permanent patch collection.
 - Acceptance: reviewed commit/release intake and conflict handling; regression failures stop synchronization; artifacts identify immutable fork commit/compiler and independent digests. Inherited workflows are not assumed to be configured downstream CI.
 - Current: explicit origin/upstream and intake lock exist; the synchronization procedure is in FORK.md. GitHub Actions are deliberately disabled; scheduled synchronization, fork CI, artifact releases and deployment are not configured.
-- Next: configure a separate reviewed CI/release policy after source migration, without enabling automatic production changes.
+- Next: configure remote reviewed environment protections and execute the candidate dry-run only after separate authorization; local source gate preparation is complete, with no automatic production changes.
+- 2026-11-07 local policy: release dispatch only, default dry run, full reviewed SHA match, explicit publication opt-in plus release environment, candidate unit/owned PG+Redis qualification dependency; removed automatic VERSION branch writes. Compiler provenance joins existing archive SHA-256 manifests and full-release assets.
+- Evidence: actionlint passed; seven platform-independent helper regressions passed; real collect/verify CLI smoke accepted Go1.27.3 and rejected mismatched compiler. Configuration CLI confirmed no mutating pre-build hooks and readonly dependencies. Exact qualification parser accepted observed pass events and rejected missing admin integration.
+- Limitation: full helper suite has Windows POSIX-mode/default-WSL limitations, not a green Linux/remote run. Generated manifests identify runner-reported compiler/commit/digests, not a cryptographic build attestation.
+- Remaining: separately authorize remote Actions/environment reviewer and protected-ref configuration, then execute a reviewed immutable candidate dry-run matrix. No remote workflow enablement, upstream merge, publish, deployment or scheduled automation performed.

@@ -31,6 +31,7 @@ class ReleaseMatrixTest(unittest.TestCase):
             shutil.copyfile(ROOT / name, name)
         Path('backend/cmd/server').mkdir(parents=True)
         release.VERSION_FILE.write_text('9.8.7\n')
+        shutil.copyfile(ROOT / 'backend/go.mod', 'backend/go.mod')
 
     def fixture_artifacts(self, simple=False):
         directory = Path('release-input')
@@ -47,7 +48,8 @@ class ReleaseMatrixTest(unittest.TestCase):
             else:
                 archive.write_bytes(b'fixture archive')
             metadata = {'version': '9.8.7', 'sha': 'a' * 40, 'target': target,
-                        'archive': name, 'sha256': release.sha256(archive)}
+                        'archive': name, 'sha256': release.sha256(archive),
+                        'compiler': release.required_compiler()}
             (directory / f"manifest-{target['goos']}-{target['goarch']}.json").write_text(json.dumps(metadata))
         return argparse.Namespace(input='release-input', version='9.8.7', sha='a' * 40, simple=simple, output='contexts')
 
@@ -107,6 +109,20 @@ class ReleaseMatrixTest(unittest.TestCase):
         next(Path('release-input').glob('*.tar.gz')).unlink()
         with self.assertRaises(FileNotFoundError):
             release.verify(args)
+
+    def test_wrong_or_missing_compiler_provenance_is_rejected(self):
+        args = self.fixture_artifacts(True)
+        path = next(Path(args.input).glob('manifest-*.json'))
+        manifest = json.loads(path.read_text())
+        for compiler in ('go0.0.0', None):
+            with self.subTest(compiler=compiler):
+                if compiler is None:
+                    manifest.pop('compiler', None)
+                else:
+                    manifest['compiler'] = compiler
+                path.write_text(json.dumps(manifest))
+                with self.assertRaisesRegex(ValueError, 'provenance'):
+                    release.verify(args)
 
     def test_linux_context_preserves_binary_executable_mode(self):
         args = self.fixture_artifacts()

@@ -567,6 +567,9 @@ func (s *OpenAIGatewayService) readUpstreamErrorBody(resp *http.Response) []byte
 		cfg = s.cfg
 	}
 	body, _ := io.ReadAll(io.LimitReader(resp.Body, openAIUpstreamErrorBodyReadLimitForConfig(cfg)))
+	if observed, ok := resp.Body.(*observedOpenAIHTTPBody); ok && resp.StatusCode >= 300 {
+		observed.attempt.observeRejection(body)
+	}
 	return body
 }
 

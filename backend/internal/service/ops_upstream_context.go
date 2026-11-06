@@ -444,6 +444,9 @@ type OpsUpstreamErrorEvent struct {
 	// bounds forced earlier attempts of the same request to be discarded.
 	DroppedEarlierAttempts int `json:"dropped_earlier_attempts,omitempty"`
 
+	// HTTPDiagnostics is an immutable inference-dispatch snapshot, absent for credential acquisition.
+	HTTPDiagnostics *UpstreamHTTPDiagnostics `json:"http_diagnostics,omitempty"`
+
 	// Outcome
 	UpstreamStatusCode int    `json:"upstream_status_code,omitempty"`
 	UpstreamRequestID  string `json:"upstream_request_id,omitempty"`
@@ -495,6 +498,9 @@ func appendOpsUpstreamError(c *gin.Context, ev OpsUpstreamErrorEvent) {
 	ev.Kind = strings.TrimSpace(ev.Kind)
 	ev.Stage = strings.TrimSpace(ev.Stage)
 	ev.Scope = strings.TrimSpace(ev.Scope)
+	if ev.HTTPDiagnostics == nil && ev.Stage != string(GatewayFailureStageAccountAuth) && ev.Platform == PlatformOpenAI {
+		ev.HTTPDiagnostics = snapshotOpenAIHTTPAttempt(c)
+	}
 	ev.Reason = strings.TrimSpace(ev.Reason)
 	ev.UpstreamURL = strings.TrimSpace(ev.UpstreamURL)
 	ev.Message = strings.TrimSpace(ev.Message)
