@@ -23,7 +23,9 @@ services:
       - ./data:/app/data
     tmpfs:
       - /tmp:size=128m,mode=1777
-    networks: [isolated]
+    # Docker 29 does not publish ports for an internal-only attachment.
+    # Only this app joins ingress; PostgreSQL/Redis remain internal-only.
+    networks: [ingress, isolated]
     healthcheck:
       test: [CMD-SHELL, "curl -fsS --max-time 5 http://127.0.0.1:8080/setup/status || curl -fsS --max-time 5 http://127.0.0.1:8080/health"]
       interval: 15s
@@ -74,5 +76,6 @@ services:
     networks: [isolated]
 
 networks:
+  ingress: {}
   isolated:
     internal: true

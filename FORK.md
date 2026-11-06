@@ -38,3 +38,26 @@ GitHub Actions remain deliberately disabled remotely. The local release workflow
 - Failure diagnostics attach immutable per-attempt snapshots to existing Ops error JSON and emit `openai.upstream_http_failure` with bounded stage classification. Credential-acquisition failures do not inherit prior HTTP-attempt data. New fields retain allowlisted protocol/ALPN/network/rejection codes, numeric times/counts and numeric peer address only; no prompts, tokens, headers, arbitrary error text or provider payload are retained by these observations.
 - Transport timing starts at dispatch; SSE timing measures parser processing, not packet arrival. Existing `first_token_ms` retains its forward-start clock. Downstream write/flush timings measure actual writer calls, not first-output staging and not proof of client receipt or Internet backpressure. `-1` means unobserved, not zero latency.
 - Local synthetic checks cover real HTTP→Forward→TLS H1/H2, unchanged SSE bytes with sampling0/1, authoritative terminal/cancellation/writer failures, non2xx redaction, H2 resets, immutable retry snapshots and native flush/timestamp regressions. No live model requests, production error-table insertion, deployment or OS-level network namespace isolation is claimed.
+
+## Independent Test deployment
+
+`deploy/test-independent/compose.yaml` defines a separate Compose project with bind-mounted data, a nonroot/read-only application, loopback-only port18085 and dedicated networks. Only the app joins the ingress bridge; PostgreSQL/Redis use an internal-only network and publish no host ports. Docker29 does not publish a port for an internal-only application attachment, so do not remove the separate ingress network. Access the UI through an SSH tunnel to the Test host, not an unauthenticated LAN/public setup endpoint.
+
+- Artifact identity and exercised checks: `maintenance/verification/test-independent-20261107.json`. The application commit and deployment Compose digest are separate identities. Package prebuilt binaries and shell entrypoints with explicit0755 modes: plain `cp` under umask077 can make the entrypoint unreadable to the nonroot runtime.
+- Initial state deliberately uses `AUTO_SETUP=false`. `GET /setup/status` returning `needs_setup:true` and a healthy container prove the initialization surface only, not migrations, login or hourly/admin-key business acceptance. Success sampling stays0.
+- PostgreSQL and Redis belong to the `initialized` profile. Before enabling it, obtain the dedicated approved OpenBao purpose and controlled bootstrap delivery; do not reuse another instance's credentials or substitute trust authentication. Required protected files are the PostgreSQL password and Redis configuration under the deployment's `secrets` directory; do not place their values in `.env`, CLI arguments, logs or this repository. The nonsensitive `.env` pins image identities only.
+- Once credentials are properly provisioned, database/Redis service names inside the application network are `postgres` and `redis`, with database/user `sub2api_fork_test`/`sub2api_test`. Completing the private wizard is a separate controlled operation; profile activation alone does not initialize the application.
+- Restart smoke exercised the application and verified nonroot bind-mount persistence. Six existing Test service identities/start times/restart counters stayed unchanged. A local-only browser rendered the real setup form; payment SDK requests were intentionally blocked by its verification allowlist, not reported as an unrestricted all-network UI test.
+
+Use the recorded deployment directory as `TEST_ROOT`; never point these commands at an existing business stack:
+
+```sh
+docker compose --project-directory "$TEST_ROOT" -f "$TEST_ROOT/compose.yaml" restart app
+docker compose --project-directory "$TEST_ROOT" -f "$TEST_ROOT/compose.yaml" up -d --wait --wait-timeout 60 --no-build --pull never app
+# Reversible rollback for this new instance: stop only its application.
+docker compose --project-directory "$TEST_ROOT" -f "$TEST_ROOT/compose.yaml" stop app
+# Approved removal of this independent project's containers/networks, preserving bind-mounted data:
+docker compose --project-directory "$TEST_ROOT" -f "$TEST_ROOT/compose.yaml" down
+```
+
+Do not delete bind-mounted data, run volume-pruning commands, touch existing proxy routes, or restore a database automatically. After initialization, future upgrades require a separately reviewed data/schema rollback plan; the pre-initialization stop/start check is not proof of database rollback.

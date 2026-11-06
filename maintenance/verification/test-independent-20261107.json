@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-07",
+  "scope": "independent Test instance, not production",
+  "application_commit": "689e6cdea73792bdfb33c31b8f694a80793cd194",
+  "application_version": "0.2.19-fork-test.689e6cdea",
+  "go_version": "1.27.3",
+  "pnpm_version": "9.15.9",
+  "source_archive_sha256": "93454b1b4ed3089b2b0065882c0f222287072437c81740de3814908ab33476e1",
+  "binary_sha256": "9a5fb0209fb44099a946f23fa701f40685f6316435c3617a84f3ffaeb3d0919b",
+  "image_id": "sha256:112ff63439422ec5ea51594e2fdd899a900a35c68e3d3b1ba74f5871486b83ea",
+  "compose_sha256": "0fbbb2cf209060296d4837acbbcadea7dcb8898a9b8d5e6122ba8d5babeb06b7",
+  "frontend_frozen_install_and_full_build": "passed on Linux",
+  "embedded_binary_build_and_version_smoke": "passed",
+  "runtime": {
+    "container_health": "healthy",
+    "user": "1000:1000",
+    "read_only_root_filesystem": true,
+    "capabilities_dropped": ["ALL"],
+    "host_binding": "loopback only",
+    "database_network_internal": true,
+    "application_has_separate_ingress_bridge": true,
+    "auto_setup": false,
+    "success_observation_sampling": 0,
+    "application_initialized": false,
+    "postgres_started": false,
+    "redis_started": false
+  },
+  "verification": {
+    "homepage_status": 200,
+    "setup_status": 200,
+    "needs_setup": true,
+    "real_browser_setup_form_rendered": true,
+    "third_party_payment_sdk_requests_blocked_by_local_only_browser_policy": 2,
+    "restart_recovered_healthy": true,
+    "nonroot_bind_mount_write_and_restart_persistence": "passed; probe removed",
+    "existing_service_identity_start_time_restart_count_unchanged": 6,
+    "running_binary_hash_matches_build": true,
+    "runtime_compose_hash_matches_local": true
+  },
+  "resolved_deployment_issues": [
+    "Windows pnpm symlink EISDIR: built the unchanged frozen source on Linux instead",
+    "Private umask made entrypoint unreadable to nonroot: package entrypoint explicitly installed as0755",
+    "Docker29 internal-only attachment did not publish host port: separate application-only ingress bridge; database network remains internal"
+  ],
+  "business_credentials_read": 0,
+  "real_provider_requests": 0,
+  "remote_git_push": false,
+  "remaining_gates": [
+    "Dedicated OpenBao credential purpose and controlled database/admin bootstrap",
+    "Start isolated PostgreSQL/Redis and verify migrations and authenticated behavior",
+    "Real hourly consumer permissions and reconciliation"
+  ],
+  "limitations": [
+    "Healthy initialization UI is not authenticated application acceptance",
+    "No production deployment, live consumer reconciliation or real provider inference",
+    "Application image and deployment Compose have separately recorded identities"
+  ]
+}

@@ -31,3 +31,12 @@
 - Performance: temporary100/1000-frame hook probe measured unsampled0alloc/0B, sampled1alloc/576B per sequence at both sizes, approximately6.3/58.2microseconds for sampled100/1000frames. This is hook scaling, not end-to-end throughput/backpressure evidence; temporary probe removed after capture.
 - Source binary built and actual -version smoke succeeded at0.2.19; commit/build metadata unknown, explicitly not a release artifact. Source-bound integrated/race/benchmark/release-gate evidence: maintenance/verification/ledger-20261107.json.
 - Limits: focused checks, not full upstream suite; synthetic Windows loopback, not OS network namespaces; no production DB insertion, real provider requests, business credentials or deployment. Release/live-consumer and remote CI work stays open in TODO.md.
+
+## [Completed subtask / parent open] TEST-01 Artifact and private initialization surface (2026-11-07)
+
+- Parent goal: an independent usable Test instance, without replacing existing services. Only artifact/private-runtime/restart preparation is complete; credentials, database services, migrations and authenticated acceptance remain explicitly open in TODO.md.
+- Built source commit689e6cdea73792bdfb33c31b8f694a80793cd194 locally committed/not pushed; immutable archive verified before native Linux frozen pnpm9/full UI and Go1.27.3 embedded build. Actual running version0.2.19-fork-test.689e6cdea and binary hash match the release artifact.
+- Dedicated Compose project is healthy with loopback-only ingress, UID1000, read-only rootfs, dropped capabilities and sampling0. Real browser setup form, HTTP200/needs_setup:true, restart recovery and a temporary persistent-data marker passed; marker removed. The six selected pre-existing service baselines are unchanged.
+- Deployment corrections: Windows dependency symlink failure avoided by unchanged Linux build; entrypoint explicitly0755 under private umask; application ingress separated from internal-only database network so Docker29 publishes the loopback port.
+- Evidence: maintenance/verification/test-independent-20261107.json records source/binary/image/Compose identities and limitations. FORK.md documents independent stop/down rollback preserving bind-mounted data; no database rollback claimed before initialization.
+- No business credential reads, real provider requests, production changes or remote Git pushes. PostgreSQL/Redis and admin bootstrap await a dedicated approved credential purpose; setup UI health is not business completion.
