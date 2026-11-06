@@ -56,6 +56,7 @@ var definitions = []permissionDefinition{
 	{Permission{"users.quotas.write", "修改与重置全站用户平台额度", "用户", "global"}, []string{"PUT /users/:id/platform-quotas", "POST /users/:id/platform-quotas/reset"}},
 	{Permission{"groups.read", "读取所有分组配置", "分组", "global"}, []string{"GET /groups", "GET /groups/all", "GET /groups/:id", "GET /groups/:id/rate-multipliers", "GET /groups/:id/composite-routes", "GET /groups/:id/model-allowlist-candidates"}},
 	{Permission{"usage.read", "读取全站用量明细及用户用量", "报表", "global"}, []string{"GET /usage", "GET /usage/stats", "GET /users/:id/usage"}},
+	{Permission{"usage.hourly.read", "读取全站小时聚合（不含用户明细）", "报表", "global"}, []string{"GET /usage/hourly"}},
 	{Permission{"payment.read", "读取全站支付订单与报表", "财务", "global"}, []string{"GET /payment/dashboard", "GET /payment/orders", "GET /payment/orders/:id"}},
 	{Permission{"payment.cancel", "取消支付订单", "财务", "global"}, []string{"POST /payment/orders/:id/cancel"}},
 	{Permission{"payment.fulfill", "重新履约支付订单", "财务", "global"}, []string{"POST /payment/orders/:id/retry"}},

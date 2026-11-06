@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source_base_commit": "c5ca149a3d856d92fa0b61bea276338be718c5db",
+  "go_version": "1.27.3",
+  "backend_tree_sha256": "1fbba3b747c3e44da5a738991e1291b8470340ac16f5eba188a72236fef5ce47",
+  "focused_unit": {
+    "pass_events": 7,
+    "skip_events": 1,
+    "skip_reason": "explicit PostgreSQL fixture gate absent in ordinary unit round"
+  },
+  "existing_permission_regressions": {
+    "pass_events": 3,
+    "skip_events": 0
+  },
+  "postgres_http": {
+    "pass_events": 1,
+    "skip_events": 0,
+    "synthetic_owned_loopback_database": true
+  },
+  "standalone_tcp_http": {
+    "passed": true,
+    "anonymous_status": 401,
+    "authenticated_status": 200,
+    "fractional_bounds_preserved": true,
+    "hourly_permission_isolated": true
+  },
+  "related_packages_built": true,
+  "deployed": false,
+  "business_credentials_read": 0,
+  "database_stopped": true,
+  "limitations": [
+    "Focused regressions and selected related package builds, not the entire upstream suite",
+    "No race run or release image build",
+    "Synthetic loopback verification, not OS-level network namespaces",
+    "OpenSpec CLI validation not run",
+    "Raw local logs and historical operational evidence are retained privately and are not published"
+  ]
+}

@@ -2565,6 +2565,10 @@ func (r *stubApiKeyRepo) GetRateLimitData(ctx context.Context, id int64) (*servi
 	return nil, nil
 }
 
+func (r *stubUsageLogRepo) GetHourlyUsage(context.Context, usagestats.HourlyUsageFilter) ([]usagestats.HourlyUsageRow, error) {
+	return nil, nil
+}
+
 type stubUsageLogRepo struct {
 	userLogs map[int64][]service.UsageLog
 }

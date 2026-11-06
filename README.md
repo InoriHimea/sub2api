@@ -1,3 +1,5 @@
+> **Maintained downstream fork:** [InoriHimea/sub2api](https://github.com/InoriHimea/sub2api), natively forked from [Wei-Shaw/sub2api](https://github.com/Wei-Shaw/sub2api) with full upstream ancestry. Provenance/sync: [FORK.md](FORK.md); owned changes: [TODO.md](TODO.md); hourly API: [docs/usage-hourly.md](docs/usage-hourly.md). This is not an official upstream release; no deployment is implied.
+
 <div align="center">
 
 <img src="assets/logo.svg" alt="Sub2API Logo" width="128" />

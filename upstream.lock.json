@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "kind": "maintained-native-github-fork",
+  "upstream": {
+    "repository": "https://github.com/Wei-Shaw/sub2api.git",
+    "branch": "main",
+    "intake_commit": "c5ca149a3d856d92fa0b61bea276338be718c5db",
+    "intake_date": "2026-11-06",
+    "nearest_release": "v0.2.19",
+    "commits_after_release": 49,
+    "history": "complete, non-shallow"
+  },
+  "origin": {
+    "repository": "https://github.com/InoriHimea/sub2api.git",
+    "web": "https://github.com/InoriHimea/sub2api",
+    "native_hosting_fork_relation": true,
+    "parent": "Wei-Shaw/sub2api",
+    "visibility": "public"
+  },
+  "tracking": {
+    "upstream_remote": "upstream",
+    "downstream_remote": "origin",
+    "upstream_anchor_branch": "upstream-main",
+    "downstream_branch": "main",
+    "automatic_sync_enabled": false,
+    "github_actions_enabled": false,
+    "automatic_deployment_enabled": false
+  },
+  "go_version": "1.27.3"
+}

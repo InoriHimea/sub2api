@@ -79,6 +79,8 @@
 
 权限目录按接口与 HTTP 方法精确登记。当前不提供 `payment.mark_paid` 或退款预览权限；不要把退款、取消订单、重新履约等其他权限当作这些动作的替代。
 
+本方fork新增全站只读权限`usage.hourly.read`，仅授权`GET /api/v1/admin/usage/hourly`的小时聚合，不包含用户/请求/key/account明细，也不授权写操作。它不从旧`usage.read`或`dashboard.read`自动继承；只有该权限不能访问`/usage`明细。`group_id`是查询筛选而非授权隔离，详见[小时聚合合同](usage-hourly.md)。此源码功能不自动修改现有或线上密钥策略。
+
 受限响应按用途收窄：
 
 - 账户读取返回基本管理信息和模型映射，不返回 OAuth token、API 密钥、任意 `extra` 或完整凭证。`accounts.credentials` 是写入权限，不提供读取凭证的能力。

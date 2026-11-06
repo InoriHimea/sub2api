@@ -15,6 +15,10 @@ type usageBatchLogRepoStub struct{}
 
 var _ UsageLogRepository = (*usageBatchLogRepoStub)(nil)
 
+func (r *usageBatchLogRepoStub) GetHourlyUsage(context.Context, usagestats.HourlyUsageFilter) ([]usagestats.HourlyUsageRow, error) {
+	return nil, nil
+}
+
 func (r *usageBatchLogRepoStub) Create(context.Context, *UsageLog) (bool, error) {
 	return false, nil
 }
