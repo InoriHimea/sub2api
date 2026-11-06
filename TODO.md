@@ -1,13 +1,5 @@
 # Maintained fork — open work
 
-## [In progress] FORK-01 Native fork and task ownership migration (2026-11-06)
-
-- Goal: maintain permanent server-side additions in an independent upstream-tracking fork rather than a downstream patch workflow.
-- Acceptance: native GitHub parent/source relation, complete upstream ancestry and explicit remotes; direct source and regression ownership; technical task migration; latest-intake HTTP/PostgreSQL verification; immutable published source reference and retirement of duplicated feature entrypoints.
-- Scope: source, repository metadata, technical tasks and synthetic local verification only; no deployments, live identities, consumer policy changes or provider requests.
-- Current: native InoriHimea/sub2api fork verified with parent Wei-Shaw/sub2api; official main intake c5ca149a3d856d92fa0b61bea276338be718c5db, non-shallow history, Go1.27.3. Source and regressions are migrated and verified locally; publication and final ownership readback are in progress.
-- Next: publish privacy-reviewed source/tasks, verify the downstream commit and upstream anchor, then close this migration task. Operational history and raw local evidence remain private.
-
 ## [Locally verified / release pending] HOUR-01 Additive hourly usage aggregates (2026-11-06)
 
 - Goal: UTC hour × nullable group × requested-model aggregates with exact additive request/token/cost/duration statistics for sub-day and longer-window consumers.

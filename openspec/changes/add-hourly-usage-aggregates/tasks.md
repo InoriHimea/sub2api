@@ -16,7 +16,7 @@
 - [x] 3.2 显式owned loopback *_test合成PG实际HTTP→认证→handler→service→repository测试1pass/0skip。
 - [x] 3.3 独立实际TCP HTTP烟测通过；maintenance/verification/仅发布脱敏摘要，原始日志私有保留；合成DB停止且数据和临时脚手架已清理。
 - [x] 3.4 服务端实现待办已归本fork，下游只留消费者指针；旧小时聚合patch/lock/helper入口退出，原始输入/日志及运维历史私有保存。
-- [ ] 3.5 提交/推送本方源码与任务，核对远端main和官方祖先/接入锚点，消费者引用不可变fork commit。
+- [x] 3.5 本方源码/任务提交15004bb0已推送并回读；native parent/source、官方祖先和upstream-main锚点已核对，下游绑定该不可变源码commit，迁移完成记录归TODO-m.md。
 
 ## 4. 单独发布门禁（本轮不执行）
 
