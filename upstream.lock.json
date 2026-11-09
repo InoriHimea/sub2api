@@ -4,10 +4,10 @@
   "upstream": {
     "repository": "https://github.com/Wei-Shaw/sub2api.git",
     "branch": "main",
-    "intake_commit": "c5ca149a3d856d92fa0b61bea276338be718c5db",
-    "intake_date": "2026-11-06",
-    "nearest_release": "v0.2.19",
-    "commits_after_release": 49,
+    "intake_commit": "6b4b37db43443b5e88e424fe3c69602cc3810dfb",
+    "intake_date": "2026-11-09",
+    "nearest_release": "v0.2.20",
+    "commits_after_release": 1,
     "history": "complete, non-shallow"
   },
   "origin": {

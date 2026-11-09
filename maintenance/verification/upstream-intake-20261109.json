@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "scope": "Local official upstream merge qualification; not deployment or release",
+  "previous_fork_commit": "6bf82603c0cc4b0a7fd3f7a57d0ee41ea73e423d",
+  "previous_upstream_intake": "c5ca149a3d856d92fa0b61bea276338be718c5db",
+  "upstream_commit": "6b4b37db43443b5e88e424fe3c69602cc3810dfb",
+  "upstream_description": "v0.2.20-1-g6b4b37db4",
+  "incoming_files": 176,
+  "automatic_merge_conflicts": 0,
+  "go_version": "go1.27.3 windows/amd64",
+  "backend": {
+    "command": "go test -mod=readonly -json -tags=unit -count=1 -p 2 ./...",
+    "exit": 0,
+    "duration_seconds": 470.4,
+    "packages_started": 111,
+    "packages_passed": 60,
+    "packages_without_tests": 51,
+    "test_and_subtest_pass_events": 25954,
+    "test_skip_events": 18,
+    "failed_events": 0,
+    "mandatory_integrations": {
+      "TestAdminCreateUserAPIKeyIntegration": [
+        "pass"
+      ],
+      "TestUsageHourlyPostgresHTTPIntegration": [
+        "pass"
+      ],
+      "TestOpenAIHTTPObservationRealHTTPSuccessSmoke": [
+        "pass"
+      ]
+    },
+    "skipped_tests": [
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/handler",
+        "test": "TestDingTalkOAuthStart_Disabled"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/pkg/tlsfingerprint",
+        "test": "TestDialerBasicConnection"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/pkg/tlsfingerprint",
+        "test": "TestJA3Fingerprint"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/pkg/tlsfingerprint",
+        "test": "TestAllProfiles"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/pkg/xai",
+        "test": "TestCLIUserAgentMatchesOfficialInteractiveCapture"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditConfigCASSecretRoundTripInvalidationAndTTL"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestRedisPayloadStoreRoundTripTTLNamespaceAndDelete"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptRuntimeAggregatesConfigWorkersQueueRedisEndpointsAndGuardMetrics"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditMigrationSchemaAndLeakageGate"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditDatabasePersistsFullPromptOnEventsOnly"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditRepositoryAdmissionClaimFencingAndEventTransaction"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditRepositoryForeignKeysFiltersAndStableIdentitySnapshots"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditRepositoryHighWaterAndSafeDeletion"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/securityaudit",
+        "test": "TestPromptAuditServiceConfirmationKeepsPostPreviewEventsAndConcurrentDeletesAreSafe"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/service",
+        "test": "TestAuthPendingIdentityService_UpsertAdoptionDecision_ClearsLegacyNullSessionReference"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/service",
+        "test": "TestContentModerationTypeSafeLive"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/service",
+        "test": "TestEstimateOpenAIInputTokens_CompareWithOpenAIAPI"
+      },
+      {
+        "package": "github.com/Wei-Shaw/sub2api/internal/service",
+        "test": "TestPluginRuntimeIntegration"
+      }
+    ]
+  },
+  "initial_gate": {
+    "exit": 1,
+    "pass_events_including_packages": 26004,
+    "skip_events_including_empty_packages": 69,
+    "fail_events_including_rollups": 10,
+    "corrections": [
+      "Admin-key integration publishes/restores backend-mode cache using existing settings API",
+      "Large escaped-body behavioral/no-mutation test retained; process-wide allocation assertion removed; allocation benchmark retained",
+      "Stale Ollama callback fixture derives a distinct reset generation without relying on clock resolution"
+    ],
+    "production_runtime_changes_for_failures": 0
+  },
+  "frontend": {
+    "targeted_test_files": 4,
+    "targeted_tests_passed": 134,
+    "i18n_tests_passed": 3,
+    "typecheck_passed": true,
+    "production_build_passed": true,
+    "production_modules_transformed": 1097,
+    "initial_build_failure": "isolated tree omitted tracked docs/legal inputs; corrected input tree without source edits",
+    "browser_quota_values": [
+      60,
+      25,
+      0,
+      10,
+      20
+    ],
+    "browser_codex_model": "gpt-6.1-sol",
+    "browser_live_web_search": true,
+    "browser_errors": 0,
+    "actual_embedded_setup_surface_passed": true,
+    "actual_setup_needs_setup": true,
+    "binary_version": "0.2.20",
+    "release_artifact": false
+  },
+  "runtime_smoke": {
+    "embedded_build_passed": true,
+    "version": "0.2.20",
+    "cli_version_passed": true,
+    "actual_browser_setup_form_passed": true,
+    "setup_status_needs_setup": true,
+    "commit_metadata": "unknown",
+    "build_metadata": "unknown",
+    "release_artifact": false,
+    "binary_sha256": "26fc767edef23f31cbad0c427a9403a97adb3f0b4fd18a89ae03eee7ddf56c48"
+  },
+  "fixtures": {
+    "postgres": "18.6 disposable native loopback",
+    "redis": "5.0.14.1 disposable Windows port loopback",
+    "business_credentials_read": 0
+  },
+  "limits": [
+    "Unit-tag suite only; integration/e2e-tag suites not claimed",
+    "18 gated tests skipped; no claim of all-environment coverage",
+    "Windows loopback fixtures, not OS network-namespace isolation",
+    "No remote CI, image build, Test deployment, production change, paid provider traffic or push",
+    "Independent Test database/admin bootstrap remains blocked on dedicated approved credential delivery"
+  ],
+  "corrected_test_sha256": {
+    "backend/internal/server/routes/admin_user_api_key_integration_test.go": "3e7eb28b7b8e3bc5d22d53fe7ad7f632530e0ee7606f5f70d55664ee9d0ce8e2",
+    "backend/internal/service/openai_responses_orphan_precheck_test.go": "7466343f10b8dd39936bf8f5a83d12e6b19bf7c33e2edbd92b12c7005595d72b",
+    "backend/internal/service/ratelimit_service_ollama_429_test.go": "257ec4e7cd393e76ca73ef5a719ff4754f357bccf903b45e4a8b0d60e4b25988"
+  }
+}

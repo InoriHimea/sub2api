@@ -394,14 +394,16 @@ func TestOllamaProbeCallback_StaleLongDoesNotOverrideNewShort(t *testing.T) {
 	svc.handle429(context.Background(), acct, http.Header{}, nil) // schedules gen @5s
 	require.Equal(t, 1, scheduler.count())
 
-	// An admin / newer policy re-arms the account to a fresh SHORT cooldown.
-	newShort := time.Now().Add(5 * time.Second)
+	// Derive the newer short cooldown from the captured generation: consecutive
+	// clock reads can be identical, accidentally making a stale CAS match.
+	scheduledReset := repo.currentReset(acct.ID)
+	require.NotNil(t, scheduledReset, "handle429 must have set an immediate cooldown")
+	newShort := scheduledReset.Add(5 * time.Second)
 	repo.mutate(acct.ID, func(a *Account) { a.RateLimitResetAt = ollama429TimePtr(newShort) })
 
 	// The old async result reports a long 7d reset; it must not override.
 	oldLong := time.Now().Add(7 * 24 * time.Hour)
 	scheduler.fire(acct.ID, oldLong)
-
 	require.Zero(t, repo.casUpdated, "stale long callback must not pass the CAS")
 	require.Greater(t, repo.casSkipped, 0)
 	reset := repo.currentReset(acct.ID)

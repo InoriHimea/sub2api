@@ -100,8 +100,13 @@ func TestAdminCreateUserAPIKeyIntegration(t *testing.T) {
 	settingsRepo := repository.NewSettingRepository(client)
 	const adminCredential = "admin-integration-fixture-not-a-runtime-secret"
 	require.NoError(t, settingsRepo.Set(ctx, service.SettingKeyAdminAPIKey, adminCredential))
-	require.NoError(t, settingsRepo.Set(ctx, service.SettingKeyBackendModeEnabled, "true"))
 	settings := service.NewSettingService(settingsRepo, cfg)
+	// Backend mode is process-cached; publish and restore it through the settings
+	// service so later route tests cannot inherit this fixture's enabled state.
+	t.Cleanup(func() {
+		require.NoError(t, settings.UpdateSettings(context.Background(), &service.SystemSettings{BackendModeEnabled: false}))
+	})
+	require.NoError(t, settings.UpdateSettings(ctx, &service.SystemSettings{BackendModeEnabled: true}))
 	settings.SetScopedAdminKeyRepository(repository.NewScopedAdminKeyRepository(db))
 	adminService := service.NewAdminService(cfg, users, repository.NewAdminGroupRepository(client, db),
 		nil, nil, keys, nil, nil, nil, nil, nil, nil, keyService, client, settings,
