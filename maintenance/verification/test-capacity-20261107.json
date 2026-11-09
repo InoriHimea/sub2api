@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-07",
+  "scope": "Read-only prelaunch capacity and dedicated bootstrap preflight",
+  "filesystems": {
+    "application_bind_mounts": {"total_bytes": 75125227520, "used_bytes": 52293812224, "available_bytes": 22831415296, "used_percent": 70, "inode_used_percent": 3},
+    "docker_storage": {"total_bytes": 536608768000, "used_bytes": 454023774208, "available_bytes": 82584993792, "used_percent": 85, "inode_used_percent": 2}
+  },
+  "task_directory_reported_size": "1.1G",
+  "release_source_reported_size": "786M",
+  "release_image_context_reported_size": "121M",
+  "docker_reported": {"images": "16.62GB", "volumes": "77.64GB", "build_cache": "1.896GB"},
+  "app": {"health": "healthy", "restart_count": 0, "user": "1000:1000", "readonly_rootfs": true},
+  "bootstrap_files": {"postgres_password_nonempty": false, "redis_config_nonempty": false},
+  "dedicated_purpose_search": "No matching dedicated Test helper filename or enrollment registry reference found; loaded authorization has no dedicated Test reader grant",
+  "decision": "Capacity permits small synthetic acceptance without rebuild or large data loads; initialization remains blocked on controlled dedicated credential delivery",
+  "operational_guardrails": {"root_minimum_available_gib": 10, "docker_minimum_available_gib": 50, "maximum_synthetic_dataset_mib": 100, "action_if_breached": "Stop new acceptance writes and investigate; no shared prune or unrelated deletion"},
+  "mutations": {"remote_changes": 0, "image_pulls": 0, "builds": 0, "service_starts": 0, "credential_reads": 0, "deletions": 0},
+  "not_verified": ["Database migration", "Authenticated UI/API", "Hourly aggregate reconciliation", "Observation acceptance", "Initialized restart and persistence", "Existing services unchanged relative to a prior identity baseline"]
+}

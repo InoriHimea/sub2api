@@ -4,6 +4,7 @@
   "scope": "Local official upstream merge qualification; not deployment or release",
   "previous_fork_commit": "6bf82603c0cc4b0a7fd3f7a57d0ee41ea73e423d",
   "previous_upstream_intake": "c5ca149a3d856d92fa0b61bea276338be718c5db",
+  "qualified_merge_commit": "40b3eb88f846008b9e40f233cdfbe6ebaf52d6ba",
   "upstream_commit": "6b4b37db43443b5e88e424fe3c69602cc3810dfb",
   "upstream_description": "v0.2.20-1-g6b4b37db4",
   "incoming_files": 176,
@@ -154,6 +155,8 @@
   "fixtures": {
     "postgres": "18.6 disposable native loopback",
     "redis": "5.0.14.1 disposable Windows port loopback",
+    "postgres_stopped": true,
+    "redis_stopped": true,
     "business_credentials_read": 0
   },
   "limits": [
