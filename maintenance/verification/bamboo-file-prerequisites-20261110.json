@@ -1,0 +1,186 @@
+{
+  "bamboo_validation": {
+    "activation": false,
+    "canonical": [
+      {
+        "kind": "aui-message closeable aui-message-error",
+        "text": "The YAML configuration is invalid\n\nThere's something wrong with the YAML configuration. Fix the errors and try again.\nProject with key SUB2API does not exist"
+      }
+    ],
+    "current_input_sha256": "1b34b5ab24e05f31684168380dbe0a45273c7acd98e5b6fd7d83fe89f0e05ce3",
+    "current_noncomment_input_unchanged": true,
+    "endpoint": "https://deploy.mellivora.com.cn/specs/yamlValidation.action",
+    "only_project_key_substituted": true,
+    "project_plan_or_repository_created": false,
+    "substituted_result": [
+      "All good!\n\nThe YAML configuration is valid."
+    ],
+    "validated_input_sha256": "734f5836d38e44c91b39b8ae23256f60c039e6006ce78157671ab12adcd1dc71",
+    "validation_only_project_substitution": "AIGP"
+  },
+  "cleanup": {
+    "owned_browser_tab_closed": true,
+    "owned_fixture_removed": true,
+    "service_or_shared_cache_cleanup": false
+  },
+  "date": "2026-11-10",
+  "external_gates": [
+    "canonical SUB2API project and fork RSS linkage, actual tag detection and agent-label acceptance",
+    "accepted dedicated CI target identity and protected approval profiles",
+    "verified current sub2api3 native/database baseline and checksum-bound pending SQL review"
+  ],
+  "fixture_source_sha256": {
+    ".gitattributes": "1e7e4dd88806c211173003844b25304bac2ba04d0c2dc4afbb7a5e181fd3bf7c",
+    ".gitignore": "d4bec811315689df33fed79327e2461c7dfc3ccdb46b5fb493bb595a2922b4c0",
+    "Dockerfile.goreleaser": "d930c927560641d2dda75d56d608ce1d5ae39b32f98db293788b5ec1e23a9af5",
+    "backend/go.mod": "0b7d42465cb86b9daa0092d8fd3794183049db284ff027c3bdef26ee0fb601e1",
+    "bamboo-specs/bamboo.yml": "734f5836d38e44c91b39b8ae23256f60c039e6006ce78157671ab12adcd1dc71",
+    "deploy/docker-entrypoint.sh": "7d3f1f532fcdefc0f405b37fb6caafa330dfcc7c531ad8bf51fcd48dad54a0b3",
+    "frontend/package.json": "9e8209845331530a13b55e7268975a2b48b9593952179d7214e6bef51314e28f",
+    "frontend/pnpm-lock.yaml": "349662af5eceb9ba591a195318395db481dd8f162cfee266f46694cf19583e77",
+    "scripts/ci/bamboo-deploy.sh": "40a44e9bd3fd15482972049b7fd7eeee26921cccfbfd15e263a9cdfc2d56c263",
+    "scripts/ci/bamboo-release.sh": "361e096196810383d6a5b8181854498c50d7ae036e6da892ea6940a11c2b5859",
+    "scripts/ci/build_release.py": "2edb725086b732afb8e54261ca877b110666f6b660483effb236f3e063cd7884",
+    "scripts/ci/deploy_release.py": "8d7a54df7041719c28bf4c0f82d7e848e270cd28830c54288c1b4bc46b6b9947",
+    "scripts/ci/known_hosts": "5e0f044f1046ae0b327bf8244a8da7f6458a448ddbd26f5a383893d1c757e87b",
+    "scripts/ci/preflight_release.py": "d9cfb42011b00794ea9383f3eafc900d449adb49fc44c4aca185c598e02ead53",
+    "scripts/ci/qualify_release.py": "8c64f781e46f605653818550bc63c3788e21a7430927ed5c46a6706a3d6692d6",
+    "scripts/ci/remote_deploy.py": "18fc8a5a742585040c96f2418e296e15d9f8ad151abc637c6bfc9dbbd1adc355",
+    "scripts/ci/targets.json": "7a2c12f7d82c7f59b3c0e5e4d4852924269b13199d1d34f8a76947b657d73fc1",
+    "scripts/ci/test_deploy_release.py": "2fe875b85a309c5c9c28dd01f993ac75cd50d86e8170f61ac3e1ad4cc0afd553",
+    "scripts/ci/test_release_scripts.py": "aca5ce9dc08d615c3e574a1980c5d2368e982c514b2e5e4f26b49ebbaac9e469"
+  },
+  "full_go_frontend_replayed": false,
+  "linux_smoke": {
+    "fixture_sha": "096630c9baa95afb008c12399acebd5f7ae969d2",
+    "fixture_tag": "v0.0.0-file-prereq.20261110",
+    "full_go_frontend_replayed": false,
+    "passed": true,
+    "preflight": {
+      "compiler": "go1.27.3",
+      "docker": "linux/x86_64",
+      "node": "v22.22.2",
+      "npm": "10.9.7",
+      "schema": 1,
+      "sha": "096630c9baa95afb008c12399acebd5f7ae969d2",
+      "tag": "v0.0.0-file-prereq.20261110"
+    },
+    "production_activation": false,
+    "qualification_not_started_after_preflight_failure": true,
+    "scope": "owned-minimal-input-fixture-not-a-qualified-release",
+    "steps": {
+      "build_without_qualification": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "deploy_missing_target": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "deploy_unknown_target": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "missing_deploy_source": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "missing_executables": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "packaged_missing_identity_gateway3": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "packaged_missing_identity_sub2api3": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "preflight_success": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      },
+      "python_behavior_suite": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      },
+      "qualify_wrong_revision": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "release_unknown_phase": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "shell_syntax_bamboo-deploy.sh": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      },
+      "shell_syntax_bamboo-release.sh": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      }
+    },
+    "synthetic_artifact_real_tooling": {
+      "bundle_immutable_after_cli": true,
+      "deploy_file_mode": "0755",
+      "deploy_file_packaged": true,
+      "space_in_bundle_path": true
+    },
+    "test_initialization_replayed": false,
+    "unqualified_build_not_published": true
+  },
+  "new_qualified_application_release_claimed": false,
+  "prior_full_qualification": "maintenance/verification/bamboo-release-20261110.json",
+  "python_behavior_suite": {
+    "ok": true,
+    "resource_warnings": false,
+    "seconds": 0.661,
+    "skipped": false,
+    "tests": 81
+  },
+  "remotes": [
+    {
+      "fetch": [
+        "https://github.com/InoriHimea/sub2api.git"
+      ],
+      "name": "origin",
+      "push": [
+        "https://github.com/InoriHimea/sub2api.git"
+      ]
+    },
+    {
+      "fetch": [
+        "https://github.com/Wei-Shaw/sub2api.git"
+      ],
+      "name": "upstream",
+      "push": [
+        "https://github.com/Wei-Shaw/sub2api.git"
+      ]
+    }
+  ],
+  "schema": 1,
+  "scope": "file-based-bamboo-build-prerequisites-not-production-activation",
+  "source_sha256": {
+    ".gitattributes": "1e7e4dd88806c211173003844b25304bac2ba04d0c2dc4afbb7a5e181fd3bf7c",
+    ".gitignore": "d4bec811315689df33fed79327e2461c7dfc3ccdb46b5fb493bb595a2922b4c0",
+    "Dockerfile.goreleaser": "d930c927560641d2dda75d56d608ce1d5ae39b32f98db293788b5ec1e23a9af5",
+    "backend/go.mod": "0b7d42465cb86b9daa0092d8fd3794183049db284ff027c3bdef26ee0fb601e1",
+    "bamboo-specs/bamboo.yml": "1b34b5ab24e05f31684168380dbe0a45273c7acd98e5b6fd7d83fe89f0e05ce3",
+    "deploy/docker-entrypoint.sh": "7d3f1f532fcdefc0f405b37fb6caafa330dfcc7c531ad8bf51fcd48dad54a0b3",
+    "frontend/package.json": "9e8209845331530a13b55e7268975a2b48b9593952179d7214e6bef51314e28f",
+    "frontend/pnpm-lock.yaml": "349662af5eceb9ba591a195318395db481dd8f162cfee266f46694cf19583e77",
+    "scripts/ci/bamboo-deploy.sh": "40a44e9bd3fd15482972049b7fd7eeee26921cccfbfd15e263a9cdfc2d56c263",
+    "scripts/ci/bamboo-release.sh": "361e096196810383d6a5b8181854498c50d7ae036e6da892ea6940a11c2b5859",
+    "scripts/ci/build_release.py": "2edb725086b732afb8e54261ca877b110666f6b660483effb236f3e063cd7884",
+    "scripts/ci/deploy_release.py": "8d7a54df7041719c28bf4c0f82d7e848e270cd28830c54288c1b4bc46b6b9947",
+    "scripts/ci/known_hosts": "5e0f044f1046ae0b327bf8244a8da7f6458a448ddbd26f5a383893d1c757e87b",
+    "scripts/ci/preflight_release.py": "d9cfb42011b00794ea9383f3eafc900d449adb49fc44c4aca185c598e02ead53",
+    "scripts/ci/qualify_release.py": "8c64f781e46f605653818550bc63c3788e21a7430927ed5c46a6706a3d6692d6",
+    "scripts/ci/remote_deploy.py": "18fc8a5a742585040c96f2418e296e15d9f8ad151abc637c6bfc9dbbd1adc355",
+    "scripts/ci/targets.json": "7a2c12f7d82c7f59b3c0e5e4d4852924269b13199d1d34f8a76947b657d73fc1",
+    "scripts/ci/test_deploy_release.py": "2fe875b85a309c5c9c28dd01f993ac75cd50d86e8170f61ac3e1ad4cc0afd553",
+    "scripts/ci/test_release_scripts.py": "aca5ce9dc08d615c3e574a1980c5d2368e982c514b2e5e4f26b49ebbaac9e469"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "task": "CD-05-follow-through",
+  "date": "2026-11-10",
+  "status": "local release candidate preparation; remote publication and production activation gated",
+  "public_github": {
+    "repository": "InoriHimea/sub2api",
+    "private": false,
+    "remote_main": "6e43eff80c17469451a6b0eb0e21eb7c9dec474c",
+    "local_main_before": "851090e84",
+    "ahead_commits": 68,
+    "workflows": [
+      {
+        "name": "CI",
+        "id": 409059426,
+        "state": "active"
+      },
+      {
+        "name": "Release",
+        "id": 409059428,
+        "state": "active"
+      }
+    ],
+    "fork_tag_workflow_not_yet_published": true,
+    "browser_signed_in": false,
+    "actions_ui_result": "404 while signed out; public API workflows readable",
+    "credential_boundary": "No exact OpenBao GitHub publisher purpose delivered; native credential-manager secrets were not read or used as fallback"
+  },
+  "migration_review": [
+    {
+      "filename": "246_enable_gemini_image_generation_groups.sql",
+      "applied_content_sha256": "87267be7ab657173768989e2b0b105c5569c5930a7f1ed124f4cf81e5198297c",
+      "effect": "Sets all currently false Gemini/Antigravity group allow_image_generation flags to true; explicit business approval required.",
+      "approved": false
+    },
+    {
+      "filename": "247_scoped_admin_api_keys.sql",
+      "applied_content_sha256": "03445774e2dfad32da9e23279193d1bca02953896bc3d3b8a87ba0b36b6ed577",
+      "effect": "Creates scoped admin key digest/policy/audit storage and deleted_at; does not create or grant a key.",
+      "approved": false
+    },
+    {
+      "filename": "248_group_image_count_billing.sql",
+      "applied_content_sha256": "a872dde339b19f311feb5fa6fd85c8ff7b11d69794c35a18e2086d9846b3499c",
+      "effect": "Adds group image_count_billing NOT NULL default false.",
+      "approved": false
+    },
+    {
+      "filename": "249_mcp_oauth.sql",
+      "applied_content_sha256": "751a1dcee6108afcecbd580b6e3140cca3480853fecd2174861b02f3a71e54a1",
+      "effect": "Creates MCP OAuth grants, hashed codes/credentials and indexes; does not grant existing users an admin scope.",
+      "approved": false
+    }
+  ],
+  "migration_hashes_match_prior_receipt": true,
+  "sub2api3_live_baseline": "not re-probed: previous authorized SSH denied, dedicated identity not delivered",
+  "previous_successful_equipment_checks": "maintenance/verification/bamboo-cd-preparation-20261110.json; not repeated",
+  "operations": {
+    "production_changes": false,
+    "production_credentials_read": false,
+    "production_ssh_retried": false,
+    "test_initialization_replayed": false,
+    "github_push": false,
+    "release_approved": false
+  },
+  "owner_gates": [
+    "GitHub publication through owner-authenticated native git or separately approved exact publisher purpose; browser has no signed-in GitHub session",
+    "dedicated per-target CI SSH identities accepted by production hosts; do not send private keys in chat",
+    "explicit migration246 business effect acceptance and final exact-migration approval after live ledger verification",
+    "production maintenance window/native Bamboo release approval after actual hosted build and intake verification"
+  ]
+}

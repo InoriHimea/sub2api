@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-09",
+  "task": "TEST-01",
+  "target": "192.168.58.34",
+  "deployment_directory": "/opt/sub2api-fork-test",
+  "instance": "sub2api-fork-test",
+  "origin": "http://127.0.0.1:18085",
+  "source_commit": "40b3eb88f846008b9e40f233cdfbe6ebaf52d6ba",
+  "source_archive_sha256": "5ffe14a555f9cb772f9955096827bed241cf3015dadc6c5f3f00004f39cc90c8",
+  "build": {
+    "frontend": "pnpm 9.15.9 frozen install; i18n 3 tests, vue-tsc and Vite production build passed",
+    "backend": "CGO_ENABLED=0 GOTOOLCHAIN=go1.27.3 go build -mod=readonly -tags=embed -trimpath",
+    "version": "0.2.20-fork-test.40b3eb88f",
+    "binary_sha256": "557e953311bcbe353d2c1ba016404a6b7e3b9ed12f340e037c3053bcbd9210f7",
+    "image_id": "sha256:cea3938697d4dc4c7718557e8ceb17e851aa605d53f67d28a14c62f6b61d9c88",
+    "runtime_base_image_id": "sha256:112ff63439422ec5ea51594e2fdd899a900a35c68e3d3b1ba74f5871486b83ea",
+    "version_cli_smoke": "passed; full source commit observed"
+  },
+  "credential_consumption": {
+    "enrollment_id": "f804b3cd-9930-4048-b156-073709a13937",
+    "first_business_reads": 1,
+    "token_revocation_confirmed_before_value_return": true,
+    "durable_exclusive_first_read_guard": true,
+    "re_enrollment": false,
+    "extra_check_or_read_replay": false,
+    "delivery_transport": "same-process pinned SSH stdin; fixed target protected files and loopback install",
+    "secret_values_in_evidence": false
+  },
+  "initialization": {
+    "install_requests": 1,
+    "install_http_status": 200,
+    "install_envelope_code": 0,
+    "schema_migration_rows": 300,
+    "admin_active_count": 1,
+    "postgres_healthy": true,
+    "redis_unauthenticated_ping_denied": true,
+    "redis_authenticated_ping": true,
+    "health_http_status": 200,
+    "setup_status_needs_setup": false,
+    "private_admin_login_http_status": 200,
+    "private_admin_login_role": "admin",
+    "browser_login": "passed; actual Dashboard route and mandatory compliance dialog rendered",
+    "app_config_uid": 1000,
+    "app_config_mode": "0600",
+    "install_lock_mode": "0400",
+    "storage_secret_uid": 999,
+    "storage_secret_mode": "0400"
+  },
+  "restart": {
+    "owned_app_postgres_and_redis_restarted": true,
+    "application_config_hash_unchanged": true,
+    "database_admin_persisted": true,
+    "post_restart_admin_login_http_status": 200,
+    "post_restart_health_http_status": 200,
+    "setup_remained_closed": true
+  },
+  "isolation": {
+    "other_container_baseline_count": 14,
+    "other_container_ids_start_times_restart_counts_unchanged": true,
+    "app_user": "1000:1000",
+    "app_rootfs_readonly": true,
+    "app_cap_drop": ["ALL"],
+    "host_publication": "127.0.0.1:18085 only",
+    "postgres_redis_host_ports": false,
+    "success_observation_sampling": 0,
+    "production_proxy_or_shared_cleanup_changes": false,
+    "real_provider_requests": 0
+  },
+  "capacity_after_restart": {
+    "root_free_bytes": 21695459328,
+    "docker_free_bytes": 169469808640,
+    "database_bytes": 17151679,
+    "api_key_count": 0,
+    "usage_log_count": 0,
+    "required_root_free_bytes": 10737418240,
+    "required_docker_free_bytes": 53687091200,
+    "synthetic_data_limit_bytes": 104857600
+  },
+  "observed_recoveries": [
+    "Docker rejected digest-only FROM; used existing local base tag only after exact image-ID verification",
+    "PostgreSQL bind parent root:root0700 prevented nonroot traversal; changed only owned parent to999:999/0700, observed healthy before first install",
+    "Named-service broker unavailable; restored session-owned pinned SSH loopback tunnel",
+    "Pricing metadata TLS handshake timed out during startup; readiness subsequently passed"
+  ],
+  "business_acceptance_blocker": {
+    "code": "ADMIN_COMPLIANCE_ACK_REQUIRED",
+    "http_status": 423,
+    "observed_paths": ["POST /api/v1/admin/groups", "GET /api/v1/admin/usage/hourly"],
+    "anonymous_hourly_http_status": 401,
+    "document_version": "v2026.06.10",
+    "agreement_accepted_by_agent": false,
+    "middleware_or_database_bypass": false,
+    "synthetic_group_user_or_api_key_created": false,
+    "hourly_reconciliation_exercised": false,
+    "mock_upstream_observation_exercised": false,
+    "next_action": "Owner personally reviews/accepts the deployment and operation compliance commitment, then resume synthetic Stages2/3; do not repeat the consumed first read without new authorization"
+  },
+  "limitations": [
+    "Initialized running Test is not completed hourly/admin-key/observation business acceptance",
+    "No production release, live consumer reconciliation or real provider request",
+    "Preserved prior image is not proof of initialized database downgrade/restore safety"
+  ]
+}

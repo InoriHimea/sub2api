@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "_comment": "Immutable verified target facts only; no profile data, credentials or guessed install paths. Documented native paths/ExecStart remain unverified until remote_deploy.py checks the running service. Contract-verified values come from recorded target probes; parent-probe values describe reachability only, not a credentialed login.",
+  "targets": {
+    "gateway3": {
+      "kind": "docker",
+      "source": "contract-verified",
+      "ssh": {
+        "host": "115.159.158.245",
+        "port": 22,
+        "user": "root",
+        "mesh_host": "100.125.250.19",
+        "known_hosts_aliases": ["115.159.158.245"]
+      },
+      "architecture": "x86_64",
+      "docker": {
+        "container_name": "sub2api2m",
+        "compose_project_dir": "/data/sub2api2m",
+        "compose_service": "sub2api",
+        "baseline_image_repo_tag": "weishaw/sub2api:0.2.17",
+        "baseline_image_id": "sha256:a998143bb54d0f7e713d2a89bd2d3662aa8f9ae727bef263218b8844956e3619",
+        "published_port": "127.0.0.1:3205->8080",
+        "postgres_container": "sub2api2m-postgres",
+        "redis_container": "sub2api2m-redis"
+      },
+      "do_not_touch": [
+        "proxy/FRP",
+        "NetBird",
+        "shared DB",
+        "any other service on this host besides sub2api2m + its dedicated postgres/redis"
+      ]
+    },
+    "sub2api3": {
+      "kind": "native",
+      "source": "contract-verified",
+      "ssh": {
+        "host": "45.66.129.135",
+        "port": 22,
+        "user": "root",
+        "mesh_host": "100.125.67.61",
+        "known_hosts_aliases": ["45.66.129.135", "100.125.67.61"],
+        "_route_note": "Primary route is the public IP per live parent reachability probe (mesh route returned 'No route to host'). Mesh IP is retained only as a known_hosts alias for the SAME pinned host identity, never a dynamic/unpinned fallback host."
+      },
+      "os": "Ubuntu 24.04",
+      "native": {
+        "service_name": "sub2api.service",
+        "listen": "127.0.0.1:9527",
+        "db_engine_doc": "PostgreSQL 16.15",
+        "cache_engine_doc": "Redis",
+        "docker_present": false,
+        "_source": "documented",
+        "_warning": "Exact ExecStart/install/binary path is explicitly NOT verified per contract. remote_deploy.py MUST discover the live binary path from the running sub2api.service MainPID (/proc/<pid>/exe) and MUST NOT assume /opt/sub2api or any other guessed path. The root-protected approved profile's native.binary_path is only accepted after it is confirmed equal to this live discovery."
+      }
+    }
+  },
+  "host_key_algorithm": "ssh-ed25519",
+  "known_hosts_file": "known_hosts",
+  "_pinned_key_source": "Recorded verified target SSH host identities; see FORK.md."
+}

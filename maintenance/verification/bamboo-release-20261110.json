@@ -1,0 +1,428 @@
+{
+  "activation_gates": [
+    "Create/link canonical SUB2API project and reviewed Specs repository; accept actual tag detection, permissions and required agent capabilities before enabling plan.",
+    "Provide dedicated accepted CI SSH identity on both targets without copying workstation private keys or AppRole/DPAPI.",
+    "Verify current sub2api3 native executable, account, resources and database/migration baseline through authorized access.",
+    "Install operator-approved root-owned closed-schema target profiles and checksum-bound pending migration approvals, with fresh protected target backups."
+  ],
+  "bamboo": {
+    "agent_capabilities": "private_admin_reauthentication_required_not_inspected",
+    "canonical_project": "SUB2API",
+    "canonical_validation": "rejected_missing_project",
+    "native_tag_stages_and_artifacts_schema": "accepted_by_actual_validator_only_with_project_substitution",
+    "no_existing_plan_modified": true,
+    "repository_linkage_and_tag_detection": "not_accepted_or_activated",
+    "semantic_comparison": {
+      "current_file_sha256": "c4e0bf0a40cff8037e8e3164098a31d8e359ae65feded7df8f43d5fed1fa7143",
+      "current_matches_submitted_except_comments": true,
+      "fixture_changes_project_key_only": true,
+      "semantic_sha256": "334f675ccc136e7171419459a0f40a773300bdd26229a42ca7ea80e974fca866",
+      "submitted_file_sha256": "4b5bc5500b3c7f6b74a16cab0ede23284edce22f862a4e552dd8c178170f3c6e"
+    },
+    "server": {
+      "buildNumber": "120111",
+      "status": 200,
+      "version": "12.1.10"
+    },
+    "substituted_validation": "success",
+    "validation_only_project_substitution": "AIGP"
+  },
+  "ci_agent": {
+    "behavior_suite": {
+      "passed": true,
+      "resource_warnings": false,
+      "seconds": 0.97,
+      "tests": 81
+    },
+    "completed_workflow_receipt": {
+      "backup_restore": {
+        "format": "pg_dump-custom-compressed",
+        "mode": "0600",
+        "production_contact": false,
+        "restored_exact_synthetic_row": true,
+        "root_owned": true,
+        "sha256": "405e1e0b6a52244dbbfae34d9bab3b957ccee8c5fe550449d5064babfda90a32",
+        "size": 1780
+      },
+      "failure": "owned runtime did not serve its local health endpoint",
+      "fixture_sha": "27afab51886a8ba535d72c103eb8095bd6117611",
+      "fixture_tag": "v0.0.0-ci-smoke.20261110",
+      "immutable_bundle_after_cli": true,
+      "manifest": {
+        "architecture": "amd64",
+        "binary_sha256": "1186d8d472f259b2c53a15fe5e91de974f4d28abb485fe04208b21ab581ceae0",
+        "compiler": "go1.27.3",
+        "file_count": 309,
+        "image_id": "sha256:83dae0e4fddba66f0805a8774f6112bb6b3e5526d06aad05322b5e9e0a142849",
+        "migration_count": 300,
+        "schema": 1,
+        "sha": "27afab51886a8ba535d72c103eb8095bd6117611",
+        "tag": "v0.0.0-ci-smoke.20261110",
+        "version": "0.0.0-ci-smoke.20261110"
+      },
+      "owned_image_tag_removed": true,
+      "owned_runtime_removed": true,
+      "passed": false,
+      "production_activation": false,
+      "qualification": {
+        "compiler": "go1.27.3",
+        "frontend_build_exit_code": 0,
+        "frontend_dist_sha256": "43d8cfb7a5e91421e2fdd5d6786884cca3e83a58fac2b39f2596b2c3a4c59c8c",
+        "generated_at": "2026-11-09T23:49:51Z",
+        "go_test_exit_code": 0,
+        "qualified": true,
+        "schema": 1,
+        "sha": "27afab51886a8ba535d72c103eb8095bd6117611",
+        "tests": {
+          "TestAdminCreateUserAPIKeyIntegration": "PASS",
+          "TestOpenAIHTTPObservationRealHTTPSuccessSmoke": "PASS",
+          "TestUsageHourlyPostgresHTTPIntegration": "PASS"
+        }
+      },
+      "same_native_docker_binary": true,
+      "scope": "disposable-ci-fixture-not-a-release",
+      "steps": {
+        "backup_restore": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 6.84
+        },
+        "build": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 106.56
+        },
+        "docker_binary_hash": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 1.12
+        },
+        "docker_version": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.32
+        },
+        "help_build_release": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.09
+        },
+        "help_deploy_release": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.11
+        },
+        "help_qualify_release": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.06
+        },
+        "help_remote_deploy": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.12
+        },
+        "missing_approved_profile": {
+          "exit_code": 2,
+          "expected_exit_code": 2,
+          "seconds": 0.09
+        },
+        "missing_ci_identity_gateway3": {
+          "exit_code": 2,
+          "expected_exit_code": 2,
+          "seconds": 1.51
+        },
+        "missing_ci_identity_sub2api3": {
+          "exit_code": 2,
+          "expected_exit_code": 2,
+          "seconds": 1.38
+        },
+        "native_version": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.04
+        },
+        "python_behavior_suite": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.97
+        },
+        "qualify": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 664.63
+        },
+        "repeat_build": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 21.4
+        },
+        "unsafe_approved_profile_mode": {
+          "exit_code": 2,
+          "expected_exit_code": 2,
+          "seconds": 0.09
+        }
+      }
+    },
+    "docker": "28.5.1",
+    "execution_account": "root",
+    "fixture_commit": "27afab51886a8ba535d72c103eb8095bd6117611",
+    "fixture_tag": "v0.0.0-ci-smoke.20261110",
+    "go_probe": {
+      "passed": true,
+      "seconds": 49.56,
+      "version": "go1.27.3 linux/amd64"
+    },
+    "historical_failed_test_diagnostics": {
+      "counts": {
+        "package_fail": 1,
+        "package_pass": 59,
+        "test_fail": 2,
+        "test_pass": 25953
+      },
+      "failed_test_output": {
+        "TestFilterThinkingBlocksSignedHistorySkipsDecode": [
+          "=== RUN   TestFilterThinkingBlocksSignedHistorySkipsDecode\n",
+          "    gateway_thinking_filter_precheck_test.go:85: \n",
+          "        \tError Trace:\t/data/sub2api-ci-smoke-iv3ilvve/source/backend/internal/service/gateway_thinking_filter_precheck_test.go:85\n",
+          "        \tError:      \t\"31\" is not less than \"16\"\n",
+          "        \tTest:       \tTestFilterThinkingBlocksSignedHistorySkipsDecode\n",
+          "        \tMessages:   \tallocs: 31\n",
+          "--- FAIL: TestFilterThinkingBlocksSignedHistorySkipsDecode (0.01s)\n"
+        ],
+        "TestInflightEstimate_AccountMappingNoDBAndBoundedMemory": [
+          "=== RUN   TestInflightEstimate_AccountMappingNoDBAndBoundedMemory\n",
+          "2026/11/09 21:47:59 [Billing] Using fallback pricing for model: claude-sonnet-4-5\n",
+          "    billing_inflight_reservation_test.go:464: \n",
+          "        \tError Trace:\t/data/sub2api-ci-smoke-iv3ilvve/source/backend/internal/service/billing_inflight_reservation_test.go:464\n",
+          "        \tError:      \t\"8924112\" is not less than \"8388608\"\n",
+          "        \tTest:       \tTestInflightEstimate_AccountMappingNoDBAndBoundedMemory\n",
+          "        \tMessages:   \tno per-model cache growth\n",
+          "--- FAIL: TestInflightEstimate_AccountMappingNoDBAndBoundedMemory (0.30s)\n"
+        ]
+      },
+      "mandatory": {
+        "TestAdminCreateUserAPIKeyIntegration": "pass",
+        "TestOpenAIHTTPObservationRealHTTPSuccessSmoke": "pass",
+        "TestUsageHourlyPostgresHTTPIntegration": "pass"
+      }
+    },
+    "historical_workflow_failure": {
+      "backup_restore": {
+        "format": "pg_dump-custom-compressed",
+        "mode": "0600",
+        "production_contact": false,
+        "restored_exact_synthetic_row": true,
+        "root_owned": true,
+        "sha256": "bfa8d7d902440f6d2370b4462c6b55967d9462802c26485c9e5429b8738192fd",
+        "size": 1780
+      },
+      "failure": "qualify returned 1 (expected 0); inspect its owned log",
+      "fixture_sha": "1ea5d801ef538b80b67506e3dd26256552d16824",
+      "fixture_tag": "v0.0.0-ci-smoke.20261110",
+      "passed": false,
+      "production_activation": false,
+      "scope": "disposable-ci-fixture-not-a-release",
+      "steps": {
+        "backup_restore": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 4.92
+        },
+        "help_build_release": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.06
+        },
+        "help_deploy_release": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.09
+        },
+        "help_qualify_release": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.06
+        },
+        "help_remote_deploy": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.1
+        },
+        "python_behavior_suite": {
+          "exit_code": 0,
+          "expected_exit_code": 0,
+          "seconds": 0.7
+        },
+        "qualify": {
+          "exit_code": 1,
+          "expected_exit_code": 0,
+          "seconds": 1160.41
+        }
+      }
+    },
+    "host": "10.156.56.155",
+    "incidental_test_cleanup": {
+      "behavior_tests_and_benchmarks_retained": true,
+      "production_logic_changed": false,
+      "removed": [
+        "TestInflightEstimate_AccountMappingNoDBAndBoundedMemory",
+        "TestFilterThinkingBlocksSignedHistorySkipsDecode"
+      ],
+      "thresholds_increased": false
+    },
+    "initial_dependency_failure": "postgres:18-alpine download exceeded 180s",
+    "initial_runtime_failure_explanation": "Throwaway smoke incorrectly required configured-only /health on an uninitialized setup server. Actual image ran; /health was404. Follow-up verified the actual /setup/status envelope, embedded HTML and uid1000 on the same qualified image without app initialization. No configured-health pass inferred.",
+    "pnpm_probe": {
+      "passed": true,
+      "seconds": 9.95,
+      "version": "9.15.9",
+      "via": "npm-exec"
+    },
+    "prefetch_transport": {
+      "captured_exit_code": 255,
+      "completed_public_image_logs": {
+        "prefetch-alpine-3.21.log": {
+          "bytes": 385,
+          "digest_lines": [
+            "Digest: sha256:bc21487101ae47172509130ee1092cc273a831968d64b617776d1f69c81e42ab",
+            "Status: Downloaded newer image for docker.nexus.mellivora.com.cn:18084/library/alpine:3.21"
+          ],
+          "error_lines": []
+        },
+        "prefetch-postgres-18-alpine.log": {
+          "bytes": 1497,
+          "digest_lines": [
+            "Digest: sha256:123b17998ccaf47e53b502e8c6a1e79afd8f579c6f3eec83c563da026f957395",
+            "Status: Downloaded newer image for docker.nexus.mellivora.com.cn:18084/library/postgres:18-alpine"
+          ],
+          "error_lines": []
+        },
+        "prefetch-redis-8-alpine.log": {
+          "bytes": 1260,
+          "digest_lines": [
+            "Digest: sha256:71885d8cc6e42f2bc0aa2eb853bfc4be200b5108a46ac50e117ae1df0531fb80",
+            "Status: Downloaded newer image for docker.nexus.mellivora.com.cn:18084/library/redis:8-alpine"
+          ],
+          "error_lines": []
+        }
+      },
+      "error": "connection_reset",
+      "owned_prefetch_processes_after_failure": [],
+      "remote_exit_code": "not_captured",
+      "retry_performed": false
+    },
+    "public_cache_ready": {
+      "alpine:3.21": {
+        "actual_image_id": "sha256:e50d940e9d2c4d81e5b3506b2ed87bfc7e91267b36ff016eb4b4cb21c39a3331",
+        "added_absent_tag": false,
+        "transferred_image_id": "sha256:e50d940e9d2c4d81e5b3506b2ed87bfc7e91267b36ff016eb4b4cb21c39a3331"
+      },
+      "postgres:18-alpine": {
+        "actual_image_id": "sha256:38b9ffe2d4c13d7c445b66306be6763dfa6f503689ea0c5b9f84544ccf3ca8e4",
+        "added_absent_tag": false,
+        "transferred_image_id": "sha256:38b9ffe2d4c13d7c445b66306be6763dfa6f503689ea0c5b9f84544ccf3ca8e4"
+      },
+      "redis:8-alpine": {
+        "actual_image_id": "sha256:d8642290c6a46f22d8ba0de16c5006b66a63b13412e5b8624912aaeecbc7f525",
+        "available": true
+      }
+    },
+    "public_image_transfer": {
+      "destination_exit": 0,
+      "destination_output": "Loaded image ID: sha256:38b9ffe2d4c13d7c445b66306be6763dfa6f503689ea0c5b9f84544ccf3ca8e4\nLoaded image ID: sha256:e50d940e9d2c4d81e5b3506b2ed87bfc7e91267b36ff016eb4b4cb21c39a3331\n",
+      "image_ids": [
+        "sha256:38b9ffe2d4c13d7c445b66306be6763dfa6f503689ea0c5b9f84544ccf3ca8e4",
+        "sha256:e50d940e9d2c4d81e5b3506b2ed87bfc7e91267b36ff016eb4b4cb21c39a3331"
+      ],
+      "seconds": 348.65,
+      "source_exit": 0
+    },
+    "python": "3.9.23",
+    "runtime_setup_followup": {
+      "app_initialized": false,
+      "app_uid": 1000,
+      "configured_health_verified": false,
+      "embedded_frontend": true,
+      "fixture_sha": "27afab51886a8ba535d72c103eb8095bd6117611",
+      "image_id": "sha256:83dae0e4fddba66f0805a8774f6112bb6b3e5526d06aad05322b5e9e0a142849",
+      "mode": "uninitialized-setup-only",
+      "owned_container_removed": true,
+      "passed": true,
+      "production_contact": false,
+      "setup_status": {
+        "http_status": 200,
+        "needs_setup": true
+      },
+      "uninitialized_health_status": 404
+    },
+    "tag_scope": "disposable_fixture_only",
+    "workflow": "qualification_and_build_passed; first-run_setup_followup_passed; production_activation_blocked"
+  },
+  "cleanup": {
+    "owned_ci_root_removal": "removed_verified",
+    "owned_runtime_containers_removed": true,
+    "owned_fixture_container_count_checked": 4,
+    "qualified_fixture_image_removed": true,
+    "shared_prune_performed": false,
+    "public_dependency_caches": "retained_no_shared_prune",
+    "restored_browser_relay": "left_running_all_owned_tabs_closed"
+  },
+  "date": "2026-11-10",
+  "gateway3": {
+    "applied_migration_count": 296,
+    "approval_profile": "absent_observed_readonly",
+    "baseline_image": "weishaw/sub2api:0.2.17",
+    "baseline_image_id": "sha256:a998143bb54d0f7e713d2a89bd2d3662aa8f9ae727bef263218b8844956e3619",
+    "candidate_migration_count": 300,
+    "compose_project_dir": "/data/sub2api2m",
+    "compose_service": "sub2api",
+    "existing_checksum_differences": 0,
+    "host": "115.159.158.245",
+    "kind": "docker-compose",
+    "loopback_port": 3205,
+    "migration_review": "required_before_approval_including_246_existing_account_flags",
+    "pending_applied_content_sha256": {
+      "246_enable_gemini_image_generation_groups.sql": "87267be7ab657173768989e2b0b105c5569c5930a7f1ed124f4cf81e5198297c",
+      "247_scoped_admin_api_keys.sql": "03445774e2dfad32da9e23279193d1bca02953896bc3d3b8a87ba0b36b6ed577",
+      "248_group_image_count_billing.sql": "a872dde339b19f311feb5fa6fd85c8ff7b11d69794c35a18e2086d9846b3499c",
+      "249_mcp_oauth.sql": "751a1dcee6108afcecbd580b6e3140cca3480853fecd2174861b02f3a71e54a1"
+    },
+    "production_sql_writes": false,
+    "service": "sub2api2m"
+  },
+  "live_consumer_gate": "Deploy hourly route, then separately approve dedicated exact hourly usage_api_key purpose; existing four-GET statistics identity is not authorized.",
+  "schema": 1,
+  "scope": {
+    "business_credentials_read": false,
+    "existing_test_receipt": "maintenance/verification/test-acceptance-20261110.json",
+    "production_activation": false,
+    "quota_freshness": "recorded_deferred_not_implemented",
+    "real_project_tag_or_push": false,
+    "successful_test_replayed": false
+  },
+  "source_contract_sha256": {
+    "backend/internal/service/billing_inflight_reservation_test.go": "a5043cb8c7823b38114de7964372ee708265bf8882b3f02738512c022ec0f744",
+    "backend/internal/service/gateway_thinking_filter_precheck_test.go": "66162c210ef97d2df70d2beebcf19a148c57b0db1811d3455db21d973b613720",
+    "bamboo-specs/bamboo.yml": "c4e0bf0a40cff8037e8e3164098a31d8e359ae65feded7df8f43d5fed1fa7143",
+    "scripts/ci/build_release.py": "412ea3cba75ceddb601551c543f4cc2ccdf4192ba5889e7e88af14faa2a7ff30",
+    "scripts/ci/deploy_release.py": "8d7a54df7041719c28bf4c0f82d7e848e270cd28830c54288c1b4bc46b6b9947",
+    "scripts/ci/known_hosts": "5e0f044f1046ae0b327bf8244a8da7f6458a448ddbd26f5a383893d1c757e87b",
+    "scripts/ci/qualify_release.py": "8c64f781e46f605653818550bc63c3788e21a7430927ed5c46a6706a3d6692d6",
+    "scripts/ci/remote_deploy.py": "18fc8a5a742585040c96f2418e296e15d9f8ad151abc637c6bfc9dbbd1adc355",
+    "scripts/ci/targets.json": "7a2c12f7d82c7f59b3c0e5e4d4852924269b13199d1d34f8a76947b657d73fc1",
+    "scripts/ci/test_deploy_release.py": "2fe875b85a309c5c9c28dd01f993ac75cd50d86e8170f61ac3e1ad4cc0afd553",
+    "scripts/ci/test_release_scripts.py": "aca5ce9dc08d615c3e574a1980c5d2368e982c514b2e5e4f26b49ebbaac9e469"
+  },
+  "status": "isolated_qualification_build_and_setup_verified_activation_blocked",
+  "sub2api3": {
+    "agent_mesh": "no_route",
+    "agent_public_ssh": "publickey_denied",
+    "current_executable_schema_profile": "unverified_ssh_denied",
+    "host": "45.66.129.135",
+    "installation_path_not_guessed": true,
+    "kind_from_infra_records": "native-systemd",
+    "mesh_host": "100.125.67.61",
+    "service_from_infra_records": "sub2api.service"
+  }
+}

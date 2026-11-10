@@ -1,0 +1,18 @@
+# Pinned SSH host identities for release deploy targets (scripts/ci/deploy_release.py
+# and scripts/ci/remote_deploy.py). This file is used EXCLUSIVELY as
+# `-o UserKnownHostsFile=<this file>` together with `-o StrictHostKeyChecking=yes`
+# and `-o GlobalKnownHostsFile=/dev/null`. It is intentionally NOT merged into any
+# user/agent/system known_hosts file. Both the public IP and the mesh (NetBird)
+# IP for sub2api3 are listed on one line because they pin the SAME verified
+# ED25519 host identity recorded in verified target evidence; this is NOT a dynamic
+# or guessed fallback -- only these exact, pre-approved hostnames are ever
+# dialed by the deploy tooling (see targets.json ssh.host / ssh.known_hosts_aliases).
+#
+# Source: verified target evidence recorded with FORK.md and targets.json.
+#
+# gateway3 (root@115.159.158.245, mesh 100.125.250.19)
+115.159.158.245 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIoFkexYLbONVdpPLsqM6/4atk9Tt25fEutYt0e0nqOX
+
+# sub2api3 (public 45.66.129.135, mesh 100.125.67.61) -- primary route is the
+# public IP (mesh route failed "No route to host" during live parent probe).
+45.66.129.135,100.125.67.61 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEe9w88y//pDAQgPbRq2oDccphP422ZKPWF1lnfNJ6J0

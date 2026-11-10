@@ -1,0 +1,49 @@
+name: Fork tag build
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fork-build-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'InoriHimea/sub2api' && !github.event.deleted
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Verify CI release contracts
+        run: python3 -m unittest discover -s scripts/ci -p 'test_*.py'
+      - name: Preflight and qualify exact triggering tag
+        run: /bin/sh scripts/ci/release.sh qualify
+      - name: Build one immutable release bundle
+        run: /bin/sh scripts/ci/release.sh build
+      - name: Upload mode-preserving release archive
+        id: upload
+        uses: actions/upload-artifact@v7
+        with:
+          name: sub2api-release
+          path: release-bundle.tar.gz
+          if-no-files-found: error
+          retention-days: 14
+

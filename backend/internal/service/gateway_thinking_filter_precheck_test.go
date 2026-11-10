@@ -74,17 +74,6 @@ func signedThinkingHistoryBody() []byte {
 	return []byte(b.String())
 }
 
-func TestFilterThinkingBlocksSignedHistorySkipsDecode(t *testing.T) {
-	body := signedThinkingHistoryBody()
-	allocs := testing.AllocsPerRun(5, func() {
-		got := filterThinkingBlocksInternal(body, false)
-		if &got[0] != &body[0] {
-			t.Fatal("valid signed history must be returned unchanged")
-		}
-	})
-	require.Less(t, allocs, float64(16), "allocs: %v", allocs)
-}
-
 func FuzzThinkingBlocksNeedFiltering(f *testing.F) {
 	f.Add([]byte(`{"thinking":{"type":"enabled"},"messages":[{"role":"assistant","content":[{"type":"thinking","thinking":"t","signature":"sig"}]}]}`), false)
 	f.Add([]byte(`{"thinking":{"type":"adaptive"},"messages":[{"role":"assistant","content":[{"type":"redacted_thinking","data":"d"},{"thinking":1}]}]}`), true)

@@ -1,0 +1,167 @@
+{
+  "schema": 1,
+  "task": "CD-05",
+  "date": "2026-11-10",
+  "scope": "equipment preparation only; gateway3 and sub2api3 are both production",
+  "github": {
+    "workflow": "fork-release.yml",
+    "build_only": true,
+    "hosted_run_performed": false,
+    "actionlint": "v1.7.7 passed"
+  },
+  "bamboo": {
+    "origin": "https://deploy.mellivora.com.cn",
+    "version": "12.1.10",
+    "project": "SUB2API",
+    "private": true,
+    "plan": {
+      "enabled": false,
+      "isActive": false,
+      "isBuilding": false,
+      "key": "SUB2API-INTAKE",
+      "id": 35684386,
+      "job": "SUB2API-INTAKE-JOB1",
+      "tasks": [
+        "clean",
+        "file:/data/sub2api-cd/current/bamboo_cd.sh intake"
+      ],
+      "automatic_triggers": [],
+      "artifact": {
+        "name": "cd-payload",
+        "location": "cd-payload",
+        "pattern": "**/*",
+        "shared": true,
+        "required": true
+      }
+    },
+    "deployment": {
+      "id": 36995074,
+      "name": "Sub2API production",
+      "environment_id": 37093378,
+      "environment_name": "Production",
+      "release_approval": "APPROVED",
+      "automatic_triggers": [],
+      "tasks": [
+        "clean",
+        "artifact:cd-payload -> cd-payload",
+        "file:cd-payload/controller/bamboo_cd.sh deploy-production"
+      ],
+      "permissions": [
+        {
+          "checks": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "name": "尼古拉斯 凯奇"
+        },
+        {
+          "checks": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "name": "Logged in users"
+        },
+        {
+          "checks": [
+            false
+          ],
+          "name": "Anonymous users"
+        }
+      ]
+    },
+    "scheduling": {
+      "required_custom_capability": "sub2api.production.controller",
+      "eligible_agents": 0,
+      "capability_not_granted": true
+    },
+    "nonsecret_variable_defaults": "UNAPPROVED",
+    "yaml_validation": [
+      "All good!The YAML configuration is valid."
+    ],
+    "release_approved": false,
+    "runs_started": 0
+  },
+  "controller_install": {
+    "root": "/data/sub2api-cd",
+    "controller_sha256": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84",
+    "installed": "/data/sub2api-cd/controllers/bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84",
+    "production_capability_enabled": false
+  },
+  "verification": {
+    "integrated_suite": {
+      "tests": 121,
+      "passed": true,
+      "seconds": 2.916
+    },
+    "final_controller_suite_after_absolute_state_guard": {
+      "tests": 17,
+      "passed": true,
+      "seconds": 0.818
+    },
+    "smoke": {
+      "checks": [
+        {
+          "name": "identity",
+          "exit_code": 0,
+          "stderr": ""
+        },
+        {
+          "name": "intake",
+          "exit_code": 0,
+          "stderr": "[deploy_release] local bundle verification OK: tag=v1.0.0 sha=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa version=1.0.0"
+        },
+        {
+          "name": "verify",
+          "exit_code": 0,
+          "stderr": "[deploy_release] local bundle verification OK: tag=v1.0.0 sha=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa version=1.0.0"
+        },
+        {
+          "name": "wrong-controller",
+          "exit_code": 2,
+          "stderr": "[bamboo-cd] BLOCKED: controller does not match independently approved identity"
+        },
+        {
+          "name": "missing-production-keys",
+          "exit_code": 2,
+          "stderr": "[deploy_release] local bundle verification OK: tag=v1.0.0 sha=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa version=1.0.0\n[bamboo-cd] BLOCKED: approved dedicated SSH key path missing for gateway3"
+        }
+      ],
+      "synthetic_fixture_only": true,
+      "no_production_contact": true
+    },
+    "limitation": "synthetic bundle, not a qualified application release"
+  },
+  "boundaries": {
+    "production_contact": false,
+    "credential_reads": 0,
+    "credential_issuance": 0,
+    "tag_push": false,
+    "production_profiles_written": false,
+    "production_migration_approval": false
+  },
+  "remaining_activation_gates": [
+    "review and commit source/controller; actual hosted Actions build",
+    "approved production agent custody/capability",
+    "dedicated per-target SSH identities and protected profiles",
+    "fresh sub2api3 native/database baseline",
+    "checksum-bound migration approvals and fresh backups",
+    "independently approved release/controller pins",
+    "optional separately provisioned GitHub Actions artifact-read purpose for automated download"
+  ],
+  "source_sha256": {
+    ".github/workflows/fork-release.yml": "9e34ff3c23d0fc719f44b0709bc18aeb60ae09b0d10bcfeb572ff33fae27aba5",
+    "scripts/ci/bamboo_cd.py": "48fa0636ab9cb96c59fa7f1766c589e75308579692802b586c8a0d98b80a5dd8",
+    "scripts/ci/bamboo_cd.sh": "a2a3959ce438980adc7b4d52d3be5fae62437f70933d49aa0c66f30350d94435",
+    "scripts/ci/import_release.py": "7daec2ebed63ba558c11c88f464cfdeaf005bf5c850cb7106d283929aa78dd80",
+    "scripts/ci/test_bamboo_cd.py": "81ab3317dcff04ac0996485277a4ec048ae2aa9eb3ae9cfb75c020e294ddd144",
+    "scripts/ci/test_import_release.py": "816ef704f0ec849419c464e82c916da69878ce8d509f96dfad5681ad8992f7d0",
+    "scripts/ci/release.sh": "f465614230745c939d8601b835aaec9ea87d9e59d73e349e4ca13527da5aea98",
+    "scripts/ci/preflight_release.py": "8de00600df8a334d61aebb354de063ac91de64db63ea492c762440c0d40e325a",
+    "deploy/bamboo/deployment.yml": "9291ebde94a5081de3cb3edc88db5d60d82490dd757becf2f686e3a822a13568",
+    "FORK.md": "2519a00d1a1510f8b584ceeb6ef95cb730866596c1777c88a9b68abb7af80abe"
+  }
+}

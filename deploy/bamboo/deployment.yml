@@ -1,0 +1,97 @@
+# Manual import recipe, NOT repository-scanned Specs. No root bamboo-specs entry.
+# Validate and apply to the existing disabled SUB2API-INTAKE plan under maintenance.
+# Keep the plan disabled until agent installation, custody and approvals are ready.
+---
+version: 2
+plan:
+  project-key: SUB2API
+  key: INTAKE
+  name: Release Intake - GitHub artifacts only
+  description: Offline intake only; GitHub Actions owns qualification and builds.
+  enabled: false
+  rerunnable: false
+
+triggers: []
+
+variables:
+  release_archive_path: ''
+  release_tag: ''
+  release_commit: ''
+  release_archive_sha256: ''
+  controller_sha256: ''
+
+stages:
+  - Offline intake:
+      jobs:
+        - Import approved archive
+
+Import approved archive:
+  key: JOB1
+  tasks:
+    - clean
+    - script:
+        interpreter: /bin/sh
+        file: /data/sub2api-cd/current/bamboo_cd.sh
+        argument: >-
+          intake
+          --archive "${bamboo.release_archive_path}"
+          --output cd-payload
+          --tag "${bamboo.release_tag}"
+          --expected-sha "${bamboo.release_commit}"
+          --archive-sha256 "${bamboo.release_archive_sha256}"
+          --controller-sha256 "${bamboo.controller_sha256}"
+  artifacts:
+    - name: cd-payload
+      location: cd-payload
+      pattern: '**/*'
+      shared: true
+      required: true
+  requirements:
+    - system.os: Linux
+    - sub2api.production.controller
+
+---
+version: 2
+deployment:
+  name: Sub2API production
+  source-plan: SUB2API-INTAKE
+
+release-naming:
+  next-version-name: intake-${bamboo.buildNumber}
+
+environments:
+  - Production
+
+Production:
+  release-approval-prerequisite: approved
+  triggers: []
+  variables:
+    approved_release_tag: ''
+    approved_release_commit: ''
+    approved_archive_sha256: ''
+    approved_controller_sha256: ''
+    gateway3_key_path: ''
+    sub2api3_key_path: ''
+    production_state_dir: ''
+  tasks:
+    - clean
+    - artifact-download:
+        artifacts:
+          - name: cd-payload
+            destination: cd-payload
+    - script:
+        interpreter: /bin/sh
+        file: cd-payload/controller/bamboo_cd.sh
+        argument: >-
+          deploy-production
+          --import-dir cd-payload
+          --tag "${bamboo.approved_release_tag}"
+          --expected-sha "${bamboo.approved_release_commit}"
+          --archive-sha256 "${bamboo.approved_archive_sha256}"
+          --controller-sha256 "${bamboo.approved_controller_sha256}"
+          --gateway3-key-path "${bamboo.gateway3_key_path}"
+          --sub2api3-key-path "${bamboo.sub2api3_key_path}"
+          --state-dir "${bamboo.production_state_dir}"
+  requirements:
+    - system.os: Linux
+    - sub2api.production.controller

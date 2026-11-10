@@ -1,0 +1,232 @@
+{
+  "task": "TEST-01",
+  "status": "completed_isolated_test_acceptance",
+  "acceptance_date": "2026-11-09",
+  "cleanup_date": "2026-11-10",
+  "target": "192.168.58.34",
+  "deployment_directory": "/opt/sub2api-fork-test",
+  "origin": "http://127.0.0.1:18085",
+  "source_commit": "40b3eb88f846008b9e40f233cdfbe6ebaf52d6ba",
+  "image_id": "sha256:cea3938697d4dc4c7718557e8ceb17e851aa605d53f67d28a14c62f6b61d9c88",
+  "initialization_evidence": "maintenance/verification/test-initialization-20261109.json",
+  "authorization": {
+    "owner_completed_compliance_commitment": true,
+    "agent_signed_or_bypassed_agreement": false,
+    "first_business_read_consumed_once": true,
+    "separately_approved_acceptance_read_consumed_once": true,
+    "both_login_tokens_revoked_before_values_returned": true,
+    "cleanup_runtime_recovery_added_credential_reads": 0,
+    "re_enrollment_or_install_replay": false,
+    "real_provider_requests": 0
+  },
+  "target_user_key_acceptance": {
+    "owner_from_url_not_body": true,
+    "same_idempotency_key_replays_same_key": true,
+    "cache_control_no_store": true,
+    "backend_only_mode_creation_passed": true,
+    "denials": {
+      "users_read_cannot_create_key": 403,
+      "hourly_only_cannot_create_key": 403,
+      "creator_only_cannot_read_users": 403,
+      "hourly_only_cannot_read_users": 403,
+      "hourly_only_cannot_read_usage_details": 403,
+      "ordinary_user_cannot_read_admin_hourly": 403,
+      "hourly_only_cannot_create_group": 403
+    },
+    "scoped_keys_revoked_401_verified_before_record_deletion": 3,
+    "unsupported_hourly_post_route": 404
+  },
+  "hourly_acceptance": {
+    "source_fixture_rows": 5,
+    "selected_half_open_rows": 4,
+    "http_aggregate_rows": 3,
+    "source_totals": {
+      "requests": 4,
+      "input_tokens": 48,
+      "output_tokens": 16,
+      "cache_creation_tokens": 8,
+      "cache_read_tokens": 12,
+      "total_tokens": 84,
+      "cost": 1.32,
+      "actual_cost": 0.88,
+      "account_cost": 1.22,
+      "duration_sum_ms": 120,
+      "duration_count": 3
+    },
+    "all_aggregate_fields_reconciled_with_independent_decimal_expectations": true,
+    "nullable_group": true,
+    "requested_model_precedence_and_blank_fallback": true,
+    "cross_hour_and_zero_vs_null_duration": true,
+    "repeat_read_identical": true,
+    "timezone_offset_read_identical": true,
+    "group_and_model_filters": true,
+    "fractional_microsecond_half_open_bounds": true,
+    "legacy_users_read_not_hourly": 403,
+    "http_verification_provenance": "Observed in previous continuation; durable TODO.md Stage2 record. Existing source rows rechecked before cleanup without replaying HTTP smoke."
+  },
+  "observation_acceptance": {
+    "mock_dispatches": {
+      "failure": 1,
+      "success": 1
+    },
+    "gateway_failure_http": 400,
+    "gateway_native_stream_http": 200,
+    "native_events": [
+      "response.created",
+      "response.output_text.delta",
+      "response.completed"
+    ],
+    "authoritative_completed_observed": true,
+    "successful_usage": [
+      {
+        "input_tokens": 8,
+        "output_tokens": 2,
+        "stream": true
+      }
+    ],
+    "failure_stage": "pre_parser_http",
+    "transport": "HTTP/1.1",
+    "tls": false,
+    "structured_failure_entries": 1,
+    "ops_upstream_failure_rows": 1,
+    "immutable_log_database_diagnostic_match": true,
+    "metadata_prompt_output_and_provider_payload_sentinels_absent": true,
+    "completion_logs_with_sampling0": 0,
+    "ops_success_error_rows": 0,
+    "h2_tls_or_sampling1_repeated_on_deployment": false
+  },
+  "cleanup": {
+    "cleanup_date": "2026-11-10",
+    "health": 200,
+    "setup_closed": true,
+    "anonymous_hourly": 401,
+    "clean_counts": {
+      "usage_logs": 0,
+      "ops_error_logs": 0,
+      "idempotency_records": 0,
+      "api_keys": 0,
+      "scoped_admin_api_keys": 0,
+      "usage_billing_dedup": 0,
+      "usage_billing_dedup_archive": 0,
+      "billing_usage_entries": 0,
+      "usage_dashboard_daily": 0,
+      "usage_dashboard_daily_users": 0,
+      "usage_dashboard_hourly": 0,
+      "usage_dashboard_hourly_users": 0,
+      "usage_group_daily_rollups": 0
+    },
+    "fixture_absence": {
+      "user2": 0,
+      "group2": 0,
+      "account1": 0,
+      "admin": 1,
+      "default_group": 1,
+      "synthetic_identity": 0,
+      "synthetic_balance": 0
+    },
+    "effective_settings": {
+      "backend_mode_enabled": "false",
+      "oidc_connect_use_pkce": "true",
+      "oidc_connect_validate_id_token": "true"
+    },
+    "other_containers": 14,
+    "other_containers_unchanged": true,
+    "image_id": "sha256:cea3938697d4dc4c7718557e8ceb17e851aa605d53f67d28a14c62f6b61d9c88",
+    "app_user": "1000:1000",
+    "app_read_only": true,
+    "app_cap_drop": [
+      "ALL"
+    ],
+    "app_publication": {
+      "8080/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "18085"
+        }
+      ]
+    },
+    "sampling0": "GATEWAY_OPENAI_HTTP_OBSERVATION_SUCCESS_SAMPLE_RATE=0",
+    "storage_publications": {
+      "/sub2api-fork-test-postgres-1": {},
+      "/sub2api-fork-test-redis-1": {}
+    },
+    "root_free_bytes": 21679509504,
+    "docker_free_bytes": 169013760000,
+    "database_bytes": 18896575,
+    "migration_records": 300,
+    "audit_records_preserved": 48,
+    "secret_file_metadata": {
+      "postgres_password": {
+        "uid": 999,
+        "mode": "0o400"
+      },
+      "redis.conf": {
+        "uid": 999,
+        "mode": "0o400"
+      }
+    },
+    "app_config_uid": 1000,
+    "app_config_mode": "0o600"
+  },
+  "settings_restore": {
+    "original_effective_values": {
+      "backend_mode_enabled": false,
+      "oidc_connect_enabled": false,
+      "oidc_connect_use_pkce": true,
+      "oidc_connect_validate_id_token": true
+    },
+    "post_cleanup_authenticated_ui_response": {
+      "http": 200,
+      "backend_mode_enabled": false,
+      "oidc_connect_enabled": false,
+      "oidc_connect_use_pkce": true,
+      "oidc_connect_validate_id_token": true
+    },
+    "method": "Restore backend mode through API; restore two disabled-provider security defaults directly in the owned Test DB after API ignored explicit flags, then restart only own app. Provider remained disabled. Effective baseline restored, not a claim of identical absent-vs-explicit raw setting rows.",
+    "upstream_source_modified": false,
+    "full_pre_smoke_response_snapshot_survived_runtime_loss": false,
+    "comparison_limit": "Before runtime loss, only the two OIDC effective flags remained different after backend restore; cleanup transaction changed only those two setting values and normal UI GET confirmed them."
+  },
+  "post_cleanup_authenticated_ui": {
+    "users": {
+      "http": 200,
+      "total": 1,
+      "items": [
+        {
+          "id": 1,
+          "role": "admin"
+        }
+      ]
+    },
+    "accounts": {
+      "http": 200,
+      "total": 0,
+      "items": []
+    },
+    "groups": {
+      "http": 200,
+      "total": 1,
+      "items": [
+        {
+          "id": 1,
+          "name": "default"
+        }
+      ]
+    }
+  },
+  "cleanup_guards": {
+    "exclusive_target_attempt": "test01-cleanup-attempt-20261110.json",
+    "database_transaction_committed_once": true,
+    "exact_owner_and_key_revocation_binding_checks": true,
+    "mock_container_and_script_removed": true,
+    "normal_audit_trail_preserved": true,
+    "test_fixture_passwords_keys_and_idempotency_response_material_removed": true,
+    "task_owned_browser_storage_cleared_and_tab_closed": true
+  },
+  "limitations": [
+    "Synthetic independent Test acceptance is not production rollout or real-consumer reconciliation.",
+    "Preserved previous image and project-local stop/start are not an initialized database downgrade/restore proof.",
+    "No external-network unrestricted browser verification or live upstream requests.",
+    "OIDC disabled-provider settings write-default behavior was recorded, not patched."
+  ]
+}

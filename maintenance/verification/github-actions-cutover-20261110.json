@@ -1,0 +1,175 @@
+{
+  "actionlint": {
+    "corrected": true,
+    "initial_findings": [
+      "runner context unavailable at job env scope",
+      "custom controlled runner label requires declaration"
+    ],
+    "result": {
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    "version": "1.7.7"
+  },
+  "cleanup": {
+    "owned_fixture_removed": true,
+    "shared_cleanup_performed": false,
+    "source_sha256": {
+      ".gitattributes": "1e7e4dd88806c211173003844b25304bac2ba04d0c2dc4afbb7a5e181fd3bf7c",
+      ".github/actionlint.yaml": "4934f2ef6584e4e7387c86caee7f741b73323f517620b61e967f6dc7281b106e",
+      ".github/workflows/backend-ci.yml": "34e3a87099e8c6302eabe844dfe6e539078ecb90ef81bd7f4189261f052770da",
+      ".github/workflows/fork-release.yml": "eeab0a6138500ce543d9b938c236efdbc76f0ebf197f2e1413e0a730eb29d976",
+      ".gitignore": "ae2fba6c71389774eead44b40175af556ac9930ddc4ffb1f3c048b670399f7ed",
+      "Dockerfile.goreleaser": "d930c927560641d2dda75d56d608ce1d5ae39b32f98db293788b5ec1e23a9af5",
+      "backend/go.mod": "0b7d42465cb86b9daa0092d8fd3794183049db284ff027c3bdef26ee0fb601e1",
+      "deploy/docker-entrypoint.sh": "7d3f1f532fcdefc0f405b37fb6caafa330dfcc7c531ad8bf51fcd48dad54a0b3",
+      "frontend/package.json": "9e8209845331530a13b55e7268975a2b48b9593952179d7214e6bef51314e28f",
+      "frontend/pnpm-lock.yaml": "349662af5eceb9ba591a195318395db481dd8f162cfee266f46694cf19583e77",
+      "scripts/ci/build_release.py": "dfd8fccba176bb08e4d4476103d4b5f81f74eb8f10898fcb14c19bd55391bf56",
+      "scripts/ci/deploy.sh": "7595aae4cebe1dc3711900536a57d5b7c747cc0eae61e8ee6d9cfe7a80c23c33",
+      "scripts/ci/deploy_release.py": "c4c2272a9954c4eea4071a971fe51bf2ed99e98c1ebc7e76b1d53cc1b64456d8",
+      "scripts/ci/known_hosts": "0bcaa3f1d285b4afe5b7617c5f15a6c0b34709e62a537015c3ddcf074a065855",
+      "scripts/ci/preflight_release.py": "d9cfb42011b00794ea9383f3eafc900d449adb49fc44c4aca185c598e02ead53",
+      "scripts/ci/qualify_release.py": "c35f2e7da4149d7599cf4b634c2469b269ea4f0d5af1bc7351ac952829ea3f61",
+      "scripts/ci/release.sh": "2da6f1e13b1495e71b20ede9715fe753e596e7e92a31b48933ae89b5e1078d81",
+      "scripts/ci/remote_deploy.py": "18fc8a5a742585040c96f2418e296e15d9f8ad151abc637c6bfc9dbbd1adc355",
+      "scripts/ci/targets.json": "3bf0350d135358a61d3a27b97db1df646448ead2618322484c15ca47a19d65c5",
+      "scripts/ci/test_deploy_release.py": "eda867e9fb19ac020419079e05a41ae0e66b5eb9427b7c07ba721ef63fb0a2b5",
+      "scripts/ci/test_release_scripts.py": "bf7ff5d562e32a95f05e3bf13a90288011af6f35f1d11c99881ad148685f7349"
+    }
+  },
+  "credentials_read": false,
+  "date": "2026-11-10",
+  "github_hosted_execution_performed": false,
+  "linux_runtime_smoke": {
+    "archive_mode_roundtrip": true,
+    "fixture_sha": "b202d429091b5f0e9d4c61f69c58936b794f5d54",
+    "fixture_tag": "v0.0.0-file-prereq.20261110",
+    "full_go_frontend_replayed": false,
+    "passed": true,
+    "preflight": {
+      "compiler": "go1.27.3",
+      "docker": "linux/x86_64",
+      "node": "v22.22.2",
+      "npm": "10.9.7",
+      "schema": 1,
+      "sha": "b202d429091b5f0e9d4c61f69c58936b794f5d54",
+      "tag": "v0.0.0-file-prereq.20261110"
+    },
+    "production_activation": false,
+    "qualification_not_started_after_preflight_failure": true,
+    "scope": "owned-minimal-input-fixture-not-a-qualified-release",
+    "steps": {
+      "build_without_qualification": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "deploy_missing_target": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "deploy_unknown_target": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "missing_deploy_source": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "missing_executables": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "packaged_missing_identity_gateway3": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "packaged_missing_identity_sub2api3": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "preflight_success": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      },
+      "python_behavior_suite": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      },
+      "qualify_wrong_revision": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "release_unknown_phase": {
+        "exit_code": 2,
+        "expected_exit_code": 2
+      },
+      "shell_syntax_deploy.sh": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      },
+      "shell_syntax_release.sh": {
+        "exit_code": 0,
+        "expected_exit_code": 0
+      }
+    },
+    "synthetic_artifact_real_tooling": {
+      "bundle_immutable_after_cli": true,
+      "deploy_file_mode": "0755",
+      "deploy_file_packaged": true,
+      "space_in_bundle_path": true
+    },
+    "test_initialization_replayed": false,
+    "unqualified_build_not_published": true
+  },
+  "metadata_contract": [
+    "GITHUB_SHA == checkout HEAD",
+    "GITHUB_REF == exact immutable release tag"
+  ],
+  "new_qualified_application_release_claimed": false,
+  "preserved_manual_publication_workflow": ".github/workflows/release.yml",
+  "prior_application_qualification": "maintenance/verification/bamboo-release-20261110.json",
+  "production_deployment": false,
+  "project_tag_push_commit": false,
+  "remaining_external_gates": [
+    "commit/push reviewed source and enable repository Actions/allowed actions as required",
+    "register controlled deployment runner and protect both deployment environments before opt-in",
+    "approved target identity/profiles, current native baseline and checksum-bound migration approvals"
+  ],
+  "removed_active_paths": [
+    "bamboo-specs/bamboo.yml",
+    "scripts/ci/bamboo-release.sh",
+    "scripts/ci/bamboo-deploy.sh"
+  ],
+  "schema": 1,
+  "status": "github_actions_source_cutover_verified_remote_execution_not_performed",
+  "unit_suite": {
+    "ok": true,
+    "resource_warnings": false,
+    "skipped": false,
+    "tests": 83
+  },
+  "workflow": ".github/workflows/fork-release.yml",
+  "workflow_topology": {
+    "artifact": "same artifact ID, mode-preserving release-bundle.tar.gz",
+    "default_deployment_disabled": true,
+    "deployment_opt_in": "FORK_DEPLOYMENT_ENABLED=true",
+    "deployment_order": [
+      "gateway3",
+      "sub2api3"
+    ],
+    "hosted_build": "ubuntu-24.04",
+    "protected_environments": [
+      "gateway3-production",
+      "sub2api3-production"
+    ],
+    "runner_labels": [
+      "self-hosted",
+      "linux",
+      "x64",
+      "sub2api-deploy"
+    ],
+    "trigger": "push v* tags on InoriHimea/sub2api, excluding deleted refs"
+  }
+}

@@ -94,6 +94,7 @@ temp/
 dist/
 build/
 release/
+/release-bundle.tar.gz
 
 # 后端嵌入的前端构建产物
 # Keep a placeholder file so `//go:embed all:dist` always has a match in CI/lint,
@@ -124,6 +125,10 @@ CLAUDE.md
 scripts
 !backend/scripts/
 !backend/scripts/resolve-version.sh
+!/scripts/
+/scripts/*
+!/scripts/ci/
+/scripts/ci/__pycache__/
 .code-review-state
 #openspec/
 code-reviews/

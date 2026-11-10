@@ -93,3 +93,13 @@ jobs:
       - run: python -m pip install -r .github/release-tools/requirements-release.txt
       - run: python -m unittest discover -s .github/release-tools -p 'test_release_matrix.py'
       - run: bash -n .github/release-tools/release-images.sh
+      - name: Release and deployment contract regressions
+        run: python3 -m unittest discover -s scripts/ci -p 'test_*.py'
+      - run: /bin/sh -n scripts/ci/release.sh
+      - run: /bin/sh -n scripts/ci/deploy.sh
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - name: Validate fork workflow syntax and GitHub contexts
+        run: go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.7 .github/workflows/fork-release.yml .github/workflows/backend-ci.yml
