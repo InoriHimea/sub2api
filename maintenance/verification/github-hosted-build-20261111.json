@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "task": "RELEASE-01/CD-05 hosted build",
+  "status": "hosted build and actual artifact acceptance completed; Bamboo scheduling/production activation gated",
+  "repository": "InoriHimea/sub2api",
+  "native_gh": {
+    "account": "InoriHimea",
+    "token_extracted": false,
+    "owner_completed_workflow_scope": true
+  },
+  "publication": {
+    "rc1": {
+      "tag": "v0.2.20-fork.1-rc.1",
+      "commit": "5333e5953fa0c817a99b5b9dc35c70323b559393",
+      "pushed": true,
+      "build_run": null,
+      "reason": "repository Actions disabled at tag push; tag preserved"
+    },
+    "rc2": {
+      "tag": "v0.2.20-fork.1-rc.2",
+      "commit": "bf8c6255527bb77148afdb6e3519a26840193869",
+      "pushed": true,
+      "documentation_only_change": true
+    }
+  },
+  "actions_setting": {
+    "enabled_before": false,
+    "enabled_after": true,
+    "mutation": "PUT enabled=true only",
+    "allowed_actions_after": "all",
+    "sha_pinning_required_after": false,
+    "allowlist_changed": false
+  },
+  "run": {
+    "id": 42852755218,
+    "url": "https://github.com/InoriHimea/sub2api/actions/runs/42852755218",
+    "workflow_id": 413491436,
+    "workflow_name": "Fork tag build",
+    "head_sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+    "head_branch": "v0.2.20-fork.1-rc.2",
+    "conclusion": "success",
+    "job_id": 129957558597,
+    "duration_seconds": 1029
+  },
+  "boundaries": {
+    "production_changes": false,
+    "release_approved": false,
+    "production_credentials_read": false,
+    "test_bootstrap_replayed": false,
+    "controller_pin": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84"
+  },
+  "next": "Deliver dedicated production identities and approved controller-agent custody; live sub2api3 baseline/profile/migration approval and real Bamboo scheduling/roundtrip remain gates. Do not rerun successful hosted build, initialization or intake.",
+  "artifact": {
+    "id": 13781244805,
+    "name": "sub2api-release",
+    "zip_bytes": 125345832,
+    "zip_sha256": "a1fa629e93adf0875233d2a0f5947abb06f7fd067207e82491c7460d2f6c828a",
+    "github_wrapper_digest_matched": true,
+    "tar_bytes": 127489849,
+    "tar_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8",
+    "independent_build_log_tar_digest_matched": true,
+    "download_recovery": "initial gh run download300s timeout; direct stream900s partial; verified206 ranges resumed to exact wrapper digest"
+  },
+  "release": {
+    "tag": "v0.2.20-fork.1-rc.2",
+    "sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+    "binary_sha256": "241c55fd2806ba50c0e78db7e0b424957f58bceb942020fa39455f3fd2cee051",
+    "image_id": "sha256:bac857a08d915935f8d627ca2c382463e6067d751cab2970a9e728c6860a4d0f",
+    "qualification": {
+      "compiler": "go1.27.3",
+      "frontend_build_exit_code": 0,
+      "frontend_dist_sha256": "148d6b106e002f42604714f46bd1a4b5a0d5e08f4e92dc75cfbbf3a487ac7894",
+      "generated_at": "2026-11-10T16:30:09Z",
+      "go_test_exit_code": 0,
+      "qualified": true,
+      "schema": 1,
+      "sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+      "tests": {
+        "TestAdminCreateUserAPIKeyIntegration": "PASS",
+        "TestOpenAIHTTPObservationRealHTTPSuccessSmoke": "PASS",
+        "TestUsageHourlyPostgresHTTPIntegration": "PASS"
+      }
+    }
+  },
+  "intake_storage": {
+    "directory": "/data/sub2api-cd/releases/v0.2.20-fork.1-rc.2-bf8c6255527b",
+    "free_bytes": 239072198656,
+    "controller_present": true
+  },
+  "intake": {
+    "storage": "/data/sub2api-cd/releases/v0.2.20-fork.1-rc.2-bf8c6255527b",
+    "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8",
+    "results": {
+      "intake": {
+        "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8",
+        "controller": {
+          "files": {
+            "build_release.py": "dfd8fccba176bb08e4d4476103d4b5f81f74eb8f10898fcb14c19bd55391bf56",
+            "deploy.sh": "7595aae4cebe1dc3711900536a57d5b7c747cc0eae61e8ee6d9cfe7a80c23c33",
+            "deploy_release.py": "c4c2272a9954c4eea4071a971fe51bf2ed99e98c1ebc7e76b1d53cc1b64456d8",
+            "import_release.py": "7daec2ebed63ba558c11c88f464cfdeaf005bf5c850cb7106d283929aa78dd80",
+            "known_hosts": "0bcaa3f1d285b4afe5b7617c5f15a6c0b34709e62a537015c3ddcf074a065855",
+            "remote_deploy.py": "18fc8a5a742585040c96f2418e296e15d9f8ad151abc637c6bfc9dbbd1adc355",
+            "targets.json": "3bf0350d135358a61d3a27b97db1df646448ead2618322484c15ca47a19d65c5"
+          },
+          "sha256": "31f19eed6782c144b3fa2005b0c130c0a850f33d726e9545ae700db51452b1b6"
+        },
+        "deployment_tools_match_controller": true,
+        "manifest_sha256": "bb47e51c47667c3dd82ef94ef78b67a587953d7d32b3026736671fdd4ae204de",
+        "mode": "offline-approved-archive",
+        "schema": 1,
+        "sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+        "tag": "v0.2.20-fork.1-rc.2"
+      },
+      "verify": {
+        "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8",
+        "controller": {
+          "files": {
+            "build_release.py": "dfd8fccba176bb08e4d4476103d4b5f81f74eb8f10898fcb14c19bd55391bf56",
+            "deploy.sh": "7595aae4cebe1dc3711900536a57d5b7c747cc0eae61e8ee6d9cfe7a80c23c33",
+            "deploy_release.py": "c4c2272a9954c4eea4071a971fe51bf2ed99e98c1ebc7e76b1d53cc1b64456d8",
+            "import_release.py": "7daec2ebed63ba558c11c88f464cfdeaf005bf5c850cb7106d283929aa78dd80",
+            "known_hosts": "0bcaa3f1d285b4afe5b7617c5f15a6c0b34709e62a537015c3ddcf074a065855",
+            "remote_deploy.py": "18fc8a5a742585040c96f2418e296e15d9f8ad151abc637c6bfc9dbbd1adc355",
+            "targets.json": "3bf0350d135358a61d3a27b97db1df646448ead2618322484c15ca47a19d65c5"
+          },
+          "sha256": "31f19eed6782c144b3fa2005b0c130c0a850f33d726e9545ae700db51452b1b6"
+        },
+        "deployment_tools_match_controller": true,
+        "manifest_sha256": "bb47e51c47667c3dd82ef94ef78b67a587953d7d32b3026736671fdd4ae204de",
+        "mode": "offline-approved-archive",
+        "schema": 1,
+        "sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+        "tag": "v0.2.20-fork.1-rc.2"
+      }
+    },
+    "production_contact": false
+  },
+  "runtime_smoke": {
+    "native_version": "2026-11-11T01:16:01.297+0800\tINFO\tstdlog\tSub2API 0.2.20-fork.1-rc.2 (commit: bf8c6255527bb77148afdb6e3519a26840193869, built: 2026-11-10T16:30:09Z)\t{\"service\": \"sub2api\", \"env\": \"bootstrap\", \"legacy_stdlog\": true}",
+    "image_id": "sha256:bac857a08d915935f8d627ca2c382463e6067d751cab2970a9e728c6860a4d0f",
+    "native_docker_same_binary": true,
+    "binary_sha256": "241c55fd2806ba50c0e78db7e0b424957f58bceb942020fa39455f3fd2cee051",
+    "first_run_setup": {
+      "code": 0,
+      "message": "success",
+      "data": {
+        "needs_setup": true,
+        "step": "welcome"
+      }
+    },
+    "embedded_frontend": true,
+    "uid": 1000,
+    "network": "none",
+    "read_only": true,
+    "app_initialized": false,
+    "configured_health_claimed": false,
+    "production_contact": false,
+    "owned_container_removed": true
+  },
+  "bamboo_preparation": {
+    "plan": {
+      "enabled": false,
+      "isActive": false,
+      "isBuilding": false,
+      "key": "SUB2API-INTAKE"
+    },
+    "intake_variables": [
+      {
+        "key": "controller_sha256",
+        "value": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84"
+      },
+      {
+        "key": "release_archive_path",
+        "value": "/data/sub2api-cd/releases/v0.2.20-fork.1-rc.2-bf8c6255527b/release-bundle.tar.gz"
+      },
+      {
+        "key": "release_archive_sha256",
+        "value": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8"
+      },
+      {
+        "key": "release_commit",
+        "value": "bf8c6255527bb77148afdb6e3519a26840193869"
+      },
+      {
+        "key": "release_tag",
+        "value": "v0.2.20-fork.1-rc.2"
+      }
+    ],
+    "production_variables": [
+      {
+        "key": "approved_archive_sha256",
+        "value": "UNAPPROVED"
+      },
+      {
+        "key": "approved_controller_sha256",
+        "value": "UNAPPROVED"
+      },
+      {
+        "key": "approved_release_commit",
+        "value": "UNAPPROVED"
+      },
+      {
+        "key": "approved_release_tag",
+        "value": "UNAPPROVED"
+      },
+      {
+        "key": "gateway3_key_path",
+        "value": "UNAPPROVED"
+      },
+      {
+        "key": "production_state_dir",
+        "value": "UNAPPROVED"
+      },
+      {
+        "key": "sub2api3_key_path",
+        "value": "UNAPPROVED"
+      }
+    ],
+    "intake_plan_enabled": false,
+    "production_capability_granted": false,
+    "bamboo_build_started": false,
+    "bamboo_artifact_roundtrip_verified": false,
+    "release_approved": false
+  },
+  "retention": {
+    "agent_release_directory": "/data/sub2api-cd/releases/v0.2.20-fork.1-rc.2-bf8c6255527b",
+    "archive_and_verified_payload_retained": true,
+    "image_loaded_on_ci_agent_only": true,
+    "owned_first_run_container_removed": true,
+    "local_download_scratch_removed": true
+  }
+}

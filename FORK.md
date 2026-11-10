@@ -55,6 +55,8 @@ Historical pre-cutover qualification and prerequisite receipts remain [here](mai
 
 Current [GitHub Actions cutover evidence](maintenance/verification/github-actions-cutover-20261110.json) records83 passing behavior tests, native GitHub ref/SHA acceptance and rejection paths, actionlint1.7.7 success, mode-preserving archive roundtrip and immutable fail-closed deployment CLI smoke on an owned Linux fixture. No GitHub-hosted run, new qualified application build, target enrollment or production deployment is inferred from these local/controlled checks.
 
+Actual hosted proof now exists: [RC2 build42852755218](https://github.com/InoriHimea/sub2api/actions/runs/42852755218), tag `v0.2.20-fork.1-rc.2`, commit `bf8c6255527bb77148afdb6e3519a26840193869`, succeeded in17m9s. The exact artifact ZIP and inner tar matched independently recorded digests; installed-controller intake/verify and actual native/image first-run acceptance passed without production contact. See `maintenance/verification/github-hosted-build-20261111.json`. Bamboo intake variables are prepared, but its disabled job/artifact roundtrip and production activation are not claimed passed. Never move RC1 merely because Actions was disabled when its tag was pushed.
+
 
 ## Bamboo manual production delivery
 
