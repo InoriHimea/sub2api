@@ -2,7 +2,7 @@
   "schema": 1,
   "task": "CD-05-follow-through",
   "date": "2026-11-10",
-  "status": "local release candidate preparation; remote publication and production activation gated",
+  "status": "reachable local release preparation completed; owner publication/access/approval gates remain",
   "public_github": {
     "repository": "InoriHimea/sub2api",
     "private": false,
@@ -87,7 +87,26 @@
     "installed_identity_matches": true,
     "root_cause": "Windows git archive under core.autocrlf=true rewrites seven controller files to CRLF",
     "fix": ".gitattributes scripts/ci/** text eol=lf",
-    "verified_using": "actual git archive --worktree-attributes; committed-archive confirmation follows",
+    "verified_using": "actual default git archive of the final annotated tag, after scoped LF source fix",
     "digest_checks_relaxed": false
-  }
+  },
+  "candidate": {
+    "tag": "v0.2.20-fork.1-rc.1",
+    "version": "0.2.20-fork.1-rc.1",
+    "commit": "5333e5953fa0c817a99b5b9dc35c70323b559393",
+    "tag_created_locally": true,
+    "pushed": false,
+    "source_clean_at_candidate": true,
+    "provenance_parser_accepted": true,
+    "default_tag_archive_controller_sha256": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84",
+    "installed_controller_match": true,
+    "full_application_build_repeated": false
+  },
+  "owner_publication_command": "git push --atomic origin main refs/tags/v0.2.20-fork.1-rc.1",
+  "remaining_order": [
+    "Owner publishes branch and exact local tag with native authenticated git; no credential pasted into chat",
+    "Agent observes actual hosted build and verifies exact archive; first real Bamboo artifact roundtrip remains unexercised",
+    "Owner delivers dedicated accepted per-target deployment identities; agent then discovers live baseline and prepares exact profiles",
+    "Owner accepts migration effects and maintenance window; native Bamboo release approval before ordered production activation"
+  ]
 }
