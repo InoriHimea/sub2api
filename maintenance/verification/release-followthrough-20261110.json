@@ -68,5 +68,26 @@
     "dedicated per-target CI SSH identities accepted by production hosts; do not send private keys in chat",
     "explicit migration246 business effect acceptance and final exact-migration approval after live ledger verification",
     "production maintenance window/native Bamboo release approval after actual hosted build and intake verification"
-  ]
+  ],
+  "local_initial_commit": "37374d7e8",
+  "reviews": {
+    "hosted_build": {
+      "status": "completed-static-review",
+      "concrete_blockers": [],
+      "hosted_runtime_verified": false
+    },
+    "production_controller": {
+      "status": "incomplete-provider-timeout",
+      "no_successful_review_claimed": true
+    }
+  },
+  "controller_archive_line_endings": {
+    "before": "4b2c09e50436c71462e4dae88ebed6a6ac840731dc0bf71623864f900ff708b7",
+    "after_scoped_lf_attribute": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84",
+    "installed_identity_matches": true,
+    "root_cause": "Windows git archive under core.autocrlf=true rewrites seven controller files to CRLF",
+    "fix": ".gitattributes scripts/ci/** text eol=lf",
+    "verified_using": "actual git archive --worktree-attributes; committed-archive confirmation follows",
+    "digest_checks_relaxed": false
+  }
 }

@@ -20,3 +20,6 @@ backend/migrations/*.sql text eol=lf
 
 # Dockerfile
 Dockerfile text eol=lf
+
+# Controller identity hashes exact SDK bytes; Windows checkout/archive must match Linux.
+scripts/ci/** text eol=lf
