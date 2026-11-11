@@ -1,0 +1,316 @@
+{
+  "schema": 1,
+  "task": "CD-08",
+  "date": "2026-11-11",
+  "status": "dedicated VM operational and reboot-verified; nonroot controller/archive acceptance passed; Bamboo registration/dedication blocked",
+  "hypervisor": {
+    "host": "10.10.10.56",
+    "name": "H3C-56",
+    "cpu_threads": 80,
+    "free_memory_bytes_at_admission": 111391977472,
+    "vm_count_before": 33,
+    "existing_vm_states": {
+      "10.156.56.1": 2,
+      "10.156.56.10": 3,
+      "10.156.56.11": 2,
+      "10.156.56.12": 3,
+      "10.156.56.145(windows打包)": 2,
+      "10.156.56.15": 2,
+      "10.156.56.155(linux打包)": 2,
+      "10.156.56.2": 3,
+      "10.156.56.20": 2,
+      "10.156.56.21": 2,
+      "10.156.56.22": 2,
+      "10.156.56.23": 3,
+      "10.156.56.24(newisee)": 2,
+      "10.156.56.3": 2,
+      "10.156.56.51": 2,
+      "10.156.56.61(Flink)": 2,
+      "10.156.56.62": 2,
+      "10.156.56.63": 2,
+      "10.156.56.71-1(机票ck)": 2,
+      "10.156.56.72（机票mysql）": 2,
+      "10.156.56.73(机票ck2)": 3,
+      "10.156.56.74(机票采集)": 2,
+      "10.156.56.75(机票ck3)": 3,
+      "git_app1": 2,
+      "git_app3": 2,
+      "git_data1": 2,
+      "git_data3": 2,
+      "git_database1": 2,
+      "git_database3": 2,
+      "guorila": 3,
+      "iStoreOS-main": 2,
+      "公用开发组件": 2,
+      "主路由组件": 2
+    },
+    "storage": {
+      "DriveLetter": "I",
+      "FileSystemLabel": "虚拟机空间2",
+      "Size": 4000768323584,
+      "SizeRemaining": 1582147461120
+    },
+    "switch": "Intel(R) Ethernet Connection X722 for 10GBASE-T - Virtual Switch",
+    "network": "existing external switch, untagged; DHCP initially"
+  },
+  "selected_vm": {
+    "name": "sub2api-deploy-agent-01",
+    "directory": "I:\\sub2api-deploy-agent-01",
+    "generation": 2,
+    "cpu": 2,
+    "ram_bytes": 4294967296,
+    "disk_bytes": 85899345920,
+    "os": "Ubuntu24.04 LTS release20261017",
+    "cloud_init_seed": {
+      "seed": "I:\\sub2api-deploy-agent-01\\seed.vhdx",
+      "label": "CIDATA",
+      "files": [
+        "user-data",
+        "meta-data",
+        "network-config"
+      ],
+      "contains_secrets": false
+    },
+    "uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350",
+    "mac": "00155D033847",
+    "current_dhcp_ipv4": "10.10.10.20",
+    "dhcp_identity": "MAC; not a static reservation",
+    "secure_boot": true,
+    "public_seed_retained": true,
+    "serial_console_pipe": "\\\\.\\pipe\\sub2api-cd08-console",
+    "hostname": "sub2api-deploy-agent-01"
+  },
+  "image": {
+    "source_url": "https://cloud-images.ubuntu.com/releases/noble/release-20261017/ubuntu-24.04-server-cloudimg-amd64.img",
+    "conversion_recovery": {
+      "files": {
+        "ubuntu-24.04-server-cloudimg-amd64.img": {
+          "bytes": 621284352,
+          "sha256": "04e8f2461a16a44e78a370284471f29616cdd9baf1893df25807b71f985b6c94"
+        },
+        "os.vhdx": {
+          "bytes": 2189426688,
+          "sha256": "4e6632101c6c4eaedbaef9be74b12ae5e23cbabbb116d6cfca58be1dfd281432"
+        }
+      },
+      "converter_container": "",
+      "source_checksum_valid": true,
+      "original_operation_exit_not_captured": true
+    },
+    "helper_workspace": "/data/sub2api-vm-bootstrap-v0ink7lk",
+    "original_ssh_exit": "not captured; no replay",
+    "host_packages_installed": false,
+    "existing_build_agent_service_changed": false,
+    "guest_disk_transfer": {
+      "bytes": 2189426688,
+      "sha256": "4e6632101c6c4eaedbaef9be74b12ae5e23cbabbb116d6cfca58be1dfd281432",
+      "verified": true
+    },
+    "transport_notes": [
+      "native SCP timed out with partial disk; no VM created from partial",
+      "compressed SSH stdin receiver timed out and retained an exclusive file lock; stopped only exact task receiver PID11508",
+      "compressed suffix fetched via loopback-only SSH forwards and verified by SHA256; reconstructed full VHDX matched source before VM creation",
+      "temporary transport helpers/tunnels intentionally stopped; supervised255/1 notifications were cleanup"
+    ]
+  },
+  "bootstrap_trust": {
+    "private_key_copied": false,
+    "seed_contains_only_public_administrator_key": true,
+    "guest_host_key_to_be_read_via_trusted_hypervisor_seed": true,
+    "unverified_host_key_autoaccept": false,
+    "durable_host_pin_file": "C:/Users/25321/.ssh/known_hosts_sub2api_deploy_agent_01",
+    "scoped_ssh_config": "C:/Users/25321/.ssh/sub2api-deploy-agent-01.conf",
+    "scoped_access_smoke": "hostname matched through pinned hypervisor jump; global config unchanged",
+    "network_bootstrap_fix": "retain public NoCloud seed, preserve keys, MAC DHCP; remove initial poweroff hook"
+  },
+  "bamboo_registration": {
+    "status": "approved credential delivery pending; do not extract browser token",
+    "agent_runs_as": "bamboo",
+    "production_keys_delivered": false,
+    "production_capability_granted": false,
+    "installer_jar_on_new_vm": false,
+    "systemd_service_installed": false,
+    "online": false,
+    "dedicated_server_assignment": false,
+    "administrator_ui": "Administrator Access challenge after ordinary Zitadel SSO",
+    "server_security_token_read": false,
+    "old_agent_identity_copied": false,
+    "missing_prerequisite": "owner administrator reauthentication and controlled registration credential delivery; no exact Bamboo OpenBao purpose loaded",
+    "proposed_credential_path_if_enrolled": "agent-kv/data/bamboo/sub2api-deploy-agent-01",
+    "proposed_reader_minimum": "read only that exact KV v2 path; revoke-self; fixed Bamboo origin and this new VM; no policy or other KV access",
+    "upstream_scope_warning": "Bamboo server security token is not claimed per-agent or least-privileged upstream; manual server authentication/dedication remains required"
+  },
+  "boundaries": {
+    "production_hosts_modified": false,
+    "old_agents_modified": false,
+    "shared_switch_modified": false,
+    "paid_cloud_instance_created": false
+  },
+  "guest_runtime": {
+    "hostname": "sub2api-deploy-agent-01",
+    "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+    "cpu_count": 2,
+    "root_disk_bytes": 82086711296,
+    "java": "openjdk version \"21.0.13.0.3\" 2026-10-24\nOpenJDK Runtime Environment (build 21.0.13.0.3+1-1-24.04.1-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)",
+    "python": "Python 3.12.3",
+    "bamboo_user": {
+      "uid": 999,
+      "gid": 988,
+      "home": "/var/lib/bamboo",
+      "shell": "/usr/sbin/nologin"
+    },
+    "root_ssh_disabled": true,
+    "docker_installed": false,
+    "state_mode": "0o700"
+  },
+  "guest_security_acceptance": {
+    "cloud_init_status": "done",
+    "cloud_init_errors": [],
+    "bamboo_uid": 999,
+    "bamboo_gid": 988,
+    "bamboo_supplemental_groups": [],
+    "bamboo_account_locked": true,
+    "sshd_effective": {
+      "permitrootlogin": "no",
+      "passwordauthentication": "no",
+      "kbdinteractiveauthentication": "no"
+    },
+    "state_uid": 999,
+    "state_mode": "0o700",
+    "connectivity": {
+      "deploy.mellivora.com.cn:443": {
+        "tcp": true,
+        "tls": "TLSv1.3"
+      },
+      "115.159.158.245:22": {
+        "tcp": true
+      },
+      "45.66.129.135:22": {
+        "tcp": true
+      }
+    },
+    "sudo_as_bamboo": false,
+    "root_ssh_login_tested": false,
+    "production_authenticated": false
+  },
+  "controller_install": {
+    "controller_sha256": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84",
+    "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8",
+    "archive_path": "/data/sub2api-cd/releases/v0.2.20-fork.1-rc.2-bf8c6255527b/release-bundle.tar.gz",
+    "controller_uid": 0,
+    "controller_group": "bamboo",
+    "controller_directory_mode": "0o750",
+    "controller_mutable_by_agent": false,
+    "agent_state_private": true,
+    "agent_service_registered": false,
+    "production_keys_present": false
+  },
+  "nonroot_rc2_acceptance": {
+    "checks": {
+      "intake": {
+        "exit": 0,
+        "tag": "v0.2.20-fork.1-rc.2",
+        "sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+        "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8"
+      },
+      "verify": {
+        "exit": 0,
+        "tag": "v0.2.20-fork.1-rc.2",
+        "sha": "bf8c6255527bb77148afdb6e3519a26840193869",
+        "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8"
+      }
+    },
+    "payload_owner_uid": 999,
+    "payload_mode": "0o700",
+    "production_contact": false
+  },
+  "reboot_acceptance": {
+    "before_boot_id": "44ee1008-f953-4fe2-a604-32d45a6ecfd1",
+    "hypervisor": {
+      "vm_id": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350",
+      "state": "Running",
+      "ssh_tcp_ready": true,
+      "seed_attached": true
+    },
+    "guest_after": {
+      "boot_id": "62b5f5de-51a8-4100-b814-fb42cebbb78f",
+      "hostname": "sub2api-deploy-agent-01",
+      "ipv4": [
+        {
+          "ifindex": 2,
+          "ifname": "eth0",
+          "flags": [
+            "BROADCAST",
+            "MULTICAST",
+            "UP",
+            "LOWER_UP"
+          ],
+          "mtu": 1500,
+          "qdisc": "mq",
+          "operstate": "UP",
+          "group": "default",
+          "txqlen": 1000,
+          "addr_info": [
+            {
+              "family": "inet",
+              "local": "10.10.10.20",
+              "prefixlen": 24,
+              "metric": 100,
+              "broadcast": "10.10.10.255",
+              "scope": "global",
+              "dynamic": true,
+              "label": "eth0",
+              "valid_life_time": 35953,
+              "preferred_life_time": 35953
+            }
+          ]
+        }
+      ],
+      "cloud_init": "done",
+      "cloud_init_errors": [],
+      "controller_sha256": "bb313bb382245c7ecdb7c3b2e0026d5be00d7b9f8a6ef036a603fcd0e409cc84",
+      "archive_sha256": "f32d83f18f8b1a57df9798816bcf63a36088480b6e9780d9a43167305a46d3a8",
+      "bamboo_uid": 999,
+      "state_owner": 999,
+      "state_mode": "0o700",
+      "payload_persisted": true,
+      "bamboo_service_present": false
+    },
+    "ip_and_ssh_host_key_preserved": true,
+    "bamboo_service_restart_not_claimed": true
+  },
+  "existing_vm_preservation": {
+    "before_count": 33,
+    "after_count": 34,
+    "new_vm_names": [
+      "sub2api-deploy-agent-01"
+    ],
+    "existing_state_differences": {},
+    "existing_vm_ids_not_independently_compared": true,
+    "existing_vm_changes_performed": false
+  },
+  "cleanup": {
+    "guest": {
+      "transfer_tar_removed": true,
+      "controller_retained": true,
+      "rc2_retained": true
+    },
+    "old_build_agent": {
+      "bootstrap_workspace_removed": true,
+      "existing_controller_retained": true
+    },
+    "hypervisor": {
+      "compressed_suffix_removed": true,
+      "new_guest_disk_retained": true,
+      "public_seed_retained": true
+    },
+    "local_transfer_scratch_removed": true,
+    "local_transport_helper_removed": true,
+    "existing_production_services_modified": false,
+    "superseded_public_pin_files_removed": [
+      "C:\\Users\\25321\\AppData\\Local\\Temp\\sub2api-deploy-agent-01-known-hosts",
+      "C:\\Users\\25321\\AppData\\Local\\Temp\\sub2api-cd08-transfer-known-hosts"
+    ],
+    "durable_scoped_host_pin_retained": "C:/Users/25321/.ssh/known_hosts_sub2api_deploy_agent_01"
+  }
+}
