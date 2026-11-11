@@ -1,0 +1,184 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "task": "CD-08 controlled Bamboo enrollment entry preparation",
+  "status": "local source, staged package, offline/native GUI and isolated encryption acceptance completed; production maintenance not performed",
+  "authorization": "owner selected prepare controlled entry only; actual Bao mutation/read/delivery/start remain separately authorized",
+  "purpose": {
+    "name": "bamboo-deploy-agent",
+    "origin": "https://deploy.mellivora.com.cn",
+    "kv": "agent-kv/data/bamboo/sub2api-deploy-agent-01",
+    "role": "bamboo-sub2api-deploy-agent-01-enroll-read",
+    "target": "10.10.10.20",
+    "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350",
+    "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+    "upstream_token_scope": "serverwide; not per-agent least privilege"
+  },
+  "workflow": {
+    "create_confirmation": "CREATE_BAMBOO_DEPLOY_AGENT_ACCEPT_SERVER_TOKEN_RISK",
+    "delivery_confirmation": "DELIVER_BAMBOO_AGENT_ENCRYPTED_CREDENTIAL",
+    "separate_create_and_deliver": true,
+    "no_typed_secrets_for_delivery": true,
+    "identity_presence_required_before_reservation": true,
+    "durable_reservation_before_reader_login": true,
+    "no_automatic_retry": true,
+    "private_current_user_dpapi": true,
+    "encrypted_target_only_no_service_start": true
+  },
+  "offline_suite": {
+    "passed": true,
+    "tests": 160,
+    "seconds": 4.71,
+    "skipped": 0,
+    "output": "................................................................................................................................................................\r\n----------------------------------------------------------------------\r\nRan 160 tests in 3.389s\r\n\r\nOK\r\n"
+  },
+  "native_gui_acceptance": {
+    "native_bao_version": "v2.7.1",
+    "real_current_user_dpapi": true,
+    "native_gui_precheck_create_deliver": true,
+    "business_token_or_issuer_in_gui_log": false,
+    "reader_fetch_count": 1,
+    "repeat_blocked_before_reader_login": true,
+    "identity_receipt_committed": true,
+    "namespace_reports": [
+      {
+        "mount_namespace_private": true,
+        "real_host_secret_hidden": true,
+        "service_started": false,
+        "mode": "precheck",
+        "actual_target_credential_untouched": true
+      },
+      {
+        "mount_namespace_private": true,
+        "real_host_secret_hidden": true,
+        "service_started": false,
+        "mode": "deliver",
+        "native_host_key_generated_in_isolated_varlib": true,
+        "decrypt_exact": true,
+        "wrong_name_rejected": true,
+        "repeat_blocked": true,
+        "credential_mode": "0600",
+        "encrypted_bytes": 235,
+        "plaintext_not_in_ciphertext": true,
+        "actual_target_credential_untouched": true
+      }
+    ],
+    "window": {
+      "width": 842,
+      "height": 463,
+      "screen_width": 1920,
+      "screen_height": 1080
+    },
+    "production_bao_or_bamboo_contact": false,
+    "real_token_used": false,
+    "actual_target_credential_written": false,
+    "agent_started": false
+  },
+  "readonly_actual_target_readiness": {
+    "bootstrap_sha256": "a7de00c26fb4473dd3ce3da7518ef8bfe041b74647fc225ec5987a957f54605e",
+    "credential_name": "security-token",
+    "credential_path": "/etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+    "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+    "installer_sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+    "schema": 1,
+    "status": "READY",
+    "target": "10.10.10.20",
+    "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350"
+  },
+  "frozen_package": {
+    "path": "E:/pikachu/infra/deployment/dist-bamboo-agent-20261111/enrollment-gui/enrollment-gui.exe",
+    "sha256": "caf7fb3d72389ed2aa4bdd30fcfb2fe876b09f01013cad242d466eb6e1503e94",
+    "purposes": 19,
+    "tk": true,
+    "problems": [],
+    "visible_window": {
+      "pid": 40700,
+      "title": "Identity enrollment",
+      "width": 858,
+      "height": 502,
+      "window_handle": 4395974,
+      "screenshot": "E:/pikachu/local/evidence/bamboo-enrollment-window-20261111.png"
+    },
+    "canonical_existing_bundle_overwritten": false,
+    "owned_visual_window_closed": true
+  },
+  "test_tool": {
+    "source": "existing previously available public test binary; copied no old storage/config/identities",
+    "version": "OpenBao v2.7.1 (a5db72cef75c24b920ade02065b18dd8eb666bac), committed 2026-10-01T15:32:54Z",
+    "binary_sha256": "b985ff8c559c16e763e517a3b2abd14f9e7e0f88fda4e440fe84273d9abaeacd",
+    "fresh_archive_download_failed_incomplete_not_executed": true
+  },
+  "safety_review": {
+    "mode": "static review",
+    "fixed": [
+      "separate management and guest UUID",
+      "exact full startup tree and nested class/XML/unit pins",
+      "no systemd unit dropins",
+      "host-key/name-bound decrypt comparison before exclusive publication",
+      "reservation before any quota-consuming reader access",
+      "dedicated jump host pin and no global trust/automatic key learning"
+    ],
+    "native_windows_ssh": "Preserve only required public metadata including PROGRAMDATA; version-only comparison isolated missing PROGRAMDATA silent exit255. No business environment variables copied. Readonly actual target precheck passed."
+  },
+  "startup_asset_archive": {
+    "before_lf": {
+      "bamboo-agent.service": {
+        "archive_sha256": "b2c5b7a9e02296204e2e3cac5e82029a549290d6c18776698bc2824aeee19326",
+        "deployed_source_sha256": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+        "same_bytes": false,
+        "archive_crlf": 27
+      },
+      "bootstrap-log4j2.xml": {
+        "archive_sha256": "da573176978ba871c9826cb034a0bddc7a1ad474fc1add3f08493d331c7ada03",
+        "deployed_source_sha256": "8c5a64980bebf5680c4f60cb5a458dade3bfeca567e0e4c6173631fab1d90f21",
+        "same_bytes": false,
+        "archive_crlf": 14
+      }
+    },
+    "after_lf": {
+      "bamboo-agent.service": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+      "bootstrap-log4j2.xml": "8c5a64980bebf5680c4f60cb5a458dade3bfeca567e0e4c6173631fab1d90f21"
+    },
+    "target_digest_checks_weakened": false,
+    "rc2_rebuilt": false
+  },
+  "boundaries": {
+    "production_bao_calls": false,
+    "real_business_credentials_read": false,
+    "actual_target_credential_written": false,
+    "appRole_identity_copied_to_vm": false,
+    "agent_started": false,
+    "bamboo_auth_settings_changed": false,
+    "production_capability_granted": false,
+    "production_services_modified": false,
+    "global_credential_policy_changed_or_distributed": false
+  },
+  "source_sha256": {
+    "bamboo_agent_credentials.py": "4dc583983f9e2e4579511f76c90fce8ad063e8d82d07bfd886af1fc84694b594",
+    "bamboo_agent_enrollment.py": "2ec59d6e044e387fe9cf506d1d106a7f09adfb65fa451f154d324a794f50fb38",
+    "bamboo_agent_delivery.py": "0426f5504368ad890138e3ac042767ddd06c4893a5ba5b06fe10f5ddd252c710",
+    "bamboo_agent_gui.py": "9b76e0eb06709ab094e1e7b93fc90abc15a81c5d7f2ffcf4283e9be5f7690a97",
+    "enrollment/gui/shell.py": "d3d9970cc42ad09e2d9f10cf4a30e7d1645a03cefe0bf6a8731c7eb5d28c03c1",
+    "enrollment/purposes.py": "bbd3fc68cf1c90aeacca9f842d3cb7be9adb60afb34f734f83181362ebc668d4",
+    "enrollment-gui.spec": "c5cc874501f6cb03fb15496cdcc1f9e4c61ba779f66f0efd72d97939c4137c3a"
+  },
+  "remaining": [
+    "explicit production maintenance/read/delivery approval and owner private issuer/security-token input",
+    "actual service registration/Online and safe first-connect job quarantine",
+    "dedication to only intake/Production and actual Bamboo artifact roundtrip",
+    "separate production target identities/profiles/migrations/backup/native release approval"
+  ],
+  "completed_date": "2026-11-12",
+  "cleanup": {
+    "owned_loopback_bao_stopped": true,
+    "owned_native_gui_closed": true,
+    "owned_namespace_and_private_host_keys_removed": true,
+    "owned_windows_fixture_profiles_and_partial_downloads_removed": true,
+    "cached_public_tool_untouched": true,
+    "canonical_operator_bundle_untouched": true
+  },
+  "infrastructure_code_publication": {
+    "performed_by_this_task": false,
+    "reason": "local-only preparation; preserve unrelated shared infrastructure worktree changes"
+  }
+}

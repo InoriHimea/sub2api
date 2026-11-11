@@ -23,3 +23,6 @@ Dockerfile text eol=lf
 
 # Controller identity hashes exact SDK bytes; Windows checkout/archive must match Linux.
 scripts/ci/** text eol=lf
+
+# Enrollment verifies the complete startup unit and logging configuration bytes.
+deploy/bamboo/agent/** text eol=lf
