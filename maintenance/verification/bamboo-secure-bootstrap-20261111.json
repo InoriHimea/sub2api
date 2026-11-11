@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "task": "CD-08 secure credential bootstrap preparation",
+  "status": "compiled, actual-vendor loopback/security tests passed and installed disabled; real credential delivery/enrollment pending",
+  "vendor_jar": {
+    "path": "/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar",
+    "sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+    "modified": false
+  },
+  "finding": {
+    "standard_cli_token_in_os_argv": true,
+    "fingerprint_uri_includes_token": true,
+    "fingerprint_uri_logged_at_info": true,
+    "reproduced_with_synthetic_token_only": true
+  },
+  "security_acceptance": {
+    "actual_vendor_jar": "/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar",
+    "isolated_loopback_only": true,
+    "real_credentials_used": false,
+    "live_bamboo_contact": false,
+    "results": {
+      "vendor-baseline": {
+        "request_received": true,
+        "synthetic_token_received_correctly": true,
+        "process_exit": 0,
+        "token_in_java_os_argv": true,
+        "token_in_java_environment": false,
+        "token_in_captured_log": true,
+        "redaction_marker_present": false,
+        "log_bytes": 6550
+      },
+      "secure-launcher": {
+        "request_received": true,
+        "synthetic_token_received_correctly": true,
+        "process_exit": 0,
+        "token_in_java_os_argv": false,
+        "token_in_java_environment": false,
+        "token_in_captured_log": false,
+        "redaction_marker_present": true,
+        "log_bytes": 6175
+      }
+    }
+  },
+  "behavior_regressions": {
+    "passed": true,
+    "cases": [
+      "raw/encoded secret forms",
+      "matches across write and flush boundaries",
+      "adjacent tokens",
+      "normal Unicode/error messages preserved",
+      "prefix fallback",
+      "large-log streaming",
+      "missing/shared/URI-unsafe credential refusal"
+    ]
+  },
+  "installation": {
+    "classes_sha256": {
+      "SecureBambooBootstrap.class": "a7de00c26fb4473dd3ce3da7518ef8bfe041b74647fc225ec5987a957f54605e",
+      "SecureBambooBootstrap$Pattern.class": "97f0104e8e1a5ca4101e8f5f5080b526fe578a5bd5fbc4b18eea0f742a33d4ea",
+      "SecureBambooBootstrap$RedactingStream.class": "066f504b08338037fca7a6129c91f4768b018538efb44b08f3db824217fdfb33",
+      "SecureBambooBootstrap$VendorRunner.class": "0d18ce6d14850919b4c9a40c0da7cdbc0caf109c44f970398f63977ab71225ca"
+    },
+    "service_unit_verified": true,
+    "unit_installed": "/etc/systemd/system/bamboo-agent.service",
+    "enabled": "disabled",
+    "active": "inactive",
+    "credential_exists": false,
+    "service_start_attempted": false,
+    "test_harness_installed": false,
+    "vendor_jar_modified": false,
+    "console_only_logging_installed": true
+  },
+  "systemd_missing_credential_smoke": {
+    "start_request_exit": 0,
+    "systemd": {
+      "MainPID": "0",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "ConditionResult": "no"
+    },
+    "credential_missing_blocks_process": true,
+    "real_token_used": false,
+    "enrollment_attempted": false
+  },
+  "boundaries": {
+    "real_token_read": false,
+    "bao_login_or_mutation": false,
+    "live_bamboo_registration_attempted": false,
+    "serverwide_auth_settings_changed": false,
+    "production_target_contact": false,
+    "production_capability_granted": false,
+    "rc2_or_nine_file_sdk_changed": false
+  },
+  "limits": [
+    "Synthetic server deliberately returned403; Online/agent-class download and restart not verified",
+    "Systemd encrypted credential delivery not performed",
+    "Server/proxy-side access log redaction not validated",
+    "Vendor JAR/class changes require fresh bounded bootstrap review"
+  ],
+  "remaining_authority": {
+    "service": "Bamboo https://deploy.mellivora.com.cn",
+    "proposed_exact_bao_path": "agent-kv/data/bamboo/sub2api-deploy-agent-01",
+    "least_reader": "read exact KV plus revoke-self; fixed VM/origin; no policy/role/other secrets access",
+    "delivery": "Maintainer-controlled credential entry/import; no secrets in chat or browser extraction",
+    "destination": "new VM host-bound encrypted credential /etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+    "secret_scope_warning": "upstream Bamboo security token is serverwide, not a per-agent restricted credential"
+  },
+  "cleanup": {
+    "guest_fixture": {
+      "isolated_loopback_fixture_removed": true,
+      "public_transfer_tar_removed": true,
+      "installed_bootstrap_retained": true
+    },
+    "old_agent_compile_fixture_removed": true,
+    "local_owned_compile_staging_removed": true
+  },
+  "source_sha256": {
+    "deploy/bamboo/agent/SecureBambooBootstrap.java": "fa556a9cc8eb7a4ce71898b5c8fde454af721c3390e203030d5926ed88a0b5c2",
+    "deploy/bamboo/agent/bootstrap-log4j2.xml": "8c5a64980bebf5680c4f60cb5a458dade3bfeca567e0e4c6173631fab1d90f21",
+    "deploy/bamboo/agent/bamboo-agent.service": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+    "deploy/bamboo/agent/SecureBambooBootstrapTest.java": "7521dbba4a4d831e3a2e39cd4e4c5fd66382397db976f91cf7fc8f5ba8ae8ea5"
+  }
+}

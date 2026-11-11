@@ -1,0 +1,27 @@
+[Unit]
+Description=Sub2API dedicated Bamboo deployment agent
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/etc/credstore.encrypted/sub2api-bamboo-security-token.cred
+
+[Service]
+Type=simple
+User=bamboo
+Group=bamboo
+WorkingDirectory=/var/lib/bamboo
+LoadCredentialEncrypted=security-token:/etc/credstore.encrypted/sub2api-bamboo-security-token.cred
+ExecStart=/usr/bin/java -Xms256m -Xmx1024m -Dbamboo.home=/var/lib/bamboo -Dlog4j2.configurationFile=/opt/bamboo-agent/bootstrap-log4j2.xml -cp /opt/bamboo-agent/bootstrap:/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar com.mellivora.bamboo.SecureBambooBootstrap /run/credentials/bamboo-agent.service/security-token
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=60
+KillMode=control-group
+UMask=0077
+LimitCORE=0
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/bamboo /data/sub2api-cd/state /data/sub2api-cd/intake
+
+[Install]
+WantedBy=multi-user.target
