@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "date": "2026-11-15",
+  "status": "OFFLINE_CANONICAL_BOOTSTRAP_QUALIFIED_LIVE_ADOPTION_NOT_AUTHORIZED",
+  "owner_scope": "Offline installer/version/loader qualification only; no installed vendor replacement, actual Agent start, credentials, server or production mutation",
+  "closed_live_attempt": "77abaed3-2458-40ee-ae12-3db2408ec110",
+  "cache": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a",
+  "remote_public_fixture_root": "/tmp/cd08-installer-offline-ff2e118b-nl4g__zb",
+  "public_transfer": {
+    "first_wrapper_interrupted": true,
+    "reconciled_verified_inputs": 38,
+    "completed_only_missing_or_partial_inputs": true,
+    "final_builder_exit": 0
+  },
+  "native_updater_contract": {
+    "whole_assembly_crc32": true,
+    "request": "GetJar?name=bootstrap-with-deps&checksum=<CRC32>",
+    "status204": "return true without write",
+    "status200": "download and replace code-source JAR, return false",
+    "nonassembly_bypass_must_be_rejected_by_fixture": true
+  },
+  "public_download": {
+    "credential_free_GetJar_status": 400,
+    "admin_page_expired": true,
+    "ordinary_dashboard_authenticated": true,
+    "official_reference": "https://jira.atlassian.com/browse/BAM-25903",
+    "static_path": "/agentServer/agentInstaller/atlassian-bamboo-agent-installer-12.1.12.jar",
+    "background_fetch_started": true,
+    "full_server_installer_bytes": 225585954,
+    "duplicate_read_requests_canceled_by_owned_navigation": true,
+    "range_probe": {
+      "length": "225585954",
+      "range": null,
+      "rangeSupported": false,
+      "status": 200
+    },
+    "ordinary_session_runtime_getjar": {
+      "length": "793",
+      "pathname": "/agentServer/GetJar",
+      "status": 400,
+      "type": "text/html;charset=utf-8"
+    }
+  },
+  "actual_agent_starts_in_offline_scope": 0,
+  "installed_assets_changed_in_offline_scope": false,
+  "maven_candidate": {
+    "path": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\maven-installer-12.1.12.jar",
+    "url": "https://packages.atlassian.com/content/groups/public/com/atlassian/bamboo/atlassian-bamboo-agent-installer/12.1.12/atlassian-bamboo-agent-installer-12.1.12.jar",
+    "bytes": 13433878,
+    "sha256": "4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded",
+    "crc32": 3556954852,
+    "server_byte_identity": false
+  },
+  "updater_boundary_qualification": {
+    "compile_exit": 0,
+    "compile_error": "Note: /tmp/cd08-installer-offline-ff2e118b-nl4g__zb/updater/ImmutableUpdaterSmoke.java uses or overrides a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\n",
+    "run_exit": 0,
+    "stdout": "OWNED_ROOT /tmp/cd08-installer-offline-ff2e118b-nl4g__zb/updater/scratch/immutable-updater-18295757320789632975\nPUBLIC_INPUT_SHA256 4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded\nPUBLIC_INPUT_WHOLE_ARCHIVE_CRC32 3556954852\nPASS 204-immutable requests=1 crc32=3556954852 beforeSha256=4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded afterSha256=4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded nativeReturn=true denial=none\nPASS 200-immutable requests=1 crc32=3556954852 beforeSha256=4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded afterSha256=4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded nativeReturn=null denial=java.nio.file.AccessDeniedException\nPASS 200-writable requests=1 crc32=3556954852 beforeSha256=4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded afterSha256=25e3763cf814465665ffbd75f4fa4ee2bc1624b41b4613f3eaea8f21fce4c9a4 nativeReturn=false denial=none\nPASS actual-native-updater-whole-archive-crc-204-immutable-200-denied-200-owned-control\n",
+    "stderr": ""
+  },
+  "nested_candidate": {
+    "path": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\bamboo-agent-bootstrap-12.1.12.jar",
+    "parent_sha256": "4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded",
+    "entry": "generic/lib/bamboo-agent-bootstrap-jar-with-dependencies.jar",
+    "bytes": 5381506,
+    "sha256": "42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05",
+    "crc32": 3699722614,
+    "old_lineage_sha256": "6cb22823b298c6acfcbb4396944b4fae7f1ff32a39673101eca2ad854162527f",
+    "server_mapping_not_yet_verified": false
+  },
+  "server_mapping": {
+    "public_web_jar_sha256": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198",
+    "retained_bytecode": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\server-getjar-mapping.javap.txt",
+    "supplier_bytecode": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\server-bootstrap-supplier.javap.txt",
+    "resource": "generic/lib/bamboo-agent-bootstrap-jar-with-dependencies.jar",
+    "server_checksum_source": "JarEntry.getCrc() of nested resource; GetJar compares supplied checksum and returns204 when equal",
+    "bootstrap_name": "bootstrap-with-deps",
+    "mapping_verified": true,
+    "fresh_live_server_cache_digest_still_required_before_start": true
+  },
+  "canonical_qualification": {
+    "canonical_updater": {
+      "exit": 0,
+      "stdout": "OWNED_ROOT /tmp/cd08-installer-offline-ff2e118b-nl4g__zb/canonical-updater-scratch/immutable-updater-11493038328637798678\nPUBLIC_INPUT_SHA256 42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05\nPUBLIC_INPUT_WHOLE_ARCHIVE_CRC32 3699722614\nPASS 204-immutable requests=1 crc32=3699722614 beforeSha256=42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05 afterSha256=42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05 nativeReturn=true denial=none\nPASS 200-immutable requests=1 crc32=3699722614 beforeSha256=42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05 afterSha256=42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05 nativeReturn=null denial=java.nio.file.AccessDeniedException\nPASS 200-writable requests=1 crc32=3699722614 beforeSha256=42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05 afterSha256=ae05407f1248375434b2938743f7057a68dcdf04f5f90dabaa1b8e433ac50c2f nativeReturn=false denial=none\nPASS actual-native-updater-whole-archive-crc-204-immutable-200-denied-200-owned-control\n",
+      "stderr": ""
+    },
+    "security_compile": {
+      "exit": 0,
+      "stdout": "",
+      "stderr": "Note: Some input files use or override a deprecated API.\nNote: Recompile with -Xlint:deprecation for details.\n"
+    },
+    "security_regression": {
+      "exit": 0,
+      "stdout": "PASS: fragmented/raw/encoded/adjacent/unicode/overlap/large-log and credential boundaries\n",
+      "stderr": ""
+    },
+    "native_transport": {
+      "exit": 0,
+      "stdout": "2026-11-15 15:40:57,171 INFO [main] [AgentBootstrap] Agent bootstrap using endpoint: http://127.0.0.1:35177/agentServer/\n2026-11-15 15:40:57,182 INFO [main] [RemoteAgentHomeLocatorForBootstrap] Using agent home located at [/tmp/cd08-installer-offline-ff2e118b-nl4g__zb/bootstrap/private-home]\n2026-11-15 15:40:57,182 INFO [main] [RemoteAgentHomeLocatorForBootstrap] Using agent home located at [/tmp/cd08-installer-offline-ff2e118b-nl4g__zb/bootstrap/private-home]\n2026-11-15 15:40:57,183 INFO [main] [AgentUuidInitializer] Generating new UUID for this agent: 79d5cc43-496f-4596-a8a9-01542b1d6384\n2026-11-15 15:40:57,188 INFO [main] [RemoteAgentHomeLocatorForBootstrap] Using agent home located at [/tmp/cd08-installer-offline-ff2e118b-nl4g__zb/bootstrap/private-home]\n2026-11-15 15:40:57,193 INFO [main] [AgentContext] Requesting fingerprint, url: http://127.0.0.1:35177/agentServer/GetFingerprint.action?hostName=sub2api-deploy-agent-01&version=5&agentUuid=79d5cc43-496f-4596-a8a9-01542b1d6384&securityToken= [REDACTED] \n2026-11-15 15:40:57,194 INFO [main] [RemoteAgentHttpClientFactory] Creating a new HTTP client...\n2026-11-15 15:40:57,226 INFO [main] [AgentContext] Authenticating against Bamboo server at http://127.0.0.1:35177/agentServer/\n2026-11-15 15:40:57,251 ERROR [main] [AgentContext] \n\n********************************************************************************\n*\n* Agent authentication failed and the error is not recoverable. Message from the server is:\n* \n* Agent will now shut down.\n*\n********************************************************************************\n\nOWNED_LOOPBACK_FINGERPRINT_ONLY\n",
+      "stderr": "",
+      "owned_fingerprint_asserted": true,
+      "synthetic_token_absent": true
+    },
+    "native_loader": {
+      "exit": 0,
+      "stdout": "PASS native-parent-first-overlays-and-real-vendor-RemoteAgent-origin\n",
+      "stderr": ""
+    },
+    "native_barrier": {
+      "exit": 0,
+      "stdout": "PASS fresh-permit-racing-consumers\nPASS prior-process-permit-replay\nPASS missing-permit-timeout\nPASS reassigned-stale-disk\nPASS missing-id-stale-disk\nPASS uuid-profile-mismatch\nPASS origin-profile-mismatch\nPASS immutable-root-owner-negative\nPASS permit-nonce\nPASS permit-assignment\nPASS permit-expired\nPASS permit-uuid\nPASS permit-origin\nPASS missing-xml\nPASS changed-xml\nPASS wrong-native\nPASS discovery-fresh-id\nPASS discovery-new-uuid\nPASS discovery-invalid-id\nPASS discovery-wrong-origin\nPASS discovery-extra-profile\nPASS discovery-missing-directory\nPASS discovery-exit-success\nPASS discovery-exit-failure\nPASS checks=241\nLIMIT full stock RemoteAgent startup and stock server registration/allocation NOT exercised. All five actual native definitions retained; negatives request all five, positive executes command container plus XML inner BambooAgentMessageListener through in-VM ActiveMQ and a synthetic converter/payload deliver callback. Other four native services remain lazy, not replaced. No real bootstrap invoked.\n",
+      "stderr": ""
+    }
+  },
+  "pin_impact": {
+    "current_installed_vendor_jar_preserved": true,
+    "current_installed_vendor_sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+    "candidate_runtime_jar_sha256": "42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05",
+    "candidate_runtime_crc32": 3699722614,
+    "canonical_loader_and_security_regressions_passed": true,
+    "historical_Bao_KV_DPAPI_reader_delivery_pins_unchanged": true,
+    "append_only_runtime_replacement_provenance_required": true,
+    "new_named_runtime_jar_and_reviewed_additive_launcher_path_preferred": true,
+    "never_allow_vendor_to_write_opt": true
+  },
+  "next_live_gates": [
+    "Separate owner approval for immutable runtime JAR adoption and new single discovery start",
+    "Fresh public server cache artifact SHA/CRC versus canonical nested candidate; reject mismatch without credentialed GetJar or suppressing updater",
+    "Preserve old installed installer and custody/delivery receipts; append-only old-to-new runtime provenance, exact public asset/class-loader pins and service-user readability",
+    "Fresh owner-scoped window ACKs/native idle controls/new durable attempt; closed77abaed3 and5e599433 never replayed",
+    "New discovery once, actual identity/native disable/exact dedication, then separately reserved bound activation/Online/exclusive intake/artifact acceptance"
+  ],
+  "retained_proof": {
+    "archive": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\canonical-source-and-native-proof.zip",
+    "sha256": "5aeec15eac5173e07225bd750797aeace3a2f43c58e6a3a6819bd8e6f15136c0",
+    "qualified_gate_unchanged_sha256": "181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2",
+    "reports": [
+      "qualification/build-evidence.json"
+    ],
+    "updater_source_sha256": "fc1acf96fbc27e4f337e3b1ffc75a212fe33cc986b5dcf9efd4f89408ecc3c06",
+    "initial_pre1980_archive_metadata_failure_corrected": true
+  },
+  "cleanup": {
+    "owned_running_java": [],
+    "owned_namespace_removed": true,
+    "installed_agent_assets_touched": false,
+    "local_throwaway_updater_source_removed_after_archival": true,
+    "owned_download_tab_closed": true
+  },
+  "verdict": {
+    "offline_qualification_complete": true,
+    "live_vendor_adoption_performed": false,
+    "actual_agent_started": false,
+    "fresh_server_cache_identity_verified": false,
+    "public_candidate_ready_for_separately_approved_live_preflight": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-14T07:19:35.169982+00:00",
+  "helper_sha256": "9d0a52830c82d446cd214f9afd1af5e53a10cc3154a71ffe3e3ad2b0477bc2e4",
+  "profile_artifact": "bamboo-selinux-domain-qualification-20261114.json",
+  "actual_quarantine_mapping_smoke": {
+    "actual_quarantined_shared_copy_matches_exact_qualified_label_profile": true,
+    "all_other_metadata_and_payload_hashes_equal": true,
+    "protected_local_backup_still_full_original_manifest": true,
+    "original_manifest_not_mutated": true,
+    "live_store_opened": false,
+    "service_action": false
+  },
+  "actual_running_primary_rejection": {
+    "actual_running_primary_rejected_despite_synthetic_peer_claims": true,
+    "no_source_store_read": true,
+    "no_service_action": true
+  },
+  "limits": [
+    "New protected profile loader and full stage/commit await fresh physical window; not exercised against running business storage.",
+    "Old aborted attempt and its root-private code remain unchanged."
+  ],
+  "next_window_coordination": "msg_61eb228ca464",
+  "start_sent": false
+}

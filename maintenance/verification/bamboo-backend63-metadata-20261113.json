@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T06:07:22.635110+00:00",
+  "status": "SERVICE_AND_TOMCAT_VALVES_READ_PENDING_APP_JUL_HASH_PROVENANCE",
+  "guest_uuid": "908b395e-777a-4f70-a5f3-297f72d08410",
+  "console_user": "admin",
+  "unit_metadata": {
+    "source": "Owner-executed short query observed via exact-UUID console; not replayed",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "MainPID": 835390,
+    "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12"
+  },
+  "tomcat_metadata": {
+    "source": "glob-discovered /opt/atlassian/bamboo/12.1.12/conf/server.xml parsed at current admin permissions",
+    "valves": [
+      {
+        "className": "org.apache.catalina.valves.RemoteIpValve"
+      },
+      {
+        "className": "org.apache.catalina.valves.AccessLogValve",
+        "pattern": "\"%{X-Forwarded-For}i\" %{X-AUSERNAME}o %a %t \"%m %U%q %H\" %s %b %D \"%{Referer}i\" \"%{User-Agent}i\""
+      },
+      {
+        "className": "org.apache.catalina.valves.StuckThreadDetectionValve",
+        "threshold": "60"
+      }
+    ],
+    "image": "maintenance/verification/bamboo-backend63-unit-valves-20261113.png",
+    "sudo_or_auth_change": false
+  },
+  "remaining": [
+    "63 application/JUL logger metadata",
+    "63 config/public-class hash provenance; do not reuse60–62 class equivalence without proof"
+  ],
+  "long_input_attempt": {
+    "fresh_unlocked_recipient_observed_before_input": true,
+    "command_characters": 935,
+    "parser_source_sha256": "68a4001d3c4396e87e6cea5492747b5fe2cc257b5c98c6bedc579a15a1f3d133",
+    "parser_scope": "Read-only allowlisted logging metadata and hashes; no secrets, writes, sudo or service commands",
+    "submitted": false,
+    "boundary": "Guest locked during or before final readback of slow935-character virtual-key input; public parser text in password field, never Enter/login submitted",
+    "cleanup": "Only unsubmitted text cleared Ctrl+A/Backspace; all keys released; empty Password placeholder visually confirmed",
+    "lock_cause_unestablished": true
+  },
+  "next_decision": "Do not repeat slow long typing or disable lock. Owner may personally paste the readonly collector after unlocking, or explicitly approve a single existing root publickey-only identity check and bounded metadata read if already authorized; neither option executed/approved by this receipt.",
+  "parent_complete": false
+}

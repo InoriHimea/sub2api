@@ -1,0 +1,720 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T11:05:42.109343+00:00",
+  "status": "OWNER_APPROVED_FULL_CHAIN_PRECHECK_ONLY_DEFERRED_BY_ACTIVE_RELEASE",
+  "authorization": {
+    "selection": "维护完整日志链路",
+    "active_nodes_rolling_scope": [
+      "10.10.10.60",
+      "10.10.10.61",
+      "10.10.10.63"
+    ],
+    "node62": "stage only, no start/repair",
+    "nginx": "Bamboo-vhost-only logging/reload, detailed error discard explicitly accepted",
+    "prohibited": [
+      "global pause",
+      "authentication/identity changes",
+      "new Agent startup",
+      "production-app rollout",
+      "credential replay"
+    ]
+  },
+  "coordination": {
+    "old_session": "omp_28a28ca0_80b1_474e_99c2_48c04d46bae8",
+    "old_send": "session_caller_not_live, no message sent",
+    "live_release_session": "omp_124d39b6_b171_4ad6_8707_ad86fa722fd9",
+    "deferral_messages": [
+      "msg_1225f04e226f",
+      "msg_4f22fec4313c",
+      "msg_086a18c6b92a",
+      "msg_13e04463654c"
+    ],
+    "latest_release_report": "Build568/v3.18.1 qualified; Test stopped-writer backup/actual restore/migration receipt and deployment/business acceptance pending; explicitly NOT READY",
+    "window_proposal_reply": "msg_6da1337cf22f: event-bound30-minute window only after explicit release-complete READY and mutual start confirmation; no automatic extension",
+    "readiness_correction_reply": "msg_d48f0818178c",
+    "technical_hold_created": false,
+    "ownership_handoff_inferred": false
+  },
+  "ci_snapshot_not_a_window_lease": {
+    "api_shapes": {
+      "/rest/api/latest/agent.json": {
+        "arrayLength": 7,
+        "keys": [],
+        "kind": "array",
+        "status": 200
+      },
+      "/rest/api/latest/queue.json": {
+        "arrayLength": null,
+        "keys": [
+          "expand",
+          "link",
+          "queuedBuilds"
+        ],
+        "kind": "object",
+        "status": 200
+      },
+      "/rest/api/latest/server": {
+        "arrayLength": null,
+        "keys": [
+          "askedNodeState",
+          "clusterState",
+          "reindexInProgress"
+        ],
+        "kind": "object",
+        "state": {
+          "askedNodeState": "RUNNING",
+          "clusterState": "RUNNING",
+          "reindexInProgress": false
+        },
+        "status": 200
+      }
+    },
+    "agents_and_build_queue": {
+      "agentFieldNames": [
+        "id",
+        "name",
+        "type",
+        "active",
+        "enabled",
+        "busy"
+      ],
+      "agents": [
+        {
+          "active": false,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 8683524,
+          "name": "Linux003",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 28344321,
+          "name": "Linux004",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 8388609,
+          "name": "Linux001",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 28344322,
+          "name": "Linux005",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 8683521,
+          "name": "Winodws001",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 35553283,
+          "name": "macOS001",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "hasBusy": true,
+          "id": 35553281,
+          "name": "Linux002",
+          "type": "REMOTE"
+        }
+      ],
+      "agentsStatus": 200,
+      "arrayFields": {},
+      "queueSize": 0,
+      "queueStatus": 200,
+      "queuedBuildsKeys": [
+        "size",
+        "start-index",
+        "max-result"
+      ],
+      "queuedBuildsKind": "object"
+    },
+    "deployment_queue": {
+      "arrayLength": null,
+      "keys": [
+        "size",
+        "start-index",
+        "max-result"
+      ],
+      "size": 0,
+      "status": 200
+    },
+    "new_dedicated_agent_present": false
+  },
+  "node_profiles": {
+    "10.10.10.60": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "unit": {
+          "Type": "forking",
+          "MainPID": "3049358",
+          "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12",
+          "User": "bamboo",
+          "Group": "bamboo",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "FragmentPath": "/usr/lib/systemd/system/bamboo.service",
+          "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf"
+        },
+        "files": {
+          "conf/server.xml": {
+            "sha256": "72ff5fca9c75a8153800c706513fe28a5495483d76570b7b986a78da989b158b",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 8163,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/server.xml"
+          },
+          "conf/logging.properties": {
+            "sha256": "bd3d8e38540403d0aba5c2874f890fae4067fb73f8531ac0e4325490620c7d0d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 5360,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties"
+          },
+          "bin/start-bamboo.sh": {
+            "sha256": "aef26992abfd6d6c5c51c84c8ae35c28f3827d2c8a89743038381b0ffaf6285d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 783,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+          },
+          "bin/catalina.sh": {
+            "sha256": "f1d9568d1811d1aecc79e58346003e40b0a1d621503a38ba59a07d74f1f010e6",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 24049,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/catalina.sh"
+          },
+          "bin/tomcat-juli.jar": {
+            "sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 52518,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+          }
+        },
+        "logging_metadata": {
+          "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          ".handlers": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers": "2localhost.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].handlers": "3manager.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].handlers": "4host-manager.org.apache.juli.AsyncFileHandler",
+          "#svnkit.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-network.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-wc.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-fsfs.handlers": "5svnkit.org.apache.juli.AsyncFileHandler"
+        },
+        "startup_metadata": {
+          "/opt/atlassian/bamboo/12.1.12/bin/setenv.sh": {
+            "sha256": "a5b121817722cc3fad896397071b768be9c64035da086013b362d3a5247c25a7",
+            "mentions_CATALINA_OPTS": true,
+            "cat_opts_assignment": true
+          }
+        },
+        "candidate_path_exists": false,
+        "dropin_target_exists": false,
+        "jvm_flags": {
+          "java.util.logging.config.file": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+          "java.util.logging.manager": "org.apache.juli.ClassLoaderLogManager",
+          "classpath": "/opt/atlassian/bamboo/12.1.12/bin/bootstrap.jar:/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+        },
+        "catalina_opts_process": {
+          "present": true,
+          "nonempty": true
+        },
+        "startup_executable_paths": [
+          "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+        ],
+        "filesystem": {
+          "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+          "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+        },
+        "instrument_module": [
+          "java.instrument@21.0.4"
+        ],
+        "module_query_exit": 0
+      }
+    },
+    "10.10.10.62": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "unit": {
+          "Type": "forking",
+          "MainPID": "0",
+          "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12",
+          "User": "bamboo",
+          "Group": "bamboo",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "FragmentPath": "/usr/lib/systemd/system/bamboo.service",
+          "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf"
+        },
+        "files": {
+          "conf/server.xml": {
+            "sha256": "a6f64073b176a6963d4e6e5ee509b2fb998f4113fedf143d8c4dbd2c29b92f0a",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 8163,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/server.xml"
+          },
+          "conf/logging.properties": {
+            "sha256": "bd3d8e38540403d0aba5c2874f890fae4067fb73f8531ac0e4325490620c7d0d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 5360,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties"
+          },
+          "bin/start-bamboo.sh": {
+            "sha256": "aef26992abfd6d6c5c51c84c8ae35c28f3827d2c8a89743038381b0ffaf6285d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 783,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+          },
+          "bin/catalina.sh": {
+            "sha256": "f1d9568d1811d1aecc79e58346003e40b0a1d621503a38ba59a07d74f1f010e6",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 24049,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/catalina.sh"
+          },
+          "bin/tomcat-juli.jar": {
+            "sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 52518,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+          }
+        },
+        "logging_metadata": {
+          "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          ".handlers": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers": "2localhost.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].handlers": "3manager.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].handlers": "4host-manager.org.apache.juli.AsyncFileHandler",
+          "#svnkit.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-network.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-wc.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-fsfs.handlers": "5svnkit.org.apache.juli.AsyncFileHandler"
+        },
+        "startup_metadata": {
+          "/opt/atlassian/bamboo/12.1.12/bin/setenv.sh": {
+            "sha256": "a5b121817722cc3fad896397071b768be9c64035da086013b362d3a5247c25a7",
+            "mentions_CATALINA_OPTS": true,
+            "cat_opts_assignment": true
+          }
+        },
+        "candidate_path_exists": false,
+        "dropin_target_exists": false,
+        "catalina_opts_process": {
+          "no_running_process": true
+        },
+        "startup_executable_paths": [
+          "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+        ],
+        "filesystem": {
+          "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+          "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+        },
+        "instrument_module": [
+          "java.instrument@21.0.4"
+        ],
+        "module_query_exit": 0
+      }
+    },
+    "10.10.10.61": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "unit": {
+          "Type": "forking",
+          "MainPID": "2005512",
+          "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12",
+          "User": "bamboo",
+          "Group": "bamboo",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "FragmentPath": "/etc/systemd/system/bamboo.service",
+          "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf"
+        },
+        "files": {
+          "conf/server.xml": {
+            "sha256": "6b77fe64f3d794761f1487d4254a61c335a819384ceeea03b21af22e9c687524",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 8163,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/server.xml"
+          },
+          "conf/logging.properties": {
+            "sha256": "bd3d8e38540403d0aba5c2874f890fae4067fb73f8531ac0e4325490620c7d0d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 5360,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties"
+          },
+          "bin/start-bamboo.sh": {
+            "sha256": "aef26992abfd6d6c5c51c84c8ae35c28f3827d2c8a89743038381b0ffaf6285d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 783,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+          },
+          "bin/catalina.sh": {
+            "sha256": "f1d9568d1811d1aecc79e58346003e40b0a1d621503a38ba59a07d74f1f010e6",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 24049,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/catalina.sh"
+          },
+          "bin/tomcat-juli.jar": {
+            "sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 52518,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+          }
+        },
+        "logging_metadata": {
+          "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          ".handlers": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers": "2localhost.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].handlers": "3manager.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].handlers": "4host-manager.org.apache.juli.AsyncFileHandler",
+          "#svnkit.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-network.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-wc.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-fsfs.handlers": "5svnkit.org.apache.juli.AsyncFileHandler"
+        },
+        "startup_metadata": {
+          "/opt/atlassian/bamboo/12.1.12/bin/setenv.sh": {
+            "sha256": "a5b121817722cc3fad896397071b768be9c64035da086013b362d3a5247c25a7",
+            "mentions_CATALINA_OPTS": true,
+            "cat_opts_assignment": true
+          }
+        },
+        "candidate_path_exists": false,
+        "dropin_target_exists": false,
+        "jvm_flags": {
+          "java.util.logging.config.file": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+          "java.util.logging.manager": "org.apache.juli.ClassLoaderLogManager",
+          "classpath": "/opt/atlassian/bamboo/12.1.12/bin/bootstrap.jar:/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+        },
+        "catalina_opts_process": {
+          "present": true,
+          "nonempty": true
+        },
+        "startup_executable_paths": [
+          "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+        ],
+        "filesystem": {
+          "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+          "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+        },
+        "instrument_module": [
+          "java.instrument@21.0.4"
+        ],
+        "module_query_exit": 0
+      }
+    },
+    "10.10.10.63": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "unit": {
+          "Type": "forking",
+          "MainPID": "835390",
+          "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12",
+          "User": "bamboo",
+          "Group": "bamboo",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "FragmentPath": "/etc/systemd/system/bamboo.service",
+          "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf"
+        },
+        "files": {
+          "conf/server.xml": {
+            "sha256": "951a3804e415898ce33183f7323e2a35661c1e570dcd170585029e9bd19fbda8",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 8163,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/server.xml"
+          },
+          "conf/logging.properties": {
+            "sha256": "bd3d8e38540403d0aba5c2874f890fae4067fb73f8531ac0e4325490620c7d0d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 5360,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties"
+          },
+          "bin/start-bamboo.sh": {
+            "sha256": "aef26992abfd6d6c5c51c84c8ae35c28f3827d2c8a89743038381b0ffaf6285d",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 783,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+          },
+          "bin/catalina.sh": {
+            "sha256": "f1d9568d1811d1aecc79e58346003e40b0a1d621503a38ba59a07d74f1f010e6",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o755",
+            "size": 24049,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/catalina.sh"
+          },
+          "bin/tomcat-juli.jar": {
+            "sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+            "uid": 1400,
+            "gid": 1400,
+            "mode": "0o644",
+            "size": 52518,
+            "realpath": "/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+          }
+        },
+        "logging_metadata": {
+          "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          ".handlers": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers": "2localhost.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].handlers": "3manager.org.apache.juli.AsyncFileHandler",
+          "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].handlers": "4host-manager.org.apache.juli.AsyncFileHandler",
+          "#svnkit.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-network.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-wc.handlers": "5svnkit.org.apache.juli.AsyncFileHandler",
+          "#svnkit-fsfs.handlers": "5svnkit.org.apache.juli.AsyncFileHandler"
+        },
+        "startup_metadata": {
+          "/opt/atlassian/bamboo/12.1.12/bin/setenv.sh": {
+            "sha256": "a5b121817722cc3fad896397071b768be9c64035da086013b362d3a5247c25a7",
+            "mentions_CATALINA_OPTS": true,
+            "cat_opts_assignment": true
+          }
+        },
+        "candidate_path_exists": false,
+        "dropin_target_exists": false,
+        "jvm_flags": {
+          "java.util.logging.config.file": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+          "java.util.logging.manager": "org.apache.juli.ClassLoaderLogManager",
+          "classpath": "/opt/atlassian/bamboo/12.1.12/bin/bootstrap.jar:/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar"
+        },
+        "catalina_opts_process": {
+          "present": true,
+          "nonempty": true
+        },
+        "startup_executable_paths": [
+          "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+        ],
+        "filesystem": {
+          "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+          "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+        },
+        "instrument_module": [
+          "java.instrument@21.0.4"
+        ],
+        "module_query_exit": 0
+      }
+    }
+  },
+  "profile_comparison": {
+    "10.10.10.60": {
+      "server_xml_matches_audit": true,
+      "juli_matches_verified_artifact_profile": true,
+      "instrument_available": true,
+      "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "root_route": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "filesystem": {
+        "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+        "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+      },
+      "catalina_opts_must_be_preserved": true
+    },
+    "10.10.10.62": {
+      "server_xml_matches_audit": true,
+      "juli_matches_verified_artifact_profile": true,
+      "instrument_available": true,
+      "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "root_route": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "filesystem": {
+        "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+        "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+      },
+      "catalina_opts_must_be_preserved": true
+    },
+    "10.10.10.61": {
+      "server_xml_matches_audit": true,
+      "juli_matches_verified_artifact_profile": true,
+      "instrument_available": true,
+      "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "root_route": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "filesystem": {
+        "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+        "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+      },
+      "catalina_opts_must_be_preserved": true
+    },
+    "10.10.10.63": {
+      "server_xml_matches_audit": true,
+      "juli_matches_verified_artifact_profile": true,
+      "instrument_available": true,
+      "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "root_route": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+      "filesystem": {
+        "/opt/atlassian/bamboo/12.1.12/conf/server.xml": "xfs    /",
+        "/opt/atlassian/bamboo/12.1.12/conf/logging.properties": "xfs    /"
+      },
+      "catalina_opts_must_be_preserved": true
+    }
+  },
+  "active_backend_health_status": {
+    "10.10.10.60": {
+      "ssh_exit": 0,
+      "stderr_present": false,
+      "http": {
+        "status": 200,
+        "response_body_read": false
+      }
+    },
+    "10.10.10.63": {
+      "ssh_exit": 0,
+      "stderr_present": false,
+      "http": {
+        "status": 503,
+        "response_body_read": false
+      }
+    },
+    "10.10.10.61": {
+      "ssh_exit": 0,
+      "stderr_present": false,
+      "http": {
+        "status": 503,
+        "response_body_read": false
+      }
+    }
+  },
+  "anonymous_lifecycle_metadata": {
+    "10.10.10.61": {
+      "ssh_exit": 0,
+      "stderr_present": false,
+      "metadata": {
+        "endpoint": "GET /rest/api/latest/server",
+        "status": 401,
+        "json_keys": [
+          "message",
+          "status-code",
+          "sub-code"
+        ],
+        "states": {},
+        "raw_body_returned": false
+      }
+    },
+    "10.10.10.63": {
+      "ssh_exit": 0,
+      "stderr_present": false,
+      "metadata": {
+        "endpoint": "GET /rest/api/latest/server",
+        "status": 401,
+        "json_keys": [
+          "message",
+          "status-code",
+          "sub-code"
+        ],
+        "states": {},
+        "raw_body_returned": false
+      }
+    }
+  },
+  "whitelisted_health_role_metadata": {
+    "10.10.10.61": {
+      "raw_body_returned": false,
+      "exact_state_body": null,
+      "fixed_role_terms_present": [
+        "RUNNING_AS_SECONDARY"
+      ]
+    },
+    "10.10.10.63": {
+      "raw_body_returned": false,
+      "exact_state_body": null,
+      "fixed_role_terms_present": [
+        "RUNNING_AS_SECONDARY"
+      ]
+    }
+  },
+  "readiness_interpretation": "61/63 health bodies include RUNNING_AS_SECONDARY. Vendor12.1 defines warm secondary as up/running and eligible for failover;503 alone is not fault proof. Original all-200 multi-active readiness assumption is withdrawn. Authenticated per-node lifecycle/failover checks still required before primary rolling; no prepareForRestart/global-pause write performed.",
+  "vendor_lifecycle_reference": "https://confluence.atlassian.com/bamboo/cluster-and-node-lifecycle-states-1354203900.html",
+  "admin_access_boundary": "Ordinary signed-in dashboard/API works; admin overview redirects WebSudoRequired. No password/form/cookie/token read or step-up attempted.",
+  "router_readonly_metadata": {
+    "ssh_uses_existing_pinned_ed25519": true,
+    "stdout": "NGINX_BINARY\n0644a6be2850454c015441f7439965449155dd73dbaed489c475ec190f30b25b  /usr/sbin/nginx\nNGINX_MOUNTS\n/var/run/docker.sock -> /var/run/docker.sock\n/mnt/scsi0-4/nginx-ui/nginx -> /etc/nginx\n/mnt/scsi0-4/nginx-ui/nginx-ui -> /etc/nginx-ui\n/mnt/scsi0-4/nginx-ui/var/www -> /var/www\n/mnt/scsi0-4/cert -> /etc/cert\n\nBAMBOO_VHOST_METADATA\n8d5f4ae6047f85740a331c3e9cd28bea79d622aed33838b9a35d2c8d7d7dfb55  /mnt/scsi0-4/nginx-ui/nginx/sites-available/git编译部署服务\n0:0:644:3171\nlisten 8080 proxy_protocol;\nlisten [::]:8080 proxy_protocol;\nserver_name deploy.mellivora.com.cn;\nlisten 8443 ssl proxy_protocol;\nlisten [::]:8443 ssl proxy_protocol;\nserver_name deploy.mellivora.com.cn;\nHAPROXY_CONFIG_PATHS\n/usr/local/etc/haproxy/haproxy.cfg\n/usr/local/etc/haproxy/conf.d\n",
+    "stderr_empty": true,
+    "nginx_binary_matches_prior_exact_fixture": true
+  },
+  "filesystem_tooling_boundary": {
+    "report": "Scout found upstream ssh provider injects accept-new and lacks dedicated known-host/algorithm schema; installed behavior not assumed proven by upstream source alone",
+    "unsafe_ssh_resource_used": false,
+    "alias_include_or_capability_file_created": false,
+    "proposed_solution": "Only during approved conflict-free window: unique aliases pin exact ED25519/HostKeyAlias/dedicated known-host/original identity, preserve existing Host blocks, prove effective options and installed negative-pin rejection before any remote edit. No TOFU/default-known-host seeding or relaxed checks."
+  },
+  "startup_integration_boundary": "Existing setenv/CATALINA_OPTS nonempty, same script hash all4. Preserve/append reviewed public option, never replace existing options with bare Environment value. No config body/environment values returned.",
+  "mutations": {
+    "server_config_writes": 0,
+    "jar_installs": 0,
+    "drain_or_route_changes": 0,
+    "service_restart_or_reload": 0,
+    "global_pause_or_auth_changes": 0,
+    "agent_start_or_credential_actions": 0,
+    "local_ssh_alias_or_default_known_hosts_changes": 0
+  },
+  "next": "Wait for explicit release-complete/window agreement; refresh CI/role-aware readiness/profile then complete secure file-tool binding before any approved live write. Continue only public/offline first-job review while waiting.",
+  "parent_complete": false
+}

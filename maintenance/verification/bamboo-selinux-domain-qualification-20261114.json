@@ -1,0 +1,145 @@
+{
+  "schema": 1,
+  "namespace": "9a43d339-8588-471b-808e-6384162930f8",
+  "root": "/data/atlassian/application-data/bamboo/shared/omp-bamboo-jms-qualification-9a43d339-8588-471b-808e-6384162930f8",
+  "status": "PASSED_EXACT_NATIVE_DOMAIN_WITH_EXISTING_ENFORCEMENT_MODES",
+  "native_identities": {
+    "60": {
+      "pid": 3238474,
+      "identity": {
+        "Uid": "1400\t1400\t1400\t1400",
+        "Gid": "1400\t1400\t1400\t1400",
+        "Groups": "1400"
+      },
+      "context": "system_u:system_r:unconfined_service_t:s0",
+      "runcon": "/usr/bin/runcon",
+      "enforcing": "Enforcing"
+    },
+    "61": {
+      "pid": 2062069,
+      "identity": {
+        "Uid": "1400\t1400\t1400\t1400",
+        "Gid": "1400\t1400\t1400\t1400",
+        "Groups": "1400"
+      },
+      "context": "system_u:system_r:unconfined_service_t:s0",
+      "runcon": "/usr/bin/runcon",
+      "enforcing": "Permissive"
+    },
+    "63": {
+      "pid": 1204700,
+      "identity": {
+        "Uid": "1400\t1400\t1400\t1400",
+        "Gid": "1400\t1400\t1400\t1400",
+        "Groups": "1400"
+      },
+      "context": "system_u:system_r:unconfined_service_t:s0",
+      "runcon": "/usr/bin/runcon",
+      "enforcing": "Permissive"
+    }
+  },
+  "baseline_artifact": "bamboo-kahadb-qualification-20261114-cd4b3283.json",
+  "service_changes": false,
+  "real_store_access": false,
+  "selinux_policy_or_mode_changed": false,
+  "runs": {
+    "60": {
+      "exit": 0,
+      "observed_java": {
+        "pid": 3240943,
+        "context": "system_u:system_r:unconfined_service_t:s0",
+        "identity": {
+          "Uid": "1400\t1400\t1400\t1400",
+          "Gid": "1400\t1400\t1400\t1400",
+          "Groups": "1400"
+        }
+      },
+      "stdout": "{\"ok\":true,\"code\":\"WRITE_CLOSED\",\"count\":4,\"read_preserves_messages\":true}\n",
+      "stderr": "",
+      "enforcement": "Enforcing"
+    },
+    "61": {
+      "exit": 0,
+      "observed_java": {
+        "pid": 2063273,
+        "context": "system_u:system_r:unconfined_service_t:s0",
+        "identity": {
+          "Uid": "1400\t1400\t1400\t1400",
+          "Gid": "1400\t1400\t1400\t1400",
+          "Groups": "1400"
+        }
+      },
+      "stdout": "{\"ok\":true,\"code\":\"REOPEN_VERIFIED\",\"count\":4,\"read_preserves_messages\":true}\n",
+      "stderr": "",
+      "enforcement": "Permissive"
+    },
+    "63": {
+      "exit": 0,
+      "observed_java": {
+        "pid": 1208397,
+        "context": "system_u:system_r:unconfined_service_t:s0",
+        "identity": {
+          "Uid": "1400\t1400\t1400\t1400",
+          "Gid": "1400\t1400\t1400\t1400",
+          "Groups": "1400"
+        }
+      },
+      "stdout": "{\"ok\":true,\"code\":\"REOPEN_VERIFIED\",\"count\":4,\"read_preserves_messages\":true}\n",
+      "stderr": "",
+      "enforcement": "Permissive"
+    }
+  },
+  "mounted_labels": {
+    "60": {
+      "labels": [
+        "system_u:object_r:fusefs_t:s0"
+      ],
+      "label_sha256": [
+        "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+      ]
+    },
+    "61": {
+      "labels": [
+        "system_u:object_r:fusefs_t:s0"
+      ],
+      "label_sha256": [
+        "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+      ]
+    },
+    "63": {
+      "labels": [
+        "system_u:object_r:fusefs_t:s0"
+      ],
+      "label_sha256": [
+        "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+      ]
+    }
+  },
+  "compiled_class_sha256": {
+    "NativeKahaDbStoreSmoke$QualificationFailure.class": "dd5fb51b783d35e8831870cd6442f593629364fca50792b6089d00757aba7be3",
+    "NativeKahaDbStoreSmoke.class": "6f7e41479580e88213ad7c52f39867f5ee65b278a00ed4b162aac05bccb0b5d3"
+  },
+  "runtime_jar_sha256": {
+    "activemq-broker-6.3.2.jar": "639f19365b1e64303ed3c021b923b784312716e207bbf43f20f2239f0bfe3354",
+    "activemq-client-6.3.2.jar": "b2ab482720ab8bfb10051b685a7871df6738eaec87f5b788ea881a6658d857ab",
+    "activemq-kahadb-store-6.3.2.jar": "30ceda3f83146df2a4630af872d47bd34dd33338731c7aff1f5b28dcadb861f0",
+    "activemq-protobuf-6.3.2.jar": "7d364cc77d1688cdb71889d23720698410b5eda32b7c6f51d7fadb5c7958d8c5",
+    "commons-io-2.20.0.jar": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+    "hawtbuf-1.11.jar": "c6b45db967f3b2b3e28fd2f0724b1730a89d3f5aa9eef3664de29caba219593e",
+    "jakarta.annotation-api-2.1.1.jar": "5f65fdaf424eee2b55e1d882ba9bb376be93fb09b37b808be6e22e8851c909fe",
+    "jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+    "log4j-api-2.26.1.jar": "f1810a4704ccce019d02bba029dc02a4f2ac0c997f647b465e7d409c1927f822",
+    "log4j-core-2.26.1.jar": "2ec8c3bf5a6d7c89be8620116a2fc973f7dda1ad0261ad393c4d4726edfd3dcb",
+    "log4j-slf4j2-impl-2.26.1.jar": "cbdfb4c2bcc10f0927c61036db54924250f3924ecd13ea913cefe4f99c08fa66",
+    "slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb"
+  },
+  "recorded_at": "2026-11-14T07:06:50.386608+00:00",
+  "limits": [
+    "60 enforced access proved;61/63 current permissive access only, not future Enforcing proof.",
+    "Does not prove native Bamboo cluster election or power-loss recovery.",
+    "Never suppress all SELinux attributes; only exact mounted-label compatibility may be admitted with this qualified profile and all other metadata/data equality."
+  ],
+  "cleanup": {
+    "removed_owned_namespace": true
+  }
+}

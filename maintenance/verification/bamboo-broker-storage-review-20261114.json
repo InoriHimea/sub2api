@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-14T04:44:58.743837+00:00",
+  "status": "REVIEW_COMPLETE_PHYSICAL_MIGRATION_REQUIRES_NEW_APPROVAL_AND_WINDOW",
+  "parent": "CD-08 independent deployment agent and acceptance",
+  "server_mutations_this_review": false,
+  "credential_reads": 0,
+  "broker_contents_read_or_copied": false,
+  "sources": [
+    {
+      "url": "https://confluence.atlassian.com/bamboo/home-directory-folder-list-1063170555.html",
+      "version": "12.1",
+      "finding": "JMS Store /jms-store is KahaDB ActiveMQ persistence and is moved to shared home in Data Center."
+    },
+    {
+      "url": "https://confluence.atlassian.com/bamboo/configuring-shared-home-location-1063170554.html",
+      "finding": "Default shared home is {bamboo.home}/shared unless overridden via JVM/environment/application property."
+    },
+    {
+      "url": "https://confluence.atlassian.com/bamboo/clustering-with-bamboo-data-center-1063170551.html",
+      "finding": "One primary, shared filesystem available to all nodes; only primary returns200, normal secondaries return503. Generic shared-storage documentation does not by itself qualify this GlusterFS volume for native KahaDB locking/durability."
+    }
+  ],
+  "native_broker_libraries": [
+    "activemq-broker-6.3.2.jar",
+    "activemq-client-6.3.2.jar",
+    "activemq-http-6.3.2.jar",
+    "activemq-jms-pool-6.3.2.jar",
+    "activemq-kahadb-store-6.3.2.jar",
+    "activemq-openwire-legacy-6.3.2.jar",
+    "activemq-pool-6.3.2.jar",
+    "activemq-protobuf-6.3.2.jar",
+    "activemq-ra-6.3.2.jar",
+    "activemq-spring-6.3.2.jar",
+    "hawtbuf-1.11.jar",
+    "jakarta.jms-api-3.1.0.jar"
+  ],
+  "observed_topology": {
+    "home": "/data/atlassian/application-data/bamboo",
+    "shared_mount_source": "data-1.git.vm:/bamboo-shared",
+    "shared_mount_type": "fuse.glusterfs",
+    "shared_mount_path": "/data/atlassian/application-data/bamboo/shared",
+    "jvm_shared_home_override_observed": false,
+    "shared_home_environment_override_observed": false,
+    "runtime_failure_path_already_verified": "shared/jms-store/bamboo/KahaDB",
+    "shared_symlink": "shared/jms-store",
+    "absolute_symlink_target": "/data/atlassian/application-data/bamboo/local-jms-store",
+    "symlink_inode_identical_on_all_three": true,
+    "symlink_mtime_identical_on_all_three": true,
+    "primary_target_filesystem": "xfs on /data, not GlusterFS",
+    "per_node_metadata": {
+      "60": {
+        "service": [
+          "MainPID=3176114",
+          "NRestarts=0",
+          "ActiveState=active",
+          "SubState=running"
+        ],
+        "shared_link_inode": 10798810832342381416,
+        "shared_link_mtime_ns": 1786177492294926402,
+        "store_target_exists": true,
+        "store_metadata_only": {
+          "regular_file_count": 3,
+          "total_bytes": 34357920,
+          "symlink_count": 0
+        }
+      },
+      "61": {
+        "service": [
+          "MainPID=2047213",
+          "NRestarts=1",
+          "ActiveState=active",
+          "SubState=running"
+        ],
+        "shared_link_inode": 10798810832342381416,
+        "shared_link_mtime_ns": 1786177492294926402,
+        "store_target_exists": false
+      },
+      "63": {
+        "service": [
+          "MainPID=1056774",
+          "NRestarts=1",
+          "ActiveState=active",
+          "SubState=running"
+        ],
+        "shared_link_inode": 10798810832342381416,
+        "shared_link_mtime_ns": 1786177492294926402,
+        "store_target_exists": false
+      }
+    }
+  },
+  "conclusions": [
+    "The GlusterFS path holds one common symlink; its absolute target resolves separately on each host. This redirects native shared JMS persistence to node-local storage.",
+    "Creating empty local targets on61/63 would remove the directory error but would not preserve or share the current primary broker store.",
+    "Changing the shared symlink while primary60 is writing risks redirecting subsequent opens to a different store. This is not a safe per-node rolling mkdir repair.",
+    "Primary60 metadata inventory found3regular files totaling34357920bytes; file count/size is not message count, a consistent snapshot, a backup or a content-integrity proof.",
+    "Current GlusterFS metadata proves topology only, not native KahaDB locking/durability compatibility."
+  ],
+  "proposed_bounded_plan": [
+    {
+      "phase": "qualification",
+      "gate": "New explicit approval and fresh coordinator agreement; all physical actions remain forbidden until then.",
+      "actions": [
+        "Inspect exact native broker configuration and writer/port inventory using allowlisted nonsecret metadata.",
+        "In an owned synthetic namespace outside the active JMS store, qualify cross-node exclusive locking, fsync/rename visibility and exact bundled ActiveMQ6.3.2 KahaDB stop/reopen durability. Do not open any real broker store or expose a test listener to agents.",
+        "If filesystem or native-broker qualification fails, stop before migration; no automatic filesystem replacement or Gluster service changes."
+      ]
+    },
+    {
+      "phase": "cold migration",
+      "gate": "Explicit shared-CI outage window, submission/scheduling idle gate, target backups and rollback reviewed;62 remains stopped.",
+      "actions": [
+        "Gracefully quiesce/stop61 and63 first, then primary60, and verify no surviving Bamboo/broker writer; no force kill/global pause/auth or unrelated service change by implication.",
+        "Create protected on-target original-link and cold primary-store backups. Copy the authoritative complete60store to a new shared-volume staging directory preserving owners/modes/attributes, verify complete file-set hashes while writers are stopped, and retain the original local store unchanged.",
+        "Replace the common shared symlink with the verified shared directory only while all writers are stopped; no clearing of journals/locks, empty-store replacement, data-content changes, DB schema changes or credentials retrieval."
+      ]
+    },
+    {
+      "phase": "actual acceptance",
+      "gate": "All pre-start copy/hash/permissions checks pass.",
+      "actions": [
+        "Start60 alone against the migrated shared store; verify native RUNNING200, broker startup without KahaDB/guard failures and the original agent inventory/reconnect, without submitting builds or starting the new dedicated agent.",
+        "Use controlled one-candidate-at-a-time primary handoffs to prove61 and63 can each actually promote using the same store; do not count ONLINE/RUNNING_AS_SECONDARY alone as acceptance.",
+        "Restore healthy approved active-node inventory, leave62 stopped, verify native primary/secondary status, queues/agents and no unintended automatic-restart failures; final primary need not be forced back to60 unless explicitly required.",
+        "Send END/ABORT within the newly agreed window; no automatic extension or production application rollout."
+      ]
+    }
+  ],
+  "rollback_boundary": {
+    "before_first_new_store_writer": "Restore original shared symlink and unchanged original60local store from protected verified metadata; restart only the reviewed recovery node after confirming no other writer.",
+    "after_any_new_store_writer": "The old local copy may be stale. Do not blindly restore it or overwrite the migrated store; stop further handoffs, retain both stores, reconcile latest persisted state in a separately controlled recovery decision.",
+    "live_rollback_exercised": false
+  },
+  "remaining_decision": "Approve the gated cold migration plus planned cluster interruption and two actual promotion checks, or retain current60-primary topology and defer physical repair. The previous logging window is closed."
+}

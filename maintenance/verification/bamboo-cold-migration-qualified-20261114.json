@@ -1,0 +1,1513 @@
+{
+  "schema": 1,
+  "attempt": "de5e4704-2aa0-4822-a7e7-ca692439d843",
+  "window_utc": [
+    "2026-11-14T07:35:00+00:00",
+    "2026-11-14T08:20:00+00:00"
+  ],
+  "coordination_message": "msg_61eb228ca464",
+  "status": "COMPLETED_COLD_MIGRATION_AND_ACTUAL61_63_TAKEOVER_WINDOW_CLOSED",
+  "old_aborted_attempt": "743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+  "agents_before": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "status": 200
+  },
+  "mac_qualification_artifact": "bamboo-selinux-domain-qualification-20261114.json",
+  "helper_sha256": "9d0a52830c82d446cd214f9afd1af5e53a10cc3154a71ffe3e3ad2b0477bc2e4",
+  "private_code_path": "/root/omp-bamboo-jms-migration-de5e4704-2aa0-4822-a7e7-ca692439d843",
+  "actions": [
+    {
+      "node": 60,
+      "command": "mkdir -m 700 /root/omp-bamboo-jms-migration-de5e4704-2aa0-4822-a7e7-ca692439d843",
+      "began": "2026-11-14T07:37:04.670596+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:05.140546+00:00"
+    },
+    {
+      "node": 60,
+      "command": "chmod 600 /root/omp-bamboo-jms-migration-de5e4704-2aa0-4822-a7e7-ca692439d843/cold_migrate_store.py /root/omp-bamboo-jms-migration-de5e4704-2aa0-4822-a7e7-ca692439d843/native-mac-proof.json && sha256sum /root/omp-bamboo-jms-migration-de5e4704-2aa0-4822-a7e7-ca692439d843/cold_migrate_store.py",
+      "began": "2026-11-14T07:37:06.138058+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "9d0a52830c82d446cd214f9afd1af5e53a10cc3154a71ffe3e3ad2b0477bc2e4  /root/omp-bamboo-jms-migration-de5e4704-2aa0-4822-a7e7-ca692439d843/cold_migrate_store.py",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:06.543262+00:00"
+    },
+    {
+      "node": 60,
+      "command": "mkdir -m 700 /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843",
+      "began": "2026-11-14T07:37:06.550825+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:06.983269+00:00"
+    },
+    {
+      "node": 60,
+      "command": "chmod 600 /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:37:07.449666+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:08.169784+00:00"
+    },
+    {
+      "node": 61,
+      "command": "mkdir -m 700 /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843",
+      "began": "2026-11-14T07:37:08.176067+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:08.916526+00:00"
+    },
+    {
+      "node": 61,
+      "command": "chmod 600 /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:37:09.421673+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:10.183924+00:00"
+    },
+    {
+      "node": 63,
+      "command": "mkdir -m 700 /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843",
+      "began": "2026-11-14T07:37:10.191727+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:10.936757+00:00"
+    },
+    {
+      "node": 63,
+      "command": "chmod 600 /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:37:11.417373+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:12.138802+00:00"
+    },
+    {
+      "node": 61,
+      "command": "systemctl stop bamboo.service",
+      "began": "2026-11-14T07:37:28.283438+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:34.393102+00:00"
+    },
+    {
+      "node": 63,
+      "command": "systemctl stop bamboo.service",
+      "began": "2026-11-14T07:37:35.400907+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:37:41.484191+00:00"
+    },
+    {
+      "node": 60,
+      "command": "systemctl stop bamboo.service",
+      "began": "2026-11-14T07:37:42.224561+00:00",
+      "status": "RECONCILED_AFTER_KERNEL_EXIT130",
+      "observed_state": "inactive/dead/PID0/noJob/ConditionResultno",
+      "exit_unknown": true
+    },
+    {
+      "node": 60,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:39:41.666620+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:39:42.111137+00:00"
+    },
+    {
+      "node": 61,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:39:42.119679+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:39:42.889960+00:00"
+    },
+    {
+      "node": 63,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:39:42.898577+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:39:43.607412+00:00"
+    },
+    {
+      "phase": "stage",
+      "status": "RETURNED",
+      "began": "2026-11-14T07:40:27.162176+00:00",
+      "cold_proof": {
+        "attempt": "de5e4704-2aa0-4822-a7e7-ca692439d843",
+        "nodes": {
+          "60": {
+            "captured_at": 1794642027.47989,
+            "unit": "bamboo.service",
+            "active": "inactive",
+            "substate": "dead",
+            "main_pid": 0,
+            "restarts": 0,
+            "cgroup_pids": [],
+            "listeners": [],
+            "health": {
+              "error": "URLError"
+            },
+            "enforcement": "Enforcing",
+            "start_fence_verified": true,
+            "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+            "condition_result": "no"
+          },
+          "61": {
+            "captured_at": 1794642028.5070882,
+            "unit": "bamboo.service",
+            "active": "inactive",
+            "substate": "dead",
+            "main_pid": 0,
+            "restarts": 0,
+            "cgroup_pids": [],
+            "listeners": [],
+            "health": {
+              "error": "URLError"
+            },
+            "enforcement": "Permissive",
+            "start_fence_verified": true,
+            "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+            "condition_result": "no"
+          },
+          "63": {
+            "captured_at": 1794642029.4347315,
+            "unit": "bamboo.service",
+            "active": "inactive",
+            "substate": "dead",
+            "main_pid": 0,
+            "restarts": 0,
+            "cgroup_pids": [],
+            "listeners": [],
+            "health": {
+              "error": "URLError"
+            },
+            "enforcement": "Permissive",
+            "start_fence_verified": true,
+            "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+            "condition_result": "no"
+          }
+        }
+      },
+      "exit": 0,
+      "stdout": "{\"ok\": true, \"attempt\": \"de5e4704-2aa0-4822-a7e7-ca692439d843\", \"phase\": \"STAGED\", \"file_count\": 3, \"bytes\": 34357920, \"manifest_sha256\": \"a7a7c6d96bd7bb398d36872e6b116bb255136d4fff23d4933cf662931fae6fdd\"}",
+      "stderr": ""
+    },
+    {
+      "phase": "commit",
+      "status": "RETURNED",
+      "began": "2026-11-14T07:40:31.703008+00:00",
+      "cold_proof": {
+        "attempt": "de5e4704-2aa0-4822-a7e7-ca692439d843",
+        "nodes": {
+          "60": {
+            "captured_at": 1794642032.6550355,
+            "unit": "bamboo.service",
+            "active": "inactive",
+            "substate": "dead",
+            "main_pid": 0,
+            "restarts": 0,
+            "cgroup_pids": [],
+            "listeners": [],
+            "health": {
+              "error": "URLError"
+            },
+            "enforcement": "Enforcing",
+            "start_fence_verified": true,
+            "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+            "condition_result": "no"
+          },
+          "61": {
+            "captured_at": 1794642033.3465056,
+            "unit": "bamboo.service",
+            "active": "inactive",
+            "substate": "dead",
+            "main_pid": 0,
+            "restarts": 0,
+            "cgroup_pids": [],
+            "listeners": [],
+            "health": {
+              "error": "URLError"
+            },
+            "enforcement": "Permissive",
+            "start_fence_verified": true,
+            "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+            "condition_result": "no"
+          },
+          "63": {
+            "captured_at": 1794642033.9748337,
+            "unit": "bamboo.service",
+            "active": "inactive",
+            "substate": "dead",
+            "main_pid": 0,
+            "restarts": 0,
+            "cgroup_pids": [],
+            "listeners": [],
+            "health": {
+              "error": "URLError"
+            },
+            "enforcement": "Permissive",
+            "start_fence_verified": true,
+            "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+            "condition_result": "no"
+          }
+        }
+      },
+      "exit": 0,
+      "stdout": "{\"ok\": true, \"attempt\": \"de5e4704-2aa0-4822-a7e7-ca692439d843\", \"phase\": \"INSTALLED_NO_SERVICE_STARTED\", \"file_count\": 3, \"bytes\": 34357920, \"manifest_sha256\": \"a7a7c6d96bd7bb398d36872e6b116bb255136d4fff23d4933cf662931fae6fdd\"}",
+      "stderr": ""
+    },
+    {
+      "node": 60,
+      "command": "rmdir /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843 && rm -- /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:41:13.055299+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:41:13.757918+00:00"
+    },
+    {
+      "node": 60,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:41:13.773313+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:41:14.322497+00:00"
+    },
+    {
+      "node": 61,
+      "command": "rmdir /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843 && rm -- /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:44:11.471515+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:44:12.572499+00:00"
+    },
+    {
+      "node": 61,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:44:12.584442+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:44:13.121309+00:00"
+    },
+    {
+      "node": 60,
+      "command": "mkdir -m 700 /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843",
+      "began": "2026-11-14T07:46:25.930230+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:46:26.407948+00:00"
+    },
+    {
+      "node": 60,
+      "command": "chmod 600 /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:46:26.939806+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:46:27.606116+00:00"
+    },
+    {
+      "node": 60,
+      "command": "systemctl stop bamboo.service",
+      "began": "2026-11-14T07:46:27.614835+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:47:28.713765+00:00"
+    },
+    {
+      "node": 60,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:47:51.903795+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:47:52.346100+00:00"
+    },
+    {
+      "node": 63,
+      "command": "rmdir /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843 && rm -- /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:49:29.245054+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:49:30.270683+00:00"
+    },
+    {
+      "node": 63,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:49:30.278922+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:49:30.833988+00:00"
+    },
+    {
+      "node": 61,
+      "command": "mkdir -m 700 /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843",
+      "began": "2026-11-14T07:51:36.851826+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:51:37.613480+00:00"
+    },
+    {
+      "node": 61,
+      "command": "chmod 600 /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:51:38.109657+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:51:38.875196+00:00"
+    },
+    {
+      "node": 61,
+      "command": "systemctl stop bamboo.service",
+      "began": "2026-11-14T07:51:38.883608+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:51:45.165214+00:00"
+    },
+    {
+      "node": 61,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:51:45.171280+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:51:45.659521+00:00"
+    },
+    {
+      "node": 60,
+      "command": "rmdir /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843 && rm -- /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:53:01.435890+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:53:02.163525+00:00"
+    },
+    {
+      "node": 60,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:53:02.171840+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:53:02.670630+00:00"
+    },
+    {
+      "node": 61,
+      "command": "rmdir /run/omp-bamboo-jms-hold-de5e4704-2aa0-4822-a7e7-ca692439d843 && rm -- /run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf && systemctl daemon-reload",
+      "began": "2026-11-14T07:56:26.040398+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:56:27.126684+00:00"
+    },
+    {
+      "node": 61,
+      "command": "systemctl start bamboo.service",
+      "began": "2026-11-14T07:56:27.139391+00:00",
+      "status": "RETURNED",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "ended": "2026-11-14T07:56:28.050939+00:00"
+    }
+  ],
+  "real_store_opened": true,
+  "store_committed": true,
+  "new_shared_writer_started": true,
+  "preflight_nodes": {
+    "60": {
+      "enforcement": "Enforcing",
+      "start_fence_verified": false,
+      "condition_result": "yes",
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "space_bytes": {
+        "/": 45918654464,
+        "/var/backups": 47294328832,
+        "/data/atlassian/application-data/bamboo/shared": 325774295040
+      },
+      "captured_at": 1794641733.7286253,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 3238474,
+      "restarts": 0,
+      "cgroup_pids": [
+        3238474
+      ],
+      "listeners": [
+        "*:54663",
+        "[::ffff:127.0.0.1]:54665",
+        "*:8892",
+        "*:9099",
+        "*:8085",
+        "[::ffff:127.0.0.1]:38113"
+      ],
+      "health": {
+        "status": 200,
+        "role": "RUNNING"
+      }
+    },
+    "61": {
+      "enforcement": "Permissive",
+      "start_fence_verified": false,
+      "condition_result": "yes",
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "space_bytes": {
+        "/": 54038675456,
+        "/var/backups": 54038675456,
+        "/data/atlassian/application-data/bamboo/shared": 325774274560
+      },
+      "captured_at": 1794641734.724071,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 2062069,
+      "restarts": 0,
+      "cgroup_pids": [
+        2062069
+      ],
+      "listeners": [
+        "*:9099",
+        "*:8892",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    },
+    "63": {
+      "enforcement": "Permissive",
+      "start_fence_verified": false,
+      "condition_result": "yes",
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "space_bytes": {
+        "/": 49404010496,
+        "/var/backups": 49404010496,
+        "/data/atlassian/application-data/bamboo/shared": 325774274560
+      },
+      "captured_at": 1794641735.5839148,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 1204700,
+      "restarts": 0,
+      "cgroup_pids": [
+        1204700
+      ],
+      "listeners": [
+        "*:8892",
+        "*:9099",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    }
+  },
+  "preflight_ui": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "environments": 7,
+    "noRunningBuilds": true,
+    "projects": 5,
+    "queueText": true,
+    "results": [
+      {
+        "id": 12845057,
+        "results": [
+          {
+            "id": 38830087,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 38830086,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 38830085,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 38830084,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 38830083,
+            "lifeCycleState": "FINISHED"
+          }
+        ]
+      },
+      {
+        "id": 12845058,
+        "results": [
+          {
+            "id": 36470799,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 36470795,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 33652748,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 31227977,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 31227957,
+            "lifeCycleState": "FINISHED"
+          }
+        ]
+      },
+      {
+        "id": 37093377,
+        "results": []
+      },
+      {
+        "id": 37093380,
+        "results": []
+      },
+      {
+        "id": 32473089,
+        "results": [
+          {
+            "id": 31227969,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 31227966,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 31227964,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 31227963,
+            "lifeCycleState": "FINISHED"
+          },
+          {
+            "id": 31227962,
+            "lifeCycleState": "FINISHED"
+          }
+        ]
+      },
+      {
+        "id": 32473090,
+        "results": [
+          {
+            "id": 31227965,
+            "lifeCycleState": "FINISHED"
+          }
+        ]
+      },
+      {
+        "id": 37093378,
+        "results": []
+      }
+    ],
+    "server": {
+      "askedNodeState": "RUNNING",
+      "clusterState": "RUNNING",
+      "reindexInProgress": false
+    }
+  },
+  "preflight_identities": {
+    "60": {
+      "pid": 3238474,
+      "context": "system_u:system_r:unconfined_service_t:s0",
+      "identity": {
+        "Uid": "1400\t1400\t1400\t1400",
+        "Gid": "1400\t1400\t1400\t1400",
+        "Groups": "1400"
+      },
+      "enforcement": "Enforcing",
+      "mounted_label_sha256": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6",
+      "link": {
+        "target": "/data/atlassian/application-data/bamboo/local-jms-store",
+        "inode": 10798810832342381416,
+        "mtime_ns": 1786177492294926402
+      }
+    },
+    "61": {
+      "pid": 2062069,
+      "context": "system_u:system_r:unconfined_service_t:s0",
+      "identity": {
+        "Uid": "1400\t1400\t1400\t1400",
+        "Gid": "1400\t1400\t1400\t1400",
+        "Groups": "1400"
+      },
+      "enforcement": "Permissive",
+      "mounted_label_sha256": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6",
+      "link": {
+        "target": "/data/atlassian/application-data/bamboo/local-jms-store",
+        "inode": 10798810832342381416,
+        "mtime_ns": 1786177492294926402
+      }
+    },
+    "63": {
+      "pid": 1204700,
+      "context": "system_u:system_r:unconfined_service_t:s0",
+      "identity": {
+        "Uid": "1400\t1400\t1400\t1400",
+        "Gid": "1400\t1400\t1400\t1400",
+        "Groups": "1400"
+      },
+      "enforcement": "Permissive",
+      "mounted_label_sha256": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6",
+      "link": {
+        "target": "/data/atlassian/application-data/bamboo/local-jms-store",
+        "inode": 10798810832342381416,
+        "mtime_ns": 1786177492294926402
+      }
+    }
+  },
+  "start_message": "msg_2958caae9bf4",
+  "start_at": "2026-11-14T07:37:04.662621+00:00",
+  "cold_proof": {
+    "attempt": "de5e4704-2aa0-4822-a7e7-ca692439d843",
+    "nodes": {
+      "60": {
+        "captured_at": 1794641986.572667,
+        "unit": "bamboo.service",
+        "active": "inactive",
+        "substate": "dead",
+        "main_pid": 0,
+        "restarts": 0,
+        "cgroup_pids": [],
+        "listeners": [],
+        "health": {
+          "error": "URLError"
+        },
+        "enforcement": "Enforcing",
+        "start_fence_verified": true,
+        "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "condition_result": "no"
+      },
+      "61": {
+        "captured_at": 1794641987.2516787,
+        "unit": "bamboo.service",
+        "active": "inactive",
+        "substate": "dead",
+        "main_pid": 0,
+        "restarts": 0,
+        "cgroup_pids": [],
+        "listeners": [],
+        "health": {
+          "error": "URLError"
+        },
+        "enforcement": "Permissive",
+        "start_fence_verified": true,
+        "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "condition_result": "no"
+      },
+      "63": {
+        "captured_at": 1794641987.9638677,
+        "unit": "bamboo.service",
+        "active": "inactive",
+        "substate": "dead",
+        "main_pid": 0,
+        "restarts": 0,
+        "cgroup_pids": [],
+        "listeners": [],
+        "health": {
+          "error": "URLError"
+        },
+        "enforcement": "Permissive",
+        "start_fence_verified": true,
+        "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "condition_result": "no"
+      }
+    }
+  },
+  "stage_result": {
+    "ok": true,
+    "attempt": "de5e4704-2aa0-4822-a7e7-ca692439d843",
+    "phase": "STAGED",
+    "file_count": 3,
+    "bytes": 34357920,
+    "manifest_sha256": "a7a7c6d96bd7bb398d36872e6b116bb255136d4fff23d4933cf662931fae6fdd"
+  },
+  "commit_result": {
+    "ok": true,
+    "attempt": "de5e4704-2aa0-4822-a7e7-ca692439d843",
+    "phase": "INSTALLED_NO_SERVICE_STARTED",
+    "file_count": 3,
+    "bytes": 34357920,
+    "manifest_sha256": "a7a7c6d96bd7bb398d36872e6b116bb255136d4fff23d4933cf662931fae6fdd"
+  },
+  "primary60": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642077.1397681,
+        "pid": 3244262,
+        "restarts": 0,
+        "active": "active",
+        "http": null,
+        "role": null
+      },
+      {
+        "at": 1794642189.814432,
+        "pid": 3244262,
+        "restarts": 0,
+        "active": "active",
+        "http": 200,
+        "role": "RUNNING"
+      }
+    ]
+  },
+  "warm61": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642255.9714208,
+        "pid": 2064755,
+        "restarts": 0,
+        "active": "active",
+        "http": null,
+        "role": null
+      },
+      {
+        "at": 1794642337.4095721,
+        "pid": 2064755,
+        "restarts": 0,
+        "active": "active",
+        "http": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    ]
+  },
+  "post60_ui": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "noRunningBuilds": true,
+    "queueText": true,
+    "server": {
+      "askedNodeState": "RUNNING",
+      "clusterState": "RUNNING",
+      "reindexInProgress": false
+    }
+  },
+  "promote61": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642476.267612,
+        "pid": 2064755,
+        "restarts": 0,
+        "active": "active",
+        "http": 200,
+        "role": "RUNNING"
+      }
+    ]
+  },
+  "promote61_state": {
+    "captured_at": 1794642476.900754,
+    "unit": "bamboo.service",
+    "active": "active",
+    "substate": "running",
+    "main_pid": 2064755,
+    "restarts": 0,
+    "cgroup_pids": [
+      2064755
+    ],
+    "listeners": [
+      "*:54663",
+      "[::ffff:127.0.0.1]:54665",
+      "*:9099",
+      "*:8892",
+      "[::ffff:127.0.0.1]:42311",
+      "*:8085"
+    ],
+    "health": {
+      "status": 200,
+      "role": "RUNNING"
+    },
+    "enforcement": "Permissive",
+    "start_fence_verified": false,
+    "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+    "condition_result": "yes"
+  },
+  "old60_fenced": {
+    "captured_at": 1794642475.3533306,
+    "unit": "bamboo.service",
+    "active": "inactive",
+    "substate": "dead",
+    "main_pid": 0,
+    "restarts": 0,
+    "cgroup_pids": [],
+    "listeners": [],
+    "health": {
+      "error": "URLError"
+    },
+    "enforcement": "Enforcing",
+    "start_fence_verified": true,
+    "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+    "condition_result": "no"
+  },
+  "post61_ui": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "noRunningBuilds": true,
+    "queueText": true,
+    "server": {
+      "askedNodeState": "RUNNING",
+      "clusterState": "RUNNING",
+      "reindexInProgress": false
+    }
+  },
+  "warm63": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642573.6764295,
+        "pid": 1217551,
+        "restarts": 0,
+        "active": "active",
+        "http": null,
+        "role": null
+      },
+      {
+        "at": 1794642681.4722996,
+        "pid": 1217551,
+        "restarts": 0,
+        "active": "active",
+        "http": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    ]
+  },
+  "promote63": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642709.4557319,
+        "pid": 1217551,
+        "restarts": 0,
+        "active": "active",
+        "http": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      },
+      {
+        "at": 1794642761.0687187,
+        "pid": 1217551,
+        "restarts": 0,
+        "active": "active",
+        "http": 200,
+        "role": "RUNNING_AS_SECONDARY"
+      },
+      {
+        "at": 1794642770.1772485,
+        "pid": 1217551,
+        "restarts": 0,
+        "active": "active",
+        "http": 200,
+        "role": "RUNNING"
+      }
+    ]
+  },
+  "promote63_state": {
+    "captured_at": 1794642770.8588345,
+    "unit": "bamboo.service",
+    "active": "active",
+    "substate": "running",
+    "main_pid": 1217551,
+    "restarts": 0,
+    "cgroup_pids": [
+      1217551
+    ],
+    "listeners": [
+      "*:54663",
+      "*:8892",
+      "*:9099",
+      "[::ffff:127.0.0.1]:54665",
+      "*:8085"
+    ],
+    "health": {
+      "status": 200,
+      "role": "RUNNING"
+    },
+    "enforcement": "Permissive",
+    "start_fence_verified": false,
+    "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+    "condition_result": "yes"
+  },
+  "old61_fenced": {
+    "captured_at": 1794642708.6304333,
+    "unit": "bamboo.service",
+    "active": "inactive",
+    "substate": "dead",
+    "main_pid": 0,
+    "restarts": 0,
+    "cgroup_pids": [],
+    "listeners": [],
+    "health": {
+      "error": "URLError"
+    },
+    "enforcement": "Permissive",
+    "start_fence_verified": true,
+    "dropins": "/run/systemd/system/bamboo.service.d/00-omp-jms-fence-de5e4704-2aa0-4822-a7e7-ca692439d843.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+    "condition_result": "no"
+  },
+  "warm60final": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642785.4671977,
+        "pid": 3246179,
+        "restarts": 0,
+        "active": "active",
+        "http": null,
+        "role": null
+      },
+      {
+        "at": 1794642839.708206,
+        "pid": 3246605,
+        "restarts": 0,
+        "active": "active",
+        "http": null,
+        "role": null
+      },
+      {
+        "at": 1794642945.2044778,
+        "pid": 3246605,
+        "restarts": 0,
+        "active": "active",
+        "http": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    ]
+  },
+  "warm61final": {
+    "ok": true,
+    "changes": [
+      {
+        "at": 1794642991.1883764,
+        "pid": 2066574,
+        "restarts": 0,
+        "active": "active",
+        "http": null,
+        "role": null
+      },
+      {
+        "at": 1794643072.6089787,
+        "pid": 2066574,
+        "restarts": 0,
+        "active": "active",
+        "http": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    ]
+  },
+  "final60_manager_transition": "2026-11-14T15:53:04+0800 git-app-1 systemd[1]: Starting Bamboo is the choice of professional teams for continuous integration, deployment, and delivery...\n2026-11-14T15:53:04+0800 git-app-1 systemd[1]: Started Bamboo is the choice of professional teams for continuous integration, deployment, and delivery.\n2026-11-14T15:53:54+0800 git-app-1 systemd[1]: Stopping Bamboo is the choice of professional teams for continuous integration, deployment, and delivery...\n2026-11-14T15:53:55+0800 git-app-1 systemd[1]: bamboo.service: Deactivated successfully.\n2026-11-14T15:53:55+0800 git-app-1 systemd[1]: Stopped Bamboo is the choice of professional teams for continuous integration, deployment, and delivery.\n2026-11-14T15:53:55+0800 git-app-1 systemd[1]: bamboo.service: Consumed 2min 38.247s CPU time.\n2026-11-14T15:53:55+0800 git-app-1 systemd[1]: Starting Bamboo is the choice of professional teams for continuous integration, deployment, and delivery...\n2026-11-14T15:53:55+0800 git-app-1 systemd[1]: Started Bamboo is the choice of professional teams for continuous integration, deployment, and delivery.\n",
+  "final_ui": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "noRunningBuilds": true,
+    "queueText": true,
+    "server": {
+      "askedNodeState": "RUNNING",
+      "clusterState": "RUNNING",
+      "reindexInProgress": false
+    }
+  },
+  "final_nodes": {
+    "60": {
+      "captured_at": 1794643122.1719828,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 3246605,
+      "restarts": 0,
+      "cgroup_pids": [
+        3246605
+      ],
+      "listeners": [
+        "*:8892",
+        "*:9099",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      },
+      "enforcement": "Enforcing",
+      "start_fence_verified": false,
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "condition_result": "yes"
+    },
+    "61": {
+      "captured_at": 1794643123.6186574,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 2066574,
+      "restarts": 0,
+      "cgroup_pids": [
+        2066574
+      ],
+      "listeners": [
+        "*:9099",
+        "*:8892",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      },
+      "enforcement": "Permissive",
+      "start_fence_verified": false,
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "condition_result": "yes"
+    },
+    "63": {
+      "captured_at": 1794643125.006034,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 1217551,
+      "restarts": 0,
+      "cgroup_pids": [
+        1217551
+      ],
+      "listeners": [
+        "[::ffff:127.0.0.1]:45369",
+        "*:54663",
+        "*:8892",
+        "*:9099",
+        "[::ffff:127.0.0.1]:54665",
+        "*:8085"
+      ],
+      "health": {
+        "status": 200,
+        "role": "RUNNING"
+      },
+      "enforcement": "Permissive",
+      "start_fence_verified": false,
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "condition_result": "yes"
+    },
+    "62": {
+      "captured_at": 1794643126.3192828,
+      "unit": "bamboo.service",
+      "active": "failed",
+      "substate": "failed",
+      "main_pid": 0,
+      "restarts": 0,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      },
+      "enforcement": "Enforcing",
+      "start_fence_verified": false,
+      "dropins": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "condition_result": "yes"
+    }
+  },
+  "public_generated_by": "bamboo04",
+  "final_logging_store_cleanup": {
+    "60": {
+      "service": {
+        "MainPID": "3246605",
+        "NRestarts": "0",
+        "ActiveState": "active",
+        "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "UnitFileState": "enabled"
+      },
+      "selected_logging_args": [
+        "-Djava.util.logging.config.file=/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+        "-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager",
+        "-javaagent:/opt/atlassian/atlassian-agent-1.5.0.jar",
+        "-javaagent:/opt/bamboo-querysafe/querysafe-juli.jar"
+      ],
+      "guard_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "native_selinux_context": "system_u:system_r:unconfined_service_t:s0",
+      "temporary_holds": [],
+      "temporary_dropins": [],
+      "runtime_mask_exists": false,
+      "shared_store": {
+        "directory": true,
+        "symlink": false,
+        "inode": 9788755705489803304,
+        "uid": 1400,
+        "gid": 1400,
+        "mode": "0o755",
+        "selinux": "system_u:object_r:fusefs_t:s0"
+      }
+    },
+    "61": {
+      "service": {
+        "MainPID": "2066574",
+        "NRestarts": "0",
+        "ActiveState": "active",
+        "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "UnitFileState": "enabled"
+      },
+      "selected_logging_args": [
+        "-Djava.util.logging.config.file=/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+        "-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager",
+        "-javaagent:/opt/atlassian/atlassian-agent-1.5.0.jar",
+        "-javaagent:/opt/bamboo-querysafe/querysafe-juli.jar"
+      ],
+      "guard_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "native_selinux_context": "system_u:system_r:unconfined_service_t:s0",
+      "temporary_holds": [],
+      "temporary_dropins": [],
+      "runtime_mask_exists": false,
+      "shared_store": {
+        "directory": true,
+        "symlink": false,
+        "inode": 9788755705489803304,
+        "uid": 1400,
+        "gid": 1400,
+        "mode": "0o755",
+        "selinux": "system_u:object_r:fusefs_t:s0"
+      }
+    },
+    "63": {
+      "service": {
+        "MainPID": "1217551",
+        "NRestarts": "0",
+        "ActiveState": "active",
+        "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "UnitFileState": "enabled"
+      },
+      "selected_logging_args": [
+        "-Djava.util.logging.config.file=/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+        "-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager",
+        "-javaagent:/opt/atlassian/atlassian-agent-1.5.0.jar",
+        "-javaagent:/opt/bamboo-querysafe/querysafe-juli.jar"
+      ],
+      "guard_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "native_selinux_context": "system_u:system_r:unconfined_service_t:s0",
+      "temporary_holds": [],
+      "temporary_dropins": [],
+      "runtime_mask_exists": false,
+      "shared_store": {
+        "directory": true,
+        "symlink": false,
+        "inode": 9788755705489803304,
+        "uid": 1400,
+        "gid": 1400,
+        "mode": "0o755",
+        "selinux": "system_u:object_r:fusefs_t:s0"
+      }
+    }
+  },
+  "end_message": "msg_b128c937596c",
+  "end_at": "2026-11-14T08:05:37.606411+00:00",
+  "physical_end_before_deadline_verified": true,
+  "limits": [
+    "Clean shutdown/reopen and actual native cluster promotions; not power-loss fault injection.",
+    "61/63 SELinux remained existing Permissive; no future Enforcing qualification.",
+    "Original cold local/source backup became stale after first shared writer; never restore it as current.",
+    "60 final standby restoration had a separate manager stop/start, NRestarts0, caller unknown; final healthy PID recorded.",
+    "Parent dedicated deployment agent registration, first-job gate and ordered production activation remain open; no scope expansion."
+  ],
+  "coordinator_end_ack": "msg_7159228da410"
+}

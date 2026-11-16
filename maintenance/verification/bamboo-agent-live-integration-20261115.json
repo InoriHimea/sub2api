@@ -1,0 +1,405 @@
+{
+  "schema": 1,
+  "attempt": "5e599433-0d56-4c72-8974-c521eefed70c",
+  "status": "LIVE_START_FAILED_CLOSED_NO_IDENTITY_RECEIPT_FROZEN_CREDENTIAL_MODE_BLOCKER",
+  "authorization": "Owner approved bounded live two-stage flow; no production application deployment/shared auth/globalpause/plugin/otherAgent changes or credential replay",
+  "window": {
+    "start": "2026-11-14T18:01:00Z",
+    "end": "2026-11-14T18:46:00Z",
+    "ack": "msg_ecf22e32d758",
+    "start_message": "msg_2c88bf41a19c",
+    "coordination_scope": "Peer session only; no unrelated-session certification",
+    "closed_at": "2026-11-14T18:17:59.606726+00:00",
+    "end_message": "msg_310c348e9213"
+  },
+  "target_preflight": {
+    "uid": 1000,
+    "service_identity": {
+      "uid": 999,
+      "gid": 988
+    },
+    "unit": {
+      "Restart": "on-failure",
+      "MainPID": "0",
+      "User": "bamboo",
+      "Group": "bamboo",
+      "ProtectHome": "yes",
+      "ProtectSystem": "strict",
+      "NoNewPrivileges": "yes",
+      "LoadState": "loaded",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "FragmentPath": "/etc/systemd/system/bamboo-agent.service",
+      "DropInPaths": "",
+      "UnitFileState": "disabled"
+    },
+    "native_cfg_status": "not_inspected_as_ubuntu_protected_parent",
+    "gate_profile_parent_exists": false,
+    "utc": "2026-11-14T18:00:05Z"
+  },
+  "protected_metadata": {
+    "reader_uid": 0,
+    "unit_sha256": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+    "native_identity": {
+      "exists": false
+    },
+    "credential_metadata_only": {
+      "regular": true,
+      "symlink": false,
+      "uid": 0,
+      "mode": "0o600",
+      "size": 195
+    },
+    "gate_dir_exists": false,
+    "sudo_path": "existing_noninteractive_root_for_approved_target_scope"
+  },
+  "original_agents": [
+    {
+      "active": false,
+      "busy": false,
+      "enabled": true,
+      "id": 8683524,
+      "name": "Linux003",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 28344321,
+      "name": "Linux004",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 8388609,
+      "name": "Linux001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 28344322,
+      "name": "Linux005",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 8683521,
+      "name": "Winodws001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 35553283,
+      "name": "macOS001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 35553281,
+      "name": "Linux002",
+      "type": "REMOTE"
+    }
+  ],
+  "queue_before_discovery": {
+    "empty": true,
+    "noBuilds": true
+  },
+  "staging": {
+    "schema": 1,
+    "attempt": "5e599433-0d56-4c72-8974-c521eefed70c",
+    "state": "STAGED_VERIFIED",
+    "discovery_start_reserved": false,
+    "activation_start_reserved": false,
+    "window_end": "2026-11-14T18:46:00Z",
+    "original_unit_sha256": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+    "artifact_sha256": "181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2",
+    "readability": {
+      "/opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar": true,
+      "/etc/bamboo-agent-isolation/profile.properties": true
+    },
+    "request_directory_writable": true,
+    "effective": {
+      "Restart": "no",
+      "MainPID": "0",
+      "ExecStart": "{ path=/usr/bin/java ; argv[]=/usr/bin/java -Xms256m -Xmx1024m -javaagent:/opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar -Dbamboo.isolation.profile=/etc/bamboo-agent-isolation/profile.properties -Dbamboo.home=/var/lib/bamboo -Dlog4j2.configurationFile=/opt/bamboo-agent/bootstrap-log4j2.xml -cp /opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar:/opt/bamboo-agent/bootstrap:/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar com.mellivora.bamboo.isolation.GuardedBootstrap /run/credentials/bamboo-agent.service/security-token ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "ActiveState": "inactive",
+      "DropInPaths": "/etc/systemd/system/bamboo-agent.service.d/isolation.conf"
+    }
+  },
+  "discovery": {
+    "schema": 1,
+    "attempt": "5e599433-0d56-4c72-8974-c521eefed70c",
+    "state": "DISCOVERY_OBSERVED",
+    "discovery_start_reserved": true,
+    "activation_start_reserved": false,
+    "window_end": "2026-11-14T18:46:00Z",
+    "original_unit_sha256": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+    "artifact_sha256": "181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2",
+    "readability": {
+      "/opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar": true,
+      "/etc/bamboo-agent-isolation/profile.properties": true
+    },
+    "request_directory_writable": true,
+    "effective": {
+      "Restart": "no",
+      "MainPID": "0",
+      "ExecStart": "{ path=/usr/bin/java ; argv[]=/usr/bin/java -Xms256m -Xmx1024m -javaagent:/opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar -Dbamboo.isolation.profile=/etc/bamboo-agent-isolation/profile.properties -Dbamboo.home=/var/lib/bamboo -Dlog4j2.configurationFile=/opt/bamboo-agent/bootstrap-log4j2.xml -cp /opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar:/opt/bamboo-agent/bootstrap:/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar com.mellivora.bamboo.isolation.GuardedBootstrap /run/credentials/bamboo-agent.service/security-token ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+      "ActiveState": "inactive",
+      "DropInPaths": "/etc/systemd/system/bamboo-agent.service.d/isolation.conf"
+    },
+    "discovery_started_at": "2026-11-14T18:08:15.620062+00:00",
+    "systemctl_start_exit": 0,
+    "service": {
+      "Restart": "no",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "NRestarts": "0",
+      "ExecMainStatus": "78",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "eb08f975a4f84c799dab5c68e9ab170e"
+    },
+    "discovery_receipts": [],
+    "native_identity": {
+      "exists": false
+    },
+    "fixed_diagnostic_codes": [
+      "ISOLATION_BOOTSTRAP_DENIED"
+    ],
+    "observed_at": "2026-11-14T18:08:16.700847+00:00"
+  },
+  "agents_after_failed_start": [
+    {
+      "active": false,
+      "busy": false,
+      "enabled": true,
+      "id": 8683524,
+      "name": "Linux003",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 28344321,
+      "name": "Linux004",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 8388609,
+      "name": "Linux001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 28344322,
+      "name": "Linux005",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 8683521,
+      "name": "Winodws001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 35553283,
+      "name": "macOS001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 35553281,
+      "name": "Linux002",
+      "type": "REMOTE"
+    }
+  ],
+  "public_guard_probe": {
+    "exit": 0,
+    "stdout": "PUBLIC_RESOURCES_OK\nPUBLIC_FROZEN_BOOTSTRAP_LINK_OK\nPUBLIC_VENDOR_RUNNER_LINK_OK\n",
+    "stderr": "",
+    "credential_argument_or_read": false,
+    "agent_start_or_server_connection": false
+  },
+  "public_no_credential_tls_probe": {
+    "exit": 0,
+    "stdout": "PUBLIC_NO_CREDENTIAL_HTTP_STATUS=400\n",
+    "stderr": "/tmp/cd08-public-guard-et50uh74/PublicGuardProbe.java:4: warning: [deprecation] URL(String) in URL has been deprecated\n   var c=(javax.net.ssl.HttpsURLConnection)new java.net.URL(\"https://deploy.mellivora.com.cn/agentServer/GetFingerprint.action\").openConnection();\n                                           ^\n1 warning\n",
+    "credential_argument_or_read": false,
+    "agent_started": false,
+    "unauthenticated_head_to_real_server": true,
+    "real_credential_used": false
+  },
+  "public_synthetic_loopback_probe": {
+    "exit": 0,
+    "stdout": "PUBLIC_SYNTHETIC_LAUNCH_ENTERED\n2026-11-14T18:13:33,629 INFO  com.atlassian.bamboo.agent.bootstrap.AgentBootstrap - Using custom logging configuration for Agent boostrap: file:/opt/bamboo-agent/bootstrap-log4j2.xml\n2026-11-14T18:13:33,645 INFO  com.atlassian.bamboo.agent.bootstrap.AgentBootstrap - Agent bootstrap logging configuration finished\nPUBLIC_OWNED_LOOPBACK_REQUEST\n2026-11-14T18:13:34,137 ERROR com.atlassian.bamboo.agent.bootstrap.AgentBootstrap - Failed to get the Bamboo URL\njava.io.IOException: Unable to determine a valid Bamboo server URL from: http://127.0.0.1:33333/agentServer/\n\tat com.atlassian.bamboo.agent.bootstrap.RemoteAgentBootstrap.getFinalUrlWithRedirects(RemoteAgentBootstrap.java:334)\n\tat com.atlassian.bamboo.agent.bootstrap.RemoteAgentBootstrap.getBambooUrl(RemoteAgentBootstrap.java:371)\n\tat com.atlassian.bamboo.agent.bootstrap.RemoteAgentBootstrap.<init>(RemoteAgentBootstrap.java:151)\n\tat com.atlassian.bamboo.agent.bootstrap.RemoteAgentBootstrap.<init>(RemoteAgentBootstrap.java:144)\n\tat com.mellivora.bamboo.SecureBambooBootstrap$VendorRunner.<init>(SecureBambooBootstrap.java:100)\n\tat com.mellivora.bamboo.SecureBambooBootstrap$VendorRunner.start(SecureBambooBootstrap.java:115)\n\tat com.mellivora.bamboo.SecureBambooBootstrap.launch(SecureBambooBootstrap.java:95)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat PublicGuardProbe.main(PublicGuardProbe.java:10)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat jdk.compiler/com.sun.tools.javac.launcher.Main.execute(Main.java:484)\n\tat jdk.compiler/com.sun.tools.javac.launcher.Main.run(Main.java:208)\n\tat jdk.compiler/com.sun.tools.javac.launcher.Main.main(Main.java:135)\n2026-11-14T18:13:34,138 INFO  com.atlassian.bamboo.agent.bootstrap.AgentBootstrap - Agent bootstrap using endpoint: http://127.0.0.1:33333/agentServer/\n2026-11-14T18:13:34,146 INFO  com.atlassian.bamboo.agent.bootstrap.RemoteAgentHomeLocatorForBootstrap - Creating agent home located at [/var/lib/bamboo/bamboo-agent-home]\n2026-11-14T18:13:34,147 INFO  com.atlassian.bamboo.agent.bootstrap.RemoteAgentHomeLocatorForBootstrap - Using agent home located at [/var/lib/bamboo/bamboo-agent-home]\n2026-11-14T18:13:34,148 INFO  com.atlassian.bamboo.agent.bootstrap.AgentUuidInitializer - Generating new UUID for this agent: 34b29dd7-57d8-4332-84a1-5bf470daab49\n2026-11-14T18:13:34,151 INFO  com.atlassian.bamboo.agent.bootstrap.RemoteAgentHomeLocatorForBootstrap - Using agent home located at [/var/lib/bamboo/bamboo-agent-home]\n2026-11-14T18:13:34,156 INFO  com.atlassian.bamboo.agent.bootstrap.AgentContext - Requesting fingerprint, url: http://127.0.0.1:33333/agentServer/GetFingerprint.action?hostName=sub2api-deploy-agent-01&version=5&agentUuid=34b29dd7-57d8-4332-84a1-5bf470daab49&securityToken= [REDACTED] \n2026-11-14T18:13:34,156 INFO  com.atlassian.bamboo.agent.bootstrap.http.RemoteAgentHttpClientFactory - Creating a new HTTP client...\n2026-11-14T18:13:34,214 INFO  com.atlassian.bamboo.agent.bootstrap.AgentContext - Authenticating against Bamboo server at http://127.0.0.1:33333/agentServer/\nPUBLIC_OWNED_LOOPBACK_REQUEST\n2026-11-14T18:13:34,238 ERROR com.atlassian.bamboo.agent.bootstrap.AgentContext - \n\n********************************************************************************\n*\n* Agent authentication failed and the error is not recoverable. Message from the server is:\n* \n* Agent will now shut down.\n*\n********************************************************************************\n\n",
+    "stderr": "2026-11-14T18:13:33.542874506Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.544999627Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.547746263Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.564546362Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.582393959Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.630910942Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.637472742Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.638050437Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.638723526Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.640104589Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.646115727Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.647606866Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.653793267Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.654287515Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.654935614Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n2026-11-14T18:13:33.656148732Z main WARN No Log4j plugin descriptor was found in the classpath.\nFalling back to scanning the `org.apache.logging.log4j.core` package.\nSee https://logging.apache.org/log4j/2.x/faq.html#plugin-descriptors for details.\n",
+    "scope": "Public staged artifact and unchanged frozen bootstrap; synthetic file and owned loopback403 only; no real credential/Agent registration or real Bamboo connection",
+    "real_agent_started": false,
+    "real_server_connection": false,
+    "real_credential_or_ciphertext_used": false,
+    "synthetic_credential_used": true,
+    "owned_loopback_connection": true
+  },
+  "fixed_log_stage_classification": {
+    "journal_lines": 1,
+    "fixed_marker_presence": {
+      "Using custom logging configuration": false,
+      "Agent bootstrap logging configuration finished": false,
+      "Failed to get the Bamboo URL": false,
+      "Agent bootstrap using endpoint": false,
+      "ISOLATION_BOOTSTRAP_DENIED": true,
+      "ISOLATION_NATIVE_DENIED": false,
+      "java.net.UnknownHostException": false,
+      "javax.net.ssl.SSLHandshakeException": false,
+      "java.net.ConnectException": false,
+      "java.io.FileNotFoundException": false,
+      "java.lang.NoClassDefFoundError": false
+    },
+    "raw_log_returned": false
+  },
+  "synthetic_systemd_probe": {
+    "exit": 3,
+    "stdout": "SYNTHETIC_CREDENTIAL_MODE=[GROUP_READ, OWNER_READ]\nPUBLIC_SYNTHETIC_LAUNCH_ENTERED\nPUBLIC_SYNTHETIC_ERROR=java.lang.reflect.InvocationTargetException:null\nPUBLIC_SYNTHETIC_ERROR=java.io.IOException:Credential file must not grant group or other access\n",
+    "stderr": "Running as unit: cd08-public-70c4429bc09b.service; invocation ID: f87502d27efc45e8bff7f1ae75703a0d\nFinished with result: exit-code\nMain processes terminated with: code=exited/status=3\nService runtime: 1.850s\nCPU time consumed: 2.812s\nMemory peak: 512.0K\nMemory swap peak: 0B\n",
+    "unit": "cd08-public-70c4429bc09b",
+    "real_credential_or_ciphertext_used": false,
+    "real_agent_started": false,
+    "real_server_connection": false
+  },
+  "closeout": {
+    "attempt": "5e599433-0d56-4c72-8974-c521eefed70c",
+    "state": "CLOSED_BLOCKED_BEFORE_IDENTITY_RECEIPT",
+    "closed_at": "2026-11-14T18:17:59.606726+00:00",
+    "final_service": {
+      "Restart": "no",
+      "MainPID": "0",
+      "NRestarts": "0",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "DropInPaths": "/etc/systemd/system/bamboo-agent.service.d/isolation.conf",
+      "UnitFileState": "disabled"
+    },
+    "native_cfg_absent": true,
+    "discovery_receipt_count": 0,
+    "probe_final": "LoadState=not-found\nActiveState=inactive",
+    "actual_start_attempts": 1,
+    "frozen_bootstrap_modified": false,
+    "staged_fail_closed_assets_preserved": true
+  },
+  "final_queue": {
+    "empty": true,
+    "noBuilds": true
+  },
+  "final_agents": [
+    {
+      "active": false,
+      "busy": false,
+      "enabled": true,
+      "id": 8683524,
+      "name": "Linux003",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 28344321,
+      "name": "Linux004",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": true,
+      "enabled": true,
+      "id": 8388609,
+      "name": "Linux001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 28344322,
+      "name": "Linux005",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 8683521,
+      "name": "Winodws001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 35553283,
+      "name": "macOS001",
+      "type": "REMOTE"
+    },
+    {
+      "active": true,
+      "busy": false,
+      "enabled": true,
+      "id": 35553281,
+      "name": "Linux002",
+      "type": "REMOTE"
+    }
+  ],
+  "final_agent_records_identity_unchanged": true,
+  "final_all_activity_fields_unchanged": false,
+  "post_end_activity_change": [
+    {
+      "id": 8388609,
+      "name": "Linux001",
+      "field": "busy",
+      "before": false,
+      "after": true,
+      "observation": "Post-END readonly snapshot; not attributed to this task. No extra target record or action."
+    }
+  ],
+  "window_end_message": "msg_310c348e9213",
+  "quiet_period_released": true,
+  "real_start_count": 1,
+  "activation_start_count": 0,
+  "original_frozen_assets_changed": false,
+  "shared_bamboo_mutations": false,
+  "production_application_mutations": false,
+  "credential_reader_or_delivery_replayed": false,
+  "diagnosis": {
+    "proven": "Same-user/sandbox synthetic native LoadCredential materializes OWNER_READ+GROUP_READ; frozen bootstrap rejects it before logging and before owned loopback connection. Public staged guard/classes and synthetic private-file loopback launch pass.",
+    "inference": "Reproduced native credential-mode incompatibility is consistent with real pre-logging fail78; actual encrypted runtime-file mode and swallowed exception were NOT directly sampled.",
+    "limits": [
+      "No actual business credential/ciphertext bytes used in diagnostics.",
+      "No second real target start or activation.",
+      "No actual id/UUID, target record, dedication, Online or task/artifact pass."
+    ],
+    "next": "Separate approval to change frozen credential trust validation and review provenance/pin impacts; native synthetic encrypted/plain credential acceptance and adversarial tests; then a newly approved bounded one-time live start/window. Do not generally allow group-readable files or run service as root."
+  }
+}

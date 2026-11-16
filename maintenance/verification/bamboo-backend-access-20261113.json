@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T02:01:02.239201+00:00",
+  "parent": "TODO.md CD-08 independent deployment-agent registration/Online/exclusive-intake/artifact acceptance",
+  "status": "BLOCKED_NO_EXISTING_BACKEND_ACCESS_BINDING_FOUND",
+  "owner_mapping": {
+    "10.10.10.60": "gitapp-1",
+    "10.10.10.61": "gitapp-2",
+    "10.10.10.62": "gitapp-3",
+    "10.10.10.63": "gitapp-4"
+  },
+  "scope": "Local public access metadata only; no backend network connection, keyscan, trust enrollment, credential read or service mutation",
+  "prior_evidence": "maintenance/verification/bamboo-registration-paths-20261112.json/backend_access_reference_search",
+  "ssh_checks": {
+    "binary": "C:/Windows/System32/OpenSSH/ssh-keygen.exe",
+    "files": [
+      "known_hosts_hyperv",
+      "known_hosts",
+      "known_hosts_sub2api_deploy_hypervisor",
+      "known_hosts_sub2api_deploy_agent_01",
+      "known_hosts_linux001_verified",
+      "known_hosts_wh_storage_20261110_verified",
+      "known_hosts_sub2api3_dual",
+      "known_hosts_gateway3_migration_20261109_verified",
+      "known_hosts_sub2api3_new",
+      "known_hosts_mac_new",
+      "known_hosts_torii_shanghai",
+      "known_hosts_coder_server",
+      "known_hosts_jifang_190_verified",
+      "known_hosts_sm_accept",
+      "known_hosts_bamboo_linux004_verified",
+      "known_hosts_bamboo_linux005_verified",
+      "known_hosts_unraid",
+      "known_hosts_infra_gateways",
+      "known_hosts_gateway2_verified",
+      "known_hosts_infra_10.155.60.201"
+    ],
+    "queries": [
+      "gitapp-1",
+      "gitapp-2",
+      "gitapp-3",
+      "gitapp-4",
+      "10.10.10.60",
+      "10.10.10.61",
+      "10.10.10.62",
+      "10.10.10.63",
+      "[10.10.10.60]:22",
+      "[10.10.10.61]:22",
+      "[10.10.10.62]:22",
+      "[10.10.10.63]:22"
+    ],
+    "skipped_previously_successful_negative_queries": {
+      "files": [
+        "known_hosts",
+        "known_hosts_hyperv",
+        "known_hosts_infra_gateways"
+      ],
+      "queries": [
+        "10.10.10.60",
+        "10.10.10.61",
+        "10.10.10.62",
+        "10.10.10.63"
+      ],
+      "count": 12
+    },
+    "new_query_count": 228,
+    "matching_query_count": 0,
+    "all_exit_codes": 1,
+    "stderr_count": 0,
+    "retired_known_hosts_old_excluded": true
+  },
+  "putty_metadata": {
+    "sessions": [],
+    "matching_public_host_key_names": [],
+    "sessions_registry_present": true,
+    "hostkeys_registry_present": false
+  },
+  "document_and_ssh_config_search": {
+    "pattern": "(?i)gitapp[-_ ]?[1-4]",
+    "paths": [
+      "E:/pikachu/infra/**/*.md",
+      "F:/VsCodeProject/sub2api/**/*.md",
+      "C:/Users/25321/.ssh/config",
+      "C:/Users/25321/.ssh/*.conf"
+    ],
+    "result": "Only current task entry matched; no additional access reference found"
+  },
+  "not_proven": [
+    "Live guest SSH availability or identity",
+    "Approved login identity and endpoint/host-key binding",
+    "Live Tomcat/app logging configuration",
+    "Fail-closed first-job isolation or successful agent registration/Online"
+  ],
+  "next_requirement": "An owner-controlled existing guest access/trust reference, or owner-executed nonsecret logging metadata audit; absence here does not prove no entry exists elsewhere. No new access or trust may be self-issued."
+}

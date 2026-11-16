@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T08:53:34.029023+00:00",
+  "status": "JUL_PROTECTION_IMPLEMENTED_NATIVE_AND_ZH_CN_QUALIFIED_NOT_INSTALLED",
+  "parent": "TODO.md CD-08",
+  "runtime_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+  "runtime_production_sources_unchanged": true,
+  "current_qualified_source_sha256": {
+    "SecurityTokenQueryRedactor.java": "a82b7c73dfa2e3dbb05565a5de004a5a4c3923311ba57d839924e9e1e6648b24",
+    "SecurityTokenQueryRedactorTest.java": "b41727846482d962ea9307fc000b047f166ceddfc7e0fffca18884ec21a9afcc",
+    "QuerySafeOneLineFormatter.java": "69abecf5b093bc14c34ee66a949eb206888c5662172e3e679044c31663522840",
+    "QuerySafeOneLineFormatterTest.java": "a50f8bc349f6fe256982315d0edacebfe17444986939e8278a054000cce9a81f",
+    "QuerySafeLoggingGuard.java": "120447bb4cdc3650cae02511a1064e9814c32f888c28159afb9e15e81375eefe",
+    "NativeJulLoggingSmoke.java": "9091517e8dc7aaeb2ff053259807f0f3ae170b5d0de906b529009a7b1741d2e1",
+    "build.py": "f8a2bee4b6a62ca0a08d5d0f1a2978b3202f72fc72f2e14e6f343f7de367a36b",
+    "verify_native.py": "a819e34aa7e731360823c306677739d6ad6fed6d25dd18242d37ea11de80316b"
+  },
+  "producer_manifest": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\manifest.json",
+  "producer_source_snapshot": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\source.tar",
+  "current_qualification_source_snapshot": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\source-qualified.tar",
+  "qualification_receipt": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\qualification.json",
+  "qualified_package": {
+    "path": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\querysafe-juli-qualified.zip",
+    "sha256": "7d517b9ae5ec7256c965673bccc80dc2c8b18adae2c7d1174bf1623b3707f205",
+    "runtime_jar_same_as_original_package": true,
+    "original_package_preserved": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\querysafe-juli-candidate.zip",
+    "original_package_sha256": "71ebbec0eb3479c8704337f331f017d7cd50f94a0f2f7a0fda8c730fc0d1846f"
+  },
+  "qualification_scope": {
+    "scanner_assertions": 425,
+    "original_formatter_regressions": "passed",
+    "zh_CN_formatter_regressions": "passed after deleting English-only display-word assertions",
+    "native_positive_scenarios": 3,
+    "native_negative_startup_scenarios": 4,
+    "native_exit_for_invalid_policy": 78,
+    "native_file_sinks_per_positive_case": 6,
+    "actual_console_verified": true,
+    "runtime_jar_absent_from_application_classpath": true,
+    "startup_guard_before_main": true,
+    "locale_before": {
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Exception in thread \"main\" java.lang.AssertionError: Useful diagnostic context was removed\n\tat com.mellivora.bamboo.logging.QuerySafeOneLineFormatterTest.check(QuerySafeOneLineFormatterTest.java:27)\n\tat com.mellivora.bamboo.logging.QuerySafeOneLineFormatterTest.retained(QuerySafeOneLineFormatterTest.java:32)\n\tat com.mellivora.bamboo.logging.QuerySafeOneLineFormatterTest.parameterRenderingAndRecordRetention(QuerySafeOneLineFormatterTest.java:66)\n\tat com.mellivora.bamboo.logging.QuerySafeOneLineFormatterTest.main(QuerySafeOneLineFormatterTest.java:179)\n"
+    },
+    "locale_after": [
+      {
+        "command": [
+          "/usr/bin/java",
+          "-Duser.language=zh",
+          "-Duser.country=CN",
+          "-cp",
+          "/tmp/cd08-jul-locale-9j8Rlf/querysafe-juli.jar:/tmp/cd08-jul-locale-9j8Rlf/tomcat-juli.jar",
+          "/tmp/cd08-jul-locale-9j8Rlf/QuerySafeOneLineFormatterTest.java"
+        ],
+        "exit_code": 0,
+        "stdout": "PASS: actual JULI parameters, repeated raw/encoded queries, throwable graph, Unicode, localization and non-mutation\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "python3",
+          "/tmp/cd08-jul-locale-9j8Rlf/source/verify_native.py",
+          "--package",
+          "/tmp/cd08-jul-locale-9j8Rlf/package",
+          "--runtime-archive",
+          "/tmp/cd08-jul-locale-9j8Rlf/public-tomcat.tar.gz",
+          "--output",
+          "/tmp/cd08-jul-locale-9j8Rlf/native-localized",
+          "--case",
+          "protected-localized"
+        ],
+        "exit_code": 0,
+        "stdout": "protected-localized: {\"candidate_not_in_application_classpath\": true, \"console_pending_parent_verification\": false, \"console_verified\": true, \"context_classloader_transition\": true, \"diagnostics_retained\": true, \"exit_code\": 0, \"native_file_sinks_verified\": 6, \"native_stuck_warning_redacted\": true, \"production_http_requests\": 0}\nNATIVE PROOF /tmp/cd08-jul-locale-9j8Rlf/native-localized/native-proof.json\n",
+        "stderr": ""
+      }
+    ],
+    "native_localized": {
+      "candidate_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "fixture_source_sha256": "9091517e8dc7aaeb2ff053259807f0f3ae170b5d0de906b529009a7b1741d2e1",
+      "java21_toolchain_version": "openjdk 21.0.13.0.3 2026-10-24\nOpenJDK Runtime Environment (build 21.0.13.0.3+1-1-24.04.1-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)",
+      "juli_dependency_sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+      "production_http_requests": 0,
+      "results": {
+        "protected-localized": {
+          "candidate_not_in_application_classpath": true,
+          "console_pending_parent_verification": false,
+          "console_verified": true,
+          "context_classloader_transition": true,
+          "diagnostics_retained": true,
+          "exit_code": 0,
+          "native_file_sinks_verified": 6,
+          "native_stuck_warning_redacted": true,
+          "production_http_requests": 0
+        }
+      },
+      "runner_source_sha256": "a819e34aa7e731360823c306677739d6ad6fed6d25dd18242d37ea11de80316b",
+      "runtime_archive_sha256": "7783656d1456f3fa5c4ad5d67003fcc2a8d35aaa2bc910f80a7208fbdcd4683d",
+      "runtime_reconfiguration_after_premain_not_covered": true,
+      "schema": 1
+    },
+    "prior_successful_nonlocalized_cases_replayed": false,
+    "no_privacy_or_diagnostic_content_assertions_relaxed": true
+  },
+  "source_provenance_note": "Producer manifest and original source snapshot remain immutable and identify the actual build/tests. Qualified snapshot only removes locale-wording test pins and adds a locale case; runtime Java sources/build script and the verified JAR are unchanged. Prior native proof receipts are retained separately.",
+  "cleanup": {
+    "all_owned_initial_and_locale_remote_fixture_directories_removed": true,
+    "all_owned_transfer_staging_removed": true,
+    "only_public_candidate_dependency_source_proof_cache_retained": true
+  },
+  "documentation": "FORK.md / Server JUL query protection; client custody/delivery guidance corrected without modifying frozen startup assets",
+  "not_authorized_or_done": [
+    "No Bamboo server install/config/JVM option/restart, nginx/HAProxy/auth mutation or new-Agent start",
+    "No failed62 repair/start",
+    "No credentials/Bao/DPAPI/model/production requests",
+    "No first-job/consumer isolation acceptance or registration/Online/exclusive-intake/artifact roundtrip"
+  ],
+  "next_decision": "Exact shared live logging-maintenance approval and proxy-error diagnostic-loss tradeoff are separate from this offline acceptance; coordinate with current IAM/Test owner before any proposed window."
+}

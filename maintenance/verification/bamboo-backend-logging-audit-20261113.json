@@ -1,0 +1,563 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T04:36:42.484405+00:00",
+  "parent": "TODO.md CD-08 independent deployment-agent registration/Online/exclusive-intake/artifact acceptance",
+  "status": "READONLY_FOUR_NODE_METADATA_AUDIT_COMPLETE_NO_LIVE_MITIGATION",
+  "four_node_class_provenance": {
+    "bamboo_web_jar_sha256": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198",
+    "log4j2_properties_sha256": "e59cf90bd4c45a17d0f484dfb44a73042b26a2b4aecc3a525cd880ff62e710fb",
+    "stuck_valve_class_sha256": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150",
+    "bamboo_escaping_converter_sha256": "c22dc239458eb3cb3c944e1cb1b32c1d6d9ccd8465d4838bb907cb15eeb12ce7",
+    "all_four_match": true,
+    "verification": "Actual installed files/classes read at each node.63 completed after separately approved single existing-root key-only identity check;61/62 converter hashes separately collected because previously uncollected. No prior native fixture or identity smoke replay.",
+    "backend63_completion_receipt": "maintenance/verification/bamboo-backend63-completion-20261113.json"
+  },
+  "access_provenance": {
+    "primary": "Owner-personally-logged-in Hyper-V console, exact UUID/name/IP, displayed ED25519 fingerprint matched offline hash and native ssh-keygen; original workstation key already authorized",
+    "primary_host_fingerprint": "SHA256:/6XXZM7aK8dJtD5sG2/7fDgFEJZdMJ0MnyhJs11maqU",
+    "original_workstation_public_fingerprint": "SHA256:YS0t1vyyG2lI0m4j3Ojbq/UKJ/96UHcSnc+dXyxqLfs",
+    "cross_node_existing_public_inventory": {
+      "preexisting_public_trust_files": [
+        {
+          "path": "/root/.ssh/known_hosts",
+          "realpath": "/root/.ssh/known_hosts",
+          "uid": 0,
+          "mode": "0o600",
+          "group_or_world_writable": false,
+          "matches": {
+            "10.10.10.61": {
+              "exit_code": 0,
+              "keys": [
+                {
+                  "type": "ssh-ed25519",
+                  "public_key": "AAAAC3NzaC1lZDI1NTE5AAAAIGb6GOb61DQakvPpAf1EzCNUyG6MdqotnG/o0XtK8bWq"
+                },
+                {
+                  "type": "ssh-rsa",
+                  "public_key": "AAAAB3NzaC1yc2EAAAADAQABAAABgQCfJQOSoSh61o7P7iRfJPq2nDRk6uU6YhxqccIuvjTR3k1vDTiaV5Hn9amHgYPpZ290eLF/yd8FdS3RLTE1f9XWUFTqY9TK8JJ/oZj29ka/XPrJ4wyZgSNn1pn6uhewAnEpkJaFZb285CYU32FiniZ6zc+bqO46MqswVKMhB2xOB5WAyLusLZijT1dl0kU3j4jUzkqZFjJV3OCsFjjrV41t4CQJAZddIsX0+Euodr6/gGzObP2XjI2B+E1my95NcOT4rSPCf6y4FOYtz5A6wtrXp8fm+ugpdYynjzUCe59tapVlgzDB6UPwkLspg+1SGUzchPcPW8QFGMLOW0pDTd2E96oZctsvdGkGdl6dqoItb7EtZ7EWGzyh7oG9JFrTPx0HQRmEoSmzdp101P2RuTqZ46a89TsagX7PYS08VAxDpvo16V6oDWmc7J4B30Hl/Wdj9PxgV9P3tKRVzWrA/kT/J8QG3nqeLDP9pm6j3uuz9eBVa9EN5je/+eqLxnC6znM="
+                },
+                {
+                  "type": "ecdsa-sha2-nistp256",
+                  "public_key": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDFTi+/myJYU13UGe5XSovwdZLsgN23Z+NFI9DKTrikBGX4LlvpCIUU2DmNTBJmCpJhfRyYJR5Db/tNu/E5xolI="
+                }
+              ],
+              "stderr_present": false
+            },
+            "10.10.10.62": {
+              "exit_code": 0,
+              "keys": [
+                {
+                  "type": "ssh-ed25519",
+                  "public_key": "AAAAC3NzaC1lZDI1NTE5AAAAID3ixSwYTpBdV7olXP9MkSZaDEToaDipQZACPydvgezW"
+                }
+              ],
+              "stderr_present": false
+            },
+            "10.10.10.63": {
+              "exit_code": 0,
+              "keys": [
+                {
+                  "type": "ssh-ed25519",
+                  "public_key": "AAAAC3NzaC1lZDI1NTE5AAAAID3ixSwYTpBdV7olXP9MkSZaDEToaDipQZACPydvgezW"
+                }
+              ],
+              "stderr_present": false
+            }
+          }
+        }
+      ],
+      "new_trust_created": false,
+      "other_hosts_connected": false
+    },
+    "hypervisor_guest_ip_ownership": {
+      "55": [
+        {
+          "VMName": "git-app-2",
+          "MacAddress": "00155D0A3702",
+          "IPAddresses": [
+            "10.10.10.61",
+            "fe80::215:5dff:fe0a:3702"
+          ]
+        },
+        {
+          "VMName": "git-app-4",
+          "MacAddress": "00155D0A3703",
+          "IPAddresses": [
+            "10.10.10.63",
+            "fe80::215:5dff:fe0a:3703"
+          ]
+        }
+      ],
+      "56": {
+        "VMName": "git_app3",
+        "MacAddress": "00155D033835",
+        "IPAddresses": [
+          "10.10.10.62",
+          "fe80::215:5dff:fe03:3835"
+        ]
+      }
+    },
+    "dedicated_local_public_file": "C:/Users/25321/.ssh/known_hosts_bamboo_backends_verified",
+    "policy": "Strict host verification, original publickey-only identity, BatchMode, no passwords/prompts, no global SSH config or server key/account changes",
+    "identity_results": [
+      {
+        "ip": "10.10.10.60",
+        "exit_code": 0,
+        "identity_matches": true
+      },
+      {
+        "ip": "10.10.10.61",
+        "exit_code": 0,
+        "output": [
+          "root",
+          "git-app-2",
+          "CD08_READONLY_IDENTITY_OK"
+        ],
+        "identity_matches": true
+      },
+      {
+        "ip": "10.10.10.62",
+        "exit_code": 0,
+        "output": [
+          "root",
+          "git-app-3",
+          "CD08_READONLY_IDENTITY_OK"
+        ],
+        "identity_matches": true
+      },
+      {
+        "ip": "10.10.10.63",
+        "exit_code": 255,
+        "output": [],
+        "identity_matches": false
+      }
+    ],
+    "host63_failure": {
+      "exit_code": 255,
+      "classification": "HOST_KEY_CHANGED_STOPPED_BEFORE_ACCEPTING_IDENTITY",
+      "reported_unverified_fingerprint": "SHA256:bj0ljBqkl1zNBc8/lsFAu5OzIKkcg72QQR6NASN+7sM",
+      "pin_overwritten": false,
+      "next": "Owner-controlled H3C-55/git-app-4 console verification; no keyscan/TOFU/retry/bypass"
+    },
+    "shared_key_limitation": "Verified60 and accepted existing62 record share a key; do not claim cryptographically unique VM identity. Old63 shared-key record is mismatched, not proof of current63 key."
+  },
+  "nodes": {
+    "10.10.10.60": {
+      "process": {
+        "pid": 3049358,
+        "owner": {
+          "Name": "java",
+          "Uid": "1400\t1400\t1400\t1400",
+          "Gid": "1400\t1400\t1400\t1400",
+          "user": "bamboo"
+        },
+        "exe": "/opt/jre-21/bin/java",
+        "cwd": "/opt/atlassian/bamboo/12.1.12",
+        "cgroup": [
+          "0::/system.slice/bamboo.service"
+        ],
+        "allowlisted_paths": {
+          "-Dbamboo.home": "/data/atlassian/application-data/bamboo",
+          "-Dcatalina.base": "/opt/atlassian/bamboo/12.1.12",
+          "-Dcatalina.home": "/opt/atlassian/bamboo/12.1.12"
+        }
+      },
+      "service_state_observed": "active",
+      "tomcat": {
+        "source": "/opt/atlassian/bamboo/12.1.12/conf/server.xml",
+        "realpath": "/opt/atlassian/bamboo/12.1.12/conf/server.xml",
+        "sha256": "72ff5fca9c75a8153800c706513fe28a5495483d76570b7b986a78da989b158b",
+        "modified_utc": "2026-11-05T08:50:32.810159+00:00",
+        "active_xml_elements_only": [
+          {
+            "element": "/Server/Service/Connector",
+            "attributes": {
+              "port": "8085",
+              "protocol": "HTTP/1.1",
+              "redirectPort": "8443",
+              "URIEncoding": "UTF-8"
+            }
+          },
+          {
+            "element": "/Server/Service/Connector",
+            "attributes": {
+              "port": "8892",
+              "protocol": "HTTP/1.1",
+              "scheme": "https",
+              "proxyName": "deploy.mellivora.com.cn",
+              "proxyPort": "443",
+              "redirectPort": "443",
+              "URIEncoding": "UTF-8"
+            }
+          },
+          {
+            "element": "/Server/Service/Engine",
+            "attributes": {
+              "name": "Catalina",
+              "defaultHost": "localhost"
+            }
+          },
+          {
+            "element": "/Server/Service/Engine/Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.RemoteIpValve"
+            }
+          },
+          {
+            "element": "/Server/Service/Engine/Host",
+            "attributes": {
+              "name": "localhost",
+              "appBase": "webapps"
+            }
+          },
+          {
+            "element": "/Server/Service/Engine/Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.AccessLogValve",
+              "pattern": "\"%{X-Forwarded-For}i\" %{X-AUSERNAME}o %a %t \"%m %U%q %H\" %s %b %D \"%{Referer}i\" \"%{User-Agent}i\"",
+              "requestAttributesEnabled": "true"
+            }
+          },
+          {
+            "element": "/Server/Service/Engine/Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.StuckThreadDetectionValve"
+            }
+          }
+        ],
+        "web_inf_names": [
+          "atlassian-bundled-plugins",
+          "classes",
+          "decorators.xml",
+          "framework-bundles",
+          "lib",
+          "mimetypes.xml",
+          "qunit.properties",
+          "sitemesh.xml",
+          "urlrewrite.xml",
+          "web.xml"
+        ]
+      },
+      "jul_logging": {
+        "handlers": "1catalina.org.apache.juli.AsyncFileHandler, 2localhost.org.apache.juli.AsyncFileHandler, 3manager.org.apache.juli.AsyncFileHandler, 4host-manager.org.apache.juli.AsyncFileHandler, 5svnkit.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+        ".handlers": "1catalina.org.apache.juli.AsyncFileHandler, java.util.logging.ConsoleHandler",
+        "1catalina.org.apache.juli.AsyncFileHandler.level": "ALL",
+        "1catalina.org.apache.juli.AsyncFileHandler.directory": "${catalina.base}/logs",
+        "1catalina.org.apache.juli.AsyncFileHandler.prefix": "catalina.",
+        "1catalina.org.apache.juli.AsyncFileHandler.maxDays": "90",
+        "2localhost.org.apache.juli.AsyncFileHandler.level": "ALL",
+        "2localhost.org.apache.juli.AsyncFileHandler.directory": "${catalina.base}/logs",
+        "2localhost.org.apache.juli.AsyncFileHandler.prefix": "localhost.",
+        "2localhost.org.apache.juli.AsyncFileHandler.maxDays": "90",
+        "3manager.org.apache.juli.AsyncFileHandler.level": "ALL",
+        "3manager.org.apache.juli.AsyncFileHandler.directory": "${catalina.base}/logs",
+        "3manager.org.apache.juli.AsyncFileHandler.prefix": "manager.",
+        "3manager.org.apache.juli.AsyncFileHandler.maxDays": "90",
+        "4host-manager.org.apache.juli.AsyncFileHandler.level": "ALL",
+        "4host-manager.org.apache.juli.AsyncFileHandler.directory": "${catalina.base}/logs",
+        "4host-manager.org.apache.juli.AsyncFileHandler.prefix": "host-manager.",
+        "4host-manager.org.apache.juli.AsyncFileHandler.maxDays": "90",
+        "java.util.logging.ConsoleHandler.level": "ALL",
+        "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter",
+        "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].level": "INFO",
+        "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers": "2localhost.org.apache.juli.AsyncFileHandler",
+        "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].level": "INFO",
+        "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/manager].handlers": "3manager.org.apache.juli.AsyncFileHandler",
+        "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].level": "INFO",
+        "org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager].handlers": "4host-manager.org.apache.juli.AsyncFileHandler",
+        "org.apache.catalina.loader.WebappClassLoader.level": "OFF",
+        "com.sun.jersey.server.impl.application.WebApplicationImpl.level": "WARNING",
+        "com.atlassian.plugins.rest.doclet.level": "WARNING",
+        "com.sun.jersey.api.wadl.config.WadlGeneratorLoader.level": "WARNING"
+      },
+      "application_logging_source": "/opt/atlassian/bamboo/12.1.12/atlassian-bamboo/WEB-INF/classes/log4j2.properties",
+      "application_logging_sha256": "e59cf90bd4c45a17d0f484dfb44a73042b26a2b4aecc3a525cd880ff62e710fb",
+      "application_request_logger_settings": {
+        "rootLogger": "INFO, console, filelog",
+        "appender.console.filter.threshold.level": "OFF",
+        "logger.accesslogfilter": "INFO, accesslog, console"
+      },
+      "application_layout_pattern": "%d{DEFAULT} %p [%t] [%c{1}] %bambooEscapedMessage%n"
+    },
+    "10.10.10.62": {
+      "hostname": "git-app-3",
+      "service": {
+        "MainPID": "0",
+        "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12",
+        "User": "bamboo",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "FragmentPath": "/usr/lib/systemd/system/bamboo.service"
+      },
+      "server_xml": {
+        "source": "/opt/atlassian/bamboo/12.1.12/conf/server.xml",
+        "sha256": "a6f64073b176a6963d4e6e5ee509b2fb998f4113fedf143d8c4dbd2c29b92f0a",
+        "active_xml_elements": [
+          {
+            "type": "Connector",
+            "attributes": {
+              "port": "8085",
+              "protocol": "HTTP/1.1"
+            }
+          },
+          {
+            "type": "Connector",
+            "attributes": {
+              "port": "8892",
+              "protocol": "HTTP/1.1",
+              "scheme": "https",
+              "proxyName": "deploy.mellivora.com.cn",
+              "proxyPort": "443"
+            }
+          },
+          {
+            "type": "Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.RemoteIpValve"
+            }
+          },
+          {
+            "type": "Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.AccessLogValve",
+              "pattern": "\"%{X-Forwarded-For}i\" %{X-AUSERNAME}o %a %t \"%m %U%q %H\" %s %b %D \"%{Referer}i\" \"%{User-Agent}i\"",
+              "requestAttributesEnabled": "true"
+            }
+          },
+          {
+            "type": "Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.StuckThreadDetectionValve"
+            }
+          }
+        ]
+      },
+      "application_logging": [
+        {
+          "source": "/opt/atlassian/bamboo/12.1.12/atlassian-bamboo/WEB-INF/classes/log4j2.properties",
+          "sha256": "e59cf90bd4c45a17d0f484dfb44a73042b26a2b4aecc3a525cd880ff62e710fb",
+          "settings": {
+            "rootLogger": "INFO, console, filelog",
+            "appender.accesslog.fileName": "atlassian-bamboo-access.log",
+            "appender.accesslog.layout.pattern": "%d{DEFAULT} %p [%t] [%c{1}] %bambooEscapedMessage%n",
+            "logger.accesslogfilter": "INFO, accesslog, console",
+            "logger.accesslogfilter.name": "com.atlassian.bamboo.filter.AccessLogFilter",
+            "logger.accesslogfilter.additivity": "false"
+          }
+        }
+      ],
+      "public_web_jars": [
+        {
+          "path": "/opt/atlassian/bamboo/12.1.12/atlassian-bamboo/WEB-INF/lib/atlassian-bamboo-web-12.1.12.jar",
+          "sha256": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198"
+        }
+      ],
+      "raw_logs_read": false
+    },
+    "10.10.10.61": {
+      "hostname": "git-app-2",
+      "service": {
+        "MainPID": "2005512",
+        "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12",
+        "User": "bamboo",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "FragmentPath": "/etc/systemd/system/bamboo.service"
+      },
+      "server_xml": {
+        "source": "/opt/atlassian/bamboo/12.1.12/conf/server.xml",
+        "sha256": "6b77fe64f3d794761f1487d4254a61c335a819384ceeea03b21af22e9c687524",
+        "active_xml_elements": [
+          {
+            "type": "Connector",
+            "attributes": {
+              "port": "8085",
+              "protocol": "HTTP/1.1"
+            }
+          },
+          {
+            "type": "Connector",
+            "attributes": {
+              "port": "8892",
+              "protocol": "HTTP/1.1",
+              "scheme": "https",
+              "proxyName": "deploy.mellivora.com.cn",
+              "proxyPort": "443"
+            }
+          },
+          {
+            "type": "Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.RemoteIpValve"
+            }
+          },
+          {
+            "type": "Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.AccessLogValve",
+              "pattern": "\"%{X-Forwarded-For}i\" %{X-AUSERNAME}o %a %t \"%m %U%q %H\" %s %b %D \"%{Referer}i\" \"%{User-Agent}i\"",
+              "requestAttributesEnabled": "true"
+            }
+          },
+          {
+            "type": "Valve",
+            "attributes": {
+              "className": "org.apache.catalina.valves.StuckThreadDetectionValve"
+            }
+          }
+        ]
+      },
+      "application_logging": [
+        {
+          "source": "/opt/atlassian/bamboo/12.1.12/atlassian-bamboo/WEB-INF/classes/log4j2.properties",
+          "sha256": "e59cf90bd4c45a17d0f484dfb44a73042b26a2b4aecc3a525cd880ff62e710fb",
+          "settings": {
+            "rootLogger": "INFO, console, filelog",
+            "appender.accesslog.fileName": "atlassian-bamboo-access.log",
+            "appender.accesslog.layout.pattern": "%d{DEFAULT} %p [%t] [%c{1}] %bambooEscapedMessage%n",
+            "logger.accesslogfilter": "INFO, accesslog, console",
+            "logger.accesslogfilter.name": "com.atlassian.bamboo.filter.AccessLogFilter",
+            "logger.accesslogfilter.additivity": "false"
+          }
+        }
+      ],
+      "public_web_jars": [
+        {
+          "path": "/opt/atlassian/bamboo/12.1.12/atlassian-bamboo/WEB-INF/lib/atlassian-bamboo-web-12.1.12.jar",
+          "sha256": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198"
+        }
+      ],
+      "raw_logs_read": false
+    },
+    "10.10.10.63": {
+      "status": "READONLY_METADATA_AUDIT_COMPLETE_OWNER_APPROVED_EXISTING_ROOT",
+      "configuration_inspected": true,
+      "followup_evidence": "maintenance/verification/bamboo-backend63-console-20261113.json",
+      "configuration_audit_complete": true,
+      "metadata_followup": "maintenance/verification/bamboo-backend63-metadata-20261113.json",
+      "service_state_observed": "loaded/active, MainPID835390; owner-run metadata observed, not replayed",
+      "completion_evidence": "maintenance/verification/bamboo-backend63-completion-20261113.json",
+      "server_xml_sha256": "951a3804e415898ce33183f7323e2a35661c1e570dcd170585029e9bd19fbda8",
+      "existing_root_identity_check": "Explicit owner approval; one strict original-publickey-only check matched root/git-app-4/sentinel, exit0/no stderr. No password/key/account/config changes. Remaining allowlisted metadata read succeeded; bounded scope consumed."
+    }
+  },
+  "stuck_valve_metadata": {
+    "10.10.10.60": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "stuck_valves": [
+          {
+            "className": "org.apache.catalina.valves.StuckThreadDetectionValve",
+            "threshold": "60"
+          }
+        ],
+        "selected_jul": {
+          "java.util.logging.ConsoleHandler.level": "ALL",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter"
+        },
+        "stuck_class": [
+          {
+            "jar": "/opt/atlassian/bamboo/12.1.12/lib/catalina.jar",
+            "class_sha256": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150"
+          }
+        ]
+      }
+    },
+    "10.10.10.62": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "stuck_valves": [
+          {
+            "className": "org.apache.catalina.valves.StuckThreadDetectionValve",
+            "threshold": "60"
+          }
+        ],
+        "selected_jul": {
+          "java.util.logging.ConsoleHandler.level": "ALL",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter"
+        },
+        "stuck_class": [
+          {
+            "jar": "/opt/atlassian/bamboo/12.1.12/lib/catalina.jar",
+            "class_sha256": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150"
+          }
+        ]
+      }
+    },
+    "10.10.10.61": {
+      "exit_code": 0,
+      "stderr": "",
+      "metadata": {
+        "stuck_valves": [
+          {
+            "className": "org.apache.catalina.valves.StuckThreadDetectionValve",
+            "threshold": "60"
+          }
+        ],
+        "selected_jul": {
+          "java.util.logging.ConsoleHandler.level": "ALL",
+          "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter"
+        },
+        "stuck_class": [
+          {
+            "jar": "/opt/atlassian/bamboo/12.1.12/lib/catalina.jar",
+            "class_sha256": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150"
+          }
+        ]
+      }
+    }
+  },
+  "actual_installed_class_analysis": {
+    "web_jar_sha256": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198",
+    "access_log_filter_class_sha256": "1c6f235b7545d1b24159af1de50cd48da4537f6b35f0c1b0e68eda9f38326e74",
+    "filter_behavior": "isInterestingUrl excludes /agentServer/ at non-TRACE; TRACE returns true before exclusions. getStartText appends query except password/os_password fields. Do not infer current runtime TRACE from disk INFO or treat this filter as general credential redaction.",
+    "configured_filter_level": "INFO, accesslog, console",
+    "bamboo_escaping_converter_sha256": "c22dc239458eb3cb3c944e1cb1b32c1d6d9ccd8465d4838bb907cb15eeb12ce7",
+    "escaping_behavior": "Angle brackets and newline escaping plus message-length truncation, no credential redaction",
+    "stuck_valve_class_sha256": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150",
+    "stuck_behavior": "invoke captures requestURL plus ?query; WARN includes stored request URI after configured60-second threshold",
+    "bytecode_verification": "Installed public classes transferred to existing isolated JDK VM for javap; exact class SHA matches; owned class tempdirs removed"
+  },
+  "native_stuck_warning_smoke": {
+    "tomcat_version": "10.1.59",
+    "public_jar_count": 9,
+    "public_jar_archive_sha256": "7783656d1456f3fa5c4ad5d67003fcc2a8d35aaa2bc910f80a7208fbdcd4683d",
+    "fixture_source_sha256": "a7ba54f19b63d43cd9f1c34e202668e33acd506925306a02f700b115befd48be",
+    "fixture_exit": 0,
+    "stderr_empty": true,
+    "result": {
+      "actual_native_stuck_class_sha256": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150",
+      "warning_count": 1,
+      "synthetic_query_token_in_warning": true,
+      "native_request_uri_contains_query": true,
+      "production_http_requests": 0
+    },
+    "fixture_input": "Synthetic HTTP request object with securityToken marker and deliberately blocked downstream test valve; actual native invoke/backgroundProcess at threshold1 in independent fixture JVM",
+    "production_http_or_registration_requests": 0,
+    "production_configuration_or_credentials_copied": false,
+    "owned_remote_fixture_removed": true,
+    "owned_local_staging_removed": true
+  },
+  "directional_proposal_not_applied": {
+    "nginx": "Retain prior exact1.31.7 isolated proof: Bamboo-vhost-only query-free access metadata and discarded error sink; loss of detailed error diagnostics remains explicit unapproved tradeoff",
+    "tomcat_access_log": "Remove %q and Referer/query-echo headers; candidate engine pattern: %a %t \"%m %U %H\" %s %b %D. Does not change the request or authentication, but is not a complete secrecy guarantee by itself.",
+    "application_filter": "Keep configured non-TRACE exclusion; verify runtime level before enrollment. Do not blanket-disable INFO access logging or assume bambooEscapedMessage redacts credentials.",
+    "stuck_and_error_diagnostics": "Preserve blocked state until query-secret protection covers JUL warning/error records and all handlers. Native60-second stuck warning is proven to include query. Redaction solution requires separately reviewed/proven implementation and maintenance approval; suppressing/disabling monitoring is not silently authorized.",
+    "cross_node_requirements": "Read-only metadata/class provenance is complete for all four nodes.63 used owner-approved single existing-root key-only identity verification after independent console host-key validation; no identity or permissions created. Runtime overrides, complete warning/error secrecy and any live remediation still need separate proof/approval; do not restart failed62 under this audit scope.",
+    "other_parent_gate": "Fail-closed first-job/consumer isolation still not established; no live agent startup authorized by this audit."
+  },
+  "limits": [
+    "No raw production logs, passwords, private-key bytes, Bao/DPAPI reads or real registration/model traffic",
+    "No server files/config/auth/VM/service state changed; no Agent start/pause or successful Test/bootstrap replay",
+    "Observed on-disk configs referenced by native processes/unit paths, not a full runtime JMX/filter/level inventory",
+    "All four nodes have verified logging metadata/public class provenance; runtime overrides and complete failure-path secrecy remain unproven, and no live mitigation or first-job isolation has been accepted"
+  ],
+  "related_evidence": [
+    "maintenance/verification/bamboo-console-verification-20261113.json",
+    "maintenance/verification/bamboo-registration-paths-20261112.json"
+  ]
+}

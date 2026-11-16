@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "Read-only and offline continuation of CD-08 after reconciled scheduling recovery; no live registration retry",
+  "status": "OFFLINE_REVIEW_COMPLETE_LIVE_REGISTRATION_BLOCKED",
+  "health_contract": {
+    "source": "https://support.atlassian.com/bamboo/kb/what-bamboo-url-should-i-use-for-http-healthchecks/",
+    "source_updated": "2025-09-26",
+    "documented_running_http_status": 200,
+    "documented_paused_http_status": 200,
+    "configured_proxy_check": "GET /rest/api/latest/status; expect status200",
+    "conclusion": "HTTP200-only health checking does not itself establish why the paused experiment produced503. No during-503 backend runtime snapshot exists; incident cause remains unproven. Do not disable health checks based on assumed paused503 semantics."
+  },
+  "request_logging_gate": {
+    "reviewed_vendor_version": "12.1.10",
+    "existing_wire_evidence": "maintenance/verification/bamboo-secure-bootstrap-20261111.json: finding.fingerprint_uri_includes_token=true, reproduced with synthetic token",
+    "active_ingress_host": "10.156.56.100",
+    "configuration_read_only": "/mnt/scsi0-4/nginx-ui/nginx/nginx.conf:15-18",
+    "log_format_contains_full_request": true,
+    "access_log_uses_that_format": true,
+    "bamboo_vhost_has_access_log_override": false,
+    "bamboo_vhost": "/mnt/scsi0-4/nginx-ui/nginx/sites-available/git编译部署服务",
+    "conclusion": "A fingerprint URI carrying a token can enter proxy request logging even when JVM stdout/stderr are redacted. This is a potential exposure path, not evidence that the real token was logged during the stopped attempt.",
+    "real_access_logs_or_credentials_read": false,
+    "required_before_another_real_bootstrap": "Verify exact12.1.12 supported token transport and narrowly scoped ingress/server logging protection. Do not infer server-side secrecy from client-only filtering."
+  },
+  "tooling_observation": {
+    "local_java_on_path": false,
+    "new_vm_existing_java_path": "/usr/bin/java",
+    "new_vm_javac_or_javap_on_path": false,
+    "existing_jdk_compiler_module_present": true,
+    "tools_installed": false,
+    "agent_service_started": false
+  },
+  "artifact_provenance": {
+    "installed_reviewed_12_1_10_sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+    "maven_12_1_10_outer_sha256": "b4f10f8efa7824bcab5c0d6ecf07710dbfa385ff6bc62b027d0f71d9c7a0870a",
+    "installed_and_public_12_1_10_class_entries": 3337,
+    "different_12_1_10_class_entries": 0,
+    "old_nested_bootstrap_sha256": "6cb22823b298c6acfcbb4396944b4fae7f1ff32a39673101eca2ad854162527f",
+    "old_nested_matches_installed_outer": false,
+    "maven_12_1_12_outer_sha256": "4e95ea600c4f50851497281d37838c733fbcb17b2150beb9a5e48a4592f56ded",
+    "maven_12_1_12_bytes": 13433878,
+    "compared_bootstrap_agenttype_log4j_runtime_classes": 57,
+    "changed_compared_runtime_classes": 0,
+    "conclusion": "Outer archive hash inequality is not evidence of class-code incompatibility. Installed12.1.10 and Maven12.1.10 classes match; selected12.1.12 runtime classes also match. No installed artifact/pin replaced; live server-delivered12.1.12 artifact and Online remain unverified."
+  },
+  "public_12_1_12_loopback_smoke": {
+    "executed_as": "locked bamboo user on dedicated VM; existing Java source-file compiler module",
+    "endpoint": "owned127.0.0.1 HTTP403 fixture only",
+    "java_exit": 0,
+    "synthetic_token_received_correctly": true,
+    "request_line_contains_synthetic_token": true,
+    "token_in_actual_java_argv": false,
+    "token_in_actual_java_environment": false,
+    "token_in_client_stdout_stderr": false,
+    "redaction_marker_present": true,
+    "real_credentials_or_live_bamboo_used": false,
+    "service_unit_or_installed_assets_changed": false,
+    "temporary_fixture_removed": true,
+    "conclusion": "Existing reviewed adapter executes against exact public12.1.12 and protects client output/argv/env, but token remains in the wire request URI. This is not an Online or server/proxy-log secrecy pass."
+  },
+  "native_registration_gate": {
+    "verified_documentation_version": "12.1.12",
+    "register_signature": "RemotedRemoteAgentManager.registerAgent(RemotableRemoteAgentDefinition)",
+    "enabled_carrier_in_documented_wire_api": false,
+    "documented_register_disabled_parameter": false,
+    "documented_register_only_bootstrap_mode_found": false,
+    "disable_and_dedicate_require_existing_agent_id": true,
+    "queue_api": "AgentQueueAccessor.takeContext(long) / takeContext(long, ResultKey), documented blocking queue retrieval",
+    "default_enabled_runtime_value": "TRUE in exact public12.1.12 implementation and actual-class offline execution; not a live server state claim",
+    "manual_auth_or_empty_queue_eliminates_first_job_race": false,
+    "conclusion": "No accepted fail-closed first-job barrier. A newly found synchronous pre-registration event can mutate the definition, but native listener exceptions are swallowed and do not veto registration; see pre_registration_event_review. Do not race disable/dedicate or repeat lifecycle pause.",
+    "references": [
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/buildqueue/manager/RemotedRemoteAgentManager.html",
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/buildqueue/RemotableRemoteAgentDefinition.html",
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/v2/build/queue/AgentQueueAccessor.html",
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/plugins/rest/resource/AgentResource.html",
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/buildqueue/manager/AgentAssignmentService.html",
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/agent/bootstrap/RemoteAgentBootstrap.html"
+    ]
+  },
+  "pre_registration_event_review": {
+    "public_version": "12.1.12",
+    "event_contract": "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/event/agent/AgentRegisteringEvent.html",
+    "public_war_url": "https://maven.artifacts.atlassian.com/com/atlassian/bamboo/atlassian-bamboo-web-app/12.1.12/atlassian-bamboo-web-app-12.1.12.war",
+    "retrieval": "HTTP206 range-selected ZIP entries; no full384MB distribution download or live server access",
+    "artifact_sha256": {
+      "atlassian-bamboo-api": "daa4f10c404a05d23e2b7ad3dd09c57aa3e0a605208006cc8eded75bd9456b23",
+      "atlassian-bamboo-core": "e5682254bed1198b13ca6a4faff95e305915f8de13b59761ad254c2378869c3c",
+      "atlassian-bamboo-agent-core": "891c5158ad15ab78917af21ffb867311ec984bc2b06ee0eeeb96f87015e4f595"
+    },
+    "event_library": {
+      "WEB-INF/lib/atlassian-event-6.0.9.jar": {
+        "sha256": "455407a10efbb04db90e38709e05685ccdadb2cb77df39710d68f70b07e054a5",
+        "classes": [
+          "com/atlassian/event/internal/EventPublisherImpl.class",
+          "com/atlassian/event/internal/AsynchronousAbleEventDispatcher.class",
+          "com/atlassian/event/internal/EventPublisherUtils.class",
+          "com/atlassian/event/api/EventPublisher.class",
+          "com/atlassian/event/spi/EventDispatcher.class"
+        ]
+      }
+    },
+    "native_default_enabled": true,
+    "registering_event_precedes_registerAgentInternal": true,
+    "event_holds_original_mutable_definition": true,
+    "event_has_AsynchronousPreferred_annotation": false,
+    "server_wiring": "applicationContextManagers.xml: TxAwareEventPublisher -> EventPublisherImpl -> BambooEventDispatcher -> AsynchronousAbleEventDispatcher with AnnotationAsynchronousEventResolver and Bamboo EventInvokerRunnable.EventRunnableFactory",
+    "registration_persistence_trace": "registerNewAgent.visitRemote passes the same definition to AgentManager.savePipeline; inspected concrete savePipeline forwards via visitor to AgentDao.saveAndReturn. No live database/cache preservation or complete persistence proof claimed.",
+    "actual_class_positive_smoke": {
+      "java_exit": 0,
+      "native_default_enabled": true,
+      "same_object": true,
+      "target_disabled_before_publish_return": true,
+      "unrelated_agent_unchanged": true,
+      "same_thread": true,
+      "async_submissions": 0,
+      "temporary_files_removed": true
+    },
+    "actual_bamboo_runnable_negative_smoke": {
+      "java_exit": 0,
+      "listener_throws_before_disable": true,
+      "native_Bamboo_EventInvokerRunnable_catches_exception": true,
+      "publish_returns_normally": true,
+      "agent_remains_enabled": true,
+      "temporary_files_removed": true
+    },
+    "decision": "Bare pre-registration listener is NOT accepted as a fail-closed first-job barrier. Healthy synchronous mutation is possible, but listener failure does not veto registration. No plugin prepared or installed; no registration/Online/persistence acceptance. Need an explicitly enforced registration/queue-activation postcondition or supported registration-only stage, plus scoped fingerprint ingress/server-log protection before any new real bootstrap.",
+    "live_bamboo_calls": false,
+    "credentials_read": false,
+    "service_started": false,
+    "shared_configuration_changed": false
+  },
+  "for_key_candidate": {
+    "actual_reviewed_bytecode": "createAgentContext passes bamboo.agent.ephemeral.for.key to AgentContext; nonblank forKey is added to fingerprint suffix",
+    "documented_carrier": "RemotableRemoteAgentDefinitionImpl constructor has nullable ResultKey ephemeralAgentDedication",
+    "documented_semantics": "PipelineDefinition.getEphemeralAgentDedication: job ResultKey or null if not a dedicated ephemeral agent. Persistent AgentAssignment is a separate mechanism.",
+    "plain_remote_server_behavior": "UNPROVEN; carrier exists but supported persistent REMOTE registration-time dedication was not demonstrated",
+    "decision": "Do not set speculative forKey, switch agent type, or use bamboo.agent.ephemeral.approval.turnedoff to bypass approval. No shortcut to persistent first-job isolation accepted.",
+    "references": [
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/v2/build/agent/RemotableRemoteAgentDefinitionImpl.html",
+      "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/buildqueue/PipelineDefinition.html"
+    ]
+  },
+  "boundaries": {
+    "shared_pause_or_resume_repeated": false,
+    "service_start_repeated": false,
+    "openbao_or_dpapi_reads": false,
+    "pinned_assets_changed": false,
+    "ci_test_iam_or_production_changes": false,
+    "health_or_logging_configuration_changed": false,
+    "registration_or_online_claimed": false
+  }
+}

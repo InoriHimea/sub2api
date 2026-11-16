@@ -1,0 +1,330 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T08:37:06.433468+00:00",
+  "parent": "TODO.md CD-08 independent deployment-agent registration/Online/exclusive-intake/artifact acceptance",
+  "status": "JUL_REDACTION_IMPLEMENTED_NATIVE_AND_LOCALIZED_QUALIFIED_NOT_INSTALLED",
+  "current_qualification_evidence": "maintenance/verification/bamboo-jul-protection-qualification-20261113.json",
+  "qualified_delivery_archive_sha256": "7d517b9ae5ec7256c965673bccc80dc2c8b18adae2c7d1174bf1623b3707f205",
+  "provenance_note": "Initial build/source/native batches below remain historical producer evidence. Current qualification removes only English display-word assertions, adds zh_CN native qualification, and preserves the identical verified runtime JAR; see the qualification receipt and separate source snapshots.",
+  "owner_scope": "2026-11-13 approve continuation after recommendation to first validate diagnostic-preserving JUL protection offline; no live maintenance/Agent start inferred",
+  "implementation": {
+    "directory": "deploy/bamboo/server-logging",
+    "source_sha256": {
+      "SecurityTokenQueryRedactor.java": "a82b7c73dfa2e3dbb05565a5de004a5a4c3923311ba57d839924e9e1e6648b24",
+      "SecurityTokenQueryRedactorTest.java": "b41727846482d962ea9307fc000b047f166ceddfc7e0fffca18884ec21a9afcc",
+      "QuerySafeOneLineFormatter.java": "69abecf5b093bc14c34ee66a949eb206888c5662172e3e679044c31663522840",
+      "QuerySafeOneLineFormatterTest.java": "38c236749f5d13066f0b7542728fadfe676722667921816bd8b9c5d935962625",
+      "QuerySafeLoggingGuard.java": "120447bb4cdc3650cae02511a1064e9814c32f888c28159afb9e15e81375eefe",
+      "NativeJulLoggingSmoke.java": "599ef346ec3f523efcb395bbb534bde4f925b750ecdc295a918a2b22d38bf65b",
+      "build.py": "f8a2bee4b6a62ca0a08d5d0f1a2978b3202f72fc72f2e14e6f343f7de367a36b",
+      "verify_native.py": "60ed9edb2beb0e2e2f611eb3428d3fd0c940737d0593b2af05629be4ce77f187"
+    },
+    "core": "Allocation-lazy linear stateless securityToken assignment scanner, raw/%HH/%25HH contract; no secret lookup, regex backtracking or unlabeled-secret guarantee",
+    "formatter": "Final native JULI OneLineFormatter output redacted; parameters, Unicode, throwable/cause/suppressed/stack diagnostics retained; original LogRecord not mutated",
+    "startup_guard": "JVM-supported premain, no bytecode transforms/attach. Mandatory actual-manager/config/dependency/declared-route/handler-instance checks; fixed diagnostic and exit78 before application main if invalid. Missing constructor protection cannot silently fall back. Runtime reconfiguration after premain remains outside continuous enforcement.",
+    "frozen_client_bootstrap_unit_or_credential_tree_modified": false,
+    "source_newlines": "New Java/Python subtree explicitly LF in .gitattributes"
+  },
+  "build": {
+    "manifest": {
+      "commands": [
+        {
+          "argv": [
+            "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+            "--module",
+            "jdk.compiler/com.sun.tools.javac.Main",
+            "--source",
+            "21",
+            "--target",
+            "21",
+            "-encoding",
+            "UTF-8",
+            "-classpath",
+            "/tmp/cd08-jul-protection-XISTNf/dependency/tomcat-juli.jar",
+            "-d",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes",
+            "/tmp/cd08-jul-protection-XISTNf/source/SecurityTokenQueryRedactor.java",
+            "/tmp/cd08-jul-protection-XISTNf/source/QuerySafeOneLineFormatter.java",
+            "/tmp/cd08-jul-protection-XISTNf/source/QuerySafeLoggingGuard.java"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+            "--module",
+            "jdk.compiler/com.sun.tools.javac.Main",
+            "--source",
+            "21",
+            "--target",
+            "21",
+            "-encoding",
+            "UTF-8",
+            "-classpath",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes:/tmp/cd08-jul-protection-XISTNf/dependency/tomcat-juli.jar",
+            "-d",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/test-classes",
+            "/tmp/cd08-jul-protection-XISTNf/source/SecurityTokenQueryRedactorTest.java",
+            "/tmp/cd08-jul-protection-XISTNf/source/QuerySafeOneLineFormatterTest.java"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+            "-classpath",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/test-classes:/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes:/tmp/cd08-jul-protection-XISTNf/dependency/tomcat-juli.jar",
+            "com.mellivora.bamboo.logging.SecurityTokenQueryRedactorTest"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+            "-classpath",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/test-classes:/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes:/tmp/cd08-jul-protection-XISTNf/dependency/tomcat-juli.jar",
+            "com.mellivora.bamboo.logging.QuerySafeOneLineFormatterTest"
+          ],
+          "exit_code": 0
+        },
+        {
+          "argv": [
+            "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+            "--module",
+            "jdk.jartool/sun.tools.jar.Main",
+            "--create",
+            "--file",
+            "/tmp/cd08-jul-protection-XISTNf/package/querysafe-juli.jar",
+            "--date=1980-01-01T00:00:02Z",
+            "--manifest",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/runtime-manifest.mf",
+            "-C",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes",
+            "com/mellivora/bamboo/logging/QuerySafeLoggingGuard$GuardFailure.class",
+            "-C",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes",
+            "com/mellivora/bamboo/logging/QuerySafeLoggingGuard.class",
+            "-C",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes",
+            "com/mellivora/bamboo/logging/QuerySafeOneLineFormatter.class",
+            "-C",
+            "/tmp/cd08-jul-protection-XISTNf/package/proof-not-installable/production-classes",
+            "com/mellivora/bamboo/logging/SecurityTokenQueryRedactor.class"
+          ],
+          "exit_code": 0
+        }
+      ],
+      "compiler_policy": "Actual Java21 platform with explicit source21/target21; no cross-compilation or ct.sym substitution",
+      "formatter_class": "com.mellivora.bamboo.logging.QuerySafeOneLineFormatter",
+      "guard_class": "com.mellivora.bamboo.logging.QuerySafeLoggingGuard",
+      "handlers": [
+        "1catalina.org.apache.juli.AsyncFileHandler",
+        "2localhost.org.apache.juli.AsyncFileHandler",
+        "3manager.org.apache.juli.AsyncFileHandler",
+        "4host-manager.org.apache.juli.AsyncFileHandler",
+        "5svnkit.org.apache.juli.AsyncFileHandler",
+        "java.util.logging.ConsoleHandler"
+      ],
+      "java21_toolchain_version": "openjdk 21.0.13.0.3 2026-10-24\nOpenJDK Runtime Environment (build 21.0.13.0.3+1-1-24.04.1-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)",
+      "java_release": 21,
+      "juli_dependency": {
+        "filename": "tomcat-juli.jar",
+        "sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c"
+      },
+      "premain_class": "com.mellivora.bamboo.logging.QuerySafeLoggingGuard",
+      "profile": "tomcat-10.1.59-juli-querysafe-java21",
+      "proof_directory": "proof-not-installable",
+      "proof_directory_installable": false,
+      "runtime_jar": {
+        "entry_date": "1980-01-01T00:00:02Z",
+        "filename": "querysafe-juli.jar",
+        "sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+        "size_bytes": 8990
+      },
+      "runtime_limitation": "Handlers added or reconfigured after premain require separate runtime review.",
+      "schema": 1,
+      "source_sha256": {
+        "QuerySafeLoggingGuard.java": "120447bb4cdc3650cae02511a1064e9814c32f888c28159afb9e15e81375eefe",
+        "QuerySafeOneLineFormatter.java": "69abecf5b093bc14c34ee66a949eb206888c5662172e3e679044c31663522840",
+        "QuerySafeOneLineFormatterTest.java": "38c236749f5d13066f0b7542728fadfe676722667921816bd8b9c5d935962625",
+        "SecurityTokenQueryRedactor.java": "a82b7c73dfa2e3dbb05565a5de004a5a4c3923311ba57d839924e9e1e6648b24",
+        "SecurityTokenQueryRedactorTest.java": "b41727846482d962ea9307fc000b047f166ceddfc7e0fffca18884ec21a9afcc",
+        "build.py": "f8a2bee4b6a62ca0a08d5d0f1a2978b3202f72fc72f2e14e6f343f7de367a36b"
+      },
+      "startup_probe_logger": "com.mellivora.bamboo.logging.startupGuard",
+      "supplemental_overlay": {
+        "filename": "logging-formatters.properties",
+        "sha256": "949ba5d0cb47a0c58bb0a34e75c9c2b7882497f8b3b95667de78ea6cce2efefb"
+      },
+      "tool_commands": {
+        "jar": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "--module",
+          "jdk.jartool/sun.tools.jar.Main"
+        ],
+        "java": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java"
+        ],
+        "javac": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "--module",
+          "jdk.compiler/com.sun.tools.javac.Main"
+        ]
+      }
+    },
+    "scanner_regression_assertions": 425,
+    "formatter_regression_main": "PASS actual JULI parameter/localization/throwable/nonmutation consumer cases",
+    "pretest_failures": [
+      "No javac/jar binaries on isolated runtime; real JDK modules present",
+      "--release21 unavailable without ct.sym before tests; fixed actual-Java21 source/target profile used, not substituted tools or suppressed tests"
+    ],
+    "actual_jdk_modules": "Java21.0.13.0.3 compiler/archive modules already installed; no toolchain installation",
+    "source_bundle_initial_sha256": "96e2f76dd415c338a9da2998b3e78c345c977486b07b2e744847e7eedfbe4f61",
+    "source_delta_updates": "Only build/verify launcher-policy files updated after pretest failures; verify later added root-subset case; production Java/JAR unchanged after successful build"
+  },
+  "native_proof_batches": [
+    {
+      "candidate_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "fixture_source_sha256": "599ef346ec3f523efcb395bbb534bde4f925b750ecdc295a918a2b22d38bf65b",
+      "java21_toolchain_version": "openjdk 21.0.13.0.3 2026-10-24\nOpenJDK Runtime Environment (build 21.0.13.0.3+1-1-24.04.1-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)",
+      "juli_dependency_sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+      "production_http_requests": 0,
+      "results": {
+        "missing-formatter-class": {
+          "application_main_entered": false,
+          "exit_code": 78,
+          "startup_rejected": true
+        },
+        "missing-probe": {
+          "application_main_entered": false,
+          "exit_code": 78,
+          "startup_rejected": true
+        },
+        "native-formatter": {
+          "application_main_entered": false,
+          "exit_code": 78,
+          "startup_rejected": true
+        },
+        "protected": {
+          "candidate_not_in_application_classpath": true,
+          "console_pending_parent_verification": true,
+          "console_verified": true,
+          "context_classloader_transition": true,
+          "diagnostics_retained": true,
+          "exit_code": 0,
+          "native_file_sinks_verified": 6,
+          "native_stuck_warning_redacted": true,
+          "production_http_requests": 0
+        },
+        "wrong-juli-digest": {
+          "application_main_entered": false,
+          "exit_code": 78,
+          "startup_rejected": true
+        }
+      },
+      "runner_source_sha256": "8e2388a9e9ba4ac9d0e78ba7719abb71f5339e893a8112b55af3c1873ae84e38",
+      "runtime_archive_sha256": "7783656d1456f3fa5c4ad5d67003fcc2a8d35aaa2bc910f80a7208fbdcd4683d",
+      "runtime_reconfiguration_after_premain_not_covered": true,
+      "schema": 1
+    },
+    {
+      "candidate_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "fixture_source_sha256": "599ef346ec3f523efcb395bbb534bde4f925b750ecdc295a918a2b22d38bf65b",
+      "java21_toolchain_version": "openjdk 21.0.13.0.3 2026-10-24\nOpenJDK Runtime Environment (build 21.0.13.0.3+1-1-24.04.1-Ubuntu)\nOpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)",
+      "juli_dependency_sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+      "production_http_requests": 0,
+      "results": {
+        "protected-root-subset": {
+          "candidate_not_in_application_classpath": true,
+          "console_pending_parent_verification": false,
+          "console_verified": true,
+          "context_classloader_transition": true,
+          "diagnostics_retained": true,
+          "exit_code": 0,
+          "native_file_sinks_verified": 6,
+          "native_stuck_warning_redacted": true,
+          "production_http_requests": 0
+        }
+      },
+      "runner_source_sha256": "60ed9edb2beb0e2e2f611eb3428d3fd0c940737d0593b2af05629be4ce77f187",
+      "runtime_archive_sha256": "7783656d1456f3fa5c4ad5d67003fcc2a8d35aaa2bc910f80a7208fbdcd4683d",
+      "runtime_reconfiguration_after_premain_not_covered": true,
+      "schema": 1
+    }
+  ],
+  "verification_summary": {
+    "protected_routing_scenarios": 2,
+    "negative_startup_scenarios": 4,
+    "negative_exit_code": 78,
+    "negative_application_main_entered": false,
+    "native_file_sinks_per_positive_case": 6,
+    "console_verified": true,
+    "types": "Five prefixed actual AsyncFileHandler instances, one actual FileHandler, actual ConsoleHandler",
+    "actual_native_stuck_warning_redacted": true,
+    "diagnostic_error_cause_suppressed_unicode_status_path_other_params_retained": true,
+    "candidate_absent_from_application_classpath": true,
+    "agent_system_loader_and_context_loader_transition_verified": true,
+    "all_completed_cases_replayed": false,
+    "new_case_only_command": "verify_native.py --case protected-root-subset"
+  },
+  "artifacts": {
+    "directory": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc",
+    "runtime_jar": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\querysafe-juli.jar",
+    "runtime_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+    "delivery_zip": "D:\\dev-cache\\sub2api-jul-protection-20261113-c6feed9c15cc\\querysafe-juli-candidate.zip",
+    "delivery_zip_sha256": "71ebbec0eb3479c8704337f331f017d7cd50f94a0f2f7a0fda8c730fc0d1846f",
+    "delivery_zip_contains_only_own_runtime_source_manifests_proofs_not_vendor_libraries": true,
+    "public_runtime_archive_sha256": "7783656d1456f3fa5c4ad5d67003fcc2a8d35aaa2bc910f80a7208fbdcd4683d",
+    "actual_juli_sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+    "public_dependencies_retained_separately_for_reproduction": true
+  },
+  "primary_public_startup_metadata": {
+    "java.util.logging.config.file": "/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+    "java.util.logging.manager": "org.apache.juli.ClassLoaderLogManager",
+    "classpath": "/opt/atlassian/bamboo/12.1.12/bin/bootstrap.jar:/opt/atlassian/bamboo/12.1.12/bin/tomcat-juli.jar",
+    "instrument_module": [
+      "java.instrument@21.0.4"
+    ],
+    "module_query_exit": 0
+  },
+  "primary_launcher_metadata": {
+    "startup_executable_paths": [
+      "/opt/atlassian/bamboo/12.1.12/bin/start-bamboo.sh"
+    ],
+    "raw_argv_or_environment_returned": false
+  },
+  "primary_launcher_chain": {
+    "start-bamboo.sh": {
+      "sha256": "aef26992abfd6d6c5c51c84c8ae35c28f3827d2c8a89743038381b0ffaf6285d",
+      "references_catalina_sh": true,
+      "mentions_CATALINA_OPTS": false,
+      "references_setenv_sh": false
+    },
+    "catalina.sh": {
+      "sha256": "f1d9568d1811d1aecc79e58346003e40b0a1d621503a38ba59a07d74f1f010e6",
+      "references_catalina_sh": true,
+      "mentions_CATALINA_OPTS": true,
+      "references_setenv_sh": true
+    }
+  },
+  "documentation": "FORK.md server JUL query protection section; corrected obsolete enrollment/delivery claims to prevent replay",
+  "cleanup": {
+    "owned_remote_fixture_removed": true,
+    "owned_local_transfer_staging_removed": true,
+    "retained_only_public_candidate_dependency_and_evidence_cache": true,
+    "production_config_or_credentials_copied": false
+  },
+  "coordination": {
+    "latest_iam_peer_report": "msg_6ec9f8fbdac0: Test565/v3.17.11/cfb47a128b3eb34160076b697b6d8ade114a17f9 acceptance complete, no further release/audit queued; peer report only, no replay",
+    "new_shared_maintenance_hold_owned": false,
+    "scope_handoff": false
+  },
+  "not_done": [
+    "No server install/JVM option/logging config/proxy/auth/service change or Agent start",
+    "No restart/repair of failed62",
+    "No Bao/DPAPI/business credential read or production/model request",
+    "No guarantee of complete enrollment secrecy from JUL alone: nginx and Tomcat access logging and runtime logger overrides still require coordinated review/maintenance",
+    "No fail-closed first-job/consumer isolation acceptance, actual registration/Online/exclusive-intake/artifact roundtrip or production rollout"
+  ],
+  "next_scope": "Separately approve exact coordinated live logging-maintenance plan (including explicit Bamboo-vhost proxy error-detail tradeoff), or continue separately bounded offline first-job isolation review. Do not treat offline proof/artifact as live authorization."
+}

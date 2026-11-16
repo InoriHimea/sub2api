@@ -1,0 +1,484 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "goal": "CD08 independent agent registration/Online/exclusive intake; continue fail-closed registration-path and fingerprint-log prerequisites without live startup",
+  "status": "BLOCKED_PENDING_CONCRETE_EXISTING_APPROVED_BACKEND_ACCESS_REFERENCE",
+  "boundaries": {
+    "live_bamboo_calls": false,
+    "business_credential_reads": false,
+    "agent_start_or_pause": false,
+    "shared_configuration_changes": false,
+    "package_installation": false,
+    "production_deployment": false
+  },
+  "nginx_synthetic_fixture": {
+    "nginx_version": "nginx version: nginx/1.24.0 (Ubuntu)",
+    "package": {
+      "Package": "nginx",
+      "Version": "1.24.0-2ubuntu7.19",
+      "Depends": "libc6 (>= 2.34), libcrypt1 (>= 1:4.1.0), libpcre2-8-0 (>= 10.22), libssl3t64 (>= 3.0.0), zlib1g (>= 1:1.1.4), iproute2, nginx-common (= 1.24.0-2ubuntu7.19)",
+      "Filename": "pool/main/n/nginx/nginx_1.24.0-2ubuntu7.19_amd64.deb",
+      "Size": "524926",
+      "SHA256": "b9c3476a504c963d8c3cab6540127fa4100ccf6ddf8ee978780bb32f128968d5"
+    },
+    "package_installed": false,
+    "loopback_only": true,
+    "upstream_received_synthetic_token": true,
+    "temporary_files_removed": true
+  },
+  "nginx_cases": {
+    "baseline": {
+      "syntax_exit": 0,
+      "statuses": [
+        502,
+        414
+      ],
+      "access_log_contains_marker": true,
+      "error_log_contains_marker": true,
+      "access_log_records": 3
+    },
+    "location_only": {
+      "syntax_exit": 0,
+      "statuses": [
+        502,
+        414
+      ],
+      "access_log_contains_marker": true,
+      "error_log_contains_marker": true,
+      "access_log_records": 3
+    },
+    "bamboo_vhost_safe": {
+      "syntax_exit": 0,
+      "statuses": [
+        502,
+        414
+      ],
+      "access_log_contains_marker": false,
+      "error_log_contains_marker": false,
+      "access_log_records": 3
+    }
+  },
+  "tested_safe_directives": {
+    "access_log_scope": "whole selected Bamboo virtual host, not only fingerprint location",
+    "log_format": "$remote_addr [$time_local] \"$request_method $uri $server_protocol\" $status $body_bytes_sent $request_time $upstream_status",
+    "error_log": "/dev/null crit",
+    "tradeoff": "Suppresses error-detail logging for the selected service/vhost; retains query-free status/timing access records. This is not approved or installed on the shared service."
+  },
+  "conclusions": [
+    "Location-only log protection is insufficient: an oversized URI can be logged before location selection; actual502/414 fixture proved the counterexample.",
+    "Whole selected-vhost query-free access plus discard error sink protected both tested failure paths on isolated Ubuntu nginx1.24.0, not the actual router version/configuration.",
+    "The upstream still receives the synthetic token in the query. No HAProxy/Tomcat/Bamboo application-log protection is claimed."
+  ],
+  "probe_sha256": "dfabe8468a24859056061c4c39bd23d3260d928a7e8db7e7061ab99e606ecd9b",
+  "tls_vhost_scope_smoke": {
+  "syntax_exit": 0,
+  "tls_hostname_and_certificate_verified": true,
+  "shared_listen_socket_distinct_sni_hosts": true,
+  "discard_error_sink_only_in_bamboo_server_block": true,
+  "bamboo_marker_any_persisted_log_or_stderr": false,
+  "control_marker_access_log": true,
+  "control_marker_error_log": true,
+  "cases": {
+    "bamboo.fixture": {
+      "statuses": [
+        502,
+        414
+      ]
+    },
+    "control.fixture": {
+      "statuses": [
+        502,
+        414
+      ]
+    }
+  },
+  "bamboo_access_records": 3,
+  "package_sha256": "b9c3476a504c963d8c3cab6540127fa4100ccf6ddf8ee978780bb32f128968d5",
+  "temporary_files_removed": true
+},
+  "native_fingerprint_controller_review": {
+  "public_version": "12.1.12",
+  "artifact_sha256": {
+    "atlassian-bamboo-agent-classserver": "fd7dc5235b34660672d99699aaa0e257b55844d8dc32a4aa8c24929b565f1d88",
+    "atlassian-bamboo-web": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198"
+  },
+  "controller": "com.atlassian.bamboo.agent.classserver.GetFingerprintAction",
+  "observed_execution": "execute reads the securityToken field, checks per-agent or global token, then isAuthenticated(), then remoteAgentManager.bootstrapping(getHostIdentification()). setSecurityToken assigns the field.",
+  "getHeader_calls_in_inspected_controller_and_manager": false,
+  "observed_warn_fields": [
+    "uuid",
+    "hostName",
+    "version"
+  ],
+  "securityToken_value_in_controller_warn_arguments": false,
+  "limitation": "Does not establish behavior of inherited/interceptor/servlet/Tomcat/HAProxy logging or prove a supported alternative header transport. No live configuration or actual logs read.",
+  "temporary_files_removed": true
+},
+  "upstream_access_log_boundary": {
+  "source": "https://support.atlassian.com/bamboo/kb/how-to-identify-the-java-version-used-by-bamboo-agents-from-bamboo-data-center-server-logs/",
+  "documented_test_version": "9.6.8",
+  "observation": "Official KB gives full-query Tomcat access_log samples for /agentServer/GetFingerprint.action. This confirms a separate exposure class, NOT current12.1.12 live configuration/defaults.",
+  "live_haproxy_mode_and_log_format": "not verified",
+  "live_tomcat_access_log_pattern": "not verified"
+},
+  "proposal_limits": [
+  "Discard error sink is /dev/null; raising severity to crit while retaining a file is NOT equivalent or a secrecy guarantee.",
+  "Use only tested access-log fields; Referer can echo tokenized queries and is excluded.",
+  "TLS SNI must select the protected vhost before request-line parsing; proof used two certificate-verified SNI hosts on the same listener. Actual ingress listener/version/configuration still requires review.",
+  "No serverwide auth changes, token rotation, new hostname, service restart or live logging change is authorized by this offline proposal."
+],
+  "backend_access_reference_search": {
+  "owner_choice": "使用已有受控只读入口",
+  "status": "BLOCKED_PENDING_CONCRETE_EXISTING_APPROVED_ENTRY_REFERENCE",
+  "checked_sources": {
+    "ssh_config": "C:/Users/25321/.ssh/config; no backend IP/Bamboo alias match",
+    "active_known_host_files": [
+      "C:/Users/25321/.ssh/known_hosts",
+      "C:/Users/25321/.ssh/known_hosts_hyperv",
+      "C:/Users/25321/.ssh/known_hosts_infra_gateways"
+    ],
+    "endpoint_search": [
+      {
+        "file": "known_hosts",
+        "target": "10.10.10.60",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts",
+        "target": "10.10.10.61",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts",
+        "target": "10.10.10.62",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts",
+        "target": "10.10.10.63",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "target": "10.10.10.60",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "target": "10.10.10.61",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "target": "10.10.10.62",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "target": "10.10.10.63",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "target": "10.10.10.60",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "target": "10.10.10.61",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "target": "10.10.10.62",
+        "found": false,
+        "exit": 1
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "target": "10.10.10.63",
+        "found": false,
+        "exit": 1
+      }
+    ],
+    "alias_search": [
+      {
+        "file": "known_hosts",
+        "alias": "git_app1",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "git-app-2",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "git_app3",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "git-app-4",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "bamboo01",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "bamboo02",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "bamboo03",
+        "found": false
+      },
+      {
+        "file": "known_hosts",
+        "alias": "bamboo04",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "git_app1",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "git-app-2",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "git_app3",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "git-app-4",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "bamboo01",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "bamboo02",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "bamboo03",
+        "found": false
+      },
+      {
+        "file": "known_hosts_hyperv",
+        "alias": "bamboo04",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "git_app1",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "git-app-2",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "git_app3",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "git-app-4",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "bamboo01",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "bamboo02",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "bamboo03",
+        "found": false
+      },
+      {
+        "file": "known_hosts_infra_gateways",
+        "alias": "bamboo04",
+        "found": false
+      }
+    ],
+    "documentation": [
+      "E:/pikachu/infra/deployment/README.md",
+      "E:/pikachu/infra/ARCHITECTURE.md:88-105",
+      "E:/pikachu/README.md",
+      "F:/VsCodeProject/sub2api/FORK.md",
+      "E:/pikachu markdown references for git_app1/git-app-2/git_app3/git-app-4"
+    ],
+    "alternative_management_entry_search": "No documented Portainer/Swarmpit/backend management binding found in inspected project Markdown. No speculative management endpoint attempted."
+  },
+  "cached_inventory": {
+    "capture": "20261111T204737Z, cached only; no new inventory scan/login",
+    "directory": "C:/Users/25321/AppData/Local/infra-inventory/sync/20261111T204737Z",
+    "mappings": [
+      {
+        "ip": "10.10.10.60",
+        "vm": "git_app1",
+        "hypervisor": "10.10.10.56"
+      },
+      {
+        "ip": "10.10.10.61",
+        "vm": "git-app-2",
+        "hypervisor": "10.10.10.55"
+      },
+      {
+        "ip": "10.10.10.62",
+        "vm": "git_app3",
+        "hypervisor": "10.10.10.56"
+      },
+      {
+        "ip": "10.10.10.63",
+        "vm": "git-app-4",
+        "hypervisor": "10.10.10.55"
+      }
+    ],
+    "limit": "VM inventory names/IP/MAC mapping is NOT an approved guest SSH key or login binding. Existing hypervisor pins do not grant guest configuration access."
+  },
+  "existing_documented_trust_caveat": "infra/ARCHITECTURE.md:104 explicitly says Git7999 service key does not substitute backend VM root SSH trust. Retired known_hosts.old and agent-only pins were not used.",
+  "guest_connections_attempted": false,
+  "keyscan_or_trust_enrollment": false,
+  "secrets_or_identity_profiles_read": false,
+  "needed_reference": "Existing backend-targeting SSH alias/configuration file or approved inventory/access entry, including exact guest endpoint host trust and authorized original-user identity. Provide the nonsecret reference, never credentials/raw logs/full configuration.",
+  "conclusion": "No usable approved backend access binding found in the inspected locations; this is not a claim that no entry exists elsewhere. Owner must identify the selected existing entry before backend audit can proceed."
+},
+  "live_ingress_configuration_review": {
+  "target": "10.156.56.100; existing strict original-workstation SSH trust reused",
+  "nginx_version": "1.31.7",
+  "bamboo_https_listener": "8443 ssl proxy_protocol",
+  "bamboo_redirect_listener": "8080 proxy_protocol",
+  "server_name": "deploy.mellivora.com.cn",
+  "nginx_vhost_source": "/mnt/scsi0-4/nginx-ui/nginx/sites-available/git编译部署服务",
+  "haproxy_sources": [
+    "/proc/40694/root/usr/local/etc/haproxy/haproxy.cfg",
+    "/proc/40694/root/usr/local/etc/haproxy/conf.d/bamboo.cfg"
+  ],
+  "haproxy_defaults": "log global; mode tcp; option tcplog",
+  "bamboo_frontend_backend": "HTTP frontend/backend mode http, no inspected httplog/log-format override; JMS frontend/backend mode tcp",
+  "conclusion": "The inspected Bamboo proxy inherits tcplog, not the separate admin-ui httplog. No full-request-line logging field observed in its declared format; actual logs not read.",
+  "configuration_or_service_changed": false
+},
+  "version_matched_nginx_smoke": {
+  "nginx_version": "nginx version: nginx/1.31.7",
+  "binary_sha256": "0644a6be2850454c015441f7439965449155dd73dbaed489c475ec190f30b25b",
+  "syntax_exit": 0,
+  "proxy_protocol_v2_before_tls": true,
+  "tls_certificate_hostname_verified": true,
+  "same_listener_two_vhosts": true,
+  "statuses": {
+    "bamboo.fixture": [
+      502,
+      414
+    ],
+    "control.fixture": [
+      502,
+      414
+    ]
+  },
+  "protected_marker_in_any_log_or_stderr": false,
+  "control_marker_access": true,
+  "control_marker_error": true,
+  "protected_access_records": 3,
+  "temporary_files_removed": true,
+  "public_binary_source": "read-only docker exec nginx-ui1 tar of nginx executable and8 named shared-library/loader files only; no configs, certificates or identities copied",
+  "execution": "locked bamboo user, owned isolated VM temporary directory; no router listener/process/config change",
+  "server_error_discard_scope": "Bamboo TLS vhost server block only; default/control vhost retained raw access/error diagnostics",
+  "staging_removed_local_and_remote": true
+},
+  "transport_observation": {
+  "first_stdin_attempt": "host eval deadline killed Python kernel; native fixture result unobserved; subsequent owned-PID/directory reconciliation found none",
+  "second_stdin_attempt_exit": 124,
+  "small_binary_ascii_probes": "both65536 bytes received, exit0; no root-cause/MTU claim",
+  "successful_staging": "native pinned SFTP, SHA256 checked before execution; only public binary bundle",
+  "bundle_bytes": 5305228,
+  "bundle_sha256": "f7f844f393e2d670ea99cffb332d1815460d0eedee60962785aa20fb811fa424",
+  "raw_logs_or_credentials_transferred": false,
+  "all_task_owned_staging_removed": true
+},
+  "backend_configuration_access_gate": {
+  "status": "WAITING_FOR_OWNER_CONTROLLED_READONLY_ACCESS_OR_NONSECRET_SUMMARY",
+  "peer_request_message": "msg_d554c358fb36",
+  "peer_reply_message": "msg_261c1216c063",
+  "peer": "orca_session_id:omp_28a28ca0_80b1_474e_99c2_48c04d46bae8",
+  "peer_observation": "IAM owner confirms no verified/approved Bamboo backend60-63 SSH binding or Tomcat AccessLogValve install-pattern reference; Linux001/004/005 agent trust must NOT be substituted. Test remains563; no shared Bamboo changes by peer.",
+  "needed_metadata": [
+    "Bamboo backend10.10.10.60-63:8892 listener/install ownership",
+    "effective Tomcat AccessLogValve pattern and request-query fields",
+    "relevant application/interceptor logging configuration without secret values or raw logs"
+  ],
+  "not_requested": [
+    "passwords/tokens/private keys",
+    "raw access/application logs",
+    "token rotation or auth toggle",
+    "pause/restart or service/config write"
+  ],
+  "independent_remaining_gate": "No enforced consumer-free registration/queue activation barrier accepted yet; passing proxy fixture alone does not authorize live startup."
+},
+  "native_registration_review": {
+  "public_version": "12.1.12",
+  "artifact_sha256": {
+    "atlassian-bamboo-agent-remote": "79c14a4800146f563293452644600a693f650745f58d425a53aaf782427d722e",
+    "atlassian-bamboo-agent-core": "891c5158ad15ab78917af21ffb867311ec984bc2b06ee0eeeb96f87015e4f595",
+    "atlassian-bamboo-agent-local": "b13ee38e853e81437944c54981433f05cdf8d63a34648a410d9c2f5163874cfd"
+  },
+  "bootstrap_artifact_sha256": "030c7ebb4ef5182fc063c7e46235f6da07aaed0630183a2d0f3e79a78205ea6b",
+  "normal_client_order": [
+    "AgentContext.run calls initServerSession then private newClassLoader, then starts AgentRunnerThread. AgentRunner loads server-selected class and invokes declared start(AgentContext).",
+    "RemoteAgent.start calls private initApplicationContext. It combines pre-context files and picked startup XMLs in one refresh.",
+    "applicationContextRemoteAgentStartup.xml declares AgentRegistrationBean. AgentRegistrationBean registers the native definition and optionally saves returned id/name/description.",
+    "applicationContextRemoteAgentStartupCore.xml defines agentMessageListenerConnector depends-on agentRegistrationBean; executableBuildAgent depends-on that connector, init-method=start; heartBeatScheduler depends-on executableBuildAgent, init-method=start."
+  ],
+  "registration_only_boundary": "Registration and consumer definitions are in separate XML files, and protected context-file selectors exist. However normal native startup loads both; no supported stop-after-registration flag or verified consumer-free launcher was established. Do not claim a custom client impossible, or falsely claim the XMLs are inseparable.",
+  "native_client_identity_fixture": {
+    "java_exit": 0,
+    "native_id_reader_writer_roundtrip": true,
+    "missing_agentDefinition_id_defaults_to_minus_one": true,
+    "wire_created_pipeline_defaults_enabled": true,
+    "temporary_files_removed": true,
+    "scope": "Actual native AgentConfiguration and XMLConfiguration, synthetic XML/UUID/id in owned temp only; private fields injected solely to isolate reader/writer. No real home/config identity read; not full startup/protocol proof."
+  },
+  "preprovision_review": {
+    "status": "NOT_ACCEPTED_AS_STANDALONE_FAIL_CLOSED_GATE",
+    "normal_returning_record_path": "Returning visitor gets stored BuildAgent.getDefinition(), updates status/name/capabilities and passes stored definition to savePipeline; no setEnabled call in inspected remote visitor or save visitor. Supports preservation in inspected normal path, not live DB/cache proof.",
+    "missing_record_failure_path": "If AgentManager.getAgent(id)==null, visitRemote sets incoming id=-1 and returns. registerAgentInternal then follows registerNewAgent on the same incoming definition (default enabled=true). Thus missing pre-provisioned records do not force a registration failure.",
+    "identity_failure_path": "Native cfg reader defaults missing id to -1; saveAgentDefinition catches ConfigurationException, warns and returns rather than vetoing worker startup.",
+    "uuid_binding": "Returning visitor checks UUID mismatch only when manual remote-agent authentication is enabled. Existing manual-auth OFF was not changed.",
+    "decision": "Do not create server records, seed real identities, install plugins, toggle auth, or start based on this candidate. A consumer-free registration stage or enforced queue-activation gate still needs implementation/validation before live use."
+  },
+  "inspection_temporary_files_removed": true
+}
+}

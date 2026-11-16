@@ -1,0 +1,928 @@
+{
+  "schema": 1,
+  "attempt": "743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+  "window_utc": [
+    "2026-11-14T06:27:00+00:00",
+    "2026-11-14T07:12:00+00:00"
+  ],
+  "coordination_message": "msg_74c7ca5967e2",
+  "status": "ABORTED_BEFORE_COMMIT_RECOVERY_VERIFIED_WINDOW_CLOSED",
+  "preflight": {
+    "60": {
+      "captured_at": 1794637281.2668872,
+      "hostname": "git-app-1",
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 3176114,
+      "restarts": 0,
+      "cgroup_pids": [
+        3176114
+      ],
+      "listeners": [
+        "*:54663",
+        "[::ffff:127.0.0.1]:54665",
+        "[::ffff:127.0.0.1]:43747",
+        "*:8892",
+        "*:9099",
+        "*:8085"
+      ],
+      "health": {
+        "status": 200,
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><restAnonymousServerStatusInfo><status>RUNNING</status></restAnonymousServerStatusInfo>"
+      },
+      "root_free": 45911482368,
+      "backup_free": 47328821248,
+      "shared_free": 325820571648
+    },
+    "61": {
+      "captured_at": 1794637282.2623832,
+      "hostname": "git-app-2",
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 2047213,
+      "restarts": 1,
+      "cgroup_pids": [
+        2047213
+      ],
+      "listeners": [
+        "*:9099",
+        "*:8892",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><restAnonymousServerStatusInfo><status>RUNNING_AS_SECONDARY</status></restAnonymousServerStatusInfo>"
+      },
+      "root_free": 54031962112,
+      "backup_free": 54031962112,
+      "shared_free": 325820571648
+    },
+    "62": {
+      "captured_at": 1794637283.0989888,
+      "hostname": "git-app-3",
+      "unit": "bamboo.service",
+      "active": "failed",
+      "substate": "failed",
+      "main_pid": 0,
+      "restarts": 0,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      },
+      "root_free": 43222589440,
+      "backup_free": 47576596480,
+      "shared_free": 325820571648
+    },
+    "63": {
+      "captured_at": 1794637283.9978623,
+      "hostname": "git-app-4",
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 1056774,
+      "restarts": 1,
+      "cgroup_pids": [
+        1056774
+      ],
+      "listeners": [
+        "*:8892",
+        "*:9099",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "body": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><restAnonymousServerStatusInfo><status>RUNNING_AS_SECONDARY</status></restAnonymousServerStatusInfo>"
+      },
+      "root_free": 49344638976,
+      "backup_free": 49344638976,
+      "shared_free": 325820592128
+    }
+  },
+  "agents_before": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "status": 200
+  },
+  "actions": [
+    {
+      "node": 60,
+      "action": "stop",
+      "exit": 0,
+      "stderr": "",
+      "at": "2026-11-14T06:31:29.796992+00:00"
+    }
+  ],
+  "real_store_opened": true,
+  "store_committed": false,
+  "new_shared_writer_started": false,
+  "start_message": "msg_9f00c15ec014",
+  "runtime_interruption_reconciliation": {
+    "60": {
+      "exit": 0,
+      "metadata": [
+        "MainPID=3176114",
+        "NRestarts=0",
+        "ControlGroup=/system.slice/bamboo.service",
+        "ActiveState=active",
+        "SubState=running",
+        "Job="
+      ],
+      "stderr": ""
+    },
+    "61": {
+      "exit": 0,
+      "metadata": [
+        "MainPID=0",
+        "NRestarts=1",
+        "ControlGroup=",
+        "ActiveState=inactive",
+        "SubState=dead",
+        "Job="
+      ],
+      "stderr": ""
+    },
+    "62": {
+      "exit": 0,
+      "metadata": [
+        "MainPID=0",
+        "NRestarts=0",
+        "ControlGroup=",
+        "ActiveState=failed",
+        "SubState=failed",
+        "Job="
+      ],
+      "stderr": ""
+    },
+    "63": {
+      "exit": 0,
+      "metadata": [
+        "MainPID=0",
+        "NRestarts=1",
+        "ControlGroup=",
+        "ActiveState=inactive",
+        "SubState=dead",
+        "Job="
+      ],
+      "stderr": ""
+    }
+  },
+  "private_code_path": "/root/omp-bamboo-jms-migration-743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+  "standby_cold": {
+    "61": {
+      "captured_at": 1794637868.2654376,
+      "unit": "bamboo.service",
+      "active": "inactive",
+      "substate": "dead",
+      "main_pid": 0,
+      "restarts": 1,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      }
+    },
+    "63": {
+      "captured_at": 1794637869.177685,
+      "unit": "bamboo.service",
+      "active": "inactive",
+      "substate": "dead",
+      "main_pid": 0,
+      "restarts": 1,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      }
+    }
+  },
+  "agents_before_primary_stop": {
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "status": 200
+  },
+  "cold_nodes": {
+    "60": {
+      "captured_at": 1794638430.5806592,
+      "unit": "bamboo.service",
+      "active": "inactive",
+      "substate": "dead",
+      "main_pid": 0,
+      "restarts": 0,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      }
+    },
+    "61": {
+      "captured_at": 1794638431.57479,
+      "unit": "bamboo.service",
+      "active": "inactive",
+      "substate": "dead",
+      "main_pid": 0,
+      "restarts": 1,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      }
+    },
+    "63": {
+      "captured_at": 1794638432.4515874,
+      "unit": "bamboo.service",
+      "active": "inactive",
+      "substate": "dead",
+      "main_pid": 0,
+      "restarts": 1,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      }
+    }
+  },
+  "condition_fences": {
+    "60": [
+      "MainPID=3235950",
+      "LoadState=loaded",
+      "UnitFileState=enabled",
+      "Conditions=[unprintable]"
+    ],
+    "61": [
+      "MainPID=0",
+      "ActiveState=inactive",
+      "DropInPaths=/run/systemd/system/bamboo.service.d/00-omp-jms-fence-743a56d6-8fa2-4cba-a6df-5fd5171c1136.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "UnitFileState=enabled",
+      "ConditionResult=no"
+    ],
+    "63": [
+      "MainPID=0",
+      "ActiveState=inactive",
+      "DropInPaths=/run/systemd/system/bamboo.service.d/00-omp-jms-fence-743a56d6-8fa2-4cba-a6df-5fd5171c1136.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "UnitFileState=enabled",
+      "ConditionResult=no"
+    ],
+    "60_functional": [
+      "MainPID=0",
+      "ActiveState=inactive",
+      "DropInPaths=/run/systemd/system/bamboo.service.d/00-omp-jms-fence-743a56d6-8fa2-4cba-a6df-5fd5171c1136.conf /etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+      "ConditionResult=no"
+    ]
+  },
+  "reactivation_evidence": {
+    "manager_events": [
+      {
+        "at": "1794637886286852",
+        "message": "Stopping Bamboo is the choice of professional teams for continuous integration, deployment, and delivery...",
+        "job_type": "stop",
+        "unit": "bamboo.service"
+      },
+      {
+        "at": "1794637892067959",
+        "message": "bamboo.service: Deactivated successfully.",
+        "job_type": null,
+        "unit": "bamboo.service"
+      },
+      {
+        "at": "1794637892068343",
+        "message": "Stopped Bamboo is the choice of professional teams for continuous integration, deployment, and delivery.",
+        "job_type": "stop",
+        "unit": "bamboo.service"
+      },
+      {
+        "at": "1794637892068542",
+        "message": "bamboo.service: Consumed 17min 33.428s CPU time.",
+        "job_type": null,
+        "unit": "bamboo.service"
+      },
+      {
+        "at": "1794637901869808",
+        "message": "Starting Bamboo is the choice of professional teams for continuous integration, deployment, and delivery...",
+        "job_type": "start",
+        "unit": "bamboo.service"
+      },
+      {
+        "at": "1794637901943554",
+        "message": "Started Bamboo is the choice of professional teams for continuous integration, deployment, and delivery.",
+        "job_type": "start",
+        "unit": "bamboo.service"
+      }
+    ],
+    "stop_and_dependency_metadata": [
+      "BindsTo=",
+      "PartOf=",
+      "Triggers=",
+      "TriggeredBy=",
+      "FragmentPath=/usr/lib/systemd/system/bamboo.service",
+      "Job="
+    ]
+  },
+  "mask_precedence": {
+    "60": {
+      "paths": [
+        {
+          "path": "/run/systemd/system/bamboo.service",
+          "exists": true,
+          "symlink": true,
+          "target": "/dev/null"
+        },
+        {
+          "path": "/etc/systemd/system/bamboo.service",
+          "exists": false,
+          "symlink": false,
+          "target": null
+        },
+        {
+          "path": "/usr/lib/systemd/system/bamboo.service",
+          "exists": true,
+          "symlink": false,
+          "target": null
+        }
+      ],
+      "service": [
+        "MainPID=3235950",
+        "LoadState=masked",
+        "ActiveState=active",
+        "FragmentPath=/run/systemd/system/bamboo.service",
+        "UnitFileState=masked-runtime"
+      ]
+    },
+    "61": {
+      "paths": [
+        {
+          "path": "/run/systemd/system/bamboo.service",
+          "exists": true,
+          "symlink": true,
+          "target": "/dev/null"
+        },
+        {
+          "path": "/etc/systemd/system/bamboo.service",
+          "exists": true,
+          "symlink": false,
+          "target": null
+        },
+        {
+          "path": "/usr/lib/systemd/system/bamboo.service",
+          "exists": false,
+          "symlink": false,
+          "target": null
+        }
+      ],
+      "service": [
+        "MainPID=0",
+        "LoadState=loaded",
+        "ActiveState=inactive",
+        "FragmentPath=/etc/systemd/system/bamboo.service",
+        "UnitFileState=enabled"
+      ]
+    },
+    "63": {
+      "paths": [
+        {
+          "path": "/run/systemd/system/bamboo.service",
+          "exists": false,
+          "symlink": false,
+          "target": null
+        },
+        {
+          "path": "/etc/systemd/system/bamboo.service",
+          "exists": true,
+          "symlink": false,
+          "target": null
+        },
+        {
+          "path": "/usr/lib/systemd/system/bamboo.service",
+          "exists": false,
+          "symlink": false,
+          "target": null
+        }
+      ],
+      "service": [
+        "MainPID=0",
+        "LoadState=loaded",
+        "ActiveState=inactive",
+        "FragmentPath=/etc/systemd/system/bamboo.service",
+        "UnitFileState=enabled"
+      ]
+    }
+  },
+  "cold_stage": {
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/root/omp-bamboo-jms-migration-743a56d6-8fa2-4cba-a6df-5fd5171c1136/cold_migrate_store.py\", line 166, in <module>\n    main()\n  File \"/root/omp-bamboo-jms-migration-743a56d6-8fa2-4cba-a6df-5fd5171c1136/cold_migrate_store.py\", line 136, in main\n    require(manifest(stage) == original, 'shared stage manifest mismatch')\n  File \"/root/omp-bamboo-jms-migration-743a56d6-8fa2-4cba-a6df-5fd5171c1136/cold_migrate_store.py\", line 28, in require\n    raise RuntimeError(message)\nRuntimeError: shared stage manifest mismatch\n"
+  },
+  "manifest_diagnostics": {
+    "attempt_state": {
+      "attempt": "743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+      "created_at": 1794638459.5009937,
+      "phase": "RESERVED"
+    },
+    "differences": [
+      {
+        "path": ".",
+        "fields": {
+          "xattrs": {
+            "source": {
+              "security.selinux": "9b65de67c0d017ee8b494c58379cd688dde453f95747533e73e91c958b8fd60e"
+            },
+            "stage": {
+              "security.selinux": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+            }
+          }
+        }
+      },
+      {
+        "path": "bamboo",
+        "fields": {
+          "xattrs": {
+            "source": {
+              "security.selinux": "ed9363e0f391b0c95710a647f34f87303d32c72c3b4f9541f610894e8dafe319"
+            },
+            "stage": {
+              "security.selinux": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+            }
+          }
+        }
+      },
+      {
+        "path": "bamboo/KahaDB",
+        "fields": {
+          "xattrs": {
+            "source": {
+              "security.selinux": "ed9363e0f391b0c95710a647f34f87303d32c72c3b4f9541f610894e8dafe319"
+            },
+            "stage": {
+              "security.selinux": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+            }
+          }
+        }
+      },
+      {
+        "path": "bamboo/KahaDB/db-366.log",
+        "fields": {
+          "xattrs": {
+            "source": {
+              "security.selinux": "ed9363e0f391b0c95710a647f34f87303d32c72c3b4f9541f610894e8dafe319"
+            },
+            "stage": {
+              "security.selinux": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+            }
+          }
+        }
+      },
+      {
+        "path": "bamboo/KahaDB/db.data",
+        "fields": {
+          "xattrs": {
+            "source": {
+              "security.selinux": "ed9363e0f391b0c95710a647f34f87303d32c72c3b4f9541f610894e8dafe319"
+            },
+            "stage": {
+              "security.selinux": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+            }
+          }
+        }
+      },
+      {
+        "path": "bamboo/KahaDB/db.redo",
+        "fields": {
+          "xattrs": {
+            "source": {
+              "security.selinux": "ed9363e0f391b0c95710a647f34f87303d32c72c3b4f9541f610894e8dafe319"
+            },
+            "stage": {
+              "security.selinux": "641d6c2d0bb036d503858595da9988eb8563782bb1574407cf430432534446b6"
+            }
+          }
+        }
+      }
+    ],
+    "source_still_equal": true,
+    "protected_backup_equal": true,
+    "live_still_original_symlink": true
+  },
+  "selinux": {
+    "enforcement": "Enforcing",
+    "getenforce_exit": 0,
+    "labels": {
+      "/data/atlassian/application-data/bamboo/local-jms-store": "unconfined_u:object_r:default_t:s0",
+      "/data/atlassian/application-data/bamboo/local-jms-store/bamboo/KahaDB": "system_u:object_r:default_t:s0",
+      "/data/atlassian/application-data/bamboo/shared": "system_u:object_r:fusefs_t:s0",
+      "/data/atlassian/application-data/bamboo/shared/.omp-jms-store-stage-743a56d6-8fa2-4cba-a6df-5fd5171c1136": "system_u:object_r:fusefs_t:s0"
+    },
+    "previous_native_jvm_selinux_context": null
+  },
+  "quarantine": "/data/atlassian/application-data/bamboo/shared/.omp-jms-migration-quarantine-743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+  "abort_message": "msg_73577946e10e",
+  "primary_recovery": {
+    "exit": 0,
+    "result": {
+      "ok": true,
+      "changes": [
+        {
+          "at": 1794638955.897932,
+          "pid": 3238474,
+          "restarts": 0,
+          "active": "active",
+          "http": null,
+          "role": null
+        },
+        {
+          "at": 1794638990.137022,
+          "pid": 3238474,
+          "restarts": 0,
+          "active": "active",
+          "http": 200,
+          "role": "RUNNING"
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "standby_restarts": [
+    {
+      "node": 61,
+      "exit": 0,
+      "at": "2026-11-14T06:50:38.367655+00:00"
+    },
+    {
+      "node": 63,
+      "exit": 0,
+      "at": "2026-11-14T06:50:39.451191+00:00"
+    }
+  ],
+  "secondary_recovery": {
+    "61": {
+      "exit": 0,
+      "result": {
+        "ok": true,
+        "changes": [
+          {
+            "at": 1794639184.020624,
+            "pid": 2062069,
+            "restarts": 0,
+            "active": "active",
+            "http": 503,
+            "role": "RUNNING_AS_SECONDARY"
+          }
+        ]
+      },
+      "stderr": ""
+    },
+    "63": {
+      "exit": 0,
+      "result": {
+        "ok": true,
+        "changes": [
+          {
+            "at": 1794639184.9241197,
+            "pid": 1204700,
+            "restarts": 0,
+            "active": "active",
+            "http": 503,
+            "role": "RUNNING_AS_SECONDARY"
+          }
+        ]
+      },
+      "stderr": ""
+    }
+  },
+  "final_nodes": {
+    "60": {
+      "captured_at": 1794639415.3986301,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 3238474,
+      "restarts": 0,
+      "cgroup_pids": [
+        3238474
+      ],
+      "listeners": [
+        "*:54663",
+        "[::ffff:127.0.0.1]:54665",
+        "*:8892",
+        "*:9099",
+        "*:8085",
+        "[::ffff:127.0.0.1]:38113"
+      ],
+      "health": {
+        "status": 200,
+        "role": "RUNNING"
+      }
+    },
+    "61": {
+      "captured_at": 1794639416.3878999,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 2062069,
+      "restarts": 0,
+      "cgroup_pids": [
+        2062069
+      ],
+      "listeners": [
+        "*:9099",
+        "*:8892",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    },
+    "62": {
+      "captured_at": 1794639417.2679312,
+      "unit": "bamboo.service",
+      "active": "failed",
+      "substate": "failed",
+      "main_pid": 0,
+      "restarts": 0,
+      "cgroup_pids": [],
+      "listeners": [],
+      "health": {
+        "error": "URLError"
+      }
+    },
+    "63": {
+      "captured_at": 1794639418.3071966,
+      "unit": "bamboo.service",
+      "active": "active",
+      "substate": "running",
+      "main_pid": 1204700,
+      "restarts": 0,
+      "cgroup_pids": [
+        1204700
+      ],
+      "listeners": [
+        "*:8892",
+        "*:9099",
+        "*:8085"
+      ],
+      "health": {
+        "status": 503,
+        "role": "RUNNING_AS_SECONDARY"
+      }
+    }
+  },
+  "final_logging_and_runtime_cleanup": {
+    "60": {
+      "service": {
+        "MainPID": "3238474",
+        "NRestarts": "0",
+        "ActiveState": "active",
+        "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "UnitFileState": "enabled"
+      },
+      "selected_logging_args": [
+        "-Djava.util.logging.config.file=/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+        "-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager",
+        "-javaagent:/opt/atlassian/atlassian-agent-1.5.0.jar",
+        "-javaagent:/opt/bamboo-querysafe/querysafe-juli.jar"
+      ],
+      "guard_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "native_selinux_context": "system_u:system_r:unconfined_service_t:s0\u0000",
+      "temporary_hold_exists": false,
+      "temporary_dropin_exists": false,
+      "runtime_mask_exists": false
+    },
+    "61": {
+      "service": {
+        "MainPID": "2062069",
+        "NRestarts": "0",
+        "ActiveState": "active",
+        "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "UnitFileState": "enabled"
+      },
+      "selected_logging_args": [
+        "-Djava.util.logging.config.file=/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+        "-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager",
+        "-javaagent:/opt/atlassian/atlassian-agent-1.5.0.jar",
+        "-javaagent:/opt/bamboo-querysafe/querysafe-juli.jar"
+      ],
+      "guard_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "native_selinux_context": "system_u:system_r:unconfined_service_t:s0\u0000",
+      "temporary_hold_exists": false,
+      "temporary_dropin_exists": false,
+      "runtime_mask_exists": false
+    },
+    "63": {
+      "service": {
+        "MainPID": "1204700",
+        "NRestarts": "0",
+        "ActiveState": "active",
+        "DropInPaths": "/etc/systemd/system/bamboo.service.d/80-lacia-no-force-stop.conf /etc/systemd/system/bamboo.service.d/81-lacia-version-12.1.12.conf /etc/systemd/system/bamboo.service.d/82-querysafe-logging.conf",
+        "UnitFileState": "enabled"
+      },
+      "selected_logging_args": [
+        "-Djava.util.logging.config.file=/opt/atlassian/bamboo/12.1.12/conf/logging.properties",
+        "-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager",
+        "-javaagent:/opt/atlassian/atlassian-agent-1.5.0.jar",
+        "-javaagent:/opt/bamboo-querysafe/querysafe-juli.jar"
+      ],
+      "guard_jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+      "native_selinux_context": "system_u:system_r:unconfined_service_t:s0\u0000",
+      "temporary_hold_exists": false,
+      "temporary_dropin_exists": false,
+      "runtime_mask_exists": false
+    }
+  },
+  "post_browser": {
+    "agent_status": 200,
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "server": {
+      "askedNodeState": "RUNNING",
+      "clusterState": "RUNNING",
+      "reindexInProgress": false
+    },
+    "server_status": 200
+  },
+  "protected_artifacts": {
+    "protected_backup_manifest_equal": true,
+    "backup_parent_root0700": true,
+    "quarantine_parent_root0700": true,
+    "original_live_symlink_inode_and_mtime_unchanged": true,
+    "attempt_phase": "RESERVED",
+    "cold_file_count": 3,
+    "cold_bytes": 34357920
+  },
+  "end_message": "msg_f687c40cd433",
+  "coordinator_end_ack": "msg_c252072d194c",
+  "physical_end_before_deadline_verified": true,
+  "executed_helper_sha256": "5054ffa9c32e2b306252db524425264216f5d636be789294a395a9b828ee138c",
+  "abort_receipt": {
+    "schema": 1,
+    "attempt": "743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+    "status": "ABORTED_BEFORE_COMMIT_ORIGINAL_TOPOLOGY_RECOVERED",
+    "recorded_at": "2026-11-14T06:57:33.543991+00:00",
+    "live_symlink_unchanged": true,
+    "commit_invoked": false,
+    "new_shared_store_started": false,
+    "local_backup_manifest_verified": true,
+    "cold_file_count": 3,
+    "cold_bytes": 34357920,
+    "quarantine": "/data/atlassian/application-data/bamboo/shared/.omp-jms-migration-quarantine-743a56d6-8fa2-4cba-a6df-5fd5171c1136",
+    "temporary_runtime_holds_dropins_masks_removed": true,
+    "final_primary": "60",
+    "final_secondaries": [
+      "61",
+      "63"
+    ],
+    "node62": "untouched_failed_pid0",
+    "reason": "Shared manifest differs only security.selinux; Enforcing active, original default_t versus mounted fusefs_t. Native service domain now observed unconfined_service_t; shared-store service-domain qualification not performed. No SELinux policy/enforcement changes.",
+    "retention": "Protected cold snapshots are not a current rollback after authoritative original store resumes writes. Do not replay stage/commit or delete attempt marker."
+  },
+  "followup_domain_qualification": "bamboo-selinux-domain-qualification-20261114.json",
+  "archived_at": "2026-11-14T07:24:10.101727+00:00"
+}

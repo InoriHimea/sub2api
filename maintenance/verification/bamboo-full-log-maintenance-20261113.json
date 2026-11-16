@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T18:07:18.581741+00:00",
+  "status": "LOGGING_APPLIED_FAILOVER_STORAGE_BLOCKED",
+  "parent_agent_complete": false,
+  "scope": {
+    "owner_approval": "TODO.md line185 full logging chain",
+    "window_utc": "2026-11-13T17:29:00Z/2026-11-13T17:59:00Z",
+    "start_message": "msg_0765640c8a84",
+    "end_message": "msg_b15a3fd403ec",
+    "window_extended": false,
+    "physical_work_ended": true,
+    "credentials_read": 0,
+    "new_agent_started": false,
+    "global_pause_or_auth_change": false,
+    "haproxy_changed_or_drained": false,
+    "production_application_deployed": false
+  },
+  "artifact": {
+    "jar_sha256": "c6feed9c15cc402375a1a2dec07ef7d9a50ed2bc19b3e85ff5a151da4cc0772d",
+    "juli_sha256": "83df7c64837fd51075f381b1ffbb5ecc442f8d6bc9b7db39faf2e5f6fb058c0c",
+    "startup_wrapper": "deploy/bamboo/server-logging/start-bamboo-querysafe.sh",
+    "startup_dropin": "deploy/bamboo/server-logging/bamboo-querysafe.conf",
+    "setenv_unchanged": true,
+    "original_stop_behavior_preserved": true,
+    "wrapper_synthetic_option_argument_smoke_exit": 0
+  },
+  "nodes": {
+    "60": {
+      "host": "10.10.10.60",
+      "server_original_sha256": "72ff5fca9c75a8153800c706513fe28a5495483d76570b7b986a78da989b158b",
+      "server_candidate_sha256": "2127bbc750741fb7ea6ad51faf165fa7ecd6c287ebc9b916d9c98d730b6b1e72",
+      "logging_candidate_sha256": "98a9f298dadf9e9f57c39d9b0c63d71b1d50a34a00d6d18ff917489f8a0dbf81",
+      "final_main_pid": 3176114,
+      "state": "active/running",
+      "role": "RUNNING",
+      "local_http_status": 200,
+      "logging_guard_actual_jvm_attested": true,
+      "restart_by_us": true,
+      "automatic_restart_observed": null,
+      "staged_only": false
+    },
+    "61": {
+      "host": "10.10.10.61",
+      "server_original_sha256": "6b77fe64f3d794761f1487d4254a61c335a819384ceeea03b21af22e9c687524",
+      "server_candidate_sha256": "8ca87aee8537fba7838360d2307e18f4272263a4aa3240e0705e603c20d9f6b2",
+      "logging_candidate_sha256": "98a9f298dadf9e9f57c39d9b0c63d71b1d50a34a00d6d18ff917489f8a0dbf81",
+      "final_main_pid": 2047213,
+      "state": "active/running",
+      "role": "RUNNING_AS_SECONDARY",
+      "local_http_status": 503,
+      "logging_guard_actual_jvm_attested": true,
+      "restart_by_us": true,
+      "automatic_restart_observed": 1,
+      "staged_only": false
+    },
+    "62": {
+      "host": "10.10.10.62",
+      "server_original_sha256": "a6f64073b176a6963d4e6e5ee509b2fb998f4113fedf143d8c4dbd2c29b92f0a",
+      "server_candidate_sha256": "66188d062c8b053393b65e3bb1b3cd6903ade4a5137d36e951b58c75690d7fac",
+      "logging_candidate_sha256": "98a9f298dadf9e9f57c39d9b0c63d71b1d50a34a00d6d18ff917489f8a0dbf81",
+      "final_main_pid": 0,
+      "state": "failed",
+      "role": "not_started",
+      "local_http_status": null,
+      "logging_guard_actual_jvm_attested": false,
+      "restart_by_us": false,
+      "automatic_restart_observed": null,
+      "staged_only": true
+    },
+    "63": {
+      "host": "10.10.10.63",
+      "server_original_sha256": "951a3804e415898ce33183f7323e2a35661c1e570dcd170585029e9bd19fbda8",
+      "server_candidate_sha256": "fc8aab58dc8d6f918933de3520c9cd439db99ecdbe7c0a1b1a10086743ae7355",
+      "logging_candidate_sha256": "98a9f298dadf9e9f57c39d9b0c63d71b1d50a34a00d6d18ff917489f8a0dbf81",
+      "final_main_pid": 1056774,
+      "state": "active/running",
+      "role": "RUNNING_AS_SECONDARY",
+      "local_http_status": 503,
+      "logging_guard_actual_jvm_attested": true,
+      "restart_by_us": true,
+      "automatic_restart_observed": 1,
+      "staged_only": false
+    }
+  },
+  "ingress": {
+    "target": "10.156.56.100",
+    "container": "nginx-ui1",
+    "changed_site": "/mnt/scsi0-4/nginx-ui/nginx/sites-available/git编译部署服务",
+    "original_sha256": "8d5f4ae6047f85740a331c3e9cd28bea79d622aed33838b9a35d2c8d7d7dfb55",
+    "candidate_sha256": "cf2bf9dda40ccbb1b883f8f9cdf998f6ff579ce69c19c93a9fc454217b16f9fe",
+    "protected_backup": "/mnt/scsi0-4/nginx-ui/bamboo-querysafe-backup-20261113",
+    "other_sites_and_global_nginx_sha_manifest_passed": true,
+    "syntax_check_passed": true,
+    "graceful_reload_completed": true,
+    "metadata_only_access_sink": "/var/log/nginx/access.log",
+    "http_and_tls_bamboo_servers_protected": true,
+    "detailed_error_sink": "/dev/null crit",
+    "error_detail_discard_owner_approved": true,
+    "routing_bytes_unchanged": true,
+    "preexisting_disabled_minio_dangling_symlink_not_repaired": true
+  },
+  "live_smoke": {
+    "path": "/__omp_querysafe_smoke_20261113_1754",
+    "synthetic_query_only": true,
+    "response_status": 404,
+    "nginx_matching_access_lines": 1,
+    "nginx_query_leaks": 0,
+    "tomcat_access_path_present": true,
+    "tomcat_access_security_token_and_value_absent": true,
+    "robots_status": 200,
+    "ordinary_sso_after_restart_succeeded": true,
+    "authenticated_server": {
+      "keys": [
+        "askedNodeState",
+        "clusterState",
+        "reindexInProgress"
+      ],
+      "reindexInProgress": false,
+      "stateFields": {
+        "askedNodeState": "RUNNING",
+        "clusterState": "RUNNING"
+      },
+      "status": 200
+    },
+    "final_native_activity_no_running_builds": true,
+    "final_native_activity_build_queue_empty": true,
+    "final_privileged_cluster_view_unavailable": "Administrator Access expired after restart; no step-up or password read repeated",
+    "manual_promotion_not_performed_or_observed": true
+  },
+  "rollback": {
+    "node_directory": "/var/backups/bamboo-querysafe-20261113",
+    "node_directory_mode": "0700 root",
+    "original_server_and_logging_hashes_verified": true,
+    "original_file_attributes_preserved": true,
+    "live_rollback_not_exercised": true
+  },
+  "open_issue": {
+    "type": "BROKER_STORE_DANGLING_TARGET_BLOCKS_FAILOVER",
+    "evidence": {
+      "61_error_local_time": "2026-11-14 01:47:29,077",
+      "63_error_local_time": "2026-11-14 01:47:10,208",
+      "logger": "BrokerService",
+      "exception": "java.io.IOException",
+      "fixed_failure_signature": "KahaDB failed; Failed to create directory",
+      "relative_failed_directory": "shared/jms-store/bamboo/KahaDB",
+      "store_link": "/data/atlassian/application-data/bamboo/shared/jms-store",
+      "link_target": "/data/atlassian/application-data/bamboo/local-jms-store",
+      "target_exists_on_60": true,
+      "target_missing_on_61_and_63": true,
+      "61_and_63_exit_status": "1/FAILURE",
+      "61_and_63_existing_restart_policy": "always",
+      "61_and_63_automatic_restarts": 1,
+      "jul_guard_failure_codes_observed": [],
+      "querysafe_frames_observed": []
+    },
+    "repair_performed": false,
+    "manual_data_store_or_symlink_change": false,
+    "next": "Review native Bamboo JMS persistence/failover storage requirements and obtain a separate coordinated repair window; do not create an empty store, repoint links, reset/copy broker data or repeat primary restart by implication. Agent first-job isolation remains independent."
+  },
+  "limits": [
+    "Premain validates startup only; runtime handler/config changes are not continuously enforced.",
+    "Native secondary ONLINE alone did not prove promotion readiness.",
+    "The live smoke proves access logging; warning-path redaction remains bound to the previously qualified exact native-JUL/Tomcat tests."
+  ]
+}

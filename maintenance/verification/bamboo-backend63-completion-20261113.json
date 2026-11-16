@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T06:20:08.336474+00:00",
+  "status": "READONLY63_AUDIT_COMPLETE_NO_LIVE_MITIGATION",
+  "authorization": {
+    "decision": "backend63_remaining_metadata_access: 允许一次既有root公钥验证",
+    "scope": "One original-workstation-key-only strict BatchMode root identity check; success permits only remaining logging fields/config-public-class hashes; rejection/unknown stop, no retries/password/sudo/newkeys/config/service changes",
+    "identity_checks_executed": 1,
+    "scope_consumed": true
+  },
+  "identity_result": {
+    "exit_code": 0,
+    "stdout": [
+      "root",
+      "git-app-4",
+      "CD08_READONLY_IDENTITY_OK"
+    ],
+    "stderr_empty": true,
+    "expected_root_git_app_4_matched": true,
+    "new_server_identity_key_or_permission": false
+  },
+  "metadata_read": {
+    "SERVER_SHA": "951a3804e415898ce33183f7323e2a35661c1e570dcd170585029e9bd19fbda8",
+    "LOG4J_SHA": "e59cf90bd4c45a17d0f484dfb44a73042b26a2b4aecc3a525cd880ff62e710fb",
+    "APP": {
+      "rootLogger": "INFO, console, filelog",
+      "logger.accesslogfilter": "INFO, accesslog, console"
+    },
+    "WEB_SHA": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198",
+    "STUCK_SHA": "e00dd3f3e0c38ce81778d7aba00768b4ac08577659c82271c32a847df1f99150",
+    "ESCAPE_SHA": "c22dc239458eb3cb3c944e1cb1b32c1d6d9ccd8465d4838bb907cb15eeb12ce7",
+    "JUL": {
+      "java.util.logging.ConsoleHandler.level": "ALL",
+      "java.util.logging.ConsoleHandler.formatter": "org.apache.juli.OneLineFormatter"
+    }
+  },
+  "class_and_configuration_comparison": {
+    "same_web_jar_60_62": true,
+    "same_log4j_properties_60_62": true,
+    "same_native_stuck_class_as_prior_fixture": true,
+    "same_bamboo_escape_converter": true,
+    "prior_native_smoke_replayed": false
+  },
+  "previously_observed_unit": {
+    "source": "Owner-executed short query observed via exact-UUID console; not replayed",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "MainPID": 835390,
+    "WorkingDirectory": "/opt/atlassian/bamboo/12.1.12"
+  },
+  "previously_observed_tomcat_valves": {
+    "source": "glob-discovered /opt/atlassian/bamboo/12.1.12/conf/server.xml parsed at current admin permissions",
+    "valves": [
+      {
+        "className": "org.apache.catalina.valves.RemoteIpValve"
+      },
+      {
+        "className": "org.apache.catalina.valves.AccessLogValve",
+        "pattern": "\"%{X-Forwarded-For}i\" %{X-AUSERNAME}o %a %t \"%m %U%q %H\" %s %b %D \"%{Referer}i\" \"%{User-Agent}i\""
+      },
+      {
+        "className": "org.apache.catalina.valves.StuckThreadDetectionValve",
+        "threshold": "60"
+      }
+    ],
+    "image": "maintenance/verification/bamboo-backend63-unit-valves-20261113.png",
+    "sudo_or_auth_change": false
+  },
+  "execution_limits": [
+    "Only allowlisted logging fields and hashes read; no raw logs, business secrets or private-key bytes",
+    "No new account/key/permission, password fallback, sudo or authentication/service/config/VM changes",
+    "No additional identity smoke beyond the single approved successful check",
+    "No Agent start/pause, enrollment/credential replay, shared CI/proxy changes or production/model requests"
+  ],
+  "remaining_parent_gates": [
+    "Runtime logging overrides and complete warning/error secrecy not proven or changed",
+    "JUL warning/error credential redaction requires separately reviewed/proven implementation and maintenance scope",
+    "First-job/consumer fail-closed isolation still unresolved; no registration/Online/exclusive-intake/artifact acceptance"
+  ],
+  "related_evidence": [
+    "maintenance/verification/bamboo-backend-logging-audit-20261113.json",
+    "maintenance/verification/bamboo-backend63-metadata-20261113.json",
+    "maintenance/verification/bamboo-backend63-console-20261113.json"
+  ],
+  "parent_complete": false
+}

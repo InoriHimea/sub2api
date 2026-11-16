@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-14T16:29:01.260883+00:00",
+  "status": "READONLY_PREFLIGHT_COMPLETE_BLOCKED_ON_FIRST_REGISTRATION_BINDING",
+  "offline_artifact_sha256": "2d4b47aa325e8223a27e6d6a2189605d12ae75aa13f7388c2072c6e69d7725c0",
+  "host": {
+    "caller_uid": 1000,
+    "unit": {
+      "Restart": "on-failure",
+      "MainPID": "0",
+      "User": "bamboo",
+      "Group": "bamboo",
+      "ReadWritePaths": "/var/lib/bamboo /data/sub2api-cd/state /data/sub2api-cd/intake",
+      "ProtectHome": "yes",
+      "ProtectSystem": "strict",
+      "NoNewPrivileges": "yes",
+      "KillMode": "control-group",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "FragmentPath": "/etc/systemd/system/bamboo-agent.service",
+      "DropInPaths": "",
+      "UnitFileState": "disabled"
+    },
+    "paths": {
+      "/opt/bamboo-agent": {
+        "uid": 0,
+        "gid": 988,
+        "mode": "0o750",
+        "symlink": false,
+        "directory": true
+      },
+      "/etc": {
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o755",
+        "symlink": false,
+        "directory": true
+      },
+      "/etc/bamboo-agent-isolation": {
+        "exists": false
+      },
+      "/var/lib/bamboo": {
+        "uid": 999,
+        "gid": 988,
+        "mode": "0o700",
+        "symlink": false,
+        "directory": true
+      }
+    },
+    "service_identity": "uid=999(bamboo) gid=988(bamboo) groups=988(bamboo)"
+  },
+  "blocked_check": {
+    "code": "INSTALLED_PUBLIC_JAR_NOT_READABLE_AS_UBUNTU",
+    "path": "/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar",
+    "next": "Need narrowly approved existing privileged metadata reader; no sudo/ACL/identity change attempted.",
+    "resolved_by": "Owner-approved existing sudo -n -u bamboo succeeded asUID999; no further privileged read needed for these hashes."
+  },
+  "mutations": false,
+  "credentials_read": false,
+  "browser": {
+    "state": "AUTHENTICATED_BAMBOO_ADMIN_READONLY_VERIFIED",
+    "authenticated_live_checks_performed": true
+  },
+  "native_control_review": {
+    "source": "https://docs.atlassian.com/atlassian-bamboo/12.1.12/com/atlassian/bamboo/plugins/rest/resource/AgentResource.html",
+    "observed": "AgentResource documents GET/status/enable/disable/delete/capability operations, no agent-record create operation.",
+    "target_record_exists_now": "UNKNOWN_BROWSER_UNAVAILABLE",
+    "preprovision_path": "NOT_ESTABLISHED; if no matching record exists, stop and establish supported provisioning or separately qualified registration-only stage; never invent expected id or bypass barrier.",
+    "local_native_identity_config_exists": false,
+    "live_target_record_verified": true,
+    "target_record_present": false,
+    "observed_agent_count": 7,
+    "observed_install_link": "/admin/agent/addRemoteAgent.action",
+    "observed_create_record_control": false
+  },
+  "conditional_live_plan": [
+    "Obtain only bounded existing privileged public artifact hash/class-byte and selected native id/UUID metadata; never permissions/credentials/service mutation.",
+    "Restore ordinary browser relay; inspect actual target record/UUID/disabled state, native dedication controls and current queue; no writes.",
+    "Agree exact supported target binding/provisioning path, no automatic restart/manual fresh-permit tradeoff and a new bounded coordinated window before physical changes.",
+    "If authorized and gates pass, install qualified jar outside frozen assets under separate /opt/bamboo-agent-isolation root:bamboo(988) protected directory; separate root-owned profile/permit and service-owned request directory.",
+    "Use reviewed additive unit drop-in retaining frozen credential path/hardening and Restart=no, never auto-enable or fallback to old bootstrap startup.",
+    "After target isolation/queue-safety verification, one controlled start/fresh challenge/attestation then actual Online/foreign exclusion/intake/artifact checks; rollback first stops new Agent and restores prior disabled/stopped state, no storage rollback."
+  ],
+  "approved_metadata_read": {
+    "exit": 0,
+    "result": {
+      "reader_uid": 999,
+      "installer_sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+      "loader_class_sha256": "c13136c47e1e9797311f371b428bff5ab94f8456432400e655a210bda20ff0e9",
+      "native_identity_metadata": {
+        "exists": false
+      },
+      "installer_matches_frozen": true,
+      "loader_matches_qualified_guard": true
+    },
+    "stderr": ""
+  },
+  "read_approval": "Owner allowed existing sudo -n -u bamboo for fixed public hashes and selected native id/UUID only.",
+  "live_surface": {
+    "origin": "https://deploy.mellivora.com.cn",
+    "path": "/admin/agent/viewAgents.action"
+  },
+  "live_inventory": {
+    "adminLinks": [
+      {
+        "href": "/build/admin/create/newSpecs.action",
+        "name": "Set up Specs repository"
+      },
+      {
+        "href": "/build/admin/create/newPlan.action?existingProjectKey=",
+        "name": "Create plan"
+      },
+      {
+        "href": "/build/admin/create/clonePlan.action?planKeyToClone=",
+        "name": "Clone plan"
+      },
+      {
+        "href": "/admin/viewLinkedRepositoryTypes.action",
+        "name": "Create repository"
+      },
+      {
+        "href": "/admin/administer.action",
+        "name": "Overview"
+      },
+      {
+        "href": "/admin/agent/viewAgents.action",
+        "name": "Agents"
+      },
+      {
+        "href": "/admin/configureGlobalVariables.action",
+        "name": "Global variables"
+      },
+      {
+        "href": "/admin/configureLinkedRepositories.action",
+        "name": "Linked repositories"
+      },
+      {
+        "href": "/admin/user/viewUsers.action",
+        "name": "User management"
+      },
+      {
+        "href": "/admin/agent/viewAgents.action",
+        "name": "Agents"
+      },
+      {
+        "href": "/admin/agentusage/agentUsage.action",
+        "name": "Agents usage"
+      },
+      {
+        "href": "/admin/agent/viewAgentPlanMatrixWizard.action",
+        "name": "Agent matrix"
+      }
+    ],
+    "agents": [
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002"
+      }
+    ],
+    "noRunningBuilds": false,
+    "queueEmpty": false,
+    "server": {
+      "askedNodeState": "RUNNING",
+      "clusterState": "RUNNING"
+    }
+  },
+  "queue_snapshot": {
+    "noRunningBuilds": true,
+    "origin": "https://deploy.mellivora.com.cn",
+    "path": "/currentActivity.action",
+    "queueEmpty": true
+  },
+  "dedication_controls": [
+    {
+      "href": "/admin/agent/configureAgentAssignments.action?agentId=8388609&returnUrl=%2Fadmin%2Fagent%2FviewAgent.action%3FagentId%3D8388609",
+      "name": "Dedicate agent"
+    }
+  ],
+  "next": "Existing fixed-positive-id activation gate cannot be deployed as first registration while target record and native cfg are absent. Establish supported disabled-record provisioning or implement/qualify explicit registration-only discovery stage; no fake id, direct DB edit, global auth change or real start."
+}

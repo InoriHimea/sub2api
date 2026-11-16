@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T05:32:00.632018+00:00",
+  "status": "HOST_KEY_INDEPENDENTLY_VERIFIED_CONFIG_AUDIT_PENDING_OWNER_UNLOCK",
+  "hypervisor": "H3C-55 / 10.10.10.55",
+  "guest_uuid": "908b395e-777a-4f70-a5f3-297f72d08410",
+  "guest_name": "git-app-4",
+  "verified_console": {
+    "user": "admin",
+    "hostname": "git-app-4",
+    "ipv4": "10.10.10.63/24",
+    "public_host_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE48xO+0cCNWI3qptkYC8di+nN3RJC7wWRo4Dp7i+zH7",
+    "fingerprint": "SHA256:bj0ljBqkl1zNBc8/lsFAu5OzIKkcg72QQR6NASN+7sM",
+    "verification": "Owner-prepared exact-UUID console output matched Python wire SHA256 and native ssh-keygen; network-reported fingerprint was not accepted until independent console validation",
+    "image": "maintenance/verification/bamboo-gitapp4-public-key-console-20261113.png"
+  },
+  "local_public_pin": {
+    "path": "C:/Users/25321/.ssh/known_hosts_bamboo_backends_verified",
+    "corrected_only_after_console_validation": true,
+    "server_host_keys_or_inventory_changed": false
+  },
+  "existing_identity_attempt": {
+    "username": "admin",
+    "method": "Original workstation key, strict BatchMode/publickey-only host verification",
+    "exit_code": 255,
+    "result": "Publickey authorization rejected; no password fallback, root-account guessing, sudo or server key installation"
+  },
+  "console_audit_attempt": {
+    "command": "systemctl show bamboo.service -p LoadState -p ActiveState -p MainPID -p WorkingDirectory -p User -p FragmentPath",
+    "submitted": false,
+    "boundary": "Console changed to locked admin password screen before readback; public nonsecret unit command text entered that field but no Enter/login submission sent",
+    "cleanup": "Ctrl+A/Backspace, every key released; observed empty Password placeholder after cleanup",
+    "lockscreen_login_submit_sent": false,
+    "actual_password_read_or_entered": false,
+    "cause_of_lock": "Unestablished; no lockscreen setting changed"
+  },
+  "configuration_inspected": false,
+  "next": "Owner personally unlocks git-app-4; use a fresh console-state check immediately before metadata-only input. No root/sudo/auth/state change authorized.",
+  "coordination": {
+    "incoming_question": "msg_c5f51d36bf0c",
+    "reply_receipt": "msg_c26787fc01c3",
+    "scope": "No shared maintenance hold by this session; readonly metadata only, no pause/start/CI changes or handoff; peer separately-approved Test-only release remains its own authorization."
+  }
+}

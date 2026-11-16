@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-14T05:45:20.504766+00:00",
+  "status": "PASSED_SYNTHETIC_SHARED_STORE_GATES_NOT_LIVE_FAILOVER",
+  "namespace": "cd4b3283-5de4-4f59-8991-9486160b5a27",
+  "owned_root": "/data/atlassian/application-data/bamboo/shared/omp-bamboo-jms-qualification-cd4b3283-5de4-4f59-8991-9486160b5a27",
+  "real_store_opened": false,
+  "service_action": false,
+  "native_version": "ActiveMQ6.3.2 / Java21.0.4 runtime",
+  "fixture_source_sha256": "302162bba4222fe5ca806d2b939ea3c52b6d1beeae42e0291fc03abda56569c6",
+  "compiled_class_sha256": {
+    "NativeKahaDbStoreSmoke$QualificationFailure.class": "dd5fb51b783d35e8831870cd6442f593629364fca50792b6089d00757aba7be3",
+    "NativeKahaDbStoreSmoke.class": "6f7e41479580e88213ad7c52f39867f5ee65b278a00ed4b162aac05bccb0b5d3"
+  },
+  "installed_public_jar_sha256": {
+    "activemq-broker-6.3.2.jar": "639f19365b1e64303ed3c021b923b784312716e207bbf43f20f2239f0bfe3354",
+    "activemq-client-6.3.2.jar": "b2ab482720ab8bfb10051b685a7871df6738eaec87f5b788ea881a6658d857ab",
+    "activemq-kahadb-store-6.3.2.jar": "30ceda3f83146df2a4630af872d47bd34dd33338731c7aff1f5b28dcadb861f0",
+    "activemq-protobuf-6.3.2.jar": "7d364cc77d1688cdb71889d23720698410b5eda32b7c6f51d7fadb5c7958d8c5",
+    "commons-io-2.20.0.jar": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72",
+    "hawtbuf-1.11.jar": "c6b45db967f3b2b3e28fd2f0724b1730a89d3f5aa9eef3664de29caba219593e",
+    "jakarta.annotation-api-2.1.1.jar": "5f65fdaf424eee2b55e1d882ba9bb376be93fb09b37b808be6e22e8851c909fe",
+    "jakarta.jms-api-3.1.0.jar": "6605e08075ab389c359451c7854808cf4b1575e1ea6317e534e9d4df088096df",
+    "log4j-api-2.26.1.jar": "f1810a4704ccce019d02bba029dc02a4f2ac0c997f647b465e7d409c1927f822",
+    "log4j-core-2.26.1.jar": "2ec8c3bf5a6d7c89be8620116a2fc973f7dda1ad0261ad393c4d4726edfd3dcb",
+    "log4j-slf4j2-impl-2.26.1.jar": "cbdfb4c2bcc10f0927c61036db54924250f3924ecd13ea913cefe4f99c08fa66",
+    "slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "atlassian-bamboo-core-12.1.12.jar": "e5682254bed1198b13ca6a4faff95e305915f8de13b59761ad254c2378869c3c",
+    "atlassian-bamboo-web-12.1.12.jar": "daefac55cadb8d277093480e15c120d3c762943d65f3a3aa78a30c7854fbc198",
+    "spring-remoting-12.1.12.jar": "e888156c77e426ac637d1f808d0848b37ae9043c4a5149bde0b1557fc2e95826",
+    "atlassian-bamboo-agent-core-12.1.12.jar": "891c5158ad15ab78917af21ffb867311ec984bc2b06ee0eeeb96f87015e4f595"
+  },
+  "native_wiring": {
+    "jar": "atlassian-bamboo-agent-core-12.1.12.jar",
+    "xml": "applicationContextJMSServer.xml",
+    "xml_sha256": "64780e5bb1e3b33f96c81c34852b4a63da931d2f30c82e6ec23151fe3e41fea3",
+    "defaults_xml": "applicationContextPropertiesCommon.xml",
+    "defaults_xml_sha256": "2443235be62b9cd5db52719fc8bf32ceda3bd8e127b133d9cfa0a555d06a7fc4",
+    "locker_class_sha256": "d193d41d16654b61037b109d5091670f24aa628864f6df0e46fd90ee94182d48",
+    "broker_name": "bamboo",
+    "persistent": true,
+    "directory": "${bamboo.jms.store.directory:${bamboo.shared.home}/jms-store}/bamboo/KahaDB",
+    "delete_all_messages_on_startup_default": false,
+    "journal_sync": "always",
+    "preallocation": "zeros",
+    "lock_keep_alive_ms": 20000,
+    "native_election_locker": "BambooAmqClusterLocker uses injected BambooClusterNodeHeartbeatService.isCurrentNodePrimaryBuffered",
+    "selected_config_overrides": {
+      "60": {
+        "cfg_selected_overrides": {},
+        "jvm_selected_overrides": {}
+      },
+      "61": {
+        "cfg_selected_overrides": {},
+        "jvm_selected_overrides": {}
+      },
+      "63": {
+        "cfg_selected_overrides": {},
+        "jvm_selected_overrides": {}
+      }
+    },
+    "jvm_selected_keys_absent_verified_using_nul_decoding": true
+  },
+  "qualification_difference": "Synthetic store uses its own fail-fast file locker and VM-only broker; it does not instantiate or exercise the live Bamboo cluster-election locker. Actual migration/promotion remains required.",
+  "filesystem_gate_evidence": "maintenance/verification/bamboo-shared-fs-qualification-20261114-cd4b3283.json",
+  "runs": {
+    "60": {
+      "mode": "write",
+      "exit": 0,
+      "summaries": [
+        {
+          "ok": true,
+          "code": "WRITE_CLOSED",
+          "count": 4,
+          "read_preserves_messages": true
+        }
+      ],
+      "stdout": "{\"ok\":true,\"code\":\"WRITE_CLOSED\",\"count\":4,\"read_preserves_messages\":true}\n",
+      "stderr": ""
+    },
+    "61": {
+      "mode": "read",
+      "exit": 0,
+      "summaries": [
+        {
+          "ok": true,
+          "code": "REOPEN_VERIFIED",
+          "count": 4,
+          "read_preserves_messages": true
+        }
+      ],
+      "stdout": "{\"ok\":true,\"code\":\"REOPEN_VERIFIED\",\"count\":4,\"read_preserves_messages\":true}\n",
+      "stderr": ""
+    },
+    "63": {
+      "mode": "read",
+      "exit": 0,
+      "summaries": [
+        {
+          "ok": true,
+          "code": "REOPEN_VERIFIED",
+          "count": 4,
+          "read_preserves_messages": true
+        }
+      ],
+      "stdout": "{\"ok\":true,\"code\":\"REOPEN_VERIFIED\",\"count\":4,\"read_preserves_messages\":true}\n",
+      "stderr": ""
+    }
+  },
+  "compiler": {
+    "host": "existing isolated helperVM20",
+    "java": "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+    "source_target": 21,
+    "explicit_classpath": true,
+    "annotation_processing_disabled_for_fixture": true,
+    "successful_compile_exit": 0,
+    "pretest_failure": "Initial wildcard classpath not expanded under module compiler,27 missing-package errors; explicit installed-JAR classpath corrected before any native run."
+  },
+  "tested_semantics": [
+    "Four exact synthetic persistent JMS messages committed on60 and cleanly stopped.",
+    "Independent new JVM on61 reopened the same shared journal, verified exact body/correlation/order/persistence/unique native IDs/count/no extras, rolled back reads and cleanly stopped.",
+    "Independent new JVM on63 repeated the same content/count verification on the preserved shared corpus.",
+    "Cross-node POSIX exclusion/fsync/rename/handoff separately passed once."
+  ],
+  "limits": [
+    "Clean stop/reopen is not a power-loss/crash recovery proof.",
+    "No production queue contents inspected or copied; no native Bamboo election/promotion performed.",
+    "No source or real storage configuration changed by these synthetic gates."
+  ],
+  "next": "Negotiate a new explicit coordinated interruption window before real-store cold backup/migration. Do not treat this gate as START permission."
+}

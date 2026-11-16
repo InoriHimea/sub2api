@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "verified_at": "2026-11-12T01:49:42.852205+00:00",
+  "scope": "Owner-approved private custody and encrypted delivery; read-only receipt reconciliation only",
+  "custody_receipt": {
+    "address": "https://bao.mellivora.com.cn",
+    "auth_accessor": "auth_approle_79e86584",
+    "auth_mount": "approle",
+    "bootstrap_sha256": "a7de00c26fb4473dd3ce3da7518ef8bfe041b74647fc225ec5987a957f54605e",
+    "credential_name": "security-token",
+    "credential_path": "/etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+    "enrollment_id": "ff49107b-0dae-4bc2-ace1-09cb62aaaf59",
+    "expires_at": "2026-12-12T01:45:42.738534+00:00",
+    "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+    "identity_saved": true,
+    "installer_sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+    "kind": "bamboo-sub2api-deploy-agent-01-enroll-read",
+    "kv": "agent-kv/data/bamboo/sub2api-deploy-agent-01",
+    "kv_accessor": "kv_2b57309c",
+    "kv_created": true,
+    "kv_version": 1,
+    "login_token_revoked": true,
+    "missing_paths": [],
+    "mutation_outcome_unknown": false,
+    "namespace": "",
+    "origin": "https://deploy.mellivora.com.cn",
+    "policy": "bamboo-sub2api-deploy-agent-01-enroll-read",
+    "policy_created": true,
+    "policy_matches": true,
+    "profile": "bamboo-sub2api-deploy-agent-01-enroll-read-approle.dpapi",
+    "purpose": "bamboo-deploy-agent",
+    "receipt_saved": true,
+    "remaining_uses_at_delivery": 255,
+    "role": "bamboo-sub2api-deploy-agent-01-enroll-read",
+    "role_created": true,
+    "role_mismatch_fields": [],
+    "save_outcome_unknown": false,
+    "schema": 1,
+    "secret_id_destroyed": false,
+    "secret_id_outcome_unknown": false,
+    "ssh_host_key": "AAAAC3NzaC1lZDI1NTE5AAAAIBommfjv1SDMMfSG88iglvSxmLKJLSPpZ4G80/6RPj0T",
+    "stage": "complete",
+    "status": "IDENTITY_DELIVERED",
+    "target": "10.10.10.20",
+    "vm_name": "sub2api-deploy-agent-01",
+    "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350",
+    "would_create": [
+      "policy",
+      "role",
+      "kv"
+    ]
+  },
+  "custody_attempt": {
+    "enrollment_id": "ff49107b-0dae-4bc2-ace1-09cb62aaaf59",
+    "kv": "agent-kv/data/bamboo/sub2api-deploy-agent-01",
+    "role": "bamboo-sub2api-deploy-agent-01-enroll-read"
+  },
+  "local_delivery_receipt": {
+    "credential_name": "security-token",
+    "credential_path": "/etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+    "enrollment_id": "ff49107b-0dae-4bc2-ace1-09cb62aaaf59",
+    "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+    "schema": 1,
+    "status": "DELIVERED",
+    "target": "10.10.10.20",
+    "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350"
+  },
+  "local_delivery_reservation": {
+    "attempt_id": "b7227860-1fd7-473f-adb4-dabf4ab4c23e",
+    "credential_name": "security-token",
+    "credential_path": "/etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+    "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+    "schema": 1,
+    "status": "UNKNOWN",
+    "target": "10.10.10.20",
+    "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350"
+  },
+  "remote_readonly_observation": {
+    "attempt": {
+      "credential_name": "security-token",
+      "credential_path": "/etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+      "enrollment_id": "ff49107b-0dae-4bc2-ace1-09cb62aaaf59",
+      "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+      "schema": 1,
+      "status": "UNKNOWN",
+      "target": "10.10.10.20",
+      "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350"
+    },
+    "encrypted_file": {
+      "mode": "0o600",
+      "nonempty": true,
+      "regular": true,
+      "uid": 0
+    },
+    "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+    "receipt": {
+      "credential_name": "security-token",
+      "credential_path": "/etc/credstore.encrypted/sub2api-bamboo-security-token.cred",
+      "enrollment_id": "ff49107b-0dae-4bc2-ace1-09cb62aaaf59",
+      "guest_uuid": "f500caf0-84d6-41dc-b7b9-a7bc02f9261c",
+      "schema": 1,
+      "status": "DELIVERED",
+      "target": "10.10.10.20",
+      "vm_uuid": "2ac3a6df-5f1f-4cf2-95ce-bbf775cd5350"
+    },
+    "service": {
+      "ActiveState": "inactive",
+      "MainPID": "0",
+      "SubState": "dead",
+      "UnitFileState": "disabled"
+    }
+  },
+  "checks": {
+    "custody_complete": true,
+    "custody_unknown_flags_false": true,
+    "local_remote_receipts_identical": true,
+    "same_enrollment_and_vm_bindings": true,
+    "encrypted_file_root_0600_nonempty_regular": true,
+    "agent_disabled_inactive_mainpid_zero": true,
+    "persistent_UNKNOWN_reservations_retained_by_design": true
+  },
+  "boundaries": {
+    "openbao_calls_during_verification": 0,
+    "dpapi_profiles_read": false,
+    "credential_bytes_read_or_decrypted": false,
+    "service_started_or_enabled": false,
+    "gui_secret_fields_inspected": false,
+    "registration_or_online_claimed": false,
+    "production_rollout_performed": false
+  },
+  "next_gate": "First-connection scheduling quarantine and explicit agent registration/start/dedication authorization; no automatic start or release"
+}

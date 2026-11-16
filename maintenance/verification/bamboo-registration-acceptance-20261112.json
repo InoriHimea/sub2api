@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "phase": "RECOVERY_COMPLETE_REGISTRATION_NOT_COMPLETED",
+  "owner_approved": ["first-connect quarantine", "dedicated registration/Online/exclusive-task acceptance", "temporary all-project scheduling pause and restore"],
+  "original_cluster_state": "RUNNING",
+  "startup_preflight": {"asset_pins_match": true, "unit_has_no_dropins": true, "credential_stat_root0600_nonempty": true, "dedicated_account_uid": 999, "service_disabled_inactive_mainpid_zero": true, "credential_bytes_read": false},
+  "pause_attempted": true,
+  "service_start_attempted": true,
+  "restore_required": false,
+  "pause_response": {"http_status": 200, "observed_cluster_state": "PAUSED", "observed_node_state": "PAUSED", "reindex_in_progress": false},
+  "startup_observation": {"start_exit": 0, "initial_active_state": "active", "initial_main_pid": 8621, "enabled": false},
+  "recovery_observation": {"new_agent_stop_exit": 0, "service_state": "inactive/dead", "main_pid": 0, "unit_state": "disabled", "resume_public_endpoint_http_status": 503, "public_error": "No server is available to handle this request.", "public_server_header": "nginx"},
+  "final_reconciliation": {"server_http_status": 200, "cluster_state": "RUNNING", "node_state": "RUNNING", "reindex_in_progress": false, "original_seven_agents_ids_enabled_active_busy_match": true, "new_dedicated_agent_registered": false, "new_service_stopped_disabled_mainpid_zero": true, "bamboo_version": "12.1.12", "bamboo_build_number": "120113", "reviewed_installer_version": "12.1.10", "pause_or_start_replayed": false},
+  "recovery_details": {"successful_resume_response_observed": false, "ordinary_browser_session_required_sso_renewal": true, "recovery_cause_established": false, "readonly_ingress_diagnostics": "Pinned router10.156.56.100: nginx-ui1 bamboo-service upstream127.0.0.1:18892; HAProxyPID40694 bamboo_backend primary10.10.10.60:8892, backups61/62/63, healthGET/rest/api/latest/status expects200. Later runtime snapshot primarybamboo01 op_state2/check_status15/check_health4; down-state during503 was not captured.", "runtime_health_or_route_mutations": false, "configuration_or_auth_changes": false, "restarts": false, "owned_temporary_runtime_probe_source_and_binary_removed": true},
+  "remaining_blockers": ["No demonstrated stable first-connect quarantine compatible with live agent registration; approved lifecycle pause reachedPAUSED but subsequent ingress503 blocked verification and global state later returnedRUNNING without a successful resume response", "Live server12.1.12 versus reviewed installer12.1.10; compatibility not yet established. Do not silently replace pinned startup assets or reread credentials."],
+  "shared_scope": {"aigp_gatm_mutations": false, "gatewayportal_test_or_iam_changes": false, "builds_submitted": false, "production_release": false, "shared_scheduling_availability_was_affected": true},
+  "production_release_authorized": false,
+  "recovery_contract": "If registration/isolation fails, stop and reconcile only the new dedicated agent before restoring original RUNNING. Never restore with an unrestricted running new agent. Do not alter global authentication/token settings, existing agent configurations or credentials."
+}

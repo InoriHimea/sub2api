@@ -1,0 +1,463 @@
+{
+  "schema": 1,
+  "attempt": "77abaed3-2458-40ee-ae12-3db2408ec110",
+  "status": "CLOSED_BLOCKED_INSTALLER_SELF_UPDATE_READ_ONLY",
+  "owner_authorization": "下一步做什么，批准继续任务",
+  "window": {
+    "start": "2026-11-15T14:25:00+00:00",
+    "end": "2026-11-15T15:10:00+00:00",
+    "coordinator_ack": "msg_13671ce02523",
+    "coordination_scope": "Two scoped ACKs; Hermes direct SSH deployment may continue; no shared Linux004/Linux001/SSO/broker/global operations permitted. Not a global freeze.",
+    "start_announced": true,
+    "hermes_owner_ack": "msg_91164f591383",
+    "start_messages": [
+      "msg_a9c4db46eb8c",
+      "msg_05e8768d0654"
+    ],
+    "closed": true,
+    "early_end_messages": [
+      "msg_a5641f28ddc5",
+      "msg_cc40d7dcdb80"
+    ],
+    "early_end_acknowledgments": [
+      "msg_2d75a241bc86",
+      "msg_6c735bb09c62"
+    ],
+    "reusable": false
+  },
+  "qualified_artifact_sha256": "6065a86e96250a47d49cb9139584fa93540645a453871485a0588c6b3a921379",
+  "preflight": {
+    "public_asset_sha256": {
+      "/opt/bamboo-agent/bootstrap/com/mellivora/bamboo/SecureBambooBootstrap.class": "a7de00c26fb4473dd3ce3da7518ef8bfe041b74647fc225ec5987a957f54605e",
+      "/opt/bamboo-agent/bootstrap/com/mellivora/bamboo/SecureBambooBootstrap$Pattern.class": "97f0104e8e1a5ca4101e8f5f5080b526fe578a5bd5fbc4b18eea0f742a33d4ea",
+      "/opt/bamboo-agent/bootstrap/com/mellivora/bamboo/SecureBambooBootstrap$RedactingStream.class": "066f504b08338037fca7a6129c91f4768b018538efb44b08f3db824217fdfb33",
+      "/opt/bamboo-agent/bootstrap/com/mellivora/bamboo/SecureBambooBootstrap$VendorRunner.class": "0d18ce6d14850919b4c9a40c0da7cdbc0caf109c44f970398f63977ab71225ca",
+      "/etc/systemd/system/bamboo-agent.service": "accdb53caf61499f70d85ea1441ca7278e0834e9e1ac3b715471c05bb6163f5a",
+      "/etc/systemd/system/bamboo-agent.service.d/isolation.conf": "368c507a9adec4cbb04738aec91953901280fcc04f5f087c0b50d31597b530b3",
+      "/etc/bamboo-agent-isolation/profile.properties": "138de82b0bd61302ee80ac99032452e7db5b88dbfd52b70490495c804c6c5b69"
+    },
+    "state": "Restart=no\nMainPID=0\nNRestarts=0\nUser=bamboo\nGroup=bamboo\nLoadCredentialEncrypted=[unprintable]\nActiveState=failed\nSubState=failed\nUnitFileState=disabled\n",
+    "native_cfg_exists": false,
+    "old_attempt_id": "5e599433-0d56-4c72-8974-c521eefed70c",
+    "old_attempt_state": "CLOSED_BLOCKED_BEFORE_IDENTITY_RECEIPT",
+    "old_discovery_start_reserved": true,
+    "old_attempt_preserved": true,
+    "ordinary_authenticated_agent_inventory": {
+      "agents": {
+        "array": true,
+        "keys": null,
+        "rows": [
+          {
+            "active": true,
+            "busy": false,
+            "enabled": true,
+            "id": 8388609,
+            "name": "Linux001",
+            "type": "REMOTE"
+          },
+          {
+            "active": false,
+            "busy": false,
+            "enabled": true,
+            "id": 35553281,
+            "name": "Linux002",
+            "type": "REMOTE"
+          },
+          {
+            "active": true,
+            "busy": false,
+            "enabled": true,
+            "id": 8683524,
+            "name": "Linux003",
+            "type": "REMOTE"
+          },
+          {
+            "active": true,
+            "busy": false,
+            "enabled": true,
+            "id": 28344321,
+            "name": "Linux004",
+            "type": "REMOTE"
+          },
+          {
+            "active": true,
+            "busy": false,
+            "enabled": true,
+            "id": 28344322,
+            "name": "Linux005",
+            "type": "REMOTE"
+          },
+          {
+            "active": true,
+            "busy": false,
+            "enabled": true,
+            "id": 35553283,
+            "name": "macOS001",
+            "type": "REMOTE"
+          },
+          {
+            "active": true,
+            "busy": false,
+            "enabled": true,
+            "id": 8683521,
+            "name": "Winodws001",
+            "type": "REMOTE"
+          }
+        ],
+        "status": 200
+      },
+      "server": {
+        "askedNodeState": "RUNNING",
+        "clusterState": "RUNNING",
+        "reindexInProgress": false,
+        "status": 200
+      }
+    }
+  },
+  "remaining_gates": [
+    "Separately approved offline immutable installer/version reconciliation and loader qualification",
+    "Explicit new startup authorization/reservation/coordinated window",
+    "Actual discovery identity/native dedication/separate activation/Online/exclusive intake/artifact acceptance"
+  ],
+  "new_actual_starts": 1,
+  "credential_reader_or_delivery_replayed": false,
+  "replacement_procedure": {
+    "prepared": true,
+    "executed": true,
+    "script_sha256": "6f05a3b47466fac5994cd7898c869b87c7c49044dc6808fafb488b86ce466d72",
+    "old_attempt_is_never_overwritten": true,
+    "all_four_old_classes_preserved_on_target": true,
+    "no_service_start_in_replacement_script": true,
+    "new_attempt": "77abaed3-2458-40ee-ae12-3db2408ec110",
+    "external_gates_default_false": true
+  },
+  "native_gate": {
+    "agents": {
+      "data": [
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "id": 8683524,
+          "name": "Linux003",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "id": 28344321,
+          "name": "Linux004",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "id": 8388609,
+          "name": "Linux001",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "id": 28344322,
+          "name": "Linux005",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "id": 8683521,
+          "name": "Winodws001",
+          "type": "REMOTE"
+        },
+        {
+          "active": true,
+          "busy": false,
+          "enabled": true,
+          "id": 35553283,
+          "name": "macOS001",
+          "type": "REMOTE"
+        },
+        {
+          "active": false,
+          "busy": false,
+          "enabled": true,
+          "id": 35553281,
+          "name": "Linux002",
+          "type": "REMOTE"
+        }
+      ],
+      "status": 200
+    },
+    "queue": {
+      "data": {
+        "expand": "queuedBuilds",
+        "link": {
+          "href": "https://deploy.mellivora.com.cn/rest/api/latest/queue",
+          "rel": "self"
+        },
+        "queuedBuilds": {
+          "expand": "queuedBuild",
+          "max-result": 0,
+          "queuedBuild": [],
+          "size": 0,
+          "start-index": 0
+        }
+      },
+      "status": 200
+    },
+    "server": {
+      "data": {
+        "askedNodeState": "RUNNING",
+        "clusterState": "RUNNING",
+        "reindexInProgress": false
+      },
+      "status": 200
+    }
+  },
+  "deployment_gate": [
+    {
+      "id": 12845057,
+      "results": [
+        {
+          "deploymentState": "SUCCESS",
+          "finishedDate": 1794570989624,
+          "id": 38830087,
+          "lifeCycleState": "FINISHED",
+          "startedDate": 1794570533610
+        }
+      ],
+      "status": 200
+    },
+    {
+      "id": 12845058,
+      "results": [
+        {
+          "deploymentState": "SUCCESS",
+          "finishedDate": 1793196860865,
+          "id": 36470799,
+          "lifeCycleState": "FINISHED",
+          "startedDate": 1793196732566
+        }
+      ],
+      "status": 200
+    },
+    {
+      "id": 37093377,
+      "results": [],
+      "status": 200
+    },
+    {
+      "id": 37093380,
+      "results": [],
+      "status": 200
+    },
+    {
+      "id": 32473089,
+      "results": [
+        {
+          "deploymentState": "SUCCESS",
+          "finishedDate": 1790565472898,
+          "id": 31227969,
+          "lifeCycleState": "FINISHED",
+          "startedDate": 1790565448643
+        }
+      ],
+      "status": 200
+    },
+    {
+      "id": 32473090,
+      "results": [
+        {
+          "deploymentState": "SUCCESS",
+          "finishedDate": 1790368842268,
+          "id": 31227965,
+          "lifeCycleState": "FINISHED",
+          "startedDate": 1790368812210
+        }
+      ],
+      "status": 200
+    },
+    {
+      "id": 37093378,
+      "results": [],
+      "status": 200
+    }
+  ],
+  "replacement_execution": {
+    "returncode": 0,
+    "public_stdout": "{\"schema\": 1, \"attempt\": \"77abaed3-2458-40ee-ae12-3db2408ec110\", \"state\": \"REPLACED_STAGED_NO_START_RESERVED\", \"provenance_receipt\": \"/opt/bamboo-agent/bootstrap-upgrades/77abaed3-2458-40ee-ae12-3db2408ec110/020-installed.json\", \"attempt_record\": \"/etc/bamboo-agent-isolation/attempts/77abaed3-2458-40ee-ae12-3db2408ec110/000-staged.json\", \"installed_classes\": {\"SecureBambooBootstrap$Pattern.class\": \"78bc36537c68c5fb47835b062a453a9a81cdda9738457f6aaf9faae08f6a893e\", \"SecureBambooBootstrap$RedactingStream.class\": \"78981989ce476fd2ba4c8d4134e3703871b9f24c374f3843486cb61a7c8545b8\", \"SecureBambooBootstrap$VendorRunner.class\": \"8c4bfb7efc80cd24e15d14e821af71b0ef722ddedf4cc4a88c2b1e263789a0cf\", \"SecureBambooBootstrap.class\": \"edaf33fb23ec7e0033ce89d590a43fb5dccc9f0ef399706d455671597e1650bd\"}, \"profile_sha256\": \"7c7b91e83f67aa2bb051a3c9128a417004e9871980758a29da947ac72ea8c852\", \"old_attempt_preserved\": true, \"actual_agent_starts\": 0}\n",
+    "public_stderr": "",
+    "observed_at": "2026-11-15T14:48:03.209321+00:00"
+  },
+  "discovery_start": {
+    "returncode": 0,
+    "public_result": "{\"attempt\": \"77abaed3-2458-40ee-ae12-3db2408ec110\", \"start_reserved\": true, \"systemctl_start_returncode\": 0, \"state\": \"Restart=no\\nMainPID=45029\\nNRestarts=0\\nExecMainStatus=0\\nActiveState=active\\nSubState=running\\n\"}\n",
+    "public_error": "",
+    "observed_at": "2026-11-15T14:49:38.700587+00:00"
+  },
+  "discovery_observation": {
+    "receipts": [],
+    "native_cfg_exists": false,
+    "identity": {},
+    "fixed_markers": [],
+    "service": "Restart=no\nMainPID=0\nNRestarts=0\nExecMainStatus=0\nActiveState=inactive\nSubState=dead\n"
+  },
+  "native_agents_after_discovery": {
+    "data": [
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683524,
+        "name": "Linux003",
+        "type": "REMOTE"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344321,
+        "name": "Linux004",
+        "type": "REMOTE"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8388609,
+        "name": "Linux001",
+        "type": "REMOTE"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 28344322,
+        "name": "Linux005",
+        "type": "REMOTE"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 8683521,
+        "name": "Winodws001",
+        "type": "REMOTE"
+      },
+      {
+        "active": true,
+        "busy": false,
+        "enabled": true,
+        "id": 35553283,
+        "name": "macOS001",
+        "type": "REMOTE"
+      },
+      {
+        "active": false,
+        "busy": false,
+        "enabled": true,
+        "id": 35553281,
+        "name": "Linux002",
+        "type": "REMOTE"
+      }
+    ],
+    "status": 200
+  },
+  "sanitized_startup_diagnostic": {
+    "journal_exit": 0,
+    "line_count": 107,
+    "classes": [
+      "java.nio.file.FileSystemException",
+      "sun.nio.fs.UnixException"
+    ],
+    "http_status_codes": [],
+    "signals": {
+      "logging_initialized": true,
+      "fingerprint_mentioned": true,
+      "security_token_mentioned": true,
+      "forbidden_mentioned": false,
+      "authentication_mentioned": true,
+      "registration_mentioned": false,
+      "connection_refused": false,
+      "tls_failure": false,
+      "trust_bootstrap_denied": false,
+      "discovery_completed": false
+    },
+    "service": "Restart=no\nMainPID=0\nResult=success\nNRestarts=0\nExecMainStartTimestamp=\nExecMainExitTimestamp=\nExecMainStatus=0\nActiveState=inactive\nUnitFileState=disabled\n"
+  },
+  "filesystem_diagnostic": {
+    "filesystem_failures": [
+      {
+        "path": "/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar",
+        "reason": "Read-only file system"
+      },
+      {
+        "path": "/opt/bamboo-agent/atlassian-bamboo-agent-installer-12.1.10.jar",
+        "reason": "Read-only file system"
+      }
+    ],
+    "status403_present": false,
+    "status401_present": false,
+    "fixed_signals": {
+      "Read-only file system": true,
+      "Permission denied": false,
+      "Failed to create": false,
+      "Failed to download": false,
+      "Agent server cannot be contacted": false,
+      "Error occurred while": false
+    }
+  },
+  "closure": {
+    "closed": {
+      "schema": 1,
+      "attempt": "77abaed3-2458-40ee-ae12-3db2408ec110",
+      "state": "CLOSED_BLOCKED_INSTALLER_SELF_UPDATE_READ_ONLY",
+      "discovery_start_reserved": true,
+      "activation_start_reserved": false,
+      "closed_at": "2026-11-15T14:51:59.226445+00:00",
+      "reason": "Native FileSystemException on frozen installer path: Read-only file system",
+      "state_observed": {
+        "Restart": "no",
+        "MainPID": "0",
+        "NRestarts": "0",
+        "ActiveState": "inactive",
+        "UnitFileState": "disabled"
+      },
+      "no_retry": true
+    },
+    "native_stack_symbols": [
+      "com.atlassian.bamboo.agent.bootstrap.BootstrapUtils.copyStreamToFile",
+      "com.atlassian.bamboo.agent.bootstrap.BootstrapUpdater.ensureLatestBootstrap",
+      "com.atlassian.bamboo.agent.bootstrap.AgentContext.updateBootstrapIfNecessary",
+      "com.atlassian.bamboo.agent.bootstrap.AgentContext.initServerSession",
+      "com.atlassian.bamboo.agent.bootstrap.AgentContext.run",
+      "com.atlassian.bamboo.agent.bootstrap.RemoteAgentBootstrap.run",
+      "com.mellivora.bamboo.SecureBambooBootstrap$VendorRunner.start",
+      "com.mellivora.bamboo.SecureBambooBootstrap.launch",
+      "com.mellivora.bamboo.SecureBambooBootstrap.main",
+      "com.mellivora.bamboo.isolation.GuardedBootstrap.main"
+    ]
+  },
+  "physical_actions": [
+    "Qualified four-class tree replacement with preserved complete prior tree and append-only receipts",
+    "New attempt/profile/request namespace staging",
+    "One durably reserved discovery startup",
+    "Append-only closed attempt receipt"
+  ],
+  "public_updater_inspection": {
+    "agent_entrypoint_executed": false,
+    "javap_module_exit": 0,
+    "bytecode_sha256": "3a5e72c676a18d9c09e9a18702d984ad1c869e53f344a76260568ce32c9e88e9",
+    "confirmed_methods": [
+      "BootstrapUpdater.ensureLatestBootstrap",
+      "BootstrapUtils.copyStreamToFile"
+    ],
+    "downloaded_replacement_version_or_bytes_qualified": false,
+    "initial_javap_executable_unavailable": true
+  }
+}

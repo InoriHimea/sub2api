@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-14T06:05:21.786870+00:00",
+  "status": "PREPARATION_PASSED_AWAITING_EXPLICIT_NEW_WINDOW",
+  "cold_helper_sha256": "5054ffa9c32e2b306252db524425264216f5d636be789294a395a9b828ee138c",
+  "primitive_smoke": {
+    "exit": 0,
+    "result": {
+      "copy_and_metadata_equal_before_mutation": true,
+      "atomic_manifest_roundtrip": true,
+      "payload_drift_detected": true,
+      "symlink_rejected": true,
+      "hardlink_rejected": true,
+      "source_file_payload_preserved": true,
+      "directory_metadata_drift_detected": true,
+      "live_store_access": false
+    },
+    "corrected_smoke_expectation": "Creating/deleting synthetic aliases changes parent directory mtime; final check compares unchanged file entries and confirms directory drift instead of expecting full original metadata equality."
+  },
+  "cli_and_peer_guard_smoke": {
+    "actual_cli_help_exit": 0,
+    "actual_nonroot_invocation_rejected": true,
+    "wrong_attempt_rejected": true,
+    "missing_peer_rejected": true,
+    "stale_peer_rejected": true,
+    "real_store_access": false
+  },
+  "read_only_native_preflight": {
+    "60": {
+      "hostname": "git-app-1",
+      "time": 1794635844.9350288,
+      "service": [
+        "MainPID=3176114",
+        "NRestarts=0",
+        "ControlGroup=/system.slice/bamboo.service",
+        "ActiveState=active",
+        "SubState=running"
+      ],
+      "root_free": 45912023040,
+      "backup_free": 47328821248,
+      "shared_free": 325782130688
+    },
+    "61": {
+      "hostname": "git-app-2",
+      "time": 1794635845.756873,
+      "service": [
+        "MainPID=2047213",
+        "NRestarts=1",
+        "ControlGroup=/system.slice/bamboo.service",
+        "ActiveState=active",
+        "SubState=running"
+      ],
+      "root_free": 54012018688,
+      "backup_free": 54012018688,
+      "shared_free": 325782130688
+    },
+    "62": {
+      "hostname": "git-app-3",
+      "time": 1794635846.4849467,
+      "service": [
+        "MainPID=0",
+        "NRestarts=0",
+        "ControlGroup=",
+        "ActiveState=failed",
+        "SubState=failed"
+      ],
+      "root_free": 43209703424,
+      "backup_free": 47576551424,
+      "shared_free": 325782130688
+    },
+    "63": {
+      "hostname": "git-app-4",
+      "time": 1794635847.3059268,
+      "service": [
+        "MainPID=1056774",
+        "NRestarts=1",
+        "ControlGroup=/system.slice/bamboo.service",
+        "ActiveState=active",
+        "SubState=running"
+      ],
+      "root_free": 49350066176,
+      "backup_free": 49350066176,
+      "shared_free": 325782130688
+    }
+  },
+  "browser_preflight": {
+    "ordinary_sso_renewed_without_secret_read": true,
+    "running_builds": 0,
+    "build_queue_empty": true,
+    "online_agents": 6,
+    "accessible_deployment_project_rows": 0,
+    "server_status": 200,
+    "askedNodeState": "RUNNING",
+    "clusterState": "RUNNING",
+    "reindexInProgress": false,
+    "existing_dashboard_errors": 4,
+    "global_idle_or_scheduling_freeze_proven": false
+  },
+  "cleanup": {
+    "shared": {
+      "owned_shared_synthetic_namespace_removed": true,
+      "live_store_touched": false
+    },
+    "helper": {
+      "owned_public_helper_namespace_removed": true,
+      "agent_service_touched": false,
+      "actual_staging_uid": 1000
+    }
+  },
+  "real_store_read_or_copied": false,
+  "service_action": false,
+  "coordination_request": "msg_bbfc01e18e62",
+  "requested_window_utc": "2026-11-14T06:05:00Z/2026-11-14T06:50:00Z",
+  "explicit_window_ack_received": false,
+  "start_sent": false,
+  "limits": [
+    "Cold stage/commit and native61/63 promotion not exercised.",
+    "Peer attestations rely on an exclusive coordinated operator window, not distributed enforcement.",
+    "HelperVM temporary public staging actual UID1000; no agent service touched."
+  ]
+}

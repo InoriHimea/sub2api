@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-13T02:17:41.525597+00:00",
+  "parent": "TODO.md CD-08",
+  "authorization": "Owner selected read-only console verification; any guest login personally by owner; public SSH host keys/existing login method only",
+  "status": "READONLY_FOUR_NODE_AUDIT_COMPLETE_EXISTING_IDENTITIES_VERIFIED_NO_LIVE_MITIGATION",
+  "hyperv56": {
+    "transport": "Existing pinned management SSH; BatchMode, StrictHostKeyChecking=yes, UpdateHostKeys=no",
+    "guests": [
+      {
+        "Name": "git_app1",
+        "Id": "0549e87a-611c-4983-ab69-45ac7d0fdf1b",
+        "State": 2
+      },
+      {
+        "Name": "git_app3",
+        "Id": "d4ac9d96-82a8-43ee-891d-8780bbf8bf48",
+        "State": 2
+      }
+    ],
+    "ComputerName": "H3C-56",
+    "Domain": "WORKGROUP",
+    "ListenerKeys": [
+      "Transport=HTTP",
+      "Address=*"
+    ]
+  },
+  "hyperv55": {
+    "transport": "Existing known_hosts_hyperv pin and repository-approved key-mode SSH; no pin changes",
+    "ComputerName": "H3C-55",
+    "Domain": "WORKGROUP",
+    "Guests": [
+      {
+        "Name": "git-app-2",
+        "Id": "5355ad8a-ddc8-4889-b9e6-3e0775b24dde",
+        "State": "Running"
+      },
+      {
+        "Name": "git-app-4",
+        "Id": "908b395e-777a-4f70-a5f3-297f72d08410",
+        "State": "Running"
+      }
+    ],
+    "ListenerKeys": [
+      "Transport=HTTP",
+      "Address=*"
+    ]
+  },
+  "vmconnect": {
+    "binary": "C:/Windows/System32/vmconnect.exe",
+    "server": "10.10.10.56",
+    "vm": "git_app1",
+    "initial_launch": {
+      "pid": 48464,
+      "exit_code": 3762504530,
+      "exception": "System.ArgumentNullException at System.Net.Dns.GetHostEntryAsync / Microsoft.Virtualization.Client.Management.ServerNames.IsLocalhostName",
+      "missing_nonsecret_environment_field": "COMPUTERNAME"
+    },
+    "corrected_launch": {
+      "pid": 48644,
+      "change": "Added COMPUTERNAME to explicit nonsecret desktop environment allowlist",
+      "observed_error": "WinRM client requires HTTPS transport or TrustedHosts for non-Kerberos/workgroup target",
+      "accessibility_tree_artifact": "artifact://769",
+      "later_exit_code": 0,
+      "dismissal_origin": "Unestablished; process exited0 and disappeared before scripted dismissal, no scripted guest input"
+    },
+    "guest_console_reached": false,
+    "guest_input_sent": false,
+    "visual_evidence_limit": "Both captures did not match the dialog: first blank, restored capture showed Orca chat. Tree text supplies the observed error; no visual console-success claim. QA report submitted."
+  },
+  "existing_remote_window_title_check": "ToDesk listed only unrelated Mac mini window; its content/credentials were not inspected",
+  "unchanged": [
+    "No TrustedHosts/CredSSP/WinRM/auth/certificate configuration changes",
+    "No guest business-secret, private-key or VHD reads",
+    "No VM state change",
+    "No Agent start/pause/credential read",
+    "Only dedicated local public known-host metadata saved from console/protected existing inventory; no global SSH config or server host/authorized keys changed"
+  ],
+  "next_requirement": "Console/access preparation and four-node readonly logging metadata audit complete. No further login/console or root identity replay needed. Separately reviewed/proven JUL warning/error protection, coordinated maintenance approval, runtime checks and fail-closed first-job isolation remain before any registration/startup. Bounded63 root-read authorization is consumed.",
+  "owner_prepared_console": {
+    "owner_report": "已操作",
+    "rdp_process_id": 51408,
+    "rdp_window_id": 1968576,
+    "rdp_target": "10.10.10.56",
+    "visual_target": "H3C-56 上的 git_app1 - 虚拟机连接",
+    "visual_guest_os": "CentOS Stream 9",
+    "visual_guest_prompt": "root@git-app-1",
+    "guest_console_visible_and_personally_logged_in": true,
+    "visual_evidence": "C:/Users/25321/AppData/Local/Temp/orca-computer-use/0868d257-c2dd-44b5-98aa-7f5c06931605-screenshot.png",
+    "input_attempts": "Terminal-area click reported synthetic/unverified; type-text refused window_not_focused both normally and once with restore-window. No further input or focus bypass attempted.",
+    "public_host_key_obtained": true,
+    "inspection_command_executed": true,
+    "pending_command": "hostname; id -un; ip -4 -o addr show scope global; ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub -E sha256; cat /etc/ssh/ssh_host_ed25519_key.pub"
+  },
+  "verified_gitapp1_identity": {
+    "guest_uuid": "0549e87a-611c-4983-ab69-45ac7d0fdf1b",
+    "host": "H3C-56 / 10.10.10.56",
+    "hostname": "git-app-1",
+    "console_user": "root",
+    "guest_ipv4": "10.10.10.60/24",
+    "public_host_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID3ixSwYTpBdV7olXP9MkSZaDEToaDipQZACPydvgezW",
+    "sha256_fingerprint": "SHA256:/6XXZM7aK8dJtD5sG2/7fDgFEJZdMJ0MnyhJs11maqU",
+    "verification": "Console-displayed fingerprint equals locally derived wire SHA256 and native ssh-keygen -lf - result; ambiguous screenshot characters were not accepted until the full fingerprint matched.",
+    "console_image": "maintenance/verification/bamboo-gitapp1-public-key-console-20261113.png",
+    "capture": "Documented GetVirtualSystemThumbnailImage through existing pinned host SSH, exact UUID/name validation, ReturnValue0; normalize GUID case, validate 4-byte big-endian total-length prefix1572868 then decode exactly1572864 RGB565 bytes locally. No guest command replay or local foreground bypass.",
+    "failed_capture_attempts": "Host-side image interop attempts exited4294967295(no diagnostics) and3221225477(Exception.ToString failure). Removed all host image interop; managed raw capture succeeded exit0. Four extra framing bytes would overrun a pixel-only destination if copied unchecked; no unproven crash root cause claimed. No VM/service/config changes."
+  },
+  "existing_login_verification": {
+    "original_workstation_public_fingerprint": "SHA256:YS0t1vyyG2lI0m4j3Ojbq/UKJ/96UHcSnc+dXyxqLfs",
+    "already_authorized_on_primary": true,
+    "console_method": "Native TypeText returned0 but produced malformed unexecuted text. No Enter; line cleared and modifiers released. Documented PressKey/ReleaseKey produced exact visually checked ssh-keygen -lf /root/.ssh/authorized_keys -E sha256; Enter sent only after readback, then actual authorized fingerprint matched. No passwords/private keys read or new keys installed.",
+    "strict_batch_publickey_only_ssh": "60=root/git-app-1,61=root/git-app-2,62=root/git-app-3; expected hostname/user and sentinel matched, exit0/no stderr",
+    "public_inventory_source": "Verified60:/root/.ssh/known_hosts root0600, existing exact entries; hypervisor UUID/MAC/IP metadata independently cross-checked",
+    "shared_key_limitation": "60/62 share ED25519 host key; no unique cryptographic VM identity claim, no rotation",
+    "backend63": "Initial strict host mismatch stopped; independent owner-console key/native SHA verified and local public pin corrected. admin key-only SSH rejected and locked input never submitted. Owner then explicitly approved one existing root key-only identity check, which matched root/git-app-4 exit0; remaining allowlisted metadata read completed without changes. Bounded approval consumed; no replay or auth escalation grant. See bamboo-backend63-completion-20261113.json.",
+    "audit_evidence": "maintenance/verification/bamboo-backend-logging-audit-20261113.json"
+  },
+  "reference": "https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/virtual-machine-connection"
+}

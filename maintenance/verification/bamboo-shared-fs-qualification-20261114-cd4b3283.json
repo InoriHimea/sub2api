@@ -1,0 +1,37 @@
+{
+  "namespace": "cd4b3283-5de4-4f59-8991-9486160b5a27",
+  "root": "/data/atlassian/application-data/bamboo/shared/omp-bamboo-jms-qualification-cd4b3283-5de4-4f59-8991-9486160b5a27",
+  "live_store_opened": false,
+  "observations": {
+    "60_hold": {
+      "phase": "hold",
+      "inode": 11759332247625719299,
+      "held": true
+    },
+    "61_contend": {
+      "phase": "contend",
+      "inode": 11759332247625719299,
+      "exclusive_conflict_observed": true,
+      "fsync_rename_payload_visible": true
+    },
+    "63_contend": {
+      "phase": "contend",
+      "inode": 11759332247625719299,
+      "exclusive_conflict_observed": true,
+      "fsync_rename_payload_visible": true
+    },
+    "61_handoff": {
+      "phase": "handoff",
+      "inode": 11759332247625719299,
+      "acquired_after_release": true,
+      "handoff_visible": true
+    },
+    "63_reacquire": {
+      "phase": "reacquire",
+      "inode": 11759332247625719299,
+      "acquired_after_release": true,
+      "handoff_visible": true
+    }
+  },
+  "passed": true
+}

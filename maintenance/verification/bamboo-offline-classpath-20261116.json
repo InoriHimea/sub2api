@@ -1,0 +1,585 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-11-15T17:55:43.430707+00:00",
+  "owner_goal": "Continue dedicated Agent acceptance and make future version updates repeatable",
+  "status": "OFFLINE_CACHE_STAGED_STOPPED_WINDOW_CLOSED_DISCOVERY_UNRESERVED",
+  "http429_cause": {
+    "responsible_process": "HAProxy bamboo_frontend on10.156.56.100:18892",
+    "config": "/usr/local/etc/haproxy/conf.d/bamboo.cfg",
+    "rule": "path_beg /agentServer/bootstrap; conn_rate(10s)>400 per forwarded IP; tarpit deny_status429",
+    "nginx_classpath_statuses": {
+      "200": 397,
+      "429": 1
+    },
+    "primary63_classpath_statuses": {
+      "200": 397
+    },
+    "shared_config_modified": false,
+    "first_install_burst_hits_existing_failover_protection": true
+  },
+  "active_primary_installer": {
+    "installer_bytes": 225585954,
+    "installer_sha256": "0ddda6857ddee98e0273a2045a8251da5ecb3f13aee4b07e0620cc887ae3c16d",
+    "runtime_bytes": 5381506,
+    "runtime_sha256": "42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05",
+    "has_classpath_zip": true,
+    "classpath_file_count": 567,
+    "classpath_bytes": 236554324,
+    "examples": [
+      "MANIFEST.DAT",
+      "atlassian-profiling-api-6.0.6.jar",
+      "commons-codec-1.19.0.jar",
+      "jackson-dataformat-yaml-3.1.6.jar",
+      "log4j-slf4j2-impl-2.26.1.jar",
+      "atlassian-oauth-api-7.0.17.jar"
+    ],
+    "hawtbuf": [
+      "hawtbuf-1.11.jar"
+    ]
+  },
+  "stale_standby_installer": {
+    "installer_bytes": 227958478,
+    "installer_sha256": "369b1a25f2a9d0957eb6d3c05825f4fcb51c7a653f156167d3c513433b4ec1d0",
+    "runtime_bytes": 5389062,
+    "runtime_sha256": "6cb22823b298c6acfcbb4396944b4fae7f1ff32a39673101eca2ad854162527f",
+    "has_classpath_zip": true,
+    "classpath_file_count": 567,
+    "classpath_bytes": 239230782,
+    "examples": [
+      "MANIFEST.DAT",
+      "jackson-module-jakarta-xmlbind-annotations-2.21.5.jar",
+      "atlassian-bamboo-agent-elastic-server-12.1.10.jar",
+      "commons-codec-1.19.0.jar",
+      "atlassian-profiling-micrometer-6.0.5.jar",
+      "jackson-dataformat-xml-3.1.5.jar"
+    ],
+    "hawtbuf": [
+      "hawtbuf-1.11.jar"
+    ]
+  },
+  "source_pins": {
+    "deploy/bamboo/agent/prepare_runtime.py": "81882dc77c2a8974d1078c979902c084f9a8db4d414b3045aa088e53ad17090d",
+    "deploy/bamboo/agent/NativeClasspathSmoke.java": "22e966d8f5b280348a1c66b125c0fc5b90a7be6d7a9f1b57c7c3ca5a2bfb4fe7"
+  },
+  "qualification": {
+    "fixture": "/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a",
+    "prepare": {
+      "exit": 0,
+      "stdout": "{\"version\": \"12.1.12\", \"runtime_sha256\": \"42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05\", \"classpath_files\": 566, \"starts_agent\": false}\n",
+      "stderr": ""
+    },
+    "compile": {
+      "exit": 1,
+      "stdout": "",
+      "stderr": "/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:1: \u9519\u8bef: \u65e0\u6cd5\u8bbf\u95eeAgentFileManifestDao\nimport com.atlassian.bamboo.agent.bootstrap.AgentFileManifestDao.AgentFileManifestEntry;\n                                           ^\n  \u9519\u8bef\u7684\u7c7b\u6587\u4ef6: /tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/prepared/bamboo-agent-bootstrap-12.1.12-42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05.jar(/com/atlassian/bamboo/agent/bootstrap/AgentFileManifestDao.class)\n    \u7c7b\u6587\u4ef6\u5177\u6709\u9519\u8bef\u7684\u7248\u672c 65.0, \u5e94\u4e3a 61.0\n    \u8bf7\u5220\u9664\u8be5\u6587\u4ef6\u6216\u786e\u4fdd\u8be5\u6587\u4ef6\u4f4d\u4e8e\u6b63\u786e\u7684\u7c7b\u8def\u5f84\u5b50\u76ee\u5f55\u4e2d\u3002\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:2: \u9519\u8bef: \u65e0\u6cd5\u8bbf\u95eeClasspathBuilder\nimport com.atlassian.bamboo.agent.bootstrap.ClasspathBuilder;\n                                           ^\n  \u9519\u8bef\u7684\u7c7b\u6587\u4ef6: /tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/prepared/bamboo-agent-bootstrap-12.1.12-42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05.jar(/com/atlassian/bamboo/agent/bootstrap/ClasspathBuilder.class)\n    \u7c7b\u6587\u4ef6\u5177\u6709\u9519\u8bef\u7684\u7248\u672c 65.0, \u5e94\u4e3a 61.0\n    \u8bf7\u5220\u9664\u8be5\u6587\u4ef6\u6216\u786e\u4fdd\u8be5\u6587\u4ef6\u4f4d\u4e8e\u6b63\u786e\u7684\u7c7b\u8def\u5f84\u5b50\u76ee\u5f55\u4e2d\u3002\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:52: \u9519\u8bef: \u627e\u4e0d\u5230\u7b26\u53f7\n            AgentFileManifestEntry entry, String reason) throws Exception {\n            ^\n  \u7b26\u53f7:   \u7c7b AgentFileManifestEntry\n  \u4f4d\u7f6e: \u7c7b NativeClasspathSmoke\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:15: \u9519\u8bef: \u627e\u4e0d\u5230\u7b26\u53f7\n                \"lambda$sync$3\", File.class, AgentFileManifestEntry.class);\n                                             ^\n  \u7b26\u53f7:   \u7c7b AgentFileManifestEntry\n  \u4f4d\u7f6e: \u7c7b NativeClasspathSmoke\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:14: \u9519\u8bef: \u627e\u4e0d\u5230\u7b26\u53f7\n        Method needsDownload = ClasspathBuilder.class.getDeclaredMethod(\n                               ^\n  \u7b26\u53f7:   \u7c7b ClasspathBuilder\n  \u4f4d\u7f6e: \u7c7b NativeClasspathSmoke\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:18: \u9519\u8bef: \u627e\u4e0d\u5230\u7b26\u53f7\n        AgentFileManifestEntry first = null;\n        ^\n  \u7b26\u53f7:   \u7c7b AgentFileManifestEntry\n  \u4f4d\u7f6e: \u7c7b NativeClasspathSmoke\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:21: \u9519\u8bef: \u627e\u4e0d\u5230\u7b26\u53f7\n            AgentFileManifestEntry entry = new AgentFileManifestEntry(\n            ^\n  \u7b26\u53f7:   \u7c7b AgentFileManifestEntry\n  \u4f4d\u7f6e: \u7c7b NativeClasspathSmoke\n/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/NativeClasspathSmoke.java:21: \u9519\u8bef: \u627e\u4e0d\u5230\u7b26\u53f7\n            AgentFileManifestEntry entry = new AgentFileManifestEntry(\n                                               ^\n  \u7b26\u53f7:   \u7c7b AgentFileManifestEntry\n  \u4f4d\u7f6e: \u7c7b NativeClasspathSmoke\n8 \u4e2a\u9519\u8bef\n"
+    },
+    "refuse_overwrite": {
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Output already exists; never overwrite a prepared generation\n"
+    },
+    "wrong_version": {
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Embedded runtime version mismatch\n"
+    },
+    "wrong_sha": {
+      "exit": 2,
+      "stdout": "",
+      "stderr": "Installer SHA256 mismatch\n"
+    },
+    "retry_only_native": {
+      "compile": {
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "native": {
+        "exit": 0,
+        "stdout": "NATIVE_CACHE_ACCEPTED=566 INVALID_CACHE_REJECTED=3 RESTORED=1 HTTP_REQUESTS=0\n",
+        "stderr": ""
+      }
+    }
+  },
+  "credential_read_or_replay": false,
+  "shared_limits_or_server_config_changed": false,
+  "actual_new_start_count": 0,
+  "parent_complete": false,
+  "window_request_messages": [
+    "msg_2370c39cccb9",
+    "msg_8628bed99fcf"
+  ],
+  "window_start": "2026-11-15T18:10:00+00:00",
+  "window_end": "2026-11-15T18:55:00+00:00",
+  "gatewayportal_ack": "msg_bc1be73fdaa1",
+  "qualified_public_bundle": {
+    "path": "/tmp/cd08-offline-cache-c306ab39c3da44f79b152ec4203c9b64-07exxk7a/qualified-offline-cache.tar.gz",
+    "bytes": 216635526,
+    "sha256": "95ae6f7be6e384685800258bc41902e0461bd6a37e1211a0edf3bedbefd4dee2"
+  },
+  "public_transfer": {
+    "path": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\qualified-offline-cache-c306ab39c3da44f79b152ec4203c9b64.tar.gz",
+    "bytes": 216635526,
+    "sha256": "95ae6f7be6e384685800258bc41902e0461bd6a37e1211a0edf3bedbefd4dee2",
+    "original_kernel_timeout": true,
+    "original_scp_process_awaited": 41704,
+    "transfer_not_replayed": true,
+    "exit_code_not_captured": true
+  },
+  "final_tool_publication_smoke": {
+    "valid": {
+      "exit": 0,
+      "final_receipt": true
+    },
+    "corrupt": {
+      "exit": 2,
+      "final_receipt": false
+    },
+    "traversal": {
+      "exit": 2,
+      "final_receipt": false
+    }
+  },
+  "target_cache_preflight": {
+    "cache_exists": true,
+    "uid": 999,
+    "gid": 988,
+    "mode": "0o700",
+    "symlink": false,
+    "files": 396,
+    "symlinks": 0,
+    "state": "Restart=no\nMainPID=0\nNRestarts=0\nActiveState=failed\nUnitFileState=disabled\n"
+  },
+  "new_attempt_plan": {
+    "attempt": "6ed59004-82fa-4f67-818d-44dd412941fc",
+    "root": "/opt/bamboo-agent/offline-upgrade-6ed59004-82fa-4f67-818d-44dd412941fc",
+    "profile": "/etc/bamboo-agent-isolation/profiles/6ed59004-82fa-4f67-818d-44dd412941fc.properties",
+    "requests": "/var/lib/bamboo/isolation/6ed59004-82fa-4f67-818d-44dd412941fc/requests",
+    "dropin": "/etc/systemd/system/bamboo-agent.service.d/zzz-offline-cache-runtime.conf",
+    "profile_sha256": "d8c856b2261350f4a3216f24d36ddc1739a377d3af0a384f83ecb7abd336a324",
+    "launcher_sha256": "4311f4c811d77c7deda27634f4235de0e50fac11ea5fba8368422e5541954e7e",
+    "actual_start_count": 0,
+    "admin_current": false,
+    "target_stage_prepared": true,
+    "live_procedure_external_gates_default": false
+  },
+  "live_procedure_closed_gate_smokes": {
+    "stage-offline-cache.py": {
+      "exit": 1,
+      "denied": true
+    },
+    "start-offline-discovery.py": {
+      "exit": 1,
+      "denied": true
+    }
+  },
+  "synthetic_fixture_cleanup": {
+    "owned_fixture_removed": true
+  },
+  "live_procedures": {
+    "stage-offline-cache.py": {
+      "path": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\stage-offline-cache.py",
+      "sha256": "0bedc6c2c42d3eea29b8ba65b0818a0a0788a3ad765855abd1b8f56f1c982dff"
+    },
+    "start-offline-discovery.py": {
+      "path": "D:\\dev-cache\\sub2api-immutable-installer-20261115-ff2e118b872b472d9ebecb2ba9784d9a\\start-offline-discovery.py",
+      "sha256": "cb37ec4c4b6e0406d9a45f6f8f963a4c95bfa04bdd3f202b8a900ac1df0446ce"
+    }
+  },
+  "native_admin_gate": {
+    "url": "https://deploy.mellivora.com.cn/admin/webSudoRequired.action?web_sudo_destination=%2Fadmin%2Fagent%2FviewAgents.action",
+    "checked_at": "2026-11-15T18:12:00.362450+00:00",
+    "private_step_up_required": true,
+    "private_inputs_read": false
+  },
+  "documentation": [
+    "FORK.md",
+    "TODO.md",
+    "TODO-m.md"
+  ],
+  "status_message": "msg_ed950fbd6145",
+  "resume_20261116": {
+    "at": "2026-11-16T01:55:45.986961+00:00",
+    "target": {
+      "exists": {
+        "/opt/bamboo-agent/offline-upgrade-6ed59004-82fa-4f67-818d-44dd412941fc": false,
+        "/etc/systemd/system/bamboo-agent.service.d/zzz-offline-cache-runtime.conf": false,
+        "/etc/bamboo-agent-isolation/profiles/6ed59004-82fa-4f67-818d-44dd412941fc.properties": false,
+        "/var/lib/bamboo/bamboo-agent.cfg.xml": false
+      },
+      "state": {
+        "Restart": "no",
+        "MainPID": "0",
+        "NRestarts": "0",
+        "ActiveState": "failed",
+        "UnitFileState": "disabled"
+      },
+      "cache": {
+        "uid": 999,
+        "gid": 988,
+        "mode": "0o700",
+        "symlink": false,
+        "files": 396
+      },
+      "previous_attempt_state": "CLOSED_BLOCKED_NATIVE_CLASSPATH_HTTP_429_BEFORE_IDENTITY"
+    },
+    "admin_url": "https://deploy.mellivora.com.cn/admin/webSudoRequired.action?web_sudo_destination=%2Fadmin%2Fagent%2FviewAgents.action",
+    "ordinary_sso_renewed": true,
+    "private_inputs_read": false,
+    "expired_unstarted_window_closed": true,
+    "expired_window_end_messages": [
+      "msg_af4ad166667d",
+      "msg_7d080ffb8a2f"
+    ],
+    "new_window_requested": false,
+    "actual_start_count": 0
+  },
+  "resume_after_owner_login": {
+    "at": "2026-11-16T03:36:00.567448+00:00",
+    "admin_verified": true,
+    "target": {
+      "exists": {
+        "/opt/bamboo-agent/offline-upgrade-6ed59004-82fa-4f67-818d-44dd412941fc": false,
+        "/etc/bamboo-agent-isolation/profiles/6ed59004-82fa-4f67-818d-44dd412941fc.properties": false,
+        "/etc/systemd/system/bamboo-agent.service.d/zzz-offline-cache-runtime.conf": false,
+        "/var/lib/bamboo/isolation/6ed59004-82fa-4f67-818d-44dd412941fc": false
+      },
+      "state": {
+        "Restart": "no",
+        "MainPID": "0",
+        "NRestarts": "0",
+        "ActiveState": "failed",
+        "UnitFileState": "disabled"
+      },
+      "pin_mismatches": [],
+      "cache": {
+        "uid": 999,
+        "gid": 988,
+        "mode": "0o700",
+        "symlink": false,
+        "files": 396
+      },
+      "native_cfg_exists": false
+    },
+    "requested_window": {
+      "start": "2026-11-16T03:37:00+00:00",
+      "end": "2026-11-16T04:22:00+00:00"
+    },
+    "requests": [
+      "msg_38b6ad0a5d36",
+      "msg_9169b962a165"
+    ],
+    "window_outcome": {
+      "status": "DEFERRED_CLOSED_UNSTARTED_CONFLICT",
+      "conflict_message": "msg_5792cdf610b6",
+      "other_authorized_build": "HER-DOCKER-16/HER-DOCKER-JOB1-16 on Linux001",
+      "other_build_started_at": "2026-11-16T03:35:10+00:00",
+      "other_build_commit": "3e892d46029125310cc7529f6f4c7afe7d08b902",
+      "end_messages": [
+        "msg_a62a6d7d089e",
+        "msg_7963337d37a9"
+      ],
+      "start_announced": false,
+      "target_staged": false,
+      "new_start_reserved": false,
+      "next": "Await terminal build and artifact publication report; request fresh bounded window and native gates"
+    }
+  },
+  "current_window": {
+    "start": "2026-11-16T03:50:00+00:00",
+    "end": "2026-11-16T04:35:00+00:00",
+    "acks": [
+      "msg_3302ffc926bd",
+      "msg_84bf31e65655"
+    ],
+    "admin_expired_at": "2026-11-16T04:00:48+00:00",
+    "start_announced": true,
+    "physical_actions": false,
+    "gates": {
+      "at": "2026-11-16T04:14:19.432845+00:00",
+      "native": {
+        "agents": [
+          {
+            "busy": false,
+            "id": 8388609
+          },
+          {
+            "busy": false,
+            "id": 35553281
+          },
+          {
+            "busy": false,
+            "id": 8683524
+          },
+          {
+            "busy": false,
+            "id": 28344321
+          },
+          {
+            "busy": false,
+            "id": 28344322
+          },
+          {
+            "busy": false,
+            "id": 35553283
+          },
+          {
+            "busy": false,
+            "id": 8683521
+          }
+        ],
+        "env": [
+          {
+            "id": 12845057,
+            "states": [
+              "FINISHED"
+            ]
+          },
+          {
+            "id": 12845058,
+            "states": [
+              "FINISHED"
+            ]
+          },
+          {
+            "id": 37093377,
+            "states": []
+          },
+          {
+            "id": 37093380,
+            "states": []
+          },
+          {
+            "id": 32473089,
+            "states": [
+              "FINISHED"
+            ]
+          },
+          {
+            "id": 32473090,
+            "states": [
+              "FINISHED"
+            ]
+          },
+          {
+            "id": 37093378,
+            "states": []
+          }
+        ],
+        "queue": 0,
+        "server": {
+          "asked": "RUNNING",
+          "cluster": "RUNNING",
+          "reindex": false
+        }
+      },
+      "admin": true
+    },
+    "start_messages": [
+      "msg_db3b4657a280",
+      "msg_eea5deec8feb"
+    ]
+  },
+  "actual_staging_reconciliation": {
+    "at": "2026-11-16T04:32:02.836385+00:00",
+    "observation": {
+      "root_exists": true,
+      "state": "Restart=no\nMainPID=0\nNRestarts=0\nActiveState=failed\n",
+      "files": [
+        "prepared",
+        "000-staging-reserved.json",
+        "payload.tar.gz",
+        "classpath.before",
+        "020-cache-staged.json"
+      ],
+      "payload_bytes": 216635526,
+      "staged": {
+        "activation_start_reserved": false,
+        "attempt": "6ed59004-82fa-4f67-818d-44dd412941fc",
+        "cache_files": 566,
+        "changed": 170,
+        "effective_execstart": "{ path=/usr/bin/java ; argv[]=/usr/bin/java -Xms256m -Xmx1024m -javaagent:/opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar -Dbamboo.isolation.profile=/etc/bamboo-agent-isolation/profiles/6ed59004-82fa-4f67-818d-44dd412941fc.properties -Dbamboo.home=/var/lib/bamboo -Dlog4j2.configurationFile=/opt/bamboo-agent/bootstrap-log4j2.xml -cp /opt/bamboo-agent-isolation/bamboo-discovery-181719383a7e6830fcd2ef273f54c66a55b8f11905dce122c884585ea768e9d2.jar:/opt/bamboo-agent/bootstrap:/opt/bamboo-agent/runtime/bamboo-agent-bootstrap-12.1.12-42b9c3d95107c531640169cb044b9631ef727168a4dd8a0212af241cdd6ffd05.jar com.mellivora.bamboo.isolation.GuardedBootstrap /run/credentials/bamboo-agent.service/security-token ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }\n",
+        "preserved": 396,
+        "schema": 1,
+        "start_reserved": false,
+        "state": {
+          "ActiveState": "failed",
+          "MainPID": "0",
+          "NRestarts": "0",
+          "Restart": "no",
+          "UnitFileState": "disabled"
+        },
+        "status": "OFFLINE_CACHE_STAGED_NO_START"
+      }
+    },
+    "original_ssh_pid": 64716,
+    "original_transport_awaited": true,
+    "replayed": false,
+    "exit_code_not_captured": true,
+    "browser_gate_failure": "Repeated target_closed on native admin verification",
+    "discovery_reserved": false,
+    "start_messages": [
+      "msg_db3b4657a280",
+      "msg_eea5deec8feb"
+    ],
+    "end_messages": [
+      "msg_16fae70840b6",
+      "msg_661beb893e3a"
+    ],
+    "end_acks": [
+      "msg_a9fd193549b1",
+      "msg_b2e10e9d35ab"
+    ]
+  },
+  "discovery_20261116": {
+    "attempt": "6ed59004-82fa-4f67-818d-44dd412941fc",
+    "window_end": 1794819300.0,
+    "acks": [
+      "msg_90c6b4dedef7",
+      "msg_e3b58beb95eb"
+    ],
+    "start_message": "msg_8e261b1b3183",
+    "start": {
+      "attempt": "6ed59004-82fa-4f67-818d-44dd412941fc",
+      "reserved": true,
+      "start_returncode": 0,
+      "state": {
+        "Restart": "no",
+        "MainPID": "51403",
+        "NRestarts": "0",
+        "ExecMainStatus": "0",
+        "ActiveState": "active",
+        "SubState": "running"
+      }
+    },
+    "initial_observation": {
+      "state": "MainPID=51403\nNRestarts=0\nExecMainStatus=0\nActiveState=active\nSubState=running\n",
+      "records": [
+        "prepared",
+        "000-staging-reserved.json",
+        "payload.tar.gz",
+        "classpath.before",
+        "020-cache-staged.json",
+        "100-discovery-start-reserved.json"
+      ],
+      "requests": [],
+      "nativecfg": true
+    },
+    "marker_observation": {
+      "markers": {
+        "ISOLATION_DISCOVERY_COMPLETE": 0,
+        "ISOLATION_BOOTSTRAP_DENIED": 0,
+        "ERROR": 1,
+        "WARN": 1711,
+        "register": 87,
+        "authentication": 1,
+        "approved": 0,
+        "Waiting": 3,
+        "429": 2,
+        "401": 3135,
+        "403": 1,
+        "SSL": 43,
+        "Connection refused": 0
+      },
+      "cfg_identity": {
+        "agentUuid": "f784ccbb-433e-4c55-b4a0-e9c107304b46"
+      },
+      "state": "MainPID=51403\nExecMainStatus=0\nActiveState=active\n"
+    },
+    "stop": {
+      "exit": 0,
+      "state": "Restart=no\nMainPID=0\nNRestarts=0\nActiveState=failed\n"
+    },
+    "classification": {
+      "exceptions": {},
+      "phrases": {
+        "Unauthorized": 0,
+        "Forbidden": 0,
+        "HTTP response code: 401": 0,
+        "status code: 401": 0,
+        "statusCode=401": 0,
+        "HTTP 401": 0,
+        "401 Unauthorized": 0,
+        "authentication failed": 0,
+        "not authenticated": 0,
+        "not authorized": 0,
+        "Connection reset": 0,
+        "Invalid broker URI": 0,
+        "Failed to connect": 0,
+        "Could not connect": 0,
+        "Unable to connect": 0,
+        "ISOLATION_DISCOVERY_COMPLETE": 0,
+        "ISOLATION_BOOTSTRAP_DENIED": 0
+      },
+      "requests": [],
+      "log_lines": 5956
+    },
+    "warning_samples": [
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: log4j-core-#.#.#.jar and [LONG]",
+        354
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: [LONG] and log4j-core-#.#.#.jar",
+        295
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: [LONG] and [LONG]",
+        247
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: httpclient-#.#.#.jar and [LONG]",
+        108
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: [LONG] and httpclient-#.#.#.jar",
+        90
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: log4j-api-#.#.#.jar and [LONG]",
+        66
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: [LONG] and log4j-api-#.#.#.jar",
+        55
+      ],
+      [
+        "#-#-16T08:#:#,# WARN  [LONG] - Package Scanner found duplicates for package '[LONG]' with different versions. Files: commons-text-#.#.#.jar and [LONG]",
+        42
+      ]
+    ],
+    "correction": "Raw 401/429 substring counts were not HTTP status evidence; no authentication failure established. Operator stopped discovery before receipt on ambiguous log counts. Do not replay consumed start.",
+    "status": "STOPPED_NO_DISCOVERY_RECEIPT"
+  },
+  "recovery_discovery_20261116": {
+    "window": "12:28-14:28UTC owner-controlled",
+    "recovery_attempt": "b3f7e2a1-9c4d-4e8a-a5c2-7f1d3b9e6a04",
+    "prior_reservation_sha256": "e0ff9353b9235ccc1efc2a8d8b55895b7d8a788e66b875562064bf89433af705",
+    "nativecfg_sha256_before": "f7d1ddb554580218983575d9c2cf8e1abb87b867b6149905a8ed1d042e0a50f4",
+    "gates_passed_at": "2026-11-16T13:51:25+00:00",
+    "start": {
+      "returncode": 0,
+      "pid": 53186
+    },
+    "first_invocation_failure": "KeyError ack pre-remote, no reservation consumed",
+    "receipt": {
+      "file": "17c15578-e38e-4eec-9e63-0160f8547e7c.properties",
+      "agent_id": "40009729",
+      "agent_uuid": "f784ccbb-433e-4c55-b4a0-e9c107304b46",
+      "mode": "registration-only"
+    },
+    "nativecfg_after": {
+      "id": "40009729",
+      "name": "sub2api-deploy-agent-01",
+      "uuid": "f784ccbb-433e-4c55-b4a0-e9c107304b46"
+    },
+    "exit78_design_halt": "ISOLATION_DISCOVERY_COMPLETE",
+    "server_inventory_after": "original7 + new40009729 idle, total8",
+    "unit": {
+      "NRestarts": 0,
+      "UnitFileState": "disabled",
+      "Restart": "no"
+    },
+    "status": "REGISTRATION_MILESTONE_PROVEN"
+  }
+}

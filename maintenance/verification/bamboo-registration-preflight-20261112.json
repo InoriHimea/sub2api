@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "owner_authorization": "First-connect scheduling isolation, dedicated startup/registration/Online and exclusive task acceptance; no production release",
+  "status": "WAITING_GLOBAL_PAUSE_SCOPE_APPROVAL",
+  "browser": {
+    "name": "bamboo-registration",
+    "origin": "https://deploy.mellivora.com.cn",
+    "sso": "Existing Zitadel session completed ordinary sign-in",
+    "current_path": "/admin/administer.action",
+    "page_title": "Bamboo administration - NERV末日机神研究所",
+    "owner_action": "Administrator Access completed. Existing target registration approval retained; separate approval required only for proposed temporary all-project scheduling pause."
+  },
+  "readonly_api_observation": {
+    "path": "/rest/api/latest/agent/remote.json",
+    "http_status": 200,
+    "agents": [
+      {"id":8388609,"name":"Linux001","active":true,"busy":false,"enabled":true},
+      {"id":35553281,"name":"Linux002","active":true,"busy":false,"enabled":true},
+      {"id":8683524,"name":"Linux003","active":false,"busy":false,"enabled":true},
+      {"id":28344321,"name":"Linux004","active":true,"busy":false,"enabled":true},
+      {"id":28344322,"name":"Linux005","active":true,"busy":false,"enabled":true},
+      {"id":35553283,"name":"macOS001","active":true,"busy":false,"enabled":true},
+      {"id":8683521,"name":"Winodws001","active":true,"busy":false,"enabled":true}
+    ],
+    "dedicated_new_agent_present": false
+  },
+  "isolation": {
+    "established": false,
+    "reason": "Authenticated native agent summary exposes enable-remote-agent-authentication and disable-security-token-verification links: manual authentication is OFF and token verification ON. Only existing-agent enable/disable actions observed; no proven target-only pre-registration quarantine. Native dedication requires an existing agent. No startup attempted.",
+    "server_state": {"http_status": 200, "askedNodeState": "RUNNING", "clusterState": "RUNNING", "reindexInProgress": false},
+    "proposed_additional_scope": "Temporarily pause all-project Bamboo scheduling, await PAUSED/quiescence, register the dedicated agent and establish disabled/dedicated isolation before restoring original RUNNING state. New jobs across projects are delayed during this window. Do not change global authentication/token verification, existing agent configurations, production settings or credentials. If registration cannot complete while paused, stop/reconcile the new service before restoring original state; never resume with an unrestricted new agent.",
+    "next": "Ask owner for temporary global scheduling-pause authority or keep the dedicated service stopped; target registration/Online approval is already recorded."
+  },
+  "boundaries": {
+    "service_start_attempted": false,
+    "global_authentication_settings_changed": false,
+    "agent_or_job_mutations": false,
+    "credential_or_dpapi_read": false,
+    "openbao_calls": 0,
+    "password_or_token_extracted": false,
+    "production_release": false
+  },
+  "references": [
+    "https://confluence.atlassian.com/bamboo/dedicating-an-agent-629015108.html",
+    "https://confluence.atlassian.com/security/agent-authentication-in-bamboo-1402421062.html",
+    "https://support.atlassian.com/bamboo/kb/automating-bamboo-backup-operations/",
+    "https://confluence.atlassian.com/security/cluster-and-node-lifecycle-states-in-bamboo-1402421047.html"
+  ]
+}
