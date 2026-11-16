@@ -113,7 +113,7 @@ func TestGroupFailureCooldownHTTPContract(t *testing.T) {
 					return
 				}
 				failure := &service.UpstreamFailoverError{StatusCode: response.StatusCode, ResponseBody: body}
-				accountPoolSelectionFailure(c, service.ErrNoAvailableAccounts, pool, &groupID, "fixture-model", service.PlatformAnthropic, failure, map[int64]struct{}{1: {}})
+				_ = accountPoolSelectionFailure(c, service.ErrNoAvailableAccounts, pool, &groupID, "fixture-model", service.PlatformAnthropic, failure, map[int64]struct{}{1: {}})
 				(&GatewayHandler{}).handleFailoverExhausted(c, failure, service.PlatformAnthropic, false)
 			})
 			gateway := httptest.NewServer(router)
