@@ -16,6 +16,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +27,8 @@ import org.apache.logging.log4j.core.appender.ConsoleAppender;
 public final class SecureBambooBootstrap {
     static final String ENDPOINT = "https://deploy.mellivora.com.cn/agentServer/";
     private static final int MAX_CREDENTIAL_BYTES = 4096;
+    private static final Path NATIVE_CREDENTIAL = Path.of(
+            "/run/credentials/bamboo-agent.service/security-token");
 
     private SecureBambooBootstrap() {}
 
@@ -38,35 +41,7 @@ public final class SecureBambooBootstrap {
 
     // Package-private for an isolated test harness; production CLI cannot override the server.
     static void launch(URL endpoint, Path credential) throws Exception {
-        if (!Files.isRegularFile(credential, LinkOption.NOFOLLOW_LINKS)) {
-            throw new IOException("Protected credential file is missing or not regular");
-        }
-        for (PosixFilePermission permission : Files.getPosixFilePermissions(credential)) {
-            if (permission.name().startsWith("GROUP_") || permission.name().startsWith("OTHERS_")) {
-                throw new IOException("Credential file must not grant group or other access");
-            }
-        }
-        byte[] bytes;
-        try (InputStream input = Files.newInputStream(credential)) {
-            bytes = input.readNBytes(MAX_CREDENTIAL_BYTES + 1);
-        }
-        if (bytes.length == 0 || bytes.length > MAX_CREDENTIAL_BYTES) {
-            Arrays.fill(bytes, (byte) 0);
-            throw new IOException("Credential length is invalid");
-        }
-        String token = new String(bytes, StandardCharsets.UTF_8).strip();
-        Arrays.fill(bytes, (byte) 0);
-        if (token.length() < 16) {
-            throw new IOException("Credential must contain at least16 characters");
-        }
-        // AgentContext concatenates the value into a URI without encoding it.
-        for (int i = 0; i < token.length(); i++) {
-            char c = token.charAt(i);
-            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-                    || (c >= '0' && c <= '9') || c == '-' || c == '.' || c == '_' || c == '~')) {
-                throw new IOException("Credential contains a character unsupported by vendor URI transport");
-            }
-        }
+        String token = readToken(credential);
         List<String> forms = new ArrayList<>();
         forms.add(token);
         String encoded = URLEncoder.encode(token, StandardCharsets.UTF_8);
@@ -93,6 +68,77 @@ public final class SecureBambooBootstrap {
             try { stdout.finish(); stderr.finish(); } catch (IOException ignored) { /* JVM is exiting. */ }
         }, "bamboo-log-redaction-flush"));
         VendorRunner.start(endpoint, token);
+    }
+
+    static String readToken(Path credential) throws IOException {
+        var attributes = Files.readAttributes(credential,
+                "unix:uid,gid,mode,nlink,isRegularFile", LinkOption.NOFOLLOW_LINKS);
+        if (!Boolean.TRUE.equals(attributes.get("isRegularFile"))) {
+            throw new IOException("Protected credential file is not regular");
+        }
+        if (credential.equals(NATIVE_CREDENTIAL)) {
+            validateNativeCredential(credential, attributes);
+        } else {
+            for (PosixFilePermission permission : Files.getPosixFilePermissions(
+                    credential, LinkOption.NOFOLLOW_LINKS)) {
+                if (permission.name().startsWith("GROUP_") || permission.name().startsWith("OTHERS_")) {
+                    throw new IOException("Credential file must not grant group or other access");
+                }
+            }
+        }
+        byte[] bytes;
+        try (InputStream input = Files.newInputStream(credential, LinkOption.NOFOLLOW_LINKS)) {
+            bytes = input.readNBytes(MAX_CREDENTIAL_BYTES + 1);
+        }
+        if (bytes.length == 0 || bytes.length > MAX_CREDENTIAL_BYTES) {
+            Arrays.fill(bytes, (byte) 0);
+            throw new IOException("Credential length is invalid");
+        }
+        String token = new String(bytes, StandardCharsets.UTF_8).strip();
+        Arrays.fill(bytes, (byte) 0);
+        if (token.length() < 16) {
+            throw new IOException("Credential must contain at least16 characters");
+        }
+        // AgentContext concatenates the value into a URI without encoding it.
+        for (int i = 0; i < token.length(); i++) {
+            char c = token.charAt(i);
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+                    || (c >= '0' && c <= '9') || c == '-' || c == '.' || c == '_' || c == '~')) {
+                throw new IOException("Credential contains a character unsupported by vendor URI transport");
+            }
+        }
+        return token;
+    }
+
+    /** systemd's root-owned, read-only credential mount grants the service access through an ACL. */
+    private static void validateNativeCredential(Path credential, Map<String, Object> attributes)
+            throws IOException {
+        int mode = ((Integer) attributes.get("mode")) & 07777;
+        if (!Integer.valueOf(0).equals(attributes.get("uid"))
+                || !Integer.valueOf(0).equals(attributes.get("gid"))
+                || !Integer.valueOf(1).equals(attributes.get("nlink"))
+                || (mode != 0400 && mode != 0440)) {
+            throw new IOException("Native credential ownership or permissions are unsafe");
+        }
+        Path directory = credential.getParent();
+        for (Path ancestor = directory; ancestor != null; ancestor = ancestor.getParent()) {
+            var parent = Files.readAttributes(ancestor,
+                    "unix:uid,gid,mode,isDirectory", LinkOption.NOFOLLOW_LINKS);
+            int permissions = ((Integer) parent.get("mode")) & 07777;
+            if (!Boolean.TRUE.equals(parent.get("isDirectory"))
+                    || !Integer.valueOf(0).equals(parent.get("uid"))
+                    || !Integer.valueOf(0).equals(parent.get("gid"))
+                    || (permissions & 07022) != 0
+                    || (ancestor.equals(directory) && permissions != 0500 && permissions != 0550)) {
+                throw new IOException("Native credential directory is unsafe");
+            }
+        }
+        var store = Files.getFileStore(directory);
+        if (!store.isReadOnly() || !store.type().equals("tmpfs")
+                || !Files.getAttribute(credential, "unix:dev", LinkOption.NOFOLLOW_LINKS).equals(
+                        Files.getAttribute(directory, "unix:dev", LinkOption.NOFOLLOW_LINKS))) {
+            throw new IOException("Native credential must reside on its read-only systemd mount");
+        }
     }
 
     /** Loaded only after both process streams have their secret filters installed. */

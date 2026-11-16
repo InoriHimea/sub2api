@@ -26,3 +26,7 @@ scripts/ci/** text eol=lf
 
 # Enrollment verifies the complete startup unit and logging configuration bytes.
 deploy/bamboo/agent/** text eol=lf
+
+# Fixed-profile JUL protection artifacts hash Java/Python source bytes across hosts.
+deploy/bamboo/server-logging/*.java text eol=lf
+deploy/bamboo/server-logging/*.py text eol=lf

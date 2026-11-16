@@ -2,7 +2,6 @@ package com.mellivora.bamboo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +32,15 @@ public final class SecureBambooBootstrapTest {
         return output.toString(StandardCharsets.UTF_8);
     }
 
+    private static void denied(Path credential) throws Exception {
+        try {
+            SecureBambooBootstrap.readToken(credential);
+            throw new AssertionError("Unsafe credential accepted");
+        } catch (IOException expected) {
+            // Refusal before vendor startup; diagnostic wording is not part of the contract.
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         String message = "HTTP401 request /fingerprint?securityToken=" + SECRET + "&agentUuid=test\n";
         String expected = "HTTP401 request /fingerprint?securityToken= [REDACTED] &agentUuid=test\n";
@@ -57,28 +65,27 @@ public final class SecureBambooBootstrapTest {
 
         Path root = Files.createTempDirectory("bamboo-credential-test-");
         try {
-            try {
-                SecureBambooBootstrap.launch(new URL("http://127.0.0.1:1/"), root.resolve("missing"));
-                throw new AssertionError("Missing credentials accepted");
-            } catch (IOException expectedFailure) {
-                equal("Protected credential file is missing or not regular", expectedFailure.getMessage());
-            }
+            denied(root.resolve("missing"));
+            denied(root);
             Path credential = root.resolve("credential");
-            Files.writeString(credential, SECRET);
-            Files.setPosixFilePermissions(credential, PosixFilePermissions.fromString("rw-r-----"));
-            try {
-                SecureBambooBootstrap.launch(new URL("http://127.0.0.1:1/"), credential);
-                throw new AssertionError("Shared credentials accepted");
-            } catch (IOException expectedFailure) {
-                equal("Credential file must not grant group or other access", expectedFailure.getMessage());
+            Files.writeString(credential, "fixture-uri-safe-token-20261115");
+            for (String permissions : new String[] {"rw-r-----", "rw----r--"}) {
+                Files.setPosixFilePermissions(credential, PosixFilePermissions.fromString(permissions));
+                denied(credential);
             }
             Files.setPosixFilePermissions(credential, PosixFilePermissions.fromString("rw-------"));
-            try {
-                SecureBambooBootstrap.launch(new URL("http://127.0.0.1:1/"), credential);
-                throw new AssertionError("Unsafe URI credential accepted");
-            } catch (IOException expectedFailure) {
-                equal("Credential contains a character unsupported by vendor URI transport", expectedFailure.getMessage());
+            Path link = root.resolve("linked");
+            Files.createSymbolicLink(link, credential);
+            denied(link);
+            Files.delete(link);
+            for (String invalid : new String[] {"", "too-short", SECRET, "x".repeat(4097)}) {
+                Files.writeString(credential, invalid);
+                denied(credential);
             }
+            Files.writeString(credential, "x".repeat(4096));
+            equal("x".repeat(4096), SecureBambooBootstrap.readToken(credential));
+            Files.setPosixFilePermissions(credential, PosixFilePermissions.fromString("r--------"));
+            equal("x".repeat(4096), SecureBambooBootstrap.readToken(credential));
             Files.delete(credential);
         } finally {
             Files.delete(root);
