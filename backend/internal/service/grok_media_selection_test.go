@@ -45,9 +45,10 @@ func TestSelectGrokMediaVideoRequestAccountPreservesOwner(t *testing.T) {
 					acquiredIDs:    &acquired, releasedIDs: &released,
 				}),
 			}
-			if state == "pool503" {
+			switch state {
+			case "pool503":
 				svc.MarkAccountPoolCooldown(&groupID, "", PlatformGrok, 503)
-			} else if state == "pool429" {
+			case "pool429":
 				svc.MarkAccountPoolCooldown(&groupID, "", PlatformGrok, 429)
 			}
 			ctx := context.Background()

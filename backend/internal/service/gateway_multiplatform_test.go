@@ -3405,7 +3405,9 @@ func TestGatewayService_GroupResolution_IgnoresInvalidContextGroup(t *testing.T)
 	require.NoError(t, err)
 	require.NotNil(t, account)
 	require.Equal(t, 0, groupRepo.getByIDCalls)
-	require.Equal(t, 2, groupRepo.getByIDLiteCalls) // 分组解析 + require_privacy_set
+	// 分组解析 + require_privacy_set + pool-cooldown key 平台解析（context 分组无效时
+	// 需要一次独立 Lite 读取来决定共享冷却键的 platform，不加载账号计数聚合）。
+	require.Equal(t, 3, groupRepo.getByIDLiteCalls)
 }
 
 func TestGatewayService_GroupContext_OverwritesInvalidContextGroup(t *testing.T) {

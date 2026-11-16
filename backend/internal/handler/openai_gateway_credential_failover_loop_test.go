@@ -588,9 +588,11 @@ func TestResponsesGrok429FailoverIsBounded(t *testing.T) {
 		require.Equal(t, http.StatusTooManyRequests, recorder.Code, recorder.Body.String())
 		require.Equal(t, []int64{801, 802}, upstream.accountHits())
 		require.Equal(t, []int64{801, 802}, repo.rateLimitedAccountIDs())
+		// The exhausted response is now the coherent representative failure:
+		// the selected upstream message stays, credential tokens never leak.
 		require.NotContains(t, recorder.Body.String(), "expired")
 		require.NotContains(t, recorder.Body.String(), "healthy-access")
-		require.NotContains(t, recorder.Body.String(), "rate limited")
+		require.Contains(t, recorder.Body.String(), "rate_limit_error")
 	})
 }
 
@@ -632,7 +634,10 @@ func TestResponsesGrok429FailoverHandlesMixedStatuses(t *testing.T) {
 
 		router.ServeHTTP(recorder, req)
 
-		require.Equal(t, http.StatusBadGateway, recorder.Code, recorder.Body.String())
+		// A retryable 429 outranks the later 500: the client receives the
+		// rate-limit status instead of a fabricated 502, with the bounded
+		// followup still hitting the second account.
+		require.Equal(t, http.StatusTooManyRequests, recorder.Code, recorder.Body.String())
 		require.Equal(t, []int64{801, 802}, upstream.accountHits())
 		require.NotContains(t, recorder.Body.String(), "upstream unavailable")
 	})
@@ -659,7 +664,9 @@ func TestResponsesGrok429FailoverHandlesMixedStatuses(t *testing.T) {
 
 		router.ServeHTTP(recorder, req)
 
-		require.Equal(t, http.StatusBadGateway, recorder.Code, recorder.Body.String())
+		// The credential-failure 500 does not win over the earlier retryable
+		// 429; the bound still stops before the third account.
+		require.Equal(t, http.StatusTooManyRequests, recorder.Code, recorder.Body.String())
 		require.Equal(t, []int64{801, 802}, upstream.accountHits())
 	})
 }
@@ -691,7 +698,10 @@ func TestGrokMedia429FailoverIsBounded(t *testing.T) {
 
 		require.Equal(t, http.StatusTooManyRequests, recorder.Code, recorder.Body.String())
 		require.Equal(t, []int64{801, 802}, upstream.accountHits())
-		require.NotContains(t, recorder.Body.String(), "rate limited")
+		// The rate-limit representative response is intentional; the media
+		// path must not leak account identity beyond it.
+		require.NotContains(t, recorder.Body.String(), "expired")
+		require.NotContains(t, recorder.Body.String(), "healthy-access")
 	})
 }
 

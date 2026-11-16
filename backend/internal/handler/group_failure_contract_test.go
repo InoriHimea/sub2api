@@ -53,7 +53,7 @@ func TestGroupFailureHTTPContract(t *testing.T) {
 				response, err := http.Get(upstream.URL)
 				require.NoError(t, err)
 				body, err := io.ReadAll(response.Body)
-				response.Body.Close()
+				require.NoError(t, response.Body.Close())
 				require.NoError(t, err)
 				failure := &service.UpstreamFailoverError{StatusCode: response.StatusCode, ResponseBody: body, ResponseHeaders: response.Header}
 				require.Equal(t, FailoverContinue, state.HandleFailoverError(context.Background(), &mockTempUnscheduler{}, int64(index+1), service.PlatformOpenAI, 0, failure))
@@ -107,7 +107,7 @@ func TestGroupFailureCooldownHTTPContract(t *testing.T) {
 					return
 				}
 				body, err := io.ReadAll(response.Body)
-				response.Body.Close()
+				require.NoError(t, response.Body.Close())
 				if err != nil {
 					c.Status(http.StatusInternalServerError)
 					return
@@ -122,7 +122,7 @@ func TestGroupFailureCooldownHTTPContract(t *testing.T) {
 				response, err := http.Post(gateway.URL+"/v1/messages", "application/json", strings.NewReader(`{"model":"fixture-model"}`))
 				require.NoError(t, err)
 				_, err = io.Copy(io.Discard, response.Body)
-				response.Body.Close()
+				require.NoError(t, response.Body.Close())
 				require.NoError(t, err)
 				require.Equal(t, status, response.StatusCode)
 				require.NotEmpty(t, response.Header.Get("Retry-After"))
