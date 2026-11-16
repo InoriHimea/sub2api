@@ -271,6 +271,10 @@ func (h *OpenAIGatewayHandler) GrokVoice(c *gin.Context, endpoint string) {
 			service.PlatformGrok,
 		)
 		if selectErr != nil || selection == nil || selection.Account == nil {
+			if cooldown := accountPoolSelectionFailure(c, selectErr, h.gatewayService, apiKey.GroupID, selectionModel, service.PlatformGrok, last, failed); cooldown != nil {
+				h.handleFailoverExhausted(c, cooldown, false)
+				return
+			}
 			if last != nil {
 				h.handleFailoverExhausted(c, last, false)
 			} else {
@@ -303,9 +307,13 @@ func (h *OpenAIGatewayHandler) GrokVoice(c *gin.Context, endpoint string) {
 			return
 		}
 		var failoverErr *service.UpstreamFailoverError
-		if errors.As(forwardErr, &failoverErr) && failoverErr.ShouldRetryNextAccount() {
+		if errors.As(forwardErr, &failoverErr) {
+			if !failoverErr.ShouldRetryNextAccount() {
+				h.handleFailoverExhausted(c, failoverErr, false)
+				return
+			}
 			failed[account.ID] = struct{}{}
-			last = failoverErr
+			last = selectRepresentativeFailure(last, failoverErr)
 			continue
 		}
 		// Non-failover errors: handleGrokMediaErrorResponse / transport already wrote response.

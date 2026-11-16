@@ -122,6 +122,7 @@ func (h *OpenAIGatewayHandler) Embeddings(c *gin.Context) {
 
 	profitVetoCount := 0
 	failedAccountIDs := make(map[int64]struct{})
+	var upstreamFailedAccountIDs map[int64]struct{}
 	var lastFailoverErr *service.UpstreamFailoverError
 	switchCount := 0
 	maxAccountSwitches := h.maxAccountSwitches
@@ -151,6 +152,10 @@ func (h *OpenAIGatewayHandler) Embeddings(c *gin.Context) {
 		if err != nil {
 			if failoverClientGone(c) {
 				reqLog.Info("openai_embeddings.account_select_aborted_client_disconnected", zap.Error(err))
+				return
+			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, forwardModel, service.PlatformOpenAI, lastFailoverErr, upstreamFailedAccountIDs); cooldown != nil {
+				h.handleFailoverExhausted(c, cooldown, false)
 				return
 			}
 			reqLog.Warn("openai_embeddings.account_select_failed",
@@ -236,11 +241,16 @@ func (h *OpenAIGatewayHandler) Embeddings(c *gin.Context) {
 					)
 					return
 				}
+				if !failoverErr.ShouldRetryNextAccount() {
+					h.handleFailoverExhausted(c, failoverErr, false)
+					return
+				}
 				h.gatewayService.RecordOpenAIAccountSwitch()
 				failedAccountIDs[account.ID] = struct{}{}
-				lastFailoverErr = failoverErr
+				recordAccountPoolFailure(&upstreamFailedAccountIDs, account.ID, failoverErr)
+				lastFailoverErr = selectRepresentativeFailure(lastFailoverErr, failoverErr)
 				if switchCount >= maxAccountSwitches {
-					h.handleFailoverExhausted(c, failoverErr, false)
+					h.handleFailoverExhausted(c, lastFailoverErr, false)
 					return
 				}
 				switchCount++

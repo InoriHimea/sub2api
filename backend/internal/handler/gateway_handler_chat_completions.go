@@ -200,6 +200,10 @@ func (h *GatewayHandler) ChatCompletions(c *gin.Context) {
 				reqLog.Info("gateway.cc.account_select_aborted_client_disconnected", zap.Error(err))
 				return
 			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, reqModel, groupPlatform, fs.LastFailoverErr, fs.UpstreamFailedAccountIDs); cooldown != nil {
+				h.handleCCFailoverExhausted(c, cooldown, streamStarted)
+				return
+			}
 			if len(fs.FailedAccountIDs) == 0 {
 				cls := classifyNoAccountErrorFromGin(c, h.gatewayService, apiKey, reqModel, reqModel, groupPlatform)
 				cls = classifySelectionFailureError(err, cls)
@@ -442,5 +446,5 @@ func (h *GatewayHandler) handleCCFailoverExhausted(c *gin.Context, lastErr *serv
 		h.chatCompletionsErrorResponse(c, http.StatusBadGateway, "upstream_error", service.OpenAISilentRefusalClientMessage())
 		return
 	}
-	h.chatCompletionsErrorResponse(c, statusCode, "server_error", "All available accounts exhausted")
+	h.chatCompletionsErrorResponse(c, statusCode, "server_error", representativeFailureClientMessage(lastErr, "All available accounts exhausted"))
 }

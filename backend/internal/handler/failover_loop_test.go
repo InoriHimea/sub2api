@@ -333,7 +333,7 @@ func TestHandleFailoverError_BasicSwitch(t *testing.T) {
 		require.Contains(t, fs.FailedAccountIDs, int64(200))
 		require.Contains(t, fs.FailedAccountIDs, int64(300))
 
-		// LastFailoverErr 应为最后一次的错误
+		// Unavailability outranks the earlier generic server failures.
 		require.Equal(t, err3, fs.LastFailoverErr)
 	})
 
@@ -732,7 +732,7 @@ func TestHandleFailoverError_FailedAccountIDs(t *testing.T) {
 // ---------------------------------------------------------------------------
 
 func TestHandleFailoverError_LastFailoverErr(t *testing.T) {
-	t.Run("每次调用都更新LastFailoverErr", func(t *testing.T) {
+	t.Run("equal rank retains first complete failure", func(t *testing.T) {
 		mock := &mockTempUnscheduler{}
 		fs := NewFailoverState(3, false)
 
@@ -742,7 +742,7 @@ func TestHandleFailoverError_LastFailoverErr(t *testing.T) {
 
 		err2 := newTestFailoverErr(502, false, false)
 		fs.HandleFailoverError(context.Background(), mock, 200, "openai", maxSameAccountRetries, err2)
-		require.Equal(t, err2, fs.LastFailoverErr)
+		require.Equal(t, err1, fs.LastFailoverErr)
 	})
 
 	t.Run("同账号重试时也更新LastFailoverErr", func(t *testing.T) {
@@ -920,7 +920,7 @@ func TestHandleSelectionExhausted(t *testing.T) {
 		require.Equal(t, FailoverExhausted, action)
 	})
 
-	t.Run("503且未耗尽_等待后返回Continue并清除失败列表", func(t *testing.T) {
+	t.Run("503 exhaustion retains exclusions without waiting", func(t *testing.T) {
 		fs := NewFailoverState(3, false)
 		fs.LastFailoverErr = newTestFailoverErr(503, false, false)
 		fs.FailedAccountIDs[100] = struct{}{}
@@ -930,10 +930,9 @@ func TestHandleSelectionExhausted(t *testing.T) {
 		action := fs.HandleSelectionExhausted(context.Background())
 		elapsed := time.Since(start)
 
-		require.Equal(t, FailoverContinue, action)
-		require.Empty(t, fs.FailedAccountIDs, "应清除失败账号列表")
-		require.GreaterOrEqual(t, elapsed, 1500*time.Millisecond, "应等待约 2s")
-		require.Less(t, elapsed, 5*time.Second)
+		require.Equal(t, FailoverExhausted, action)
+		require.Contains(t, fs.FailedAccountIDs, int64(100))
+		require.Less(t, elapsed, 100*time.Millisecond)
 	})
 
 	t.Run("503但SwitchCount已超过MaxSwitches_返回Exhausted", func(t *testing.T) {
@@ -987,13 +986,13 @@ func TestHandleSelectionExhausted(t *testing.T) {
 		require.Equal(t, FailoverCanceled, action)
 	})
 
-	t.Run("503且SwitchCount等于MaxSwitches_仍可重试", func(t *testing.T) {
+	t.Run("503 at switch limit remains exhausted", func(t *testing.T) {
 		fs := NewFailoverState(2, false)
 		fs.LastFailoverErr = newTestFailoverErr(503, false, false)
-		fs.SwitchCount = 2 // == MaxSwitches，条件是 <=，仍可重试
+		fs.SwitchCount = 2
 
 		action := fs.HandleSelectionExhausted(context.Background())
-		require.Equal(t, FailoverContinue, action)
+		require.Equal(t, FailoverExhausted, action)
 	})
 }
 

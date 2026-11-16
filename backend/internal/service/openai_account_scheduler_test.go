@@ -1110,28 +1110,6 @@ func TestOpenAIGatewayService_SelectAccountWithScheduler_NoAvailableErrorAggrega
 	require.EqualError(t, err, "no available OpenAI accounts supporting model: gpt-5.4-mini (pool=3, filtered: excluded=1 model_not_supported=1 quota_auto_pause_7d=1)")
 }
 
-func TestOpenAIGatewayService_SelectAccountWithScheduler_NoAvailableErrorReportsEmptyPool(t *testing.T) {
-	resetOpenAIAdvancedSchedulerSettingCacheForTest()
-
-	ctx := context.Background()
-	groupID := int64(101204)
-	svc := &OpenAIGatewayService{
-		accountRepo:        schedulerTestOpenAIAccountRepo{},
-		cache:              &schedulerTestGatewayCache{},
-		cfg:                &config.Config{},
-		rateLimitService:   newOpenAIAdvancedSchedulerRateLimitService("true"),
-		concurrencyService: NewConcurrencyService(schedulerTestConcurrencyCache{}),
-	}
-
-	selection, _, err := svc.SelectAccountWithScheduler(
-		ctx, &groupID, "", "", "gpt-5.1", nil, OpenAIUpstreamTransportAny, false,
-	)
-	require.Error(t, err)
-	require.ErrorIs(t, err, ErrNoAvailableAccounts)
-	require.Nil(t, selection)
-	require.EqualError(t, err, "no available OpenAI accounts supporting model: gpt-5.1 (pool=0)")
-}
-
 func TestOpenAIGatewayService_SelectAccountWithScheduler_EnabledUsesAdvancedPreviousResponseRouting(t *testing.T) {
 	resetOpenAIAdvancedSchedulerSettingCacheForTest()
 

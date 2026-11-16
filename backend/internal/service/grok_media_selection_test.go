@@ -10,7 +10,7 @@ import (
 )
 
 func TestSelectGrokMediaVideoRequestAccountPreservesOwner(t *testing.T) {
-	for _, state := range []string{"available", "full", "unavailable", "wrong group", "missing", "invalid id"} {
+	for _, state := range []string{"available", "pool503", "pool429", "full", "unavailable", "wrong group", "missing", "invalid id"} {
 		t.Run(state, func(t *testing.T) {
 			groupID := int64(24)
 			ownerID := int64(1)
@@ -45,13 +45,18 @@ func TestSelectGrokMediaVideoRequestAccountPreservesOwner(t *testing.T) {
 					acquiredIDs:    &acquired, releasedIDs: &released,
 				}),
 			}
+			if state == "pool503" {
+				svc.MarkAccountPoolCooldown(&groupID, "", PlatformGrok, 503)
+			} else if state == "pool429" {
+				svc.MarkAccountPoolCooldown(&groupID, "", PlatformGrok, 429)
+			}
 			ctx := context.Background()
 			require.NoError(t, svc.BindGrokMediaVideoRequestAccount(ctx, &groupID, "task", 10, 20, 1))
 			sessionHash := GrokMediaVideoRequestSessionHash("task", 10, 20)
 			for range 20 {
 				selection, decision, err := svc.SelectGrokMediaVideoRequestAccount(ctx, &groupID, sessionHash, ownerID, "")
 				switch state {
-				case "available":
+				case "available", "pool503", "pool429":
 					require.NoError(t, err)
 					require.Equal(t, int64(1), selection.Account.ID)
 					require.True(t, selection.Acquired)
@@ -73,7 +78,7 @@ func TestSelectGrokMediaVideoRequestAccountPreservesOwner(t *testing.T) {
 			}
 			require.NotContains(t, acquired, int64(2))
 			require.Empty(t, cache.deletedSessions)
-			if state == "available" {
+			if state == "available" || state == "pool503" || state == "pool429" {
 				require.Len(t, released, 20)
 			} else {
 				require.Empty(t, released)

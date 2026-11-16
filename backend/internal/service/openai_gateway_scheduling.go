@@ -905,8 +905,12 @@ func (s *OpenAIGatewayService) selectAccountForModelWithExclusions(ctx context.C
 
 // selectAccountForModelWithExclusionsStickyHit 与 selectAccountForModelWithExclusions 相同，
 // 另返回账号是否来自粘性会话命中。
-func (s *OpenAIGatewayService) selectAccountForModelWithExclusionsStickyHit(ctx context.Context, groupID *int64, platform string, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}, requireCompact bool, stickyAccountID int64, requiredCapability OpenAIEndpointCapability, preferLowUpstreamRate bool) (*Account, bool, error) {
+func (s *OpenAIGatewayService) selectAccountForModelWithExclusionsStickyHit(ctx context.Context, groupID *int64, platform string, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}, requireCompact bool, stickyAccountID int64, requiredCapability OpenAIEndpointCapability, preferLowUpstreamRate bool) (_ *Account, _ bool, err error) {
 	platform = NormalizeOpenAICompatiblePlatform(platform)
+	if cooldownErr := s.CheckAccountPoolCooldown(groupID, requestedModel, platform); cooldownErr != nil {
+		return nil, false, cooldownErr
+	}
+	defer s.poolCooldown.finishSelection(poolCooldownKey(groupID, requestedModel, platform), excludedIDs, &err)
 	if s.checkChannelPricingRestriction(ctx, groupID, requestedModel) {
 		slog.Warn("channel pricing restriction blocked request",
 			"group_id", derefGroupID(groupID),
@@ -925,6 +929,9 @@ func (s *OpenAIGatewayService) selectAccountForModelWithExclusionsStickyHit(ctx 
 	accounts, err := s.listSchedulableAccounts(ctx, groupID, platform)
 	if err != nil {
 		return nil, false, fmt.Errorf("query accounts failed: %w", err)
+	}
+	if len(accounts) == 0 {
+		return nil, false, emptyAccountPoolError{}
 	}
 
 	// 3. 按优先级 + LRU 选择最佳账号
@@ -1139,8 +1146,12 @@ func (s *OpenAIGatewayService) SelectAccountWithLoadAwareness(ctx context.Contex
 	return s.selectAccountWithLoadAwareness(ctx, groupID, PlatformOpenAI, sessionHash, requestedModel, excludedIDs, false, "", true)
 }
 
-func (s *OpenAIGatewayService) selectAccountWithLoadAwareness(ctx context.Context, groupID *int64, platform string, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}, requireCompact bool, requiredCapability OpenAIEndpointCapability, useUpstreamTokenCost bool) (*AccountSelectionResult, error) {
+func (s *OpenAIGatewayService) selectAccountWithLoadAwareness(ctx context.Context, groupID *int64, platform string, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}, requireCompact bool, requiredCapability OpenAIEndpointCapability, useUpstreamTokenCost bool) (_ *AccountSelectionResult, err error) {
 	platform = NormalizeOpenAICompatiblePlatform(platform)
+	if cooldownErr := s.CheckAccountPoolCooldown(groupID, requestedModel, platform); cooldownErr != nil {
+		return nil, cooldownErr
+	}
+	defer s.poolCooldown.finishSelection(poolCooldownKey(groupID, requestedModel, platform), excludedIDs, &err)
 	if s.checkChannelPricingRestriction(ctx, groupID, requestedModel) {
 		slog.Warn("channel pricing restriction blocked request",
 			"group_id", derefGroupID(groupID),
@@ -1194,7 +1205,7 @@ func (s *OpenAIGatewayService) selectAccountWithLoadAwareness(ctx context.Contex
 		return nil, err
 	}
 	if len(accounts) == 0 {
-		return nil, noAvailableOpenAISelectionError(requestedModel, false, openAISelectionFilterStats{}.summary(""))
+		return nil, emptyAccountPoolError{}
 	}
 
 	isExcluded := func(accountID int64) bool {

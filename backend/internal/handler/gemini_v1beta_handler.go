@@ -615,6 +615,10 @@ func (h *GatewayHandler) GeminiV1BetaModels(c *gin.Context) {
 				googleError(c, http.StatusServiceUnavailable, geminiCachedContentUnavailableMessage)
 				return
 			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, modelName, effectiveAPIKeyPlatform(c, apiKey), fs.LastFailoverErr, fs.UpstreamFailedAccountIDs); cooldown != nil {
+				h.handleGeminiFailoverExhausted(c, cooldown)
+				return
+			}
 			if len(fs.FailedAccountIDs) == 0 {
 				diagPlatform := service.PlatformGemini
 				if p := effectiveAPIKeyPlatform(c, apiKey); p == service.PlatformAntigravity {
@@ -892,6 +896,7 @@ func (h *GatewayHandler) handleGeminiFailoverExhausted(c *gin.Context, failoverE
 		googleError(c, http.StatusBadGateway, "Upstream request failed")
 		return
 	}
+	copyFailoverRetryAfter(c, failoverErr.ResponseHeaders)
 
 	statusCode := failoverErr.StatusCode
 	responseBody := failoverErr.ResponseBody
@@ -927,7 +932,7 @@ func (h *GatewayHandler) handleGeminiFailoverExhausted(c *gin.Context, failoverE
 
 	// 使用默认的错误映射
 	status, message := mapGeminiUpstreamError(statusCode)
-	googleError(c, status, message)
+	googleError(c, status, representativeFailureClientMessage(failoverErr, message))
 }
 
 func mapGeminiUpstreamError(statusCode int) (int, string) {
@@ -940,7 +945,9 @@ func mapGeminiUpstreamError(statusCode int) (int, string) {
 		return http.StatusTooManyRequests, "Upstream rate limit exceeded, please retry later"
 	case 529:
 		return http.StatusServiceUnavailable, "Upstream service overloaded, please retry later"
-	case 500, 502, 503, 504:
+	case 503:
+		return http.StatusServiceUnavailable, "Upstream service temporarily unavailable"
+	case 500, 502, 504:
 		return http.StatusBadGateway, "Upstream service temporarily unavailable"
 	default:
 		return http.StatusBadGateway, "Upstream request failed"

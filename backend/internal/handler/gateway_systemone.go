@@ -135,6 +135,10 @@ func (h *GatewayHandler) SystemOne(c *gin.Context) {
 				reqLog.Info("systemone.account_select_aborted_client_disconnected", zap.Error(err))
 				return
 			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, model, service.PlatformTypeSafe, fs.LastFailoverErr, fs.UpstreamFailedAccountIDs); cooldown != nil {
+				h.handleFailoverExhausted(c, cooldown, service.PlatformTypeSafe, false)
+				return
+			}
 			if len(fs.FailedAccountIDs) == 0 {
 				cls := classifyNoAccountErrorFromGin(c, h.gatewayService, apiKey, model, model, service.PlatformTypeSafe)
 				cls = classifySelectionFailureError(err, cls)

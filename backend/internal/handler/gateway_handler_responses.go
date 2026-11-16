@@ -197,6 +197,10 @@ func (h *GatewayHandler) Responses(c *gin.Context) {
 				reqLog.Info("gateway.responses.account_select_aborted_client_disconnected", zap.Error(err))
 				return
 			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, reqModel, effectiveAPIKeyPlatform(c, apiKey), fs.LastFailoverErr, fs.UpstreamFailedAccountIDs); cooldown != nil {
+				h.handleResponsesFailoverExhausted(c, cooldown, streamStarted)
+				return
+			}
 			if len(fs.FailedAccountIDs) == 0 {
 				cls := classifyNoAccountErrorFromGin(c, h.gatewayService, apiKey, reqModel, reqModel, effectiveAPIKeyPlatform(c, apiKey))
 				cls = classifySelectionFailureError(err, cls)
@@ -419,6 +423,7 @@ func (h *GatewayHandler) handleResponsesFailoverExhausted(c *gin.Context, lastEr
 	} else if lastErr != nil && statusCode == http.StatusTooManyRequests {
 		status, code, message = http.StatusTooManyRequests, "rate_limit_error", "All available accounts are currently rate-limited. Please retry later."
 	}
+	message = representativeFailureClientMessage(lastErr, message)
 	if streamStarted {
 		// A slot-wait heartbeat commits HTTP 200 before any upstream response.
 		// In that case a terminal frame is still required; once any semantic or

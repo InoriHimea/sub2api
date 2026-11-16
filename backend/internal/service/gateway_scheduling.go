@@ -31,7 +31,15 @@ func (s *GatewayService) SelectAccountForModel(ctx context.Context, groupID *int
 }
 
 // SelectAccountForModelWithExclusions selects an account supporting the requested model while excluding specified accounts.
-func (s *GatewayService) SelectAccountForModelWithExclusions(ctx context.Context, groupID *int64, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}) (*Account, error) {
+func (s *GatewayService) SelectAccountForModelWithExclusions(ctx context.Context, groupID *int64, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}) (_ *Account, err error) {
+	poolKey, keyErr := s.requestPoolCooldownKey(ctx, groupID, requestedModel)
+	if keyErr != nil {
+		return nil, keyErr
+	}
+	if cooldownErr := s.poolCooldown.check(poolKey, time.Now()); cooldownErr != nil {
+		return nil, cooldownErr
+	}
+	defer s.poolCooldown.finishSelection(poolKey, excludedIDs, &err)
 	// 优先检查 context 中的强制平台（/antigravity 路由）
 	var platform string
 	forcePlatform, hasForcePlatform := ctx.Value(ctxkey.ForcePlatform).(string)
@@ -97,7 +105,15 @@ func (s *GatewayService) SelectAccountForModelWithExclusions(ctx context.Context
 // SelectAccountWithLoadAwareness selects account with load-awareness and wait plan.
 // metadataUserID: 用于客户端亲和调度，从中提取客户端 ID
 // sub2apiUserID: 系统用户 ID，用于二维亲和调度
-func (s *GatewayService) SelectAccountWithLoadAwareness(ctx context.Context, groupID *int64, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}, metadataUserID string, sub2apiUserID int64) (*AccountSelectionResult, error) {
+func (s *GatewayService) SelectAccountWithLoadAwareness(ctx context.Context, groupID *int64, sessionHash string, requestedModel string, excludedIDs map[int64]struct{}, metadataUserID string, sub2apiUserID int64) (_ *AccountSelectionResult, err error) {
+	poolKey, keyErr := s.requestPoolCooldownKey(ctx, groupID, requestedModel)
+	if keyErr != nil {
+		return nil, keyErr
+	}
+	if cooldownErr := s.poolCooldown.check(poolKey, time.Now()); cooldownErr != nil {
+		return nil, cooldownErr
+	}
+	defer s.poolCooldown.finishSelection(poolKey, excludedIDs, &err)
 	// 调试日志：记录调度入口参数
 	excludedIDsList := make([]int64, 0, len(excludedIDs))
 	for id := range excludedIDs {
@@ -225,7 +241,7 @@ func (s *GatewayService) SelectAccountWithLoadAwareness(ctx context.Context, gro
 		return nil, err
 	}
 	if len(accounts) == 0 {
-		return nil, ErrNoAvailableAccounts
+		return nil, emptyAccountPoolError{}
 	}
 	ctx = s.withWindowCostPrefetch(ctx, accounts)
 	ctx = s.withRPMPrefetch(ctx, accounts)
@@ -1955,6 +1971,9 @@ func (s *GatewayService) selectAccountForModelWithPlatform(ctx context.Context, 
 		if err != nil {
 			return nil, fmt.Errorf("query accounts failed: %w", err)
 		}
+		if len(accounts) == 0 {
+			return nil, emptyAccountPoolError{}
+		}
 		accountsLoaded = true
 
 		// 提前预取窗口费用+RPM 计数，确保 routing 段内的调度检查调用能命中缓存
@@ -2075,6 +2094,9 @@ func (s *GatewayService) selectAccountForModelWithPlatform(ctx context.Context, 
 		if err != nil {
 			return nil, fmt.Errorf("query accounts failed: %w", err)
 		}
+	}
+	if len(accounts) == 0 {
+		return nil, emptyAccountPoolError{}
 	}
 
 	// 批量预取窗口费用+RPM 计数，避免逐个账号查询（N+1）
@@ -2217,6 +2239,9 @@ func (s *GatewayService) selectAccountWithMixedScheduling(ctx context.Context, g
 		if err != nil {
 			return nil, fmt.Errorf("query accounts failed: %w", err)
 		}
+		if len(accounts) == 0 {
+			return nil, emptyAccountPoolError{}
+		}
 		accountsLoaded = true
 
 		// 提前预取窗口费用+RPM 计数，确保 routing 段内的调度检查调用能命中缓存
@@ -2339,6 +2364,9 @@ func (s *GatewayService) selectAccountWithMixedScheduling(ctx context.Context, g
 		if err != nil {
 			return nil, fmt.Errorf("query accounts failed: %w", err)
 		}
+	}
+	if len(accounts) == 0 {
+		return nil, emptyAccountPoolError{}
 	}
 
 	// 批量预取窗口费用+RPM 计数，避免逐个账号查询（N+1）

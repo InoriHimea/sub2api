@@ -208,6 +208,7 @@ func (h *OpenAIGatewayHandler) handleGrokMedia(c *gin.Context, endpoint service.
 	requestCtx := service.WithOpenAIProfitControlSuppressed(c.Request.Context())
 	profitVetoCount := 0
 	failedAccountIDs := make(map[int64]struct{})
+	var upstreamFailedAccountIDs map[int64]struct{}
 	sameAccountRetryCount := make(map[int64]int)
 	var lastFailoverErr *service.UpstreamFailoverError
 	var oauth429FailoverState service.OpenAIOAuth429FailoverState
@@ -270,8 +271,13 @@ func (h *OpenAIGatewayHandler) handleGrokMedia(c *gin.Context, endpoint service.
 				reqLog.Info("grok_media.account_select_aborted_client_disconnected", zap.Error(err))
 				return
 			}
-			if boundLookupAccountID > 0 && errors.Is(err, service.ErrNoAvailableAccounts) {
+			var cooldownErr *service.AccountPoolCooldownError
+			if boundLookupAccountID > 0 && errors.Is(err, service.ErrNoAvailableAccounts) && !errors.As(err, &cooldownErr) {
 				h.errorResponse(c, http.StatusNotFound, "not_found_error", "Video request not found")
+				return
+			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, routingModel, platform, lastFailoverErr, upstreamFailedAccountIDs); cooldown != nil {
+				h.handleFailoverExhausted(c, cooldown, false)
 				return
 			}
 			reqLog.Warn("grok_media.account_select_failed",
@@ -446,14 +452,17 @@ func (h *OpenAIGatewayHandler) handleGrokMedia(c *gin.Context, endpoint service.
 				}
 				h.gatewayService.RecordOpenAIAccountSwitch()
 				failedAccountIDs[account.ID] = struct{}{}
-				lastFailoverErr = failoverErr
+				if boundLookupAccountID == 0 {
+					recordAccountPoolFailure(&upstreamFailedAccountIDs, account.ID, failoverErr)
+				}
+				lastFailoverErr = selectRepresentativeFailure(lastFailoverErr, failoverErr)
 				if switchCount >= maxAccountSwitches {
-					h.handleFailoverExhausted(c, failoverErr, false)
+					h.handleFailoverExhausted(c, lastFailoverErr, false)
 					return
 				}
 				switchCount++
 				if h.gatewayService.ShouldStopOpenAIOAuth429Failover(account, failoverErr.StatusCode, switchCount, &oauth429FailoverState) {
-					h.handleFailoverExhausted(c, failoverErr, false)
+					h.handleFailoverExhausted(c, lastFailoverErr, false)
 					return
 				}
 				reqLog.Warn("grok_media.upstream_failover_switching",

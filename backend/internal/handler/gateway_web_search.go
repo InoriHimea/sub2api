@@ -141,6 +141,7 @@ func (h *GatewayHandler) WebSearch(c *gin.Context) {
 	var nativeResp *websearch.SearchResponse
 	var providerName string
 	var err error
+	var representative *service.UpstreamFailoverError
 
 	// Acquire + release holder for the whole handler (including failover retries).
 	defer func() {
@@ -150,11 +151,15 @@ func (h *GatewayHandler) WebSearch(c *gin.Context) {
 	}()
 
 	// First attempt + up to 3 failover accounts (max 4 total).
-	for attempt := 0; attempt < 4; attempt++ {
+	for attempt := range 4 {
 		selected, selectErr := h.gatewayService.SelectAccountWithLoadAwareness(
 			c.Request.Context(), groupID, "", searchModel, failedAccounts, "", 0,
 		)
 		if selectErr != nil {
+			if cooldown := accountPoolSelectionFailure(c, selectErr, h.gatewayService, groupID, searchModel, service.PlatformGrok, representative, failedAccounts); cooldown != nil {
+				h.handleCCFailoverExhausted(c, cooldown, false)
+				return
+			}
 			if attempt == 0 {
 				c.JSON(http.StatusServiceUnavailable, gin.H{"error": gin.H{
 					"type":    "scheduling_error",
@@ -197,9 +202,15 @@ func (h *GatewayHandler) WebSearch(c *gin.Context) {
 			break
 		}
 		var failoverErr *service.UpstreamFailoverError
-		if !errors.As(err, &failoverErr) || !failoverErr.ShouldRetryNextAccount() {
+		if !errors.As(err, &failoverErr) {
+			representative = nil
 			break
 		}
+		if !failoverErr.ShouldRetryNextAccount() {
+			representative = failoverErr
+			break
+		}
+		representative = selectRepresentativeFailure(representative, failoverErr)
 		failedAccounts[account.ID] = struct{}{}
 		if accountReleaseFunc != nil {
 			accountReleaseFunc()
@@ -208,6 +219,10 @@ func (h *GatewayHandler) WebSearch(c *gin.Context) {
 		account = nil
 	}
 	if err != nil || nativeResp == nil {
+		if representative != nil {
+			h.handleCCFailoverExhausted(c, representative, false)
+			return
+		}
 		msg := "web search failed"
 		if err != nil {
 			msg = err.Error()

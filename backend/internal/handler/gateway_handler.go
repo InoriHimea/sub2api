@@ -354,6 +354,10 @@ func (h *GatewayHandler) Messages(c *gin.Context) {
 					reqLog.Info("gateway.account_select_aborted_client_disconnected", zap.Error(err))
 					return
 				}
+				if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, reqModel, platform, fs.LastFailoverErr, fs.UpstreamFailedAccountIDs); cooldown != nil {
+					h.handleFailoverExhausted(c, cooldown, platform, streamStarted)
+					return
+				}
 				if len(fs.FailedAccountIDs) == 0 {
 					cls := classifyNoAccountErrorFromGin(c, h.gatewayService, apiKey, reqModel, reqModel, service.PlatformGemini)
 					if !cls.ModelNotFound {
@@ -684,6 +688,10 @@ func (h *GatewayHandler) Messages(c *gin.Context) {
 			if err != nil {
 				if failoverClientGone(c) {
 					reqLog.Info("gateway.account_select_aborted_client_disconnected", zap.Error(err))
+					return
+				}
+				if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, currentAPIKey.GroupID, reqModel, platform, fs.LastFailoverErr, fs.UpstreamFailedAccountIDs); cooldown != nil {
+					h.handleFailoverExhausted(c, cooldown, platform, streamStarted)
 					return
 				}
 				if len(fs.FailedAccountIDs) == 0 {
@@ -1919,6 +1927,7 @@ func (h *GatewayHandler) handleConcurrencyError(c *gin.Context, err error, slotT
 }
 
 func (h *GatewayHandler) handleFailoverExhausted(c *gin.Context, failoverErr *service.UpstreamFailoverError, platform string, streamStarted bool) {
+	copyFailoverRetryAfter(c, failoverErr.ResponseHeaders)
 	statusCode := failoverErr.StatusCode
 	responseBody := failoverErr.ResponseBody
 	if service.IsOpenAISilentRefusalErrorBody(responseBody) {
@@ -1957,7 +1966,7 @@ func (h *GatewayHandler) handleFailoverExhausted(c *gin.Context, failoverErr *se
 
 	// 使用默认的错误映射
 	status, errType, errMsg := h.mapUpstreamError(statusCode)
-	h.handleStreamingAwareError(c, status, errType, errMsg, streamStarted)
+	h.handleStreamingAwareError(c, status, errType, representativeFailureClientMessage(failoverErr, errMsg), streamStarted)
 }
 
 // handleFailoverExhaustedSimple 简化版本，用于没有响应体的情况
@@ -1977,7 +1986,9 @@ func (h *GatewayHandler) mapUpstreamError(statusCode int) (int, string, string) 
 		return http.StatusTooManyRequests, "rate_limit_error", "Upstream rate limit exceeded, please retry later"
 	case 529:
 		return http.StatusServiceUnavailable, "overloaded_error", "Upstream service overloaded, please retry later"
-	case 500, 502, 503, 504:
+	case 503:
+		return http.StatusServiceUnavailable, "upstream_error", "Upstream service temporarily unavailable"
+	case 500, 502, 504:
 		return http.StatusBadGateway, "upstream_error", "Upstream service temporarily unavailable"
 	default:
 		return http.StatusBadGateway, "upstream_error", "Upstream request failed"

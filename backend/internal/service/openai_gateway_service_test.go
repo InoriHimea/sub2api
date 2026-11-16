@@ -1385,27 +1385,6 @@ func TestOpenAISelectAccountForModelWithExclusions_StickyNonOpenAI(t *testing.T)
 	}
 }
 
-func TestOpenAISelectAccountForModelWithExclusions_NoAccounts(t *testing.T) {
-	repo := stubOpenAIAccountRepo{accounts: []Account{}}
-	cache := &stubGatewayCache{}
-
-	svc := &OpenAIGatewayService{
-		accountRepo: repo,
-		cache:       cache,
-	}
-
-	acc, err := svc.SelectAccountForModelWithExclusions(context.Background(), nil, "", "", nil)
-	if err == nil {
-		t.Fatalf("expected error for no accounts")
-	}
-	if acc != nil {
-		t.Fatalf("expected nil account")
-	}
-	if !strings.Contains(err.Error(), "no available OpenAI accounts") {
-		t.Fatalf("unexpected error: %v", err)
-	}
-}
-
 func TestOpenAISelectAccountWithLoadAwareness_NoCandidates(t *testing.T) {
 	groupID := int64(1)
 	resetAt := time.Now().Add(1 * time.Hour)

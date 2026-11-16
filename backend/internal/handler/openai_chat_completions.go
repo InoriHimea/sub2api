@@ -165,6 +165,7 @@ func (h *OpenAIGatewayHandler) ChatCompletions(c *gin.Context) {
 	switchCount := 0
 	profitVetoCount := 0
 	failedAccountIDs := make(map[int64]struct{})
+	var upstreamFailedAccountIDs map[int64]struct{}
 	sameAccountRetryCount := make(map[int64]int)
 	var lastFailoverErr *service.UpstreamFailoverError
 	var oauth429FailoverState service.OpenAIOAuth429FailoverState
@@ -195,6 +196,10 @@ func (h *OpenAIGatewayHandler) ChatCompletions(c *gin.Context) {
 		if err != nil {
 			if failoverClientGone(c) {
 				reqLog.Info("openai_chat_completions.account_select_aborted_client_disconnected", zap.Error(err))
+				return
+			}
+			if cooldown := accountPoolSelectionFailure(c, err, h.gatewayService, apiKey.GroupID, forwardModel, requestPlatform, lastFailoverErr, upstreamFailedAccountIDs); cooldown != nil {
+				h.handleFailoverExhausted(c, cooldown, streamStarted)
 				return
 			}
 			reqLog.Warn("openai_chat_completions.account_select_failed",
@@ -373,14 +378,15 @@ func (h *OpenAIGatewayHandler) ChatCompletions(c *gin.Context) {
 					}
 					h.gatewayService.RecordOpenAIAccountSwitch()
 					failedAccountIDs[account.ID] = struct{}{}
-					lastFailoverErr = failoverErr
+					recordAccountPoolFailure(&upstreamFailedAccountIDs, account.ID, failoverErr)
+					lastFailoverErr = selectRepresentativeFailure(lastFailoverErr, failoverErr)
 					if switchCount >= maxAccountSwitches {
-						h.handleFailoverExhausted(c, failoverErr, streamStarted)
+						h.handleFailoverExhausted(c, lastFailoverErr, streamStarted)
 						return
 					}
 					switchCount++
 					if h.gatewayService.ShouldStopOpenAIOAuth429Failover(account, failoverErr.StatusCode, switchCount, &oauth429FailoverState) {
-						h.handleFailoverExhausted(c, failoverErr, streamStarted)
+						h.handleFailoverExhausted(c, lastFailoverErr, streamStarted)
 						return
 					}
 					reqLog.Warn("openai_chat_completions.upstream_failover_switching",

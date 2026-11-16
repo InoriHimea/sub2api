@@ -1410,7 +1410,7 @@ func (s *defaultOpenAIAccountScheduler) selectByLoadBalance(
 		return nil, 0, 0, 0, err
 	}
 	if len(accounts) == 0 {
-		return nil, 0, 0, 0, noAvailableOpenAISelectionError(req.RequestedModel, false, openAISelectionFilterStats{}.summary(""))
+		return nil, 0, 0, 0, emptyAccountPoolError{}
 	}
 	// Local free-tier soft gate on the Grok scheduling path only (not admin probe).
 	accounts = s.filterGrokFreeQuotaAccounts(ctx, accounts)
@@ -2175,7 +2175,12 @@ func (s *OpenAIGatewayService) selectAccountWithScheduler(
 	platform string,
 	previousResponseCanMove bool,
 	useUpstreamTokenCost bool,
-) (*AccountSelectionResult, OpenAIAccountScheduleDecision, error) {
+) (_ *AccountSelectionResult, _ OpenAIAccountScheduleDecision, err error) {
+	platform = NormalizeOpenAICompatiblePlatform(platform)
+	if cooldownErr := s.CheckAccountPoolCooldown(groupID, requestedModel, platform); cooldownErr != nil {
+		return nil, OpenAIAccountScheduleDecision{}, cooldownErr
+	}
+	defer s.poolCooldown.finishSelection(poolCooldownKey(groupID, requestedModel, platform), excludedIDs, &err)
 	selection, decision, err := s.selectAccountWithSchedulerBySize(ctx, groupID, previousResponseID, sessionHash, requestedModel, excludedIDs, requiredTransport, requiredCapability, requiredImageCapability, requireCompact, platform, previousResponseCanMove, useUpstreamTokenCost)
 	if err == nil || openAIProxyStreamQuarantineBypassed(ctx) {
 		return selection, decision, err
