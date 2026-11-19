@@ -50,11 +50,9 @@ class ControllerBehaviorTests(unittest.TestCase):
             import_dir=str(self.root / "imported"), archive_sha256=hashlib.sha256(archive.read_bytes()).hexdigest(),
             tag="v1.0.0", expected_sha="a" * 40, controller_sha256=cd.controller_identity(),
             state_dir=str(self.root / "state"),
-            gateway3_key_path=str(self.root / "gateway3.key"),
-            sub2api3_key_path=str(self.root / "sub2api3.key"))
-        for key in (self.args.gateway3_key_path, self.args.sub2api3_key_path):
-            Path(key).write_bytes(b"fixture-only-not-an-SSH-key")
-            Path(key).chmod(0o600)
+            target="gateway3", key_path=str(self.root / "fixture.key"))
+        Path(self.args.key_path).write_bytes(b"fixture-only-not-an-SSH-key")
+        Path(self.args.key_path).chmod(0o600)
         self.events = []
         self.results = {}
         self.addCleanup(mock.patch.stopall)
@@ -64,7 +62,7 @@ class ControllerBehaviorTests(unittest.TestCase):
     def transfer(self, bundle, ssh, hosts, key, target, run_id):
         self.assertTrue(Path(bundle, "manifest.json").is_file())
         self.assertTrue(Path(hosts).is_file())
-        self.assertEqual(key, getattr(self.args, target + "_key_path"))
+        self.assertEqual(target, self.args.target)
         self.events.append((target, "transfer"))
         return "/fixture/incoming-" + run_id
 
@@ -75,8 +73,7 @@ class ControllerBehaviorTests(unittest.TestCase):
             saved = self.state()
             self.assertEqual(saved["status"], "running")
             self.assertEqual((saved["active_target"], saved["active_phase"]), (target, phase))
-            self.assertEqual({t: saved["targets"][t]["preflight"] for t in cd.TARGETS},
-                             {"gateway3": 0, "sub2api3": 0})
+            self.assertEqual(saved["targets"][target]["preflight"], 0)
         outcome = self.results.get((target, phase), 0)
         if isinstance(outcome, Exception):
             raise outcome
@@ -86,42 +83,57 @@ class ControllerBehaviorTests(unittest.TestCase):
         return json.loads(Path(self.args.state_dir, "production-state.json").read_text())
 
     def prepared(self):
-        return cd.prepare(self.args)
+        receipt = cd.prepare(self.args)
+        self.args.archive = str(Path(self.args.output) / cd.ARCHIVE_NAME)
+        return receipt
+
+    def production(self, args=None):
+        return cd.with_downloaded_release(args or self.args, cd.production)
 
     def assert_replay_blocked(self):
         before = list(self.events)
         with self.assertRaises(cd.deploy.OrchestratorBlocker):
-            cd.production(self.args)
+            self.production()
         self.assertEqual(self.events, before)
 
-    def test_success_admits_both_before_ordered_stage_and_activation(self):
+    def test_separate_windows_requires_first_success_and_blocks_replay(self):
         receipt = self.prepared()
-        self.assertEqual(cd.production(self.args), 0)
-        self.assertEqual(self.events, [
-            ("gateway3", "transfer"), ("gateway3", "preflight"),
-            ("sub2api3", "transfer"), ("sub2api3", "preflight"),
-            ("gateway3", "stage"), ("gateway3", "activate"),
-            ("sub2api3", "stage"), ("sub2api3", "activate")])
+        self.args.target = "sub2api3"
+        self.assert_replay_blocked()
+        self.args.target = "gateway3"
+        self.assertEqual(self.production(), 0)
+        self.assertEqual(self.events, [("gateway3", phase) for phase in
+                                      ("transfer", "preflight", "stage", "activate")])
+        self.assertEqual(self.state()["status"], "gateway-succeeded")
+        self.assert_replay_blocked()
+        self.args.target = "sub2api3"
+        self.assertEqual(self.production(), 0)
+        self.assertEqual(self.events[4:], [("sub2api3", phase) for phase in
+                                          ("transfer", "preflight", "stage", "activate")])
         state = self.state()
         self.assertEqual(state["status"], "succeeded")
         self.assertEqual((state["tag"], state["sha"], state["archive_sha256"]),
                          (receipt["tag"], receipt["sha"], receipt["archive_sha256"]))
-        self.assertEqual(state["targets"], {
-            target: {"preflight": 0, "stage": 0, "activate": 0} for target in cd.TARGETS})
+        self.assert_replay_blocked()
 
-    def test_second_admission_failure_prevents_any_staging(self):
+    def test_sub2api3_refuses_valid_release_with_different_archive_identity(self):
         self.prepared()
-        self.results[("sub2api3", "preflight")] = 2
-        self.assertEqual(cd.production(self.args), 2)
-        self.assertEqual(self.events, [("gateway3", "transfer"), ("gateway3", "preflight"),
-                                       ("sub2api3", "transfer"), ("sub2api3", "preflight")])
-        self.assertEqual(self.state()["status"], "blocked")
-        self.assertEqual(self.state()["targets"]["sub2api3"], {"preflight": 2})
+        self.assertEqual(self.production(), 0)
+        # Recompress the same tar stream with a different gzip header.
+        archive = Path(self.args.archive)
+        data = bytearray(archive.read_bytes())
+        data[4] ^= 1
+        altered = self.root / "other.tar.gz"
+        altered.write_bytes(data)
+        self.args.archive = str(altered)
+        self.args.archive_sha256 = hashlib.sha256(data).hexdigest()
+        self.args.target = "sub2api3"
+        self.assert_replay_blocked()
 
     def test_gateway_stage_failure_stops_second_target_without_activation(self):
         self.prepared()
         self.results[("gateway3", "stage")] = 2
-        self.assertEqual(cd.production(self.args), 2)
+        self.assertEqual(self.production(), 2)
         self.assertEqual(self.events[-1], ("gateway3", "stage"))
         self.assertNotIn(("gateway3", "activate"), self.events)
         self.assertNotIn(("sub2api3", "stage"), self.events)
@@ -130,7 +142,7 @@ class ControllerBehaviorTests(unittest.TestCase):
     def test_gateway_activation_failure_stops_second_target_and_blocks_replay(self):
         self.prepared()
         self.results[("gateway3", "activate")] = 2
-        self.assertEqual(cd.production(self.args), 2)
+        self.assertEqual(self.production(), 2)
         self.assertNotIn(("sub2api3", "stage"), self.events)
         self.assertEqual(self.state()["status"], "manual-intervention")
         self.assert_replay_blocked()
@@ -138,7 +150,7 @@ class ControllerBehaviorTests(unittest.TestCase):
     def test_activation_exception_is_unknown_and_blocks_replay(self):
         self.prepared()
         self.results[("gateway3", "activate")] = OSError("fixture connection lost after activation")
-        self.assertEqual(cd.production(self.args), 3)
+        self.assertEqual(self.production(), 3)
         self.assertEqual(self.state()["status"], "manual-intervention")
         self.assertNotIn("activate", self.state()["targets"]["gateway3"])
         self.assertNotIn(("sub2api3", "stage"), self.events)
@@ -147,14 +159,16 @@ class ControllerBehaviorTests(unittest.TestCase):
     def test_manual_intervention_code_before_activation_also_blocks_replay(self):
         self.prepared()
         self.results[("gateway3", "stage")] = 3
-        self.assertEqual(cd.production(self.args), 3)
+        self.assertEqual(self.production(), 3)
         self.assertEqual(self.state()["status"], "manual-intervention")
         self.assert_replay_blocked()
 
     def test_partial_rollout_second_stage_failure_never_replays_first_host(self):
         self.prepared()
+        self.assertEqual(self.production(), 0)
+        self.args.target = "sub2api3"
         self.results[("sub2api3", "stage")] = 2
-        self.assertEqual(cd.production(self.args), 2)
+        self.assertEqual(self.production(), 2)
         self.assertEqual(self.state()["targets"]["gateway3"]["activate"], 0)
         self.assertEqual(self.state()["status"], "manual-intervention")
         self.assertNotIn(("sub2api3", "activate"), self.events)
@@ -162,16 +176,20 @@ class ControllerBehaviorTests(unittest.TestCase):
 
     def test_partial_rollout_second_stage_exception_blocks_replay(self):
         self.prepared()
+        self.assertEqual(self.production(), 0)
+        self.args.target = "sub2api3"
         self.results[("sub2api3", "stage")] = OSError("fixture staging transport lost")
-        self.assertEqual(cd.production(self.args), 3)
+        self.assertEqual(self.production(), 3)
         self.assertEqual(self.state()["targets"]["gateway3"]["activate"], 0)
         self.assertEqual(self.state()["status"], "manual-intervention")
         self.assert_replay_blocked()
 
     def test_second_activation_manual_code_preserves_partial_success_and_blocks_replay(self):
         self.prepared()
+        self.assertEqual(self.production(), 0)
+        self.args.target = "sub2api3"
         self.results[("sub2api3", "activate")] = 3
-        self.assertEqual(cd.production(self.args), 3)
+        self.assertEqual(self.production(), 3)
         self.assertEqual(self.state()["targets"]["gateway3"]["activate"], 0)
         self.assertEqual(self.state()["targets"]["sub2api3"]["activate"], 3)
         self.assertEqual(self.state()["status"], "manual-intervention")
@@ -204,7 +222,7 @@ class ControllerBehaviorTests(unittest.TestCase):
                 args = argparse.Namespace(**vars(self.args))
                 args.state_dir = location
                 with self.assertRaises(cd.deploy.OrchestratorBlocker):
-                    cd.production(args)
+                    self.production(args)
         self.assertEqual(self.events, [])
 
     def test_production_rejects_each_independent_pin_before_remote_work(self):
@@ -215,33 +233,31 @@ class ControllerBehaviorTests(unittest.TestCase):
                 args = argparse.Namespace(**vars(self.args))
                 setattr(args, field, value)
                 with self.assertRaises(cd.intake.ImportFailure):
-                    cd.production(args)
+                    self.production(args)
                 self.assertFalse(Path(args.state_dir).exists())
         self.assertEqual(self.events, [])
 
-    def test_real_intake_snapshots_all_trusted_files_and_verifies_without_archive(self):
+    def test_native_download_mode_is_irrelevant_but_bytes_are_verified(self):
         receipt = self.prepared()
-        output = Path(self.args.output)
-        snapshot = output / "controller"
-        self.assertEqual({p.name for p in snapshot.iterdir()}, set(cd.CONTROLLER_FILES))
-        self.assertEqual(cd.controller_identity(snapshot), self.args.controller_sha256)
-        for name in cd.CONTROLLER_FILES:
-            self.assertEqual((snapshot / name).read_bytes(), (cd.HERE / name).read_bytes())
-            self.assertEqual(stat.S_IMODE((snapshot / name).stat().st_mode),
-                             0o755 if name.endswith(".sh") else 0o644)
-        Path(self.args.archive).unlink()
-        self.assertEqual(cd.verify(self.args), receipt)
-        self.assertEqual({p.name for p in output.iterdir()},
-                         {"release", "import-receipt.json", "controller"})
-        self.assertEqual(list(self.root.glob(".cd-prepare-*")), [])
+        archive = Path(self.args.archive)
+        self.assertEqual(list(archive.parent.iterdir()), [archive])
+        archive.chmod(0o711)
+        observed = cd.with_downloaded_release(self.args, lambda _, value, bundle: (
+            value, stat.S_IMODE(Path(bundle, "sub2api").stat().st_mode)))
+        self.assertEqual(observed, (receipt, 0o755))
+        with archive.open("ab") as stream:
+            stream.write(b"changed")
+        with self.assertRaises(cd.intake.ImportFailure):
+            self.production()
+        self.assertEqual(self.events, [])
 
     def test_prepared_output_is_never_replaced(self):
-        receipt = self.prepared()
-        original = (Path(self.args.output) / "import-receipt.json").read_bytes()
+        self.prepared()
+        archive = Path(self.args.archive)
+        original = archive.read_bytes()
         with self.assertRaises(cd.intake.ImportFailure):
             self.prepared()
-        self.assertEqual((Path(self.args.output) / "import-receipt.json").read_bytes(), original)
-        self.assertEqual(cd.verify(self.args), receipt)
+        self.assertEqual(archive.read_bytes(), original)
 
     def test_existing_dangling_output_symlink_is_not_followed_or_replaced(self):
         output = Path(self.args.output)
@@ -251,22 +267,6 @@ class ControllerBehaviorTests(unittest.TestCase):
             self.prepared()
         self.assertTrue(output.is_symlink())
         self.assertFalse(destination.exists())
-
-    def test_changed_controller_during_snapshot_is_not_published(self):
-        real_copy = cd.shutil.copyfile
-
-        def changed_copy(source, destination, *args, **kwargs):
-            result = real_copy(source, destination, *args, **kwargs)
-            if Path(destination).parent.name == "controller" and Path(destination).name == "bamboo_cd.py":
-                with Path(destination).open("ab") as stream:
-                    stream.write(b"\n# changed during snapshot\n")
-            return result
-
-        with mock.patch.object(cd.shutil, "copyfile", side_effect=changed_copy):
-            with self.assertRaises(cd.intake.ImportFailure):
-                self.prepared()
-        self.assertFalse(os.path.lexists(self.args.output))
-        self.assertEqual(list(self.root.glob(".cd-prepare-*")), [])
 
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ Import approved archive:
   tasks:
     - clean
     - script:
-        interpreter: /bin/sh
+        interpreter: RUN_AS_EXECUTABLE
         file: /data/sub2api-cd/current/bamboo_cd.sh
         argument: >-
           intake
@@ -43,7 +43,7 @@ Import approved archive:
   artifacts:
     - name: cd-payload
       location: cd-payload
-      pattern: '**/*'
+      pattern: release-bundle.tar.gz
       shared: true
       required: true
   requirements:
@@ -70,8 +70,8 @@ Production:
     approved_release_commit: ''
     approved_archive_sha256: ''
     approved_controller_sha256: ''
-    gateway3_key_path: ''
-    sub2api3_key_path: ''
+    approved_target: ''
+    approved_target_key_path: ''
     production_state_dir: ''
   tasks:
     - clean
@@ -80,17 +80,17 @@ Production:
           - name: cd-payload
             destination: cd-payload
     - script:
-        interpreter: /bin/sh
-        file: cd-payload/controller/bamboo_cd.sh
+        interpreter: RUN_AS_EXECUTABLE
+        file: /data/sub2api-cd/current/bamboo_cd.sh
         argument: >-
           deploy-production
-          --import-dir cd-payload
+          --archive cd-payload/release-bundle.tar.gz
           --tag "${bamboo.approved_release_tag}"
           --expected-sha "${bamboo.approved_release_commit}"
           --archive-sha256 "${bamboo.approved_archive_sha256}"
           --controller-sha256 "${bamboo.approved_controller_sha256}"
-          --gateway3-key-path "${bamboo.gateway3_key_path}"
-          --sub2api3-key-path "${bamboo.sub2api3_key_path}"
+          --target "${bamboo.approved_target}"
+          --key-path "${bamboo.approved_target_key_path}"
           --state-dir "${bamboo.production_state_dir}"
   requirements:
     - system.os: Linux
