@@ -389,10 +389,21 @@ def build_docker_image(binary_path, version, sha):
         _make_tree_world_readable(context_dir / "backend" / "resources")
 
         log("building Docker image %s (no registry login/push)" % image_tag)
+        # Explicit buildkit: buildx attaches provenance/sbom attestation
+        # manifests by default on containerd-backed runners, which makes
+        # `docker image inspect --format {{.Id}}` return the INDEX digest
+        # instead of the image config digest. Targets then reject the
+        # loaded image because the manifest records the wrong id. Disabling
+        # the attestations keeps .Id == the config digest that
+        # `docker load` preserves across hosts.
+        env = dict(os.environ)
+        env["DOCKER_BUILDKIT"] = "1"
         run(
             [
                 "docker", "build",
                 "--pull=false",
+                "--provenance=false",
+                "--sbom=false",
                 "-f", str(context_dir / "Dockerfile"),
                 "-t", image_tag,
                 "--label", "org.opencontainers.image.version=" + version,
@@ -400,6 +411,7 @@ def build_docker_image(binary_path, version, sha):
                 str(context_dir),
             ],
             timeout=900,
+            env=env,
         )
     finally:
         shutil.rmtree(context_dir, ignore_errors=True)
