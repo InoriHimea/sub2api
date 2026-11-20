@@ -597,7 +597,7 @@ def walk_release_files(release_root):
             yield relative, candidate
 
 
-def build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, image_load_ids, migrations):
+def build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, migrations, image_load_ids=None):
     binary_sha256 = sha256_hex(binary_path)
 
     files = {}
@@ -627,13 +627,14 @@ def build_manifest(release_root, tag, version, sha, compiler, binary_path, image
         "architecture": "amd64",
         "binary_sha256": binary_sha256,
         "image_id": image_id,
-        "image_load_ids": sorted(set(image_load_ids) | {image_id}),
         "files": files,
         "migrations": [
             {"filename": path.name, "sha256": migration_applied_checksum(path)}
             for path in migrations
         ],
     }
+    if image_load_ids is not None:
+        manifest["image_load_ids"] = sorted(set(image_load_ids) | {image_id})
     return manifest
 
 
@@ -681,7 +682,7 @@ def main():
             "the saved archive would register an id the manifest does not declare"
             % (tar_config_id, image_id))
 
-    manifest = build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, image_load_ids, migrations)
+    manifest = build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, migrations, image_load_ids)
     manifest_path = release_root / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8")
 
