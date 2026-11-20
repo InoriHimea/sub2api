@@ -47,3 +47,39 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  publish:
+    # Publishes the immutable bundle as tag-addressed GitHub Release assets so
+    # delivery hosts can fetch them through the Nexus github-group proxy
+    # (Actions artifacts live on Azure blob and are not proxied).
+    needs: build
+    if: github.repository == 'InoriHimea/sub2api' && !github.event.deleted
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          name: sub2api-release
+          path: dist
+      - name: Generate independent checksum
+        working-directory: dist
+        run: sha256sum release-bundle.tar.gz > release-bundle.tar.gz.sha256
+      - name: Publish tag release with bundle and checksum
+        working-directory: dist
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 \
+            || gh release create "$GITHUB_REF_NAME" \
+                 --repo "$GITHUB_REPOSITORY" \
+                 --verify-tag \
+                 --title "release-bundle $GITHUB_REF_NAME" \
+                 --notes "Immutable release bundle for $GITHUB_REF_NAME. Verify the .sha256 digest before intake."
+          # No --clobber: a pre-existing asset fails the upload so a rebuild of
+          # the same tag can never silently replace already-pinned bytes.
+          gh release upload "$GITHUB_REF_NAME" \
+            release-bundle.tar.gz release-bundle.tar.gz.sha256 \
+            --repo "$GITHUB_REPOSITORY"
+
