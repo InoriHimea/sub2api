@@ -56,6 +56,7 @@ CONTROLLERS_DIR = CD_ROOT / "controllers"
 CURRENT_LINK = CD_ROOT / "current"
 DELIVERY_DIR = CD_ROOT / "delivery"
 KEY_DIR = CD_ROOT / "keys"
+BAMBOO_PAT_FILE = CD_ROOT / "bamboo.pat"
 TARGETS_JSON = CD_ROOT / "current" / "targets.json"
 
 PLAN_KEY = os.environ.get("DELIVERY_PLAN_KEY", "SUB2API-INTAKE")
@@ -459,20 +460,43 @@ def cmd_controller(args) -> dict:
     return state
 
 
+def require_cookie_session(bamboo: Bamboo) -> None:
+    """Admin ajax (.action) endpoints reject PATs with a login redirect
+    (probed 2026-11-22: updatePlanVariable.action -> 302 userlogin); they need
+    an exported administrator session cookie. REST endpoints accept the PAT."""
+    if bamboo.cookie:
+        return
+    if bamboo.token:
+        raise DeliveryError(
+            "this phase drives Bamboo admin ajax endpoints, which reject PATs "
+            "(302 userlogin redirect, probed 2026-11-22); rerun with "
+            "--bamboo-cookie '<exported administrator cookie header>'"
+        )
+    raise DeliveryError("Bamboo auth required: --bamboo-token-file or --bamboo-cookie")
+
+
 def bamboo_from_args(args) -> Bamboo:
-    if getattr(args, "bamboo_token_file", None):
-        token = Path(args.bamboo_token_file).read_text().strip()
+    cookie = getattr(args, "bamboo_cookie", None)
+    if cookie:
+        return Bamboo(BAMBOO_BASE, cookie=cookie)
+    token_file = getattr(args, "bamboo_token_file", None)
+    if not token_file and BAMBOO_PAT_FILE.exists():
+        token_file = str(BAMBOO_PAT_FILE)
+    if token_file:
+        token = Path(token_file).read_text().strip()
         if not token:
             raise DeliveryError("empty bamboo token file")
         return Bamboo(BAMBOO_BASE, token=token)
-    if getattr(args, "bamboo_cookie", None):
-        return Bamboo(BAMBOO_BASE, cookie=args.bamboo_cookie)
-    raise DeliveryError("Bamboo auth required: --bamboo-token-file or --bamboo-cookie")
+    raise DeliveryError(
+        f"Bamboo auth required: install the PAT at {BAMBOO_PAT_FILE} "
+        "(root:bamboo 0440) or pass --bamboo-token-file/--bamboo-cookie"
+    )
 
 
 def cmd_pins(args) -> dict:
     state = load_state(args.tag)
     bamboo = bamboo_from_args(args)
+    require_cookie_session(bamboo)
     release_dir = state["release_dir"]
     update_plan_variables(bamboo, {
         "release_tag": state["tag"],
@@ -498,14 +522,15 @@ def cmd_intake(args) -> dict:
     state = load_state(args.tag)
     bamboo = bamboo_from_args(args)
     before = latest_build_number(bamboo)
-    token = bamboo.xsrf_token() if bamboo.cookie else ""
     code, body = bamboo.request(
-        "POST", "/build/admin/triggerManualBuild.action",
-        form={"atl_token": token, "buildKey": PLAN_KEY, "executeAllStages": "true"},
-        expect=(200, 302),
+        "POST", f"/rest/api/latest/queue/{PLAN_KEY}?executeAllStages=true",
+        json_body={}, expect=(200, 201, 400),
     )
-    print(f"[intake] triggered (previous latest build #{before})")
-    target = before + 1
+    if code == 400:
+        raise DeliveryError(f"intake queue rejected: HTTP 400: {body[:200]}")
+    match = re.search(re.escape(PLAN_KEY) + r"-(\d+)", body)
+    target = int(match.group(1)) if match else before + 1
+    print(f"[intake] queued via REST (previous latest build #{before}); waiting for #{target}")
     for _ in range(POLL_ATTEMPTS):
         time.sleep(POLL_SECONDS)
         code, body = bamboo.request(
@@ -530,17 +555,14 @@ def cmd_release_create(args) -> dict:
     state = load_state(args.tag)
     bamboo = bamboo_from_args(args)
     name = release_version_name(state["tag"], state["commit"])
-    token = bamboo.xsrf_token() if bamboo.cookie else ""
     bamboo.request(
-        "POST", "/deploy/executeManualDeployment.action",
-        form={"atl_token": token, "environmentId": str(PRODUCTION_ENV_ID),
-              "releaseTypeOption": "CREATE", "newReleaseBranchKey": PLAN_KEY,
-              "newReleaseBuildResult": f"{PLAN_KEY}-{state['intake_build']}",
-              "versionName": name, "save": "Start deployment"},
-        expect=(200,),
+        "POST", f"/rest/api/latest/deploy/project/{DEPLOY_PROJECT_ID}/version",
+        json_body={"name": name,
+                   "planResultKey": f"{PLAN_KEY}-{state['intake_build']}"},
+        expect=(200, 201),
     )
     code, body = bamboo.request(
-        "GET", f"/rest/api/latest/deploy/project/{DEPLOY_PROJECT_ID}/versions?max-results=10",
+        "GET", f"/rest/api/latest/deploy/project/{DEPLOY_PROJECT_ID}/versions?max-results=20",
         expect=(200,),
     )
     for version in json.loads(body).get("versions", []):

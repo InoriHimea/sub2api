@@ -128,5 +128,80 @@ class NamingAndStateTest(unittest.TestCase):
             rd.DELIVERY_DIR = original
 
 
+class AuthRoutingTest(unittest.TestCase):
+    """PAT/cookie routing: default PAT file, cookie preference, no-auth and
+    token-only refusals for the admin-ajax-bound pins phase."""
+
+    def _args(self, token_file=None, cookie=None):
+        import argparse
+        return argparse.Namespace(bamboo_token_file=token_file, bamboo_cookie=cookie)
+
+    def test_default_pat_path_used_when_present(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bamboo.pat"
+            path.write_text("tok-123\n")
+            original = rd.BAMBOO_PAT_FILE
+            rd.BAMBOO_PAT_FILE = path
+            try:
+                bamboo = rd.bamboo_from_args(self._args())
+                self.assertEqual(bamboo.token, "tok-123")
+                self.assertIsNone(bamboo.cookie)
+            finally:
+                rd.BAMBOO_PAT_FILE = original
+
+    def test_cookie_preferred_when_given(self):
+        bamboo = rd.bamboo_from_args(self._args(cookie="JSESSIONID=x"))
+        self.assertIsNone(bamboo.token)
+        self.assertEqual(bamboo.cookie, "JSESSIONID=x")
+
+    def test_explicit_token_file_wins_over_default(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            explicit = Path(tmp) / "other.pat"
+            explicit.write_text("explicit")
+            default = Path(tmp) / "default.pat"
+            default.write_text("default")
+            original = rd.BAMBOO_PAT_FILE
+            rd.BAMBOO_PAT_FILE = default
+            try:
+                bamboo = rd.bamboo_from_args(self._args(token_file=str(explicit)))
+                self.assertEqual(bamboo.token, "explicit")
+            finally:
+                rd.BAMBOO_PAT_FILE = original
+
+    def test_no_auth_blocked(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            original = rd.BAMBOO_PAT_FILE
+            rd.BAMBOO_PAT_FILE = Path(tmp) / "absent.pat"
+            try:
+                with self.assertRaises(rd.DeliveryError):
+                    rd.bamboo_from_args(self._args())
+            finally:
+                rd.BAMBOO_PAT_FILE = original
+
+    def test_empty_default_pat_blocked(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "bamboo.pat"
+            path.write_text("   \n")
+            original = rd.BAMBOO_PAT_FILE
+            rd.BAMBOO_PAT_FILE = path
+            try:
+                with self.assertRaises(rd.DeliveryError):
+                    rd.bamboo_from_args(self._args())
+            finally:
+                rd.BAMBOO_PAT_FILE = original
+
+    def test_pins_guard_accepts_cookie_session(self):
+        rd.require_cookie_session(rd.Bamboo("https://x", cookie="JSESSIONID=x"))
+
+    def test_pins_guard_refuses_token_only_session(self):
+        with self.assertRaises(rd.DeliveryError) as caught:
+            rd.require_cookie_session(rd.Bamboo("https://x", token="t"))
+        self.assertIn("--bamboo-cookie", str(caught.exception))
+
+    def test_pins_guard_refuses_missing_auth(self):
+        with self.assertRaises(rd.DeliveryError):
+            rd.require_cookie_session(rd.Bamboo("https://x"))
+
+
 if __name__ == "__main__":
     unittest.main()
