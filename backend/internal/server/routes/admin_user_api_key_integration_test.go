@@ -110,7 +110,7 @@ func TestAdminCreateUserAPIKeyIntegration(t *testing.T) {
 	settings.SetScopedAdminKeyRepository(repository.NewScopedAdminKeyRepository(db))
 	adminService := service.NewAdminService(cfg, users, repository.NewAdminGroupRepository(client, db),
 		nil, nil, keys, nil, nil, nil, nil, nil, nil, keyService, client, settings,
-		nil, subscriptions, nil, nil, nil, nil, nil, nil)
+		nil, subscriptions, nil, nil, nil, nil, nil, nil, nil)
 	auth := service.NewAuthService(nil, nil, nil, nil, cfg, nil, nil, nil, nil, nil, nil, nil, nil)
 	userService := service.NewUserService(users, nil, nil, nil)
 	audits := service.NewAuditLogService(repository.NewAuditLogRepository(db), nil)
