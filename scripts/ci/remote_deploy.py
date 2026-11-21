@@ -1162,8 +1162,11 @@ def cmd_stage(args: argparse.Namespace) -> int:
         run(["docker", "load", "--input", tar_path])
         repo_tag = parse_image_repo_tag_from_tar(tar_path)
         loaded_id = discover_docker_image_id_for_ref(repo_tag)
-        if loaded_id != manifest["image_id"]:
-            raise DeployFailure("loaded docker image id (%s) does not match manifest.image_id (%s) for tag %s" % (loaded_id, manifest["image_id"], repo_tag))
+        acceptable_ids = image_ids_acceptable_for_load(tar_path)
+        acceptable_ids.add(manifest["image_id"])
+        acceptable_ids.update(manifest.get("image_load_ids") or [])
+        if loaded_id not in acceptable_ids:
+            raise DeployFailure("loaded docker image id (%s) matches none of the ids derivable from the transferred image tar (acceptable: %s) for tag %s" % (loaded_id, sorted(acceptable_ids), repo_tag))
         staged["docker"] = {"repo_tag": repo_tag, "image_id": loaded_id}
     else:
         live_binary = prev["baseline"]["native"]["binary_path"]
@@ -1221,6 +1224,42 @@ def parse_image_repo_tag_from_tar(tar_path: str) -> str:
     if not data or not data[0].get("RepoTags"):
         raise DeployFailure("sub2api-image.tar manifest.json has no RepoTags")
     return data[0]["RepoTags"][0]
+
+
+def image_ids_acceptable_for_load(tar_path: str) -> set:
+    """Derives, from the transferred `docker save` tar itself, every image
+    id a target's `docker load` could register for it. The image id is
+    store-dependent: containerd-backed daemons register the OCI manifest
+    digest while classic daemons register the config digest. Both are
+    computed from the exact transferred bytes, so verification stays
+    self-consistent across docker versions and never trusts metadata
+    claims over payload content."""
+    import tarfile
+    acceptable = set()
+    with tarfile.open(tar_path, mode="r") as tf:
+        for member in tf:
+            if member.name == "manifest.json":
+                data = json.loads(tf.extractfile(member).read().decode("utf-8"))
+                for entry in data:
+                    cfg = (entry.get("Config") or "")
+                    if cfg:
+                        acceptable.add("sha256:" + cfg.rsplit("/", 1)[-1].replace(".json", ""))
+            elif member.name == "index.json":
+                index = json.loads(tf.extractfile(member).read().decode("utf-8"))
+                for descriptor in index.get("manifests", []):
+                    digest = descriptor.get("digest")
+                    if digest:
+                        acceptable.add(digest)
+            elif member.name.startswith("blobs/sha256/") and member.size > 0:
+                try:
+                    payload = json.loads(tf.extractfile(member).read().decode("utf-8"))
+                except (ValueError, UnicodeDecodeError):
+                    continue
+                if isinstance(payload, dict) and str(payload.get("mediaType", "")).endswith("image.manifest.v1+json"):
+                    acceptable.add("sha256:" + member.name.rsplit("/", 1)[-1])
+    if not acceptable:
+        raise DeployFailure("sub2api-image.tar yielded no verifiable image ids")
+    return acceptable
 
 
 def cmd_activate(args: argparse.Namespace) -> int:

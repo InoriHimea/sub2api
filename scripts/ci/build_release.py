@@ -389,10 +389,21 @@ def build_docker_image(binary_path, version, sha):
         _make_tree_world_readable(context_dir / "backend" / "resources")
 
         log("building Docker image %s (no registry login/push)" % image_tag)
+        # Explicit buildkit: buildx attaches provenance/sbom attestation
+        # manifests by default on containerd-backed runners, which makes
+        # `docker image inspect --format {{.Id}}` return the INDEX digest
+        # instead of the image config digest. Targets then reject the
+        # loaded image because the manifest records the wrong id. Disabling
+        # the attestations keeps .Id == the config digest that
+        # `docker load` preserves across hosts.
+        env = dict(os.environ)
+        env["DOCKER_BUILDKIT"] = "1"
         run(
             [
                 "docker", "build",
                 "--pull=false",
+                "--provenance=false",
+                "--sbom=false",
                 "-f", str(context_dir / "Dockerfile"),
                 "-t", image_tag,
                 "--label", "org.opencontainers.image.version=" + version,
@@ -400,6 +411,7 @@ def build_docker_image(binary_path, version, sha):
                 str(context_dir),
             ],
             timeout=900,
+            env=env,
         )
     finally:
         shutil.rmtree(context_dir, ignore_errors=True)
@@ -430,6 +442,45 @@ def save_docker_image(image_tag, destination):
     run(["docker", "save", "-o", str(destination), image_tag], timeout=600)
     if not destination.exists() or destination.stat().st_size == 0:
         raise BuildError("docker save did not produce a non-empty archive at %s" % destination)
+
+
+def image_ids_from_saved_tar(tar_path):
+    """Derives the docker image ids a target's `docker load` may register
+    from the saved tar, WITHOUT needing docker on this host. The id is
+    store-dependent: containerd-backed daemons register the OCI manifest
+    digest while classic daemons register the config digest. Returns
+    (config_digest, sorted load-stable ids)."""
+    import tarfile
+    config_digest = None
+    manifest_digests = []
+    with tarfile.open(tar_path, mode="r") as tf:
+        names = set()
+        for member in tf:
+            names.add(member.name)
+            if member.name == "manifest.json":
+                data = json.loads(tf.extractfile(member).read().decode("utf-8"))
+                cfg = (data[0].get("Config") or "") if data else ""
+                if cfg:
+                    config_digest = "sha256:" + cfg.rsplit("/", 1)[-1].replace(".json", "")
+            if member.name == "index.json":
+                index = json.loads(tf.extractfile(member).read().decode("utf-8"))
+                for descriptor in index.get("manifests", []):
+                    digest = descriptor.get("digest")
+                    if digest:
+                        manifest_digests.append(digest)
+            if member.name.startswith("blobs/sha256/") and member.size > 0:
+                try:
+                    payload = json.loads(tf.extractfile(member).read().decode("utf-8"))
+                except (ValueError, UnicodeDecodeError):
+                    continue
+                if isinstance(payload, dict) and str(payload.get("mediaType", "")).endswith("image.manifest.v1+json"):
+                    digest = "sha256:" + member.name.rsplit("/", 1)[-1]
+                    if digest not in manifest_digests:
+                        manifest_digests.append(digest)
+    if config_digest is None:
+        raise BuildError("saved docker tar %s has no docker-style manifest.json Config entry" % tar_path)
+    load_ids = sorted(set(manifest_digests) | {config_digest})
+    return config_digest, load_ids
 
 
 def reset_release_root(release_root):
@@ -546,7 +597,7 @@ def walk_release_files(release_root):
             yield relative, candidate
 
 
-def build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, migrations):
+def build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, migrations, image_load_ids=None):
     binary_sha256 = sha256_hex(binary_path)
 
     files = {}
@@ -582,6 +633,8 @@ def build_manifest(release_root, tag, version, sha, compiler, binary_path, image
             for path in migrations
         ],
     }
+    if image_load_ids is not None:
+        manifest["image_load_ids"] = sorted(set(image_load_ids) | {image_id})
     return manifest
 
 
@@ -622,8 +675,14 @@ def main():
 
     image_tag, image_id = build_docker_image(binary_path, version, sha)
     save_docker_image(image_tag, release_root / "sub2api-image.tar")
+    tar_config_id, image_load_ids = image_ids_from_saved_tar(release_root / "sub2api-image.tar")
+    if tar_config_id != image_id:
+        raise BuildError(
+            "docker-save tar config digest (%s) does not match the built image id (%s); "
+            "the saved archive would register an id the manifest does not declare"
+            % (tar_config_id, image_id))
 
-    manifest = build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, migrations)
+    manifest = build_manifest(release_root, tag, version, sha, compiler, binary_path, image_id, migrations, image_load_ids)
     manifest_path = release_root / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8")
 
